@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var tilemap : TileMapExtended 
 
 # Pet data
-@export var pet_name : String = "tas"
+@export var pet_name : String = "soriel"
 
 # Visuals
 @onready var visuals : Node2D = $Visuals
@@ -31,7 +31,7 @@ func _ready() -> void:
 		return
 	
 	# Signal connection
-	SignalDatabase.screen_touch_double_tap.connect(move_test)
+	# InputManager.screen_touch_double_tap.connect(move_test)
 	SignalDatabase.tick_reached.connect(tick_process)
 	SignalDatabase.outline.connect(toggle_outline)
 	
@@ -40,8 +40,6 @@ func _ready() -> void:
 	update_sprite()
 	idle()
 	
-	# Set outline based on config file
-	toggle_outline(SettingsManager.get_value("Character","Outline"))
 
 ## load pet data from savestate
 func load_from_savestate() -> void:

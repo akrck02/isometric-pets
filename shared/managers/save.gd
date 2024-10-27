@@ -1,6 +1,12 @@
 extends Node
 const save_path="user://kinokoro.save"
 
+## Signals
+signal new_game_created
+signal save_game_requested
+
+
+## Save game
 func save_game():
 	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
@@ -24,7 +30,7 @@ func save_game():
 		# Store the save dictionary as a new line in the save file.
 		save_file.store_line(json_string)
 
-
+## Load game
 func load_game():
 	
 	if not FileAccess.file_exists(save_path):

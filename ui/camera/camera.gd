@@ -1,4 +1,5 @@
 extends Camera2D
+class_name SmartCamera
 
 # Camera focus 
 @export var focus_node : Node2D;
@@ -27,78 +28,73 @@ var start_zoom
 @export var movement_speed = 1.00/1.5;
 var start_distance = 0
 
-# Called when the node enters the scene tree for the first time.
+
+## Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	SignalDatabase.zoom_in.connect(zoom_in)
-	SignalDatabase.zoom_out.connect(zoom_out)
+	InputManager.prepare_zoom_requested.connect(prepare_zoom_camera)
+	InputManager.zoom_requested.connect(zoom_camera)
+	InputManager.find_requested.connect(return_to_default_camera_position)
+	InputManager.movement_requested.connect(pan_camera)
 	SignalDatabase.camera_movement_updated.connect(update_can_move)
-	SignalDatabase.screen_touch_started.connect(reset_camera_move_values)
-	SignalDatabase.three_finger_touch_started.connect(return_to_default_camera_position)
-	SignalDatabase.screen_touch_pinch.connect(set_zoom_start)
-	SignalDatabase.screen_touch_drag_move.connect(pan_camera)
-	SignalDatabase.screen_touch_drag_pinch.connect(zoom_camera_from_touch)
-	
+
 	zoom = default_zoom
 	if focus_node != null: 
 		focusing = true
 
-# Process operations
+## Process operations
 func _process(_delta):
 	
 	if not is_current_context() or not can_move:
 		return;
 	
-	if zoom != default_zoom or offset.x < -80 or offset.x > 80 or offset.y < -80 or offset.y > 80: 
-		SignalDatabase.notification_shown.emit("[center]Tap with 3 fingers to center the camera")
+	if camera_is_not_focused(): 
+		var message = ""
+		match InputManager.current_input:
+			Controls.Type.Touch: 			message = "Tap with 3 fingers to center the camera";
+			Controls.Type.KeyboardAndMouse: message = "Press E to center the camera"
+		
+		SignalDatabase.notification_shown.emit("[center] %s" % message) 
 	else: 
 		if focus_node != null:
 			position = focus_node.position
+		
 		SignalDatabase.notification_hidden.emit() 
 
-# Reset camera move values to start a new move
-func reset_camera_move_values(_data : InputData): 
-	if not is_current_context():
-		return; 
-		 
-	start_distance = 0
 
-# Zoom in the camera
-func zoom_in(value : float):
-	
-	var new_zoom = limit_zoom(zoom + Vector2(value,value))
-	zoom_tween = create_tween()
-	zoom_tween.tween_property(self, NodeProperties.Zoom, new_zoom, .1).set_trans(Tween.TRANS_LINEAR)
-	await zoom_tween.finished
-	zoom_tween.kill()
+## Get if the camera is outside the max offset
+func camera_is_not_focused() -> bool:
+	return zoom != default_zoom or offset.x < -80 or offset.x > 80 or offset.y < -80 or offset.y > 80
 
-# Zoom out the camera
-func zoom_out(value : float):
-	var new_zoom = limit_zoom(zoom - Vector2(value,value))
-	zoom_tween = create_tween()
-	zoom_tween.tween_property(self, NodeProperties.Zoom, new_zoom, .1).set_trans(Tween.TRANS_LINEAR)
-	await zoom_tween.finished
-	zoom_tween.kill()
-
-# Set zoom start
-func set_zoom_start(data: InputData):
-	if not is_current_context():
-		return
-	
-	start_distance = data.calculate_distance_between(0,1)
+## Prepare zoom camera
+func prepare_zoom_camera(data : InputData):
 	start_zoom = zoom
 
-# Zoom camera from touch
-func zoom_camera_from_touch(data: InputData):
+## Zoom camera
+func zoom_camera(data : InputData):
 	if not is_current_context() or not can_zoom:
 		return;
 	
-	var current_distance = data.calculate_distance_between(0,1)
-	var zoom_factor = start_distance / current_distance
-	zoom = limit_zoom(start_zoom / zoom_factor)
+	match data.origin: 
+		Controls.Type.Touch: 
+			zoom = limit_zoom(start_zoom / data.touch_data.get_drag_distance_factor())
+		Controls.Type.Gamepad:
+			pass
+		Controls.Type.KeyboardAndMouse:
+			zoom = limit_zoom(zoom * data.keyboard_and_mouse_data.zoom_percentage)
 
-# Return to default camera position 
-func return_to_default_camera_position(_data: InputData):
+
+## Limit max and min zoom
+func limit_zoom(new_zoom : Vector2) -> Vector2:
+	if new_zoom.x <= min_zoom: new_zoom.x = min_zoom
+	if new_zoom.x >= max_zoom: new_zoom.x = max_zoom
+	if new_zoom.y <= min_zoom: new_zoom.y = min_zoom
+	if new_zoom.y >= max_zoom: new_zoom.y = max_zoom
+	return new_zoom
+	
+
+## Return to default camera position 
+func return_to_default_camera_position():
 	
 	if not is_current_context():
 		return
@@ -112,26 +108,26 @@ func return_to_default_camera_position(_data: InputData):
 	zoom_tween.tween_property(self, NodeProperties.Zoom, default_zoom, movement_speed).set_trans(Tween.TRANS_SINE)
 	await zoom_tween.finished
 	zoom_tween.kill()
-	
-# Pan camera
-func pan_camera(data: InputData):
+
+
+## Pan camera
+func pan_camera(data : InputData):
 	if not is_current_context() or not can_pan:
 		return
 	
-	offset -= data.relative * pan_speed / zoom.x;
+	match data.origin: 
+		Controls.Type.Touch: 
+			offset -= data.touch_data.relative * pan_speed / zoom.x;
+		Controls.Type.Gamepad:
+			pass
+		Controls.Type.KeyboardAndMouse:
+			pass
 
-# Limit max and min zoom
-func limit_zoom(new_zoom : Vector2) -> Vector2:
-	if new_zoom.x <= min_zoom: new_zoom.x = min_zoom
-	if new_zoom.x >= max_zoom: new_zoom.x = max_zoom
-	if new_zoom.y <= min_zoom: new_zoom.y = min_zoom
-	if new_zoom.y >= max_zoom: new_zoom.y = max_zoom
-	return new_zoom
-
-# Update the can move property
+## Update the can move property
 func update_can_move(value : bool):
 	can_move = value
 
-# Is current context
+
+## Is current context
 func is_current_context() -> bool:
-	return TouchInput.context == Game.Context.Camera;
+	return InputManager.context == Game.Context.Camera;

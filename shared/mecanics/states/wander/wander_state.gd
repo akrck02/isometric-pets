@@ -10,7 +10,7 @@ var navigation_data : GridNavigationData
 ## Logic for the entrance of the state
 func enter(): 
 	animation.play("RESET")
-	navigation_data = calculate_next_route()
+	navigation_data = await calculate_next_route()
 
 
 ## Move along the path
@@ -33,7 +33,7 @@ func calculate_next_route() -> GridNavigationData:
 	var new_coordinates = navigation_data.current_coordinates
 	new_coordinates.x += randi_range(-5,5)
 	new_coordinates.y += randi_range(-3,3)
-	return navigation.calculate_path_to(new_coordinates)
+	return await navigation.calculate_path_to(new_coordinates)
 
 
 ## Check startup parameters

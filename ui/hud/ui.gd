@@ -49,14 +49,6 @@ func _connect_signals():
 	SignalDatabase.notification_shown.connect(_show_notification)
 	SignalDatabase.notification_hidden.connect(_hide_notification)
 	show_settings_button.pressed.connect(_toggle_settings)
-
-func _input(_event):
-	if Input.is_action_just_released('ui_zoom_in'):
-		_zoom_in()
-	if Input.is_action_just_released('ui_zoom_out'):
-		_zoom_out()
-	if Input.is_action_just_pressed("ui_photo_mode"):
-		_toggle_ui()
 	
 func _zoom_in():
 	SignalDatabase.zoom_in.emit(.5)
@@ -106,5 +98,5 @@ func _hide_notification():
 func _toggle_settings():
 	settings.visible=!settings.visible
 	if settings.visible:
-		TouchInput.context = Game.Context.Settings 
+		InputManager.context = Game.Context.Settings 
 				

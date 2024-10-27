@@ -38,7 +38,6 @@ func _ready():
 	area_2d.input_event.connect(handle_interaction)
 	
 	# Set outline based on config file
-	toggle_outline(SettingsManager.get_value("Character","Outline"))
 	animation_player.play("idle")
 
 # load pet data from savestate
@@ -68,17 +67,14 @@ func handle_touch(event : InputEventScreenTouch):
 	interaction_active = !interaction_active
 	
 	if interaction_active:
-		SignalDatabase.notification_shown.emit("[center]Move the pet dragging")
-		TouchInput.context = Game.Context.PetInteraction
+		SignalDatabase.notification_shown.emit("[center] %s is interested" % pet_name)
+		InputManager.context = Game.Context.PetInteraction
 		sprite.material.set_shader_parameter("width",2)
 	else:
-		TouchInput.context = Game.Context.Camera
+		InputManager.context = Game.Context.Camera
 		sprite.material.set_shader_parameter("width",0)
 		
-# Handle input for manual control
-func _input(_event):
-	manual_movement()
-	
+
 # This function will be called every tick
 func tick_update():
 	stats.time += 1
@@ -86,17 +82,6 @@ func tick_update():
 	normalize_stats()
 	show_feelings()
 	
-# Manual movement
-func manual_movement():
-	
-	if not control or moving: 
-		return
-	
-	if Input.is_action_pressed("ui_left"):    move(1)
-	elif Input.is_action_pressed("ui_up"):    move(2)
-	elif Input.is_action_pressed("ui_down"):  move(3)
-	elif Input.is_action_pressed("ui_right"): move(4)
-
 
 # Normalize stat values
 func normalize_stats():

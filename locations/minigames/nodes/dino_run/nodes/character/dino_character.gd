@@ -20,7 +20,7 @@ var jumping : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalDatabase.screen_touch_started.connect(jump)
+	InputManager.screen_touch_started.connect(jump)
 	area_2d.area_entered.connect(check_collision)
 	animation_player.play("walk")
 
