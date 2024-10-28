@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cba3m5gci8old"]
+[gd_scene load_steps=23 format=3 uid="uid://cba3m5gci8old"]
 
 [ext_resource type="Script" path="res://ui/hud/ui.gd" id="1_yktcp"]
 [ext_resource type="Texture2D" uid="uid://cqutuq0jrsqbu" path="res://ui/hud/settings/sprites/park.svg" id="2_wwa4d"]
 [ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="3_g1lr1"]
 [ext_resource type="Material" uid="uid://de0kp0bflu8l6" path="res://materials/camera/filter_shader_material_day.tres" id="4_y8ln0"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="5_jc2jt"]
 [ext_resource type="PackedScene" uid="uid://bkxydu410llqn" path="res://ui/hud/settings/settings.tscn" id="6_1eey1"]
 [ext_resource type="Texture2D" uid="uid://dptxys2tpqwm1" path="res://ui/hud/settings/sprites/icons.png" id="7_acr4x"]
 [ext_resource type="PackedScene" uid="uid://csy5nja40cw3j" path="res://ui/hud/debug/debug_ui.tscn" id="7_udyie"]
@@ -12,13 +13,11 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnnow"]
 bg_color = Color(0, 0, 0, 0.788235)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggjfe"]
-bg_color = Color(0, 0, 0, 0.654902)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-anti_aliasing = false
+[sub_resource type="LabelSettings" id="LabelSettings_br3iv"]
+font_size = 38
+
+[sub_resource type="LabelSettings" id="LabelSettings_aes4b"]
+font_size = 38
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mo36"]
 
@@ -99,7 +98,6 @@ offset_left = 7.0
 offset_top = 2.0
 offset_right = 7.0
 offset_bottom = 2.0
-type = 1
 
 [node name="Filter" type="ColorRect" parent="."]
 material = ExtResource("4_y8ln0")
@@ -122,6 +120,7 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="UiControl"]
 layout_mode = 2
+size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bnnow")
 
 [node name="MarginContainer" type="MarginContainer" parent="UiControl/PanelContainer"]
@@ -134,36 +133,12 @@ theme_override_constants/margin_bottom = 1
 [node name="Banner" type="BoxContainer" parent="UiControl/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 74)
 layout_mode = 2
-
-[node name="Location" type="RichTextLabel" parent="UiControl/PanelContainer/MarginContainer/Banner"]
-y_sort_enabled = true
-custom_minimum_size = Vector2(305, 45)
-layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_fonts/normal_font = ExtResource("3_g1lr1")
-theme_override_font_sizes/normal_font_size = 40
-bbcode_enabled = true
-text = "Central park"
-
-[node name="Time" type="RichTextLabel" parent="UiControl/PanelContainer/MarginContainer/Banner"]
-y_sort_enabled = true
-custom_minimum_size = Vector2(97, 45)
-layout_direction = 2
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_fonts/normal_font = ExtResource("3_g1lr1")
-theme_override_font_sizes/normal_font_size = 40
-bbcode_enabled = true
-text = "[right] 00:00"
 
 [node name="Icon" type="Control" parent="UiControl/PanelContainer/MarginContainer/Banner"]
-custom_minimum_size = Vector2(74, 49)
+custom_minimum_size = Vector2(67, 46)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 size_flags_vertical = 4
 
 [node name="Icon" type="Sprite2D" parent="UiControl/PanelContainer/MarginContainer/Banner/Icon"]
@@ -176,47 +151,51 @@ position = Vector2(50, 28)
 scale = Vector2(1.00521, 1.00521)
 texture = ExtResource("2_wwa4d")
 
-[node name="Banner" type="ColorRect" parent="UiControl/PanelContainer/MarginContainer/Banner"]
-visible = false
+[node name="LocationContainer" type="MarginContainer" parent="UiControl/PanelContainer/MarginContainer/Banner"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="Location" type="Label" parent="UiControl/PanelContainer/MarginContainer/Banner/LocationContainer"]
+y_sort_enabled = true
+custom_minimum_size = Vector2(305, 90)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("5_jc2jt")
+text = " Central park"
+label_settings = SubResource("LabelSettings_br3iv")
+vertical_alignment = 1
+
+[node name="Spacing" type="MarginContainer" parent="UiControl/PanelContainer/MarginContainer/Banner"]
 layout_mode = 2
 size_flags_horizontal = 3
-color = Color(0, 0, 0, 0.835294)
 
-[node name="ShowSettings" type="MarginContainer" parent="UiControl"]
-custom_minimum_size = Vector2(1, 100)
+[node name="Time" type="Label" parent="UiControl/PanelContainer/MarginContainer/Banner"]
+y_sort_enabled = true
+custom_minimum_size = Vector2(73, 90)
+layout_direction = 2
 layout_mode = 2
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 16
+size_flags_horizontal = 8
+theme = ExtResource("5_jc2jt")
+text = "00:00"
+label_settings = SubResource("LabelSettings_aes4b")
+horizontal_alignment = 2
+vertical_alignment = 1
+justification_flags = 162
 
-[node name="Control" type="Control" parent="UiControl/ShowSettings"]
+[node name="SettingsButton" type="Control" parent="UiControl/PanelContainer/MarginContainer/Banner"]
 custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="Panel" type="Panel" parent="UiControl/ShowSettings/Control"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 0
-offset_left = 17.0
-offset_top = 11.0
-offset_right = 90.0
-offset_bottom = 84.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ggjfe")
-
-[node name="Icons" type="Sprite2D" parent="UiControl/ShowSettings/Control"]
-modulate = Color(1, 1, 1, 0.729412)
-position = Vector2(54, 48)
-scale = Vector2(3.375, 3.375)
-texture = ExtResource("7_acr4x")
-hframes = 8
-
-[node name="Button" type="Button" parent="UiControl/ShowSettings/Control"]
+[node name="Button" type="Button" parent="UiControl/PanelContainer/MarginContainer/Banner/SettingsButton"]
 custom_minimum_size = Vector2(86, 82)
-layout_mode = 2
-offset_left = 10.0
-offset_top = 8.0
-offset_right = 96.0
-offset_bottom = 90.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4mo36")
@@ -224,6 +203,19 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_m2pxu")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_3q2we")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_400cc")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_yld6r")
+
+[node name="Icons" type="Sprite2D" parent="UiControl/PanelContainer/MarginContainer/Banner/SettingsButton"]
+modulate = Color(1, 1, 1, 0.729412)
+position = Vector2(44, 46)
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("7_acr4x")
+hframes = 8
+
+[node name="ShowSettings" type="MarginContainer" parent="UiControl"]
+custom_minimum_size = Vector2(1, 60)
+layout_mode = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="UiControl"]
 layout_mode = 2

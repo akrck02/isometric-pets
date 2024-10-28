@@ -14,31 +14,35 @@ var current_input : Controls.Type = Controls.Type.Touch
 
 ## Input handle
 func _input(event) -> void:
+	
+	var delta : float = get_process_delta_time()
+	if not delta: 
+		delta = 0.0
 
 	if event is InputEventScreenTouch: 
-		TouchInput.handle_touch(event)
+		TouchInput.handle_touch(event, delta)
 		return
 		
 	if event is InputEventScreenDrag:  
-		TouchInput.handle_drag(event)
+		TouchInput.handle_drag(event, delta)
 		return
 		
 	if event is InputEventMouseMotion: 
-		MouseInput.handle_mouse_motion(event)
+		MouseInput.handle_mouse_motion(event, delta)
 		return
 	
 	if event is InputEventMouseButton:
-		MouseInput.handle_mouse_button(event)
+		MouseInput.handle_mouse_button(event, delta)
 
 	if event is InputEventJoypadButton:
-		GamepadInput.handle()
+		GamepadInput.handle_joypad_button(event, delta)
 		return
 	
 	if event is InputEventJoypadMotion:
-		GamepadInput.handle()
+		GamepadInput.handle_joypad_motion(event, delta)
 		return
 	
 	if event is InputEventKey:
-		KeyboardInput.handle(event)
+		KeyboardInput.handle_input_event_key(event, delta)
 		return
 	

@@ -6,7 +6,7 @@ extends CanvasLayer
 
 # Ui general
 @onready var ui_control : VBoxContainer = $UiControl
-@onready var time_label : RichTextLabel = $UiControl/PanelContainer/MarginContainer/Banner/Time 
+@onready var time_label : Label = $UiControl/PanelContainer/MarginContainer/Banner/Time 
 @onready var filter : ColorRect = $Filter
 
 # Info banner
@@ -16,11 +16,11 @@ extends CanvasLayer
 var notification_showing = false;
 
 # Settings
-@onready var show_settings_button : Button = $UiControl/ShowSettings/Control/Button
+@onready var show_settings_button : Button = $UiControl/PanelContainer/MarginContainer/Banner/SettingsButton/Button
 @onready var settings = $Settings
 
 # Location title
-@onready var location_label : RichTextLabel = $UiControl/PanelContainer/MarginContainer/Banner/Location
+@onready var location_label : Label = $UiControl/PanelContainer/MarginContainer/Banner/LocationContainer/Location 
 
 # Debug ui
 @onready var debug_ui : DebugUi = $DebugUi
@@ -68,7 +68,7 @@ func _update_tick():
 ## Update time clock
 func _update_time():
 	var time = TimeManager.get_real_time();
-	time_label.text = "[right] {hh}:{mm}".format({"hh": "%02d" % time.hour, "mm": "%02d" % time.minute })
+	time_label.text = "{hh}:{mm}".format({"hh": "%02d" % time.hour, "mm": "%02d" % time.minute })
 	TimeManager.emit_daytime()
 
 	
@@ -105,7 +105,7 @@ func _hide_notification():
 
 
 ## Toggle settings by input
-func _toggle_settings_by_input(data : InputData):
+func _toggle_settings_by_input(_data : InputData):
 	_toggle_settings()
 	
 

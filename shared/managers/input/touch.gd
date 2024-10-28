@@ -5,7 +5,7 @@ static var touch_points : Dictionary = {}
 static var start_distance : float = 0
 
 ## Touch events handle
-static func handle_touch(event : InputEventScreenTouch):
+static func handle_touch(event : InputEventScreenTouch, delta : float):
 	
 	InputManager.current_input = Controls.Type.Touch
 	
@@ -18,8 +18,9 @@ static func handle_touch(event : InputEventScreenTouch):
 	touch_points[event.index] =  event.position
 
 	# Switch between the touch types
-	var data = InputData.new();
+	var data = InputData.new()
 	data.origin = Controls.Type.Touch
+	data.delta = delta
 	data.touch_data = TouchInputData.from(event.index, InputEnums.Type.Tap, touch_points)
 
 	# Screen touch
@@ -35,17 +36,18 @@ static func handle_touch(event : InputEventScreenTouch):
 	# Three finger touch
 	elif touch_points.size() == 3: 
 		data.touch_data.type = InputEnums.Type.ThreeFingerTap
-		InputManager.find_requested.emit()
+		InputManager.find_requested.emit(data)
 
 
 ## Drag events handle 
-static func handle_drag(event : InputEventScreenDrag):
+static func handle_drag(event : InputEventScreenDrag, delta : float):
 	
 	InputManager.current_input = Controls.Type.Touch
 	touch_points[event.index] = event.position
 	
 	var data = InputData.new();
 	data.origin = Controls.Type.Touch
+	data.delta = delta
 	data.touch_data = TouchInputData.from(event.index, InputEnums.Type.Tap, touch_points)
 	
 	# Switch between drag types

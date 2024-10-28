@@ -9,7 +9,11 @@ var config = ConfigFile.new()
 ## The default settings of the game
 var default_settings = {
 	"Volume" : { "General" : .5 },
-	"Display" : { "Mode" : Display.WindowMode.Fullscreen }
+	"Display" : { 
+		"Mode" : Display.WindowMode.Fullscreen,
+		"Size" : 1920,
+		"Position" : 1080
+	}
 }
 
 ## Signals
@@ -22,12 +26,12 @@ signal toggle_fullscreen()
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
-	connect_signals()
-	gather_config_data()
+	_connect_signals()
+	_gather_config_data()
 
 
 ## Connect the needed settings related signals
-func connect_signals():
+func _connect_signals():
 	change_volume.connect(AudioSettings.change_volume)
 	change_general_volume.connect(AudioSettings.change_general_volume)
 	
@@ -36,32 +40,34 @@ func connect_signals():
 	toggle_fullscreen.connect(GraphicSettings.toggle_fullscreen)
 
 
-## Gether the config data or create a new one
-func gather_config_data():
-	if !FileAccess.file_exists(settings_path):
-		config = ConfigFile.new()
-		config.save(settings_path)
-		
-	elif !check_structure():
+## Gather the config data or create a new one
+func _gather_config_data():
+	
+	# If a previous savefile does exist and 
+	# the structure is corrupted create a new one
+	var settings_created : bool = _create_setting_file(settings_path);
+	if not settings_created and not _check_structure():
 		config.clear()
+		_set_default_values()
+		
+	# Set configurations from current file
+	AudioSettings.apply_current_configuration()
+	GraphicSettings.apply_current_configuration()
+
+
+## Create a new savefile and return if created
+func _create_setting_file(path : String) -> bool:
 	
-	set_default_values()
-	
-	# Set audio levels
-	var current_general_volume = config.get_value("Volume", Audio.get_bus_name(Audio.Bus.General))
-	change_general_volume.emit(current_general_volume)
-	
-	# Set window mode
-	match config.get_value("Display", "Mode"):
-		Display.WindowMode.Windowed:
-			set_windowed_screen.emit()
-		Display.WindowMode.Fullscreen:
-			set_fullscreen.emit()
-	
+	if FileAccess.file_exists(path):
+		return false
+		
+	config = ConfigFile.new()
+	_set_default_values()
+	return true
 
 
 ## Set the default values for settings
-func set_default_values():
+func _set_default_values():
 	for section in default_settings.keys():
 		for key in default_settings[section].keys():
 			config.set_value(section, key, default_settings[section][key])
@@ -70,7 +76,7 @@ func set_default_values():
 
 
 ## Check if the structure of the settings match the default settings structure
-func check_structure() -> bool:
+func _check_structure() -> bool:
 	var default_sections = default_settings.keys()
 	var config_file_sections = Array(config.get_sections())
 	default_sections.sort()

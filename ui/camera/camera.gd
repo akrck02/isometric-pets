@@ -28,6 +28,8 @@ var start_zoom
 @export var movement_speed = 1.00/1.5;
 var start_distance = 0
 
+var delta_time = 1
+
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,8 +44,11 @@ func _ready():
 	if focus_node != null: 
 		focusing = true
 
+
 ## Process operations
-func _process(_delta):
+func _process(delta):
+	
+	delta_time = delta
 	
 	if not is_current_context() or not can_move:
 		return;
@@ -66,9 +71,11 @@ func _process(_delta):
 func camera_is_not_focused() -> bool:
 	return zoom != default_zoom or offset.x < -80 or offset.x > 80 or offset.y < -80 or offset.y > 80
 
+
 ## Prepare zoom camera
-func prepare_zoom_camera(data : InputData):
+func prepare_zoom_camera(_data : InputData):
 	start_zoom = zoom
+
 
 ## Zoom camera
 func zoom_camera(data : InputData):
@@ -79,7 +86,11 @@ func zoom_camera(data : InputData):
 		Controls.Type.Touch: 
 			zoom = limit_zoom(start_zoom / data.touch_data.get_drag_distance_factor())
 		Controls.Type.Gamepad:
-			pass
+			var new_zoom = limit_zoom(zoom * data.gamepad_data.zoom_percentage)
+			zoom_tween = create_tween()
+			zoom_tween.tween_property(self, NodeProperties.Zoom, new_zoom, movement_speed / 2).set_trans(Tween.TRANS_SINE)
+			await zoom_tween.finished
+			zoom_tween.kill()
 		Controls.Type.KeyboardAndMouse:
 			zoom = limit_zoom(zoom * data.keyboard_and_mouse_data.zoom_percentage)
 
@@ -94,7 +105,7 @@ func limit_zoom(new_zoom : Vector2) -> Vector2:
 	
 
 ## Return to default camera position 
-func return_to_default_camera_position(data : InputData):
+func return_to_default_camera_position(_data : InputData) -> void:
 	
 	if not is_current_context():
 		return
@@ -119,9 +130,8 @@ func pan_camera(data : InputData):
 		Controls.Type.Touch: 
 			offset -= data.touch_data.relative * pan_speed / zoom.x;
 		Controls.Type.Gamepad:
-			pass
-		Controls.Type.KeyboardAndMouse:
-			offset += data.keyboard_and_mouse_data.direction * 10 * pan_speed / zoom.x
+			offset += data.gamepad_data.direction * 30 * pan_speed * delta_time / zoom.x;
+
 
 ## Update the can move property
 func update_can_move(value : bool):

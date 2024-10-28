@@ -1,5 +1,5 @@
 extends Node
-const save_path="user://kinokoro.save"
+const save_path="user://isopets.save"
 
 ## Signals
 signal new_game_created
