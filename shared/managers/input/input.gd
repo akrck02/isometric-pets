@@ -5,6 +5,7 @@ var context : Game.Context = Game.Context.Camera
 var current_input : Controls.Type = Controls.Type.Touch
 
 ## Action signals
+@warning_ignore("unused_signal") signal start_requested(data : InputData)
 @warning_ignore('unused_signal') signal interaction_requested(data : InputData)
 @warning_ignore('unused_signal') signal movement_requested(data : InputData)
 @warning_ignore('unused_signal') signal prepare_zoom_requested(data : InputData)

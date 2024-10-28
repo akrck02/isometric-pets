@@ -1,11 +1,9 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://b1vppjetxm2w8"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://b1vppjetxm2w8"]
 
-[ext_resource type="Texture2D" uid="uid://c032lcegudlcv" path="res://entities/map/nodes/grid_area/tilemap/sprites/landscape.png" id="1_j4mar"]
 [ext_resource type="Texture2D" uid="uid://bmy41nvrnw3fy" path="res://locations/interior/nodes/home/sprites/carpet.png" id="5_ur8nf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0670"]
 resource_name = "landscape"
-texture = ExtResource("1_j4mar")
 texture_region_size = Vector2i(80, 80)
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 10)

@@ -39,6 +39,7 @@ func _ready():
 	
 	# Set outline based on config file
 	animation_player.play("idle")
+	toggle_outline(false)
 
 # load pet data from savestate
 func load_from_savestate():

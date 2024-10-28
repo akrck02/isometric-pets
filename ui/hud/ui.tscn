@@ -137,7 +137,7 @@ layout_mode = 2
 
 [node name="Location" type="RichTextLabel" parent="UiControl/PanelContainer/MarginContainer/Banner"]
 y_sort_enabled = true
-custom_minimum_size = Vector2(249, 41)
+custom_minimum_size = Vector2(305, 45)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -149,7 +149,7 @@ text = "Central park"
 
 [node name="Time" type="RichTextLabel" parent="UiControl/PanelContainer/MarginContainer/Banner"]
 y_sort_enabled = true
-custom_minimum_size = Vector2(79, 41)
+custom_minimum_size = Vector2(97, 45)
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 10
@@ -236,7 +236,7 @@ theme_override_constants/margin_bottom = 19
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(19, 63)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_xjwsg")
 
 [node name="Info" type="RichTextLabel" parent="UiControl/MarginContainer/InfoBanner"]

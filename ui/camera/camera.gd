@@ -94,7 +94,7 @@ func limit_zoom(new_zoom : Vector2) -> Vector2:
 	
 
 ## Return to default camera position 
-func return_to_default_camera_position():
+func return_to_default_camera_position(data : InputData):
 	
 	if not is_current_context():
 		return
@@ -121,7 +121,7 @@ func pan_camera(data : InputData):
 		Controls.Type.Gamepad:
 			pass
 		Controls.Type.KeyboardAndMouse:
-			pass
+			offset += data.keyboard_and_mouse_data.direction * 10 * pan_speed / zoom.x
 
 ## Update the can move property
 func update_can_move(value : bool):

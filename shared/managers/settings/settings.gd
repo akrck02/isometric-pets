@@ -9,7 +9,7 @@ var config = ConfigFile.new()
 ## The default settings of the game
 var default_settings = {
 	"Volume" : { "General" : .5 },
-	"Display" : {"Mode" : Display.WindowMode.Fullscreen }
+	"Display" : { "Mode" : Display.WindowMode.Fullscreen }
 }
 
 ## Signals
@@ -39,12 +39,13 @@ func connect_signals():
 ## Gether the config data or create a new one
 func gather_config_data():
 	if !FileAccess.file_exists(settings_path):
-		config = default_settings
+		config = ConfigFile.new()
 		config.save(settings_path)
 		
 	elif !check_structure():
 		config.clear()
-		set_default_values()
+	
+	set_default_values()
 	
 	# Set audio levels
 	var current_general_volume = config.get_value("Volume", Audio.get_bus_name(Audio.Bus.General))
@@ -100,3 +101,6 @@ func set_value(section : String, key : String, value : Variant):
 ## Get value for given section property
 func get_value(section : String, key : String):
 	return config.get_value(section, key)
+
+func get_general_volume() -> float:
+	return AudioSettings.get_general_volume();

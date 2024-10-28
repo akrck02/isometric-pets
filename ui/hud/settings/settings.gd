@@ -1,5 +1,5 @@
 extends Control
-@onready var exit_button : Button = $Scroll/Margin/Controls/ExitButton
+@onready var exit_button : Button = $Scroll/Margin/Controls/ExitControls/ExitButton
 @onready var general_volume_h_slider: HSlider = $Scroll/Margin/Controls/VolumeControls/GeneralVolumeHSlider
 
 @onready var fullscreen_button : Button = $Scroll/Margin/Controls/GraphicControls/HBoxContainer/FullScreen
@@ -7,7 +7,7 @@ extends Control
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
-	general_volume_h_slider.value = SettingsManager.get_value("Volume", "General")
+	general_volume_h_slider.value = AudioSettings.get_general_volume()
 	exit_button.pressed.connect(exit)
 	general_volume_h_slider.value_changed.connect(change_general_volume)
 	fullscreen_button.pressed.connect(set_fullscreen)
