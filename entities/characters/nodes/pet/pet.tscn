@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bgd58tknkodwv"]
+[gd_scene load_steps=17 format=3 uid="uid://bgd58tknkodwv"]
 
 [ext_resource type="Script" path="res://entities/characters/nodes/pet/pet.gd" id="1_t2hn5"]
 [ext_resource type="Texture2D" uid="uid://bm6uy3x5dk7qw" path="res://entities/characters/nodes/pet/sprites/tas.png" id="2_dbtwv"]
@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://g84fjvgcei1i" path="res://entities/characters/sprites/light-cast.png" id="4_a1wdx"]
 [ext_resource type="PackedScene" uid="uid://uwg3nl77trw1" path="res://ui/in_game/chat_bubble/chat_bubble.tscn" id="6_slsed"]
 [ext_resource type="PackedScene" uid="uid://dbciupg0y5qog" path="res://shared/mecanics/states/state_machine.tscn" id="7_0n4qr"]
+[ext_resource type="PackedScene" uid="uid://btpvicx32t5f" path="res://shared/mecanics/navigation/navigation.tscn" id="7_sqe1t"]
 [ext_resource type="Script" path="res://shared/mecanics/states/idle/idle_state.gd" id="8_fngwt"]
+[ext_resource type="PackedScene" uid="uid://b8kgse64epm5s" path="res://shared/mecanics/movement/movement.tscn" id="8_tn5q3"]
+[ext_resource type="Script" path="res://shared/mecanics/states/wander/wander_state.gd" id="9_fxuck"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ketbd"]
 radius = 29.0
@@ -186,11 +189,21 @@ position = Vector2(1.90735e-06, -10)
 scale = Vector2(1.4, 1.4)
 target_position = Vector2(0, 40)
 
+[node name="Navigation" parent="." instance=ExtResource("7_sqe1t")]
+
+[node name="Movement" parent="." instance=ExtResource("8_tn5q3")]
+
 [node name="States" parent="." node_paths=PackedStringArray("actor", "initial_state") instance=ExtResource("7_0n4qr")]
 position = Vector2(-1, -30)
 actor = NodePath("..")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Wander")
 
 [node name="Idle" type="Node" parent="States" node_paths=PackedStringArray("animation")]
 script = ExtResource("8_fngwt")
 animation = NodePath("../../Visuals/AnimationPlayer")
+
+[node name="Wander" type="Node" parent="States" node_paths=PackedStringArray("animation", "navigation", "movement")]
+script = ExtResource("9_fxuck")
+animation = NodePath("../../Visuals/AnimationPlayer")
+navigation = NodePath("../../Navigation")
+movement = NodePath("../../Movement")

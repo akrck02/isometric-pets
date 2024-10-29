@@ -141,12 +141,12 @@ position = Vector2(-0.125, -0.500023)
 shape = SubResource("CapsuleShape2D_ketbd")
 debug_color = Color(0, 0.6, 0.701961, 0.101961)
 
+[node name="Navigation" parent="." instance=ExtResource("5_qd26c")]
+
 [node name="Collision" type="CollisionPolygon2D" parent="."]
 modulate = Color(0.909804, 0.803922, 1, 0.25098)
 position = Vector2(-26, -1)
 polygon = PackedVector2Array(26.3, -16, 61.3, 1, 26.3, 19, -9.7, 1)
-
-[node name="Navigation" parent="." instance=ExtResource("5_qd26c")]
 
 [node name="Visuals" type="Node2D" parent="."]
 

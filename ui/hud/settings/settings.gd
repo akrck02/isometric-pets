@@ -14,7 +14,7 @@ func _ready():
 	general_volume_h_slider.value_changed.connect(change_general_volume)
 	fullscreen_button.pressed.connect(set_fullscreen)
 	windowed_button.pressed.connect(set_windowed_screen)
-
+ 
 ## Exit game
 func exit_game():
 	get_tree().quit()

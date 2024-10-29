@@ -21,14 +21,11 @@ static func handle_mouse_button(event : InputEventMouseButton, delta : float):
 	data.keyboard_and_mouse_data = KeyboardAndMouseInputData.new()
 	
 	if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-		
 		data.keyboard_and_mouse_data.zoom_percentage = 1.08
-		print(event.factor)
 		InputManager.zoom_requested.emit(data)
 		return
 	
 	if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-		print(event.factor)
 		data.keyboard_and_mouse_data.zoom_percentage = 0.92
 		InputManager.zoom_requested.emit(data)
 		return

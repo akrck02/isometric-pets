@@ -25,7 +25,8 @@ func tick():
 
 ## Calculate next route
 func calculate_next_route() -> GridNavigationData:
-		
+	
+	await get_tree().physics_frame
 	navigation_data = navigation.calculate_current_coordinates()
 	if navigation_data == null:
 		return

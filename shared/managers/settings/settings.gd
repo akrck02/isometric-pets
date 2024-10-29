@@ -28,6 +28,7 @@ signal toggle_fullscreen()
 func _ready():
 	_connect_signals()
 	_gather_config_data()
+	# get_window().size = Vector2(960,640)
 
 
 ## Connect the needed settings related signals

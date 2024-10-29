@@ -4,8 +4,6 @@ class_name  GridNavigationAgent2D
 
 ## Get the navigation path on grid
 func get_grid_navigation_path(destiny_coordinates : Vector2) -> Array[Vector2i]:
-
-	await get_tree().physics_frame
 		
 	self.target_position = TilemapManager.get_global_position_from_coordinates(destiny_coordinates)
 	var _next = get_next_path_position()
