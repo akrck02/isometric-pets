@@ -5,4 +5,4 @@ class_name IdleState
 
 ## Logic for the entrance of the state
 func enter(): 
-	animation.play("RESET")
+	animation.play("idle")

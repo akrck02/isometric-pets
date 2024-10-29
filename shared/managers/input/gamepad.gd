@@ -3,7 +3,7 @@ class_name GamepadInput
 
 
 ## Handle gamepad button related events
-static func handle_joypad_button(event : InputEventJoypadButton, delta : float):
+static func handle_joypad_button(_event : InputEventJoypadButton, delta : float):
 	
 	var data : InputData = InputData.new();
 	data.origin = Controls.Type.Gamepad
@@ -38,7 +38,7 @@ static func handle_joypad_button(event : InputEventJoypadButton, delta : float):
 
 
 ## Handle gamepad motion related events
-static func handle_joypad_motion(event : InputEventJoypadMotion, delta : float):
+static func handle_joypad_motion(_event : InputEventJoypadMotion, delta : float):
 	
 	var data : InputData = InputData.new();
 	data.origin = Controls.Type.Gamepad

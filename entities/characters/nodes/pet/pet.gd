@@ -6,22 +6,22 @@ extends CharacterBody2D
 @export var stats : PetStats
 
 # Visuals
-@onready var sprite : Sprite2D = $Sprite
-@onready var point_light : PointLight2D = $PointLight2D
+@onready var sprite : Sprite2D = $Visuals/Sprite
+@onready var point_light : PointLight2D = $Visuals/PointLight2D
 
 # Emotions
-@onready var chat_bubble = $ChatBubble
+@onready var chat_bubble = $Visuals/ChatBubble
 
 # Movement
 @export var control : bool = false;
-@onready var animation_player : AnimationPlayer = $AnimationPlayer
-@onready var ray : RayCast2D = $RayCast2D
+@onready var animation_player : AnimationPlayer = $Visuals/AnimationPlayer
+@onready var ray : RayCast2D = $RayCast
 @onready var tween : Tween
 @export var movement_speed = 1.00/1.5;
 var moving = false
 
 # Interactions
-@onready var area_2d : Area2D = $Area2D
+@onready var interaction_area : Area2D = $Interaction
 var interaction_active : bool  = false
 
 # Called when the node enters the scene tree for the first time.
@@ -35,7 +35,7 @@ func _ready():
 	SignalDatabase.outline.connect(toggle_outline)
 	
 	# Interactions
-	area_2d.input_event.connect(handle_interaction)
+	interaction_area.input_event.connect(handle_interaction)
 	
 	# Set outline based on config file
 	animation_player.play("idle")
@@ -79,7 +79,6 @@ func handle_touch(event : InputEventScreenTouch):
 # This function will be called every tick
 func tick_update():
 	stats.time += 1
-	automatic_movement()
 	normalize_stats()
 	show_feelings()
 	
