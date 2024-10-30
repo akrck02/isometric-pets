@@ -1,5 +1,5 @@
-extends Node2D
 class_name StateMachine
+extends Node2D
 
 ## Actor of the states
 @export var actor : CharacterBody2D
@@ -22,7 +22,8 @@ func _ready() -> void:
 	
 	_connect_signals()
 	_register_states()
-	transition(initial_state)
+	
+	call_deferred("transition", initial_state)
 
 
 ## Connect the necessary signals 

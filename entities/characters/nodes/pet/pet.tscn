@@ -191,7 +191,10 @@ target_position = Vector2(0, 40)
 
 [node name="Navigation" parent="." instance=ExtResource("7_sqe1t")]
 
-[node name="Movement" parent="." instance=ExtResource("8_tn5q3")]
+[node name="Movement" parent="." node_paths=PackedStringArray("navigation", "animation_player", "visuals") instance=ExtResource("8_tn5q3")]
+navigation = NodePath("../Navigation")
+animation_player = NodePath("../Visuals/AnimationPlayer")
+visuals = NodePath("../Visuals")
 
 [node name="States" parent="." node_paths=PackedStringArray("actor", "initial_state") instance=ExtResource("7_0n4qr")]
 position = Vector2(-1, -30)

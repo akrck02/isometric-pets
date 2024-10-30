@@ -3,7 +3,7 @@ class_name WanderState
 
 @export var animation : AnimationPlayer
 @export var navigation : NavigationNode
-@export var movement : Movement
+@export var movement : MovementNode
 
 var navigation_data : GridNavigationData
 
@@ -20,8 +20,8 @@ func tick():
 		return
 	
 	navigation_data = new_data
-	movement.step_node_to(actor, navigation_data.next_coordinates)
-
+	await movement.move_towards_in_grid(actor, navigation_data.next_coordinates)
+	# calculate_next_route()
 
 ## Calculate next route
 func calculate_next_route() -> GridNavigationData:
@@ -34,7 +34,7 @@ func calculate_next_route() -> GridNavigationData:
 	var new_coordinates = navigation_data.current_coordinates
 	new_coordinates.x += randi_range(-5,5)
 	new_coordinates.y += randi_range(-3,3)
-	return await navigation.calculate_path_to(new_coordinates)
+	return navigation.calculate_path_to(new_coordinates)
 
 
 ## Check startup parameters

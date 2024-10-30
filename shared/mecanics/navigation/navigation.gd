@@ -1,5 +1,6 @@
-extends Node2D
 class_name NavigationNode
+extends Node2D
+
 
 ## Standard grid navigation agent
 @onready var navigation_agent : GridNavigationAgent2D = $GridNavigationAgent2D
@@ -17,7 +18,7 @@ func calculate_current_coordinates() -> GridNavigationData:
 func calculate_path_to(destiny_coordinates : Vector2i) -> GridNavigationData:
 
 	var data = calculate_current_coordinates()
-	data.path = await navigation_agent.get_grid_navigation_path(destiny_coordinates) 
+	data.path = navigation_agent.get_grid_navigation_path(destiny_coordinates) 
 	return data
 
 

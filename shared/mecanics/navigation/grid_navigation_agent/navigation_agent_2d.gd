@@ -1,5 +1,6 @@
-extends NavigationAgent2D
 class_name  GridNavigationAgent2D
+extends NavigationAgent2D
+
 
 
 ## Get the navigation path on grid
