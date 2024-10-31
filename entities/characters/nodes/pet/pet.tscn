@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://btpvicx32t5f" path="res://shared/mecanics/navigation/navigation.tscn" id="7_sqe1t"]
 [ext_resource type="Script" path="res://shared/mecanics/states/idle/idle_state.gd" id="8_fngwt"]
 [ext_resource type="PackedScene" uid="uid://b8kgse64epm5s" path="res://shared/mecanics/movement/movement.tscn" id="8_tn5q3"]
-[ext_resource type="Script" path="res://shared/mecanics/states/wander/wander_state.gd" id="9_fxuck"]
+[ext_resource type="PackedScene" uid="uid://b145u2b1gyom3" path="res://shared/mecanics/states/wander/wander.tscn" id="11_w66mi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ketbd"]
 radius = 29.0
@@ -205,8 +205,7 @@ initial_state = NodePath("Wander")
 script = ExtResource("8_fngwt")
 animation = NodePath("../../Visuals/AnimationPlayer")
 
-[node name="Wander" type="Node" parent="States" node_paths=PackedStringArray("animation", "navigation", "movement")]
-script = ExtResource("9_fxuck")
+[node name="Wander" parent="States" node_paths=PackedStringArray("animation", "navigation", "movement") instance=ExtResource("11_w66mi")]
 animation = NodePath("../../Visuals/AnimationPlayer")
 navigation = NodePath("../../Navigation")
 movement = NodePath("../../Movement")

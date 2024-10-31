@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b145u2b1gyom3"]
+
+[ext_resource type="Script" path="res://shared/mecanics/states/wander/wander_state.gd" id="1_3cy41"]
+
+[node name="Wander" type="Node"]
+script = ExtResource("1_3cy41")
+
+[node name="Timer" type="Timer" parent="."]

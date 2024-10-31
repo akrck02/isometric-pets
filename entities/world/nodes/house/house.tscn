@@ -90,3 +90,9 @@ position = Vector2(93.7937, 89.3432)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2(-7, -30)
 polygon = PackedVector2Array(10, 16, 165, -64, 5, -134, -134, -54, 10, 16)
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 141.35
+vertices = PackedVector2Array(-48, 5, 91, -74, 249, -6, 94, 74)
+affect_navigation_mesh = true
+carve_navigation_mesh = true

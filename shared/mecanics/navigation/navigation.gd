@@ -5,7 +5,6 @@ extends Node2D
 ## Standard grid navigation agent
 @onready var navigation_agent : GridNavigationAgent2D = $GridNavigationAgent2D
 
-
 ## Calculate current coordinates
 func calculate_current_coordinates() -> GridNavigationData:
 		
@@ -33,7 +32,6 @@ func next(data : GridNavigationData) -> GridNavigationData:
 	data.path.pop_front()
 	return data
 
-
 ## Create a line woth the path
 func get_debug_path_line(data : GridNavigationData, color : Color) -> Line2D:
 	
@@ -48,6 +46,6 @@ func get_debug_path_line(data : GridNavigationData, color : Color) -> Line2D:
 	path_line.joint_mode = Line2D.LINE_JOINT_BEVEL
 	
 	for point in data.path:  
-		path_line.add_point(SceneManager.current_tilemap.get_global_position_from_coordinates(point)) 
+		path_line.add_point(TilemapManager.get_global_position_from_coordinates(point)) 
 
 	return path_line

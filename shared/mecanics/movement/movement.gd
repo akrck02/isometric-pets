@@ -37,8 +37,6 @@ func move_towards_in_grid(node : Node2D, new_coordinates : Vector2i) -> void:
 	if animation_player.current_animation != "walk":
 		animation_player.play("walk")
 	
-	# if not SceneManager.current_tilemap.can_object_be_placed_on_tile(self, coords):
-		# return
 	var current_cordinates = navigation.calculate_current_coordinates().current_coordinates
 	var directions : Array[MoveEnums.Direction] = Positions.get_directions_from_coordinates(current_cordinates, new_coordinates)
 
