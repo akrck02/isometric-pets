@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8kgse64epm5s"]
+
+[ext_resource type="Script" path="res://shared/mecanics/movement/movement.gd" id="1_4m4vm"]
+
+[node name="Movement" type="Node2D"]
+script = ExtResource("1_4m4vm")
+
+[node name="Timer" type="Timer" parent="."]

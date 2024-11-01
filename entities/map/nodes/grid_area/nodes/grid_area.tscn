@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpcb1ngr6m282"]
+
+[ext_resource type="Script" path="res://entities/map/nodes/grid_area/nodes/grid_area.gd" id="1_8pfdl"]
+
+[node name="GridArea" type="Area2D"]
+z_index = 4096
+script = ExtResource("1_8pfdl")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+z_index = 4096
+position = Vector2(20.7652, 0.707909)
+polygon = PackedVector2Array(0.168911, 17.1804, 35.4359, -0.850807, -0.361423, -18.5285, -36.4239, -0.320477)

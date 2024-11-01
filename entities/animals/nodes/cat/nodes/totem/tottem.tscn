@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=3 uid="uid://bb0q2fy8l6iaj"]
+
+[ext_resource type="Script" path="res://entities/animals/nodes/cat/nodes/totem/tottem.gd" id="2_hm1f6"]
+[ext_resource type="Material" uid="uid://c0q6k8bo0nc7y" path="res://materials/general/outline_shader_material.tres" id="3_lejhi"]
+[ext_resource type="Texture2D" uid="uid://dqp30tsofkpqk" path="res://entities/animals/nodes/cat/sprites/cat.png" id="3_w6u44"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f42l2"]
+radius = 22.0
+height = 64.0
+
+[sub_resource type="Animation" id="Animation_uc57t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cat 3/Cat3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -19)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cat 2/Cat2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cat/Cat:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -12)]
+}
+
+[sub_resource type="Animation" id="Animation_ddhsy"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cat 3/Cat3:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -28), Vector2(-1, -39), Vector2(-1, -29)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cat 2/Cat2:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -20), Vector2(0, -25), Vector2(0, -20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("cat/Cat:position")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uepur"]
+_data = {
+"RESET": SubResource("Animation_uc57t"),
+"idle": SubResource("Animation_ddhsy")
+}
+
+[node name="Cattotem" type="CharacterBody2D"]
+y_sort_enabled = true
+material = ExtResource("3_lejhi")
+script = ExtResource("2_hm1f6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+z_index = 2
+position = Vector2(-1, -25)
+shape = SubResource("CapsuleShape2D_f42l2")
+
+[node name="cat" type="Node2D" parent="."]
+
+[node name="Cat" type="Sprite2D" parent="cat"]
+y_sort_enabled = true
+position = Vector2(0, -12)
+texture = ExtResource("3_w6u44")
+
+[node name="cat 2" type="Node2D" parent="."]
+
+[node name="Cat2" type="Sprite2D" parent="cat 2"]
+y_sort_enabled = true
+position = Vector2(0, -9)
+texture = ExtResource("3_w6u44")
+
+[node name="cat 3" type="Node2D" parent="."]
+
+[node name="Cat3" type="Sprite2D" parent="cat 3"]
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(0, -19)
+texture = ExtResource("3_w6u44")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uepur")
+}

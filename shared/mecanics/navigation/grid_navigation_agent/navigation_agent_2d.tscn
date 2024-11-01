@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2bwygr8gqpqx"]
+
+[ext_resource type="Script" path="res://shared/mecanics/navigation/grid_navigation_agent/navigation_agent_2d.gd" id="1_0eolv"]
+
+[node name="GridNavigationAgent2D" type="NavigationAgent2D"]
+path_postprocessing = 1
+script = ExtResource("1_0eolv")

@@ -1,0 +1,105 @@
+[gd_scene load_steps=13 format=3 uid="uid://cgnui67yn25qr"]
+
+[ext_resource type="Script" path="res://entities/animals/nodes/wandering_animal/wandering_animal.gd" id="1_ncdur"]
+[ext_resource type="Texture2D" uid="uid://by6rrw7l8k88f" path="res://entities/animals/nodes/chicken/sprites/chicken.png" id="1_nvfyc"]
+[ext_resource type="Script" path="res://shared/mecanics/states/state_machine.gd" id="2_155ih"]
+[ext_resource type="Script" path="res://shared/mecanics/states/wander/wander_state.gd" id="3_q82n3"]
+[ext_resource type="Script" path="res://shared/mecanics/states/follow/follow_state.gd" id="5_5fjn1"]
+[ext_resource type="Script" path="res://shared/mecanics/states/idle/idle_state.gd" id="6_h0a66"]
+[ext_resource type="PackedScene" uid="uid://btpvicx32t5f" path="res://shared/mecanics/navigation/navigation.tscn" id="6_honqo"]
+[ext_resource type="PackedScene" uid="uid://b8kgse64epm5s" path="res://shared/mecanics/movement/movement.tscn" id="8_fo35g"]
+
+[sub_resource type="Animation" id="Animation_16rx2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jb06q"]
+resource_name = "walk"
+length = 0.65
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fblcx"]
+_data = {
+"RESET": SubResource("Animation_16rx2"),
+"walk": SubResource("Animation_jb06q")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aw5qf"]
+radius = 157.051
+
+[node name="WanderingAnimal" type="CharacterBody2D"]
+script = ExtResource("1_ncdur")
+
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -34.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("1_nvfyc")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals"]
+libraries = {
+"": SubResource("AnimationLibrary_fblcx")
+}
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+modulate = Color(0.909804, 0.803922, 1, 0.25098)
+position = Vector2(-26, -18.5)
+polygon = PackedVector2Array(26.3, -16, 61.3, 1, 26.3, 19, -9.7, 1)
+
+[node name="FollowArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FollowArea"]
+position = Vector2(1, -17)
+shape = SubResource("CircleShape2D_aw5qf")
+debug_color = Color(0.754069, 0.457241, 0, 0.0313726)
+
+[node name="Navigation" parent="." instance=ExtResource("6_honqo")]
+position = Vector2(10, -17)
+
+[node name="Movement" parent="." instance=ExtResource("8_fo35g")]
+position = Vector2(2, -18)
+
+[node name="States" type="Node2D" parent="." node_paths=PackedStringArray("actor", "initial_state")]
+position = Vector2(0, -34.5)
+script = ExtResource("2_155ih")
+actor = NodePath("..")
+initial_state = NodePath("WanderState")
+
+[node name="WanderState" type="Node" parent="States" node_paths=PackedStringArray("animation", "navigation", "movement")]
+script = ExtResource("3_q82n3")
+animation = NodePath("../../Visuals/AnimationPlayer")
+navigation = NodePath("../../Navigation")
+movement = NodePath("../../Movement")
+
+[node name="FollowState" type="Node" parent="States" node_paths=PackedStringArray("animation", "navigation", "visual_area")]
+script = ExtResource("5_5fjn1")
+animation = NodePath("../../Visuals/AnimationPlayer")
+navigation = NodePath("../../Navigation")
+visual_area = NodePath("../../FollowArea")
+
+[node name="IdleState" type="Node" parent="States"]
+script = ExtResource("6_h0a66")

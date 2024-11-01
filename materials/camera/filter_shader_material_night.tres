@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cbpap4ms4xy4p"]
+
+[ext_resource type="Shader" path="res://shaders/brightness.gdshader" id="1_8m7ij"]
+[ext_resource type="Texture2D" uid="uid://d3pgrufjmhdg7" path="res://materials/camera/cool_gradient.tres" id="2_2jo4v"]
+[ext_resource type="Texture2D" uid="uid://2t0ga8dfk6ur" path="res://materials/camera/night_gradient.tres" id="3_w3jek"]
+
+[resource]
+shader = ExtResource("1_8m7ij")
+shader_parameter/temperature = 0.5
+shader_parameter/brightness = 0.0
+shader_parameter/contrast = 0.706
+shader_parameter/saturation = 1.0
+shader_parameter/redVal = 0.836
+shader_parameter/greenVal = 0.845
+shader_parameter/blueVal = 0.796
+shader_parameter/tint_color = Vector4(0, 0, 0, 0)
+shader_parameter/tint_effect_factor = 0.0
+shader_parameter/warm_color = ExtResource("3_w3jek")
+shader_parameter/cool_color = ExtResource("2_2jo4v")

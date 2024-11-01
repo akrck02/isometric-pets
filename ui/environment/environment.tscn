@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxji80jjayie"]
+
+[ext_resource type="Script" path="res://ui/environment/environment.gd" id="1_dhc5m"]
+[ext_resource type="Texture2D" uid="uid://sdfrus1ydjaa" path="res://entities/world/nodes/leaf/sprites/leaf.png" id="1_tme83"]
+[ext_resource type="Texture2D" uid="uid://cra2twwml7uet" path="res://entities/world/nodes/rain/sprites/rain.png" id="3_5ul2i"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o4ph0"]
+lifetime_randomness = 0.15
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(10, 1, 1)
+emission_shape = 2
+emission_sphere_radius = 74.73
+angle_min = 1.07288e-05
+angle_max = 68.5
+spread = 87.222
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 48.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(-35, 98, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 60.7
+scale_min = 0.0
+scale_max = 4.55
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.1
+turbulence_noise_strength = 2.57
+turbulence_noise_scale = 0.0
+turbulence_noise_speed = Vector3(0, 23, 0)
+turbulence_noise_speed_random = 3.95
+turbulence_influence_min = 0.215
+turbulence_influence_max = 0.215
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 28.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gyhp4"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2000, 1, 1)
+angle_min = 150.0
+angle_max = 180.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+gravity = Vector3(-810, 980, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = -2.23517e-06
+scale_min = 4.0
+scale_max = 10.0
+color = Color(1, 1, 1, 0.192157)
+
+[node name="Environment" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dhc5m")
+
+[node name="LeafParticles" type="GPUParticles2D" parent="."]
+position = Vector2(629, -86)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_o4ph0")
+texture = ExtResource("1_tme83")
+lifetime = 5.0
+preprocess = 2.0
+randomness = 0.31
+
+[node name="RainParticles" type="GPUParticles2D" parent="."]
+position = Vector2(708, -74)
+amount = 400
+process_material = SubResource("ParticleProcessMaterial_gyhp4")
+texture = ExtResource("3_5ul2i")
+lifetime = 12.0

@@ -1,0 +1,213 @@
+[gd_scene load_steps=13 format=3 uid="uid://dpm1ux607ou7j"]
+
+[ext_resource type="Script" path="res://locations/minigames/nodes/dino_run/dino_run.gd" id="1_s0npo"]
+[ext_resource type="Texture2D" uid="uid://0clhfb7r062v" path="res://entities/world/nodes/cloud/sprites/cloud.png" id="2_16725"]
+[ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="2_iu5yp"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_t0afc"]
+[ext_resource type="PackedScene" uid="uid://db2acwdainnwl" path="res://locations/minigames/nodes/dino_run/nodes/character/dino_character.tscn" id="3_avw1s"]
+[ext_resource type="Texture2D" uid="uid://cvkn1bl60lu4a" path="res://locations/minigames/nodes/dino_run/sprites/parallax.png" id="4_e2oyv"]
+[ext_resource type="Material" uid="uid://de0kp0bflu8l6" path="res://materials/camera/filter_shader_material_day.tres" id="6_2nxuf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a4kyg"]
+radius = 24.0832
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sl206"]
+bg_color = Color(0, 0, 0, 0.67451)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mq3pt"]
+bg_color = Color(0, 0, 0, 0.811765)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cphyj"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h1e4u"]
+lifetime_randomness = 0.54
+particle_flag_disable_z = true
+gravity = Vector3(-98, -49, 0)
+scale_min = 0.03
+scale_max = 0.2
+anim_speed_max = 2.91
+turbulence_enabled = true
+turbulence_noise_scale = 8.35
+
+[node name="DinoRun" type="Node2D"]
+script = ExtResource("1_s0npo")
+
+[node name="Rotation" type="Node2D" parent="."]
+position = Vector2(-902, -665)
+rotation = 0.462512
+metadata/_edit_group_ = true
+
+[node name="Parallax2D" type="Parallax2D" parent="Rotation"]
+scroll_scale = Vector2(1, 0)
+repeat_size = Vector2(699, 1174)
+autoscroll = Vector2(-160, 0)
+repeat_times = 2
+ignore_camera_scroll = true
+
+[node name="Parallax" type="Sprite2D" parent="Rotation/Parallax2D"]
+position = Vector2(25.0149, 25.5196)
+texture = ExtResource("4_e2oyv")
+
+[node name="Camera2D" parent="." instance=ExtResource("2_iu5yp")]
+position = Vector2(-896, -765)
+rotation = 0.462512
+zoom = Vector2(2, 2)
+default_zoom = Vector2(2, 2)
+can_move = false
+can_zoom = false
+can_pan = false
+can_rotate = true
+metadata/_edit_group_ = true
+
+[node name="Dino" parent="." instance=ExtResource("3_avw1s")]
+position = Vector2(-934, -740)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="DespawnArea" type="Area2D" parent="."]
+position = Vector2(-1743, -1077)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DespawnArea"]
+polygon = PackedVector2Array(-16, 81, 99, -134, 68, -150, -51, 65)
+
+[node name="SpawnArea" type="Area2D" parent="."]
+position = Vector2(-345, -428)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
+shape = SubResource("CircleShape2D_a4kyg")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="Filter" type="ColorRect" parent="ui"]
+material = ExtResource("6_2nxuf")
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.061
+offset_left = -4155.0
+offset_top = -1624.0
+offset_right = 3741.0
+offset_bottom = 2753.73
+
+[node name="RunScore" type="VBoxContainer" parent="ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 5.0
+offset_right = -2.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/RunScore"]
+layout_mode = 2
+theme_override_constants/margin_top = 75
+
+[node name="PanelContainer" type="PanelContainer" parent="ui/RunScore/MarginContainer"]
+custom_minimum_size = Vector2(232, 62)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_sl206")
+
+[node name="Score" type="Label" parent="ui/RunScore/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("2_t0afc")
+theme_override_font_sizes/font_size = 57
+text = "00000000"
+horizontal_alignment = 1
+
+[node name="Results" type="VBoxContainer" parent="ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="ui/Results"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_mq3pt")
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/Results/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 56
+theme_override_constants/margin_bottom = 31
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Results/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ui/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_t0afc")
+theme_override_font_sizes/font_size = 111
+text = "Results"
+horizontal_alignment = 1
+
+[node name="Score" type="HBoxContainer" parent="ui/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Title" type="Label" parent="ui/Results/PanelContainer/MarginContainer/VBoxContainer/Score"]
+custom_minimum_size = Vector2(107, 0)
+layout_mode = 2
+theme = ExtResource("2_t0afc")
+theme_override_font_sizes/font_size = 45
+text = "score:"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="ui/Results/PanelContainer/MarginContainer/VBoxContainer/Score"]
+layout_mode = 2
+theme = ExtResource("2_t0afc")
+theme_override_font_sizes/font_size = 45
+text = "0000000"
+
+[node name="Buttons" type="HBoxContainer" parent="ui/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+alignment = 1
+
+[node name="Retry" type="Button" parent="ui/Results/PanelContainer/MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme = ExtResource("2_t0afc")
+text = "Retry"
+
+[node name="Exit" type="Button" parent="ui/Results/PanelContainer/MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme = ExtResource("2_t0afc")
+text = "Exit"
+
+[node name="CloudParticles" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.345098)
+top_level = true
+z_index = 6
+material = SubResource("CanvasItemMaterial_cphyj")
+position = Vector2(-653, -414)
+process_material = SubResource("ParticleProcessMaterial_h1e4u")
+texture = ExtResource("2_16725")
+lifetime = 51.0
+visibility_rect = Rect2(-2000, -2000, 2016, 2000)
+local_coords = true
+
+[node name="CloudParticles2" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.345098)
+top_level = true
+z_index = 6
+material = SubResource("CanvasItemMaterial_cphyj")
+position = Vector2(-459, -681)
+process_material = SubResource("ParticleProcessMaterial_h1e4u")
+texture = ExtResource("2_16725")
+lifetime = 51.0
+visibility_rect = Rect2(-2000, -2000, 2000, 2000)
+local_coords = true
