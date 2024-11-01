@@ -71,7 +71,7 @@ script = ExtResource("1_fu28v")
 
 [node name="Home" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_p281b")
-position = Vector2(100.794, -75.6568)
+position = Vector2(13, -66)
 texture = ExtResource("1_g3qx4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -79,20 +79,13 @@ libraries = {
 "": SubResource("AnimationLibrary_hsy8a")
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(86.7937, 59.3432)
-polygon = PackedVector2Array(10, 16, 165, -64, 5, -134, -134, -54, 10, 16)
-
 [node name="Area2D" type="Area2D" parent="."]
 z_index = 2
 position = Vector2(93.7937, 89.3432)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-position = Vector2(-7, -30)
-polygon = PackedVector2Array(10, 16, 165, -64, 5, -134, -134, -54, 10, 16)
+position = Vector2(-96.7937, -20.3432)
+polygon = PackedVector2Array(13, 17, 165, -64, 6, -133, -133, -52, 13, 17)
 
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-radius = 141.35
-vertices = PackedVector2Array(-48, 5, 91, -74, 249, -6, 94, 74)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(10, 86, -136, 17, 3, -64, 162, 5)

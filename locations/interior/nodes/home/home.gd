@@ -16,5 +16,5 @@ func exit(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not event.double_tap:
 		return 
 	
-	SignalDatabase.scene_change_requested.emit(Paths.get_world().get_scene())
+	SceneManager.scene_change_requested.emit(Paths.get_world().get_scene())
 	queue_free()

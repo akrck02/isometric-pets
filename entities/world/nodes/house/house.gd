@@ -11,7 +11,7 @@ func _ready():
 func enter_home():
 	animation_player.play("enter")
 	await animation_player.animation_finished
-	SignalDatabase.scene_change_requested.emit(Paths.get_interior("home").get_scene())
+	SceneManager.scene_change_requested.emit(Paths.get_interior("home").get_scene())
 
 func _on_touch(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is not InputEventScreenTouch:

@@ -59,6 +59,7 @@ Persist=""
 dino_run_score_area=""
 dino_run_death_area=""
 followable=""
+navigation=""
 
 [input]
 
@@ -139,6 +140,10 @@ ui_start={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[navigation]
+
+2d/default_cell_size=20.0
 
 [rendering]
 

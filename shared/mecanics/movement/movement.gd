@@ -37,8 +37,8 @@ func move_towards_in_grid(node : Node2D, new_coordinates : Vector2i) -> void:
 	if animation_player.current_animation != "walk":
 		animation_player.play("walk")
 	
-	var current_cordinates = navigation.calculate_current_coordinates().current_coordinates
-	var directions : Array[MoveEnums.Direction] = Positions.get_directions_from_coordinates(current_cordinates, new_coordinates)
+	navigation.calculate_current_coordinates()
+	var directions : Array[MoveEnums.Direction] = Positions.get_directions_from_coordinates(navigation.data.current_coordinates, new_coordinates)
 
 	match  directions[0]:
 		MoveEnums.Direction.Right:  

@@ -4,7 +4,7 @@ extends Node
 signal tilemap_changed(tilemap : TileMap)
 
 ## Registered tilemaps
-@onready var tilemap : TileMapExtended = _create_fallback_tilemap()
+var tilemap : TileMapExtended = _create_fallback_tilemap()
 
 
 ## Logic to be executed when node is ready
@@ -36,3 +36,10 @@ func get_coordinates_from_global_position(global_position : Vector2i) -> Vector2
 ## Get global position from coordinates
 func get_global_position_from_coordinates(coordinates : Vector2i) -> Vector2i:
 	return tilemap.get_global_position_from_coordinates(coordinates)
+
+
+
+## Get the position inside de grid
+func snap_position(origin : Vector2) -> Vector2:
+	
+	return tilemap.map_to_local(get_coordinates_from_global_position(origin))

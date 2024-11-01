@@ -9,11 +9,15 @@ extends Control
 @onready var fullscreen_button : Button = $Scroll/Margin/Controls/GraphicControls/DisplayControls/FullScreen
 @onready var windowed_button : Button = $Scroll/Margin/Controls/GraphicControls/DisplayControls/Windowed
 
+@onready var low_cpu_mode_button : Button = $Scroll/Margin/Controls/PerformanceControls/LowCpuMode
+
+
 ## Called when the node enters the scene tree for the first time.
 func _ready():
 	general_volume_h_slider.value = AudioSettings.get_general_volume()
 	close_menu_button.pressed.connect(close_menu)
 	general_volume_h_slider.value_changed.connect(change_general_volume)
+	low_cpu_mode_button.pressed.connect(toggle_low_cpu_mode)
 	
 	if OSManager.is_desktop():
 		fullscreen_button.pressed.connect(set_fullscreen)
@@ -24,7 +28,12 @@ func _ready():
 		graphic_controls.hide()
 		exit_button.hide()
 		
- 
+
+## toggle_low_cpu_mode
+func toggle_low_cpu_mode():
+	OS.low_processor_usage_mode = not OS.low_processor_usage_mode  
+
+
 ## Exit game
 func exit_game():
 	get_tree().quit()
