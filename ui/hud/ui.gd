@@ -10,6 +10,7 @@ extends CanvasLayer
 @onready var filter : ColorRect = $Filter
 
 # Info banner
+@onready var info_banner : PanelContainer = $UiControl/MarginContainer/InfoBanner
 @onready var info : RichTextLabel = $UiControl/MarginContainer/InfoBanner/Info
 @onready var info_animation_player : AnimationPlayer = $UiControl/MarginContainer/InfoBanner/AnimationPlayer
 @onready var info_timer : Timer = $UiControl/MarginContainer/InfoBanner/Timer
@@ -42,15 +43,18 @@ func _ready():
 	_connect_signals()
 	_update_time()
 	location_label.text = site_name
+	
+	if OSManager.is_desktop():
+		info_banner.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 
 
 ## Connect the needed signals
 func _connect_signals():
-	SignalDatabase.tick_reached.connect(_update_tick);
-	SignalDatabase.night_started.connect(_set_night_color_palette)
-	SignalDatabase.day_started.connect(_set_day_color_palette)
-	SignalDatabase.notification_shown.connect(_show_notification)
-	SignalDatabase.notification_hidden.connect(_hide_notification)
+	TimeManager.tick_reached.connect(_update_tick);
+	TimeManager.night_started.connect(_set_night_color_palette)
+	TimeManager.day_started.connect(_set_day_color_palette)
+	UIManager.notification_shown.connect(_show_notification)
+	UIManager.notification_hidden.connect(_hide_notification)
 	InputManager.start_requested.connect(_toggle_settings_by_input)
 	show_settings_button.pressed.connect(_toggle_settings)
 	
@@ -111,7 +115,9 @@ func _toggle_settings_by_input(_data : InputData):
 
 ## Toggle settings 
 func _toggle_settings():
-	settings.visible=!settings.visible
+	
 	if settings.visible:
-		InputManager.context = Game.Context.Settings 
-				
+		settings.close_menu()
+		return
+	
+	settings.open_menu()

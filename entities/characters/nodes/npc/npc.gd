@@ -31,9 +31,8 @@ func _ready() -> void:
 		return
 	
 	# Signal connection
-	# InputManager.screen_touch_double_tap.connect(move_test)
-	SignalDatabase.tick_reached.connect(tick_process)
-	SignalDatabase.outline.connect(toggle_outline)
+	TimeManager.tick_reached.connect(tick_process)
+	UIManager.outline.connect(toggle_outline)
 	
 	# Setup the npc data
 	load_from_savestate();

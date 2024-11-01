@@ -12,11 +12,12 @@ class_name State
 
 ## The actor of the state
 var actor : CharacterBody2D
+var enabled : bool = true
 
 ## If this state is enabled 
 ## ALERT DO NOT OVERRIDE!!!
-func enabled() -> bool:
-	return _can_start() and dependencies.check()
+func is_enabled() -> bool:
+	return enabled and _can_start() and dependencies.check()
 
 ## Logic to be executed before the state enters
 func enter() -> void: pass

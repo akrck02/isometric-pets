@@ -150,11 +150,12 @@ debug_color = Color(0, 0.6, 0.701961, 0.101961)
 
 [node name="PointLight2D" type="PointLight2D" parent="Visuals"]
 visible = false
+position = Vector2(0, -26)
 color = Color(1, 0.603922, 0, 1)
-energy = 0.24
+energy = 0.2
 range_z_max = 1041
 texture = ExtResource("4_a1wdx")
-texture_scale = 1.43
+texture_scale = 1.4
 
 [node name="ChatBubble" parent="Visuals" instance=ExtResource("6_slsed")]
 position = Vector2(-2, -82)

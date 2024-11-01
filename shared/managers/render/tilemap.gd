@@ -1,7 +1,21 @@
 extends Node
 
+## Signals
+signal tilemap_changed(tilemap : TileMap)
+
 ## Registered tilemaps
 @onready var tilemap : TileMapExtended = _create_fallback_tilemap()
+
+
+## Logic to be executed when node is ready
+func _ready() -> void:
+	tilemap_changed.connect(set_tilemap)
+
+
+## Set current tilemap
+func set_tilemap(new_tilemap: TileMapExtended):
+	tilemap = new_tilemap
+
 
 ## Create a fallback tilemap
 func _create_fallback_tilemap() -> TileMapExtended:

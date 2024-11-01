@@ -43,6 +43,10 @@ position = Vector2(5712, -1877)
 [node name="Npc" parent="Tilemap/Navigable" instance=ExtResource("9_p24x2")]
 position = Vector2(6112, -1961)
 
+[node name="Tas" parent="Tilemap/Navigable" instance=ExtResource("6_bdx4c")]
+position = Vector2(6528, -2054)
+metadata/_edit_group_ = true
+
 [node name="Pet" type="Node2D" parent="Tilemap/Navigable"]
 
 [node name="Camera2D" parent="Tilemap/Navigable/Pet" node_paths=PackedStringArray("focus_node") instance=ExtResource("7_lsj0o")]

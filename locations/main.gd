@@ -16,5 +16,5 @@ func _input(_event : InputEvent) -> void:
 ## Start the game
 func _start_game(_data : InputData) -> void:
 	started = true
-	SignalDatabase.scene_change_requested.emit(next_scene)
+	SceneManager.scene_change_requested.emit(next_scene)
 	queue_free()

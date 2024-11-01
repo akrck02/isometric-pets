@@ -7,7 +7,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalDatabase.environment_changed.connect(_select_environment)
+	UIManager.environment_changed.connect(_select_environment)
 	_select_environment(type)
 
 ## Select an environment

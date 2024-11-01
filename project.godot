@@ -19,15 +19,16 @@ config/icon="res://android_icon.png"
 
 [autoload]
 
+OSManager="*res://shared/managers/os/os.gd"
 SignalDatabase="*res://shared/engine/signal_database.gd"
-GameSprites="*res://shared/managers/render/game_sprites.gd"
-TimeManager="*res://shared/managers/time.gd"
-SaveManager="*res://shared/managers/save.gd"
+GameSprites="*res://shared/constants/game_sprites.gd"
+TimeManager="*res://shared/managers/time/time.gd"
+SaveManager="*res://shared/managers/save/save.gd"
 SettingsManager="*res://shared/managers/settings/settings.gd"
-ViewportManager="*res://shared/managers/render/viewport.gd"
+UIManager="*res://shared/managers/render/ui/ui.gd"
 InputManager="*res://shared/managers/input/input.gd"
-Canvas="*res://shared/managers/render/canvas.gd"
-SceneManager="*res://shared/managers/render/scene.gd"
+Canvas="*res://shared/managers/render/scenes/canvas.gd"
+SceneManager="*res://shared/managers/render/scenes/scene.gd"
 TilemapManager="*res://shared/managers/render/tilemap.gd"
 
 [display]

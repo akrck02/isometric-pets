@@ -38,7 +38,11 @@ func _ready():
 	InputManager.zoom_requested.connect(zoom_camera)
 	InputManager.find_requested.connect(return_to_default_camera_position)
 	InputManager.movement_requested.connect(pan_camera)
-	SignalDatabase.camera_movement_updated.connect(update_can_move)
+	UIManager.camera_movement_updated.connect(update_can_move)
+
+	# if it is being played on desktop, show more 
+	if OSManager.is_desktop():
+		default_zoom *= 0.65
 
 	zoom = default_zoom
 	if focus_node != null: 
@@ -58,13 +62,14 @@ func _process(delta):
 		match InputManager.current_input:
 			Controls.Type.Touch: 			message = "Tap with 3 fingers to center the camera";
 			Controls.Type.KeyboardAndMouse: message = "Press E to center the camera"
+			Controls.Type.Gamepad: 			message = "Press R1 to center the camera"
 		
-		SignalDatabase.notification_shown.emit("[center] %s" % message) 
+		UIManager.notification_shown.emit("[center] %s" % message) 
 	else: 
 		if focus_node != null:
-			position = focus_node.position
+			position = focus_node.position - offset
 		
-		SignalDatabase.notification_hidden.emit() 
+		UIManager.notification_hidden.emit() 
 
 
 ## Get if the camera is outside the max offset

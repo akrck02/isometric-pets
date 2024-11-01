@@ -2,6 +2,7 @@ class_name Pet
 extends CharacterBody2D
 
 # Pet data
+@export_category("Stats")
 @export var pet_name : String = "tas"
 @export var stats : PetStats
 
@@ -12,55 +13,49 @@ extends CharacterBody2D
 # Emotions
 @onready var chat_bubble = $Visuals/ChatBubble
 
-# Movement
-@export var control : bool = false;
-@onready var animation_player : AnimationPlayer = $Visuals/AnimationPlayer
-@onready var ray : RayCast2D = $RayCast
-@onready var tween : Tween
-@export var movement_speed = 1.00/1.5;
-var moving = false
-
 # Interactions
 @onready var interaction_area : Area2D = $Interaction
 var interaction_active : bool  = false
 
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
 func _ready():
-	load_from_savestate();
-	update_sprite()
+	_load_from_savestate();
+	_update_sprite()
 
-	SignalDatabase.tick_reached.connect(tick_update)
-	SignalDatabase.night_started.connect(set_night)
-	SignalDatabase.day_started.connect(set_day)
-	SignalDatabase.outline.connect(toggle_outline)
+	TimeManager.tick_reached.connect(_tick_update)
+	TimeManager.night_started.connect(_set_night)
+	TimeManager.day_started.connect(_set_day)
 	
 	# Interactions
-	interaction_area.input_event.connect(handle_interaction)
+	interaction_area.input_event.connect(_handle_interaction)
 	
 	# Set outline based on config file
-	animation_player.play("idle")
-	toggle_outline(false)
+	_toggle_outline(false)
 
-# load pet data from savestate
-func load_from_savestate():
+
+## Load pet data from savestate
+func _load_from_savestate():
 	stats = PetStats.new();
-	
-# Change the sprite according to name
-func update_sprite():
+
+
+## Change the sprite according to name
+func _update_sprite():
 	if not sprite:
 		return;
 	sprite.texture = load(Paths.get_character("pet").get_sprite("%s.png" % pet_name))
 
-# Handle interaction
-func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
+
+## Handle interaction
+func _handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	
 	if event is not InputEventScreenTouch:
 		return;
 		
-	handle_touch(event)
+	_handle_touch(event)
 
-# Handle touch interaction
-func handle_touch(event : InputEventScreenTouch):
+
+## Handle touch interaction
+func _handle_touch(event : InputEventScreenTouch):
 	
 	if not event.double_tap:
 		return
@@ -68,7 +63,7 @@ func handle_touch(event : InputEventScreenTouch):
 	interaction_active = !interaction_active
 	
 	if interaction_active:
-		SignalDatabase.notification_shown.emit("[center] %s is interested" % pet_name)
+		UIManager.notification_shown.emit("[center] %s is interested" % pet_name)
 		InputManager.context = Game.Context.PetInteraction
 		sprite.material.set_shader_parameter("width",2)
 	else:
@@ -76,81 +71,46 @@ func handle_touch(event : InputEventScreenTouch):
 		sprite.material.set_shader_parameter("width",0)
 		
 
-# This function will be called every tick
-func tick_update():
+## This function will be called every tick
+func _tick_update():
 	stats.time += 1
-	normalize_stats()
-	show_feelings()
-	
+	_normalize_stats()
+	_show_feelings()
 
-# Normalize stat values
-func normalize_stats():
+
+## Normalize stat values
+func _normalize_stats():
 	stats.hunger = clamp(stats.hunger,0,100)
 	stats.affection = clamp(stats.affection,0,100)
 	stats.energy =  clamp(stats.energy,0,100)
 	stats.fun =  clamp(stats.fun,0,100)
 
-# Automatic movement
-func automatic_movement():
-	
-	if control or moving or interaction_active: 
-		return
-	
-	var direction = randi() % 7
-	move(direction)
 
-
-# Move the character
-func move(direction : int):
-
-	moving = true
-	var length = 40 
-	var new_position = Vector2.ZERO 
-	match direction:
-		1: new_position = length * (Vector2.UP * 0.5 + Vector2.LEFT)    # Left
-		2: new_position = length * (Vector2.UP * 0.5 + Vector2.RIGHT)   # Up
-		3: new_position = length * (Vector2.DOWN * 0.5 + Vector2.LEFT)  # Down
-		4: new_position = length * (Vector2.DOWN * 0.5 + Vector2.RIGHT) # Right
-		
-	# Check future collisions
-	ray.target_position = new_position
-	ray.force_raycast_update()
-	
-	# If a collision will happen, stop
-	if not ray.is_colliding() and new_position != Vector2.ZERO:
-		stats.energy -= 1
-		stats.hunger += 1
-		
-		animation_player.play("walk")
-		tween = create_tween()
-		tween.tween_property(self, NodeProperties.Position, position + new_position, movement_speed).set_trans(Tween.TRANS_SINE)
-		await tween.finished
-		tween.kill()
-		animation_player.play("idle")
-		
-	moving = false
-
-# Prepare the visuals for nighttime
-func set_night() : 
+## Prepare the visuals for nighttime
+func _set_night() : 
 	point_light.show()
 
-# Prepare the visuals for daytime
-func set_day() : 
+
+## Prepare the visuals for daytime
+func _set_day() : 
 	point_light.hide()
 
+
 # Toggle the sprite outline
-func toggle_outline(value:bool):
+func _toggle_outline(value:bool):
 	if value:
 		sprite.material.set_shader_parameter("width",1)
 		return
 		
 	sprite.material.set_shader_parameter("width",0)
 
-# Interact
-func interact():
+
+## Interact
+func _interact():
 	pass
 
-# Show feelings 
-func show_feelings():
+
+## Show feelings 
+func _show_feelings():
 	if stats.hunger > 80:
 		chat_bubble.visible = true
