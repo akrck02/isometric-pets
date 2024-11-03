@@ -15,9 +15,11 @@ func _ready() -> void:
 func is_linux() -> bool:
 	return operating_system == OperatingSystems.LINUX
 
+
 ## Get if current OS is Android
 func is_android() -> bool:
 	return operating_system == OperatingSystems.ANDROID
+
 
 ## Get if current OS is Windows
 func is_windows() -> bool:

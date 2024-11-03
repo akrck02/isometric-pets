@@ -27,7 +27,6 @@ func step_node_to(node : Node2D, new_coordinates : Vector2i) -> void:
 	tween.tween_property(node, NodeProperties.GlobalPosition, new_global_position, 1.00 / speed) #.set_trans(Tween.TRANS_SINE)
 	await tween.finished
 
-
 ## Move towards coordinates in grid
 func move_towards_in_grid(node : Node2D, new_coordinates : Vector2i) -> void:
 	
