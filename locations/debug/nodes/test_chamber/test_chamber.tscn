@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/map/nodes/tilemap/nodes/tilemap_extended.gd" id="1_uid3b"]
 [ext_resource type="TileSet" uid="uid://b1vppjetxm2w8" path="res://materials/map/tilemap.tres" id="2_6r4np"]
 [ext_resource type="PackedScene" uid="uid://xtpk8a7u1agl" path="res://entities/characters/nodes/npc/npc.tscn" id="3_wv1re"]
-[ext_resource type="Script" path="res://entities/map/nodes/tilemap/nodes/tilemap_layer_extended.gd" id="4_o5auv"]
+[ext_resource type="Script" path="res://entities/map/nodes/grid_area/tilemap/tilemap_extended.gd" id="4_o5auv"]
 [ext_resource type="PackedScene" uid="uid://cba3m5gci8old" path="res://ui/hud/ui.tscn" id="4_p5xpf"]
 [ext_resource type="PackedScene" uid="uid://cgnui67yn25qr" path="res://entities/animals/nodes/wandering_animal/wandering_animal.tscn" id="5_24v8e"]
 [ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="5_gymh8"]

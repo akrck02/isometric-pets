@@ -32,7 +32,9 @@ func _ready() -> void:
 	
 	# Signal connection
 	TimeManager.tick_reached.connect(tick_process)
-	UIManager.outline.connect(toggle_outline)
+	UIManager.outline.connect(_set_outline)
+	
+	_set_outline(false)
 	
 	# Setup the npc data
 	load_from_savestate();
@@ -56,56 +58,22 @@ func update_sprite() -> void:
 ## This function will be called every tick
 func tick_process() -> void:
 	pass
-	# navigation.step()
 
 
 ## Set idle state
 func idle() -> void:
 	animation_player.play("idle")
-
-
-## Test click movement
-func move_test(input: InputData) -> void:
-	var click_coordinates : Vector2i = TilemapManager.get_coordinates_from_global_position(input.get_current_global_position(get_viewport()))
-	navigation.calculate_path_to(click_coordinates)
-
-
-## Move towards coordinates in grid
-func move_towards_in_grid(new_coordinates : Vector2i) -> void:
 	
-	if new_coordinates == null:
-		return;
-		
-	if animation_player.current_animation != "walk":
-		animation_player.play("walk")
 	
-	# if not SceneManager.current_tilemap.can_object_be_placed_on_tile(self, coords):
-		# return
-	
-	var directions : Array[MoveEnums.Direction] = Positions.get_directions_from_coordinates(navigation.coordinates, new_coordinates)
-
-	match  directions[0]:
-		MoveEnums.Direction.Right:  
-			visuals.scale.x = -1
-		MoveEnums.Direction.Left:
-			visuals.scale.x = 1
-
-	match  directions[1]:
-		MoveEnums.Direction.Up:  
-			visuals.scale.x = -1
-		MoveEnums.Direction.Down:
-			visuals.scale.x = 1
-
-	navigation.step_node_to(self,new_coordinates)
-
 ## Interact
 func interact() -> void:
 	pass
 
-## Toggle outline
-func toggle_outline(value : bool) -> void:
+
+## Set sprite outline
+func _set_outline(value:bool):
 	if value:
-		sprite.material.set_shader_parameter("width",1)
+		sprite.material = load("res://materials/general/outline_shader_material.tres")
 		return
 		
-	sprite.material.set_shader_parameter("width",0)
+	sprite.material = null

@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://bgd58tknkodwv"]
+[gd_scene load_steps=16 format=3 uid="uid://bgd58tknkodwv"]
 
 [ext_resource type="Script" path="res://entities/characters/nodes/pet/pet.gd" id="1_t2hn5"]
 [ext_resource type="Texture2D" uid="uid://bm6uy3x5dk7qw" path="res://entities/characters/nodes/pet/sprites/tas.png" id="2_dbtwv"]
 [ext_resource type="Texture2D" uid="uid://dtnrq3qm6emc" path="res://entities/characters/sprites/shadow.png" id="3_03fhf"]
-[ext_resource type="Material" uid="uid://c0q6k8bo0nc7y" path="res://materials/general/outline_shader_material.tres" id="3_abgn8"]
 [ext_resource type="Texture2D" uid="uid://g84fjvgcei1i" path="res://entities/characters/sprites/light-cast.png" id="4_a1wdx"]
 [ext_resource type="PackedScene" uid="uid://uwg3nl77trw1" path="res://ui/in_game/chat_bubble/chat_bubble.tscn" id="6_slsed"]
 [ext_resource type="PackedScene" uid="uid://dbciupg0y5qog" path="res://shared/mecanics/states/state_machine.tscn" id="7_0n4qr"]
@@ -174,7 +173,6 @@ texture = ExtResource("3_03fhf")
 
 [node name="Sprite" type="Sprite2D" parent="Visuals"]
 y_sort_enabled = true
-material = ExtResource("3_abgn8")
 position = Vector2(-37, -70)
 texture = ExtResource("2_dbtwv")
 centered = false
@@ -210,3 +208,4 @@ animation = NodePath("../../Visuals/AnimationPlayer")
 animation = NodePath("../../Visuals/AnimationPlayer")
 navigation = NodePath("../../Navigation")
 movement = NodePath("../../Movement")
+enabled = false

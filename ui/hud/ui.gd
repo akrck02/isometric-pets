@@ -26,6 +26,9 @@ var notification_showing = false;
 # Debug ui
 @onready var debug_ui : DebugUi = $DebugUi
 
+# Pet interation layer
+@onready var pet_interaction_ui : Control = $PetInteractionMenu 
+
 ## Dependency management
 var dependencies : DependencyDatabase = DependencyDatabase.for_node("Ui")
 
@@ -56,6 +59,7 @@ func _connect_signals():
 	UIManager.notification_shown.connect(_show_notification)
 	UIManager.notification_hidden.connect(_hide_notification)
 	InputManager.start_requested.connect(_toggle_settings_by_input)
+	SignalDatabase.toggle_pet_actions_menu.connect(toggle_pet_actions)
 	show_settings_button.pressed.connect(_toggle_settings)
 	
 
@@ -63,6 +67,15 @@ func _connect_signals():
 func _toggle_ui():
 	ui_control.visible = !ui_control.visible
 
+
+## Toggle pet actions
+func toggle_pet_actions():
+	if pet_interaction_ui.visible:
+		pet_interaction_ui.hide()
+		return
+	
+	pet_interaction_ui.show()
+	
 
 ## Update tick
 func _update_tick():

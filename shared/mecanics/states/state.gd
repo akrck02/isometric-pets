@@ -12,7 +12,7 @@ class_name State
 
 ## The actor of the state
 var actor : CharacterBody2D
-var enabled : bool = true
+@export var enabled : bool = true
 
 ## If this state is enabled 
 ## ALERT DO NOT OVERRIDE!!!

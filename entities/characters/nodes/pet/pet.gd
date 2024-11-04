@@ -30,7 +30,7 @@ func _ready():
 	interaction_area.input_event.connect(_handle_interaction)
 	
 	# Set outline based on config file
-	_toggle_outline(false)
+	_set_outline(false)
 
 
 ## Load pet data from savestate
@@ -65,10 +65,12 @@ func _handle_touch(event : InputEventScreenTouch):
 	if interaction_active:
 		UIManager.notification_shown.emit("[center] %s is interested" % pet_name)
 		InputManager.context = Game.Context.PetInteraction
-		sprite.material.set_shader_parameter("width",2)
+		_set_outline(true)
 	else:
 		InputManager.context = Game.Context.Camera
-		sprite.material.set_shader_parameter("width",0)
+		_set_outline(false)
+	
+	SignalDatabase.toggle_pet_actions_menu.emit()
 		
 
 ## This function will be called every tick
@@ -97,12 +99,12 @@ func _set_day() :
 
 
 # Toggle the sprite outline
-func _toggle_outline(value:bool):
+func _set_outline(value:bool):
 	if value:
-		sprite.material.set_shader_parameter("width",1)
+		sprite.material = load("res://materials/general/outline_shader_material.tres")
 		return
 		
-	sprite.material.set_shader_parameter("width",0)
+	sprite.material = null
 
 
 ## Interact
