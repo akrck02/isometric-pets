@@ -17,6 +17,9 @@ extends CharacterBody2D
 @onready var interaction_area : Area2D = $Interaction
 var interaction_active : bool  = false
 
+# Loader module
+@onready var loader : PetLoader = $Loader
+
 ## Called when the node enters the scene tree for the first time.
 func _ready():
 	_load_from_savestate();
@@ -50,7 +53,7 @@ func _handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	
 	if event is not InputEventScreenTouch:
 		return;
-		
+	
 	_handle_touch(event)
 
 
@@ -61,6 +64,8 @@ func _handle_touch(event : InputEventScreenTouch):
 		return
 	
 	interaction_active = !interaction_active
+	
+	loader.load_pet_requested.emit()
 	
 	if interaction_active:
 		UIManager.notification_shown.emit("[center] %s is interested" % pet_name)

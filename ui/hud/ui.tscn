@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cba3m5gci8old"]
+[gd_scene load_steps=23 format=3 uid="uid://cba3m5gci8old"]
 
 [ext_resource type="Script" path="res://ui/hud/ui.gd" id="1_yktcp"]
 [ext_resource type="Texture2D" uid="uid://cqutuq0jrsqbu" path="res://ui/hud/settings/sprites/park.svg" id="2_wwa4d"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dptxys2tpqwm1" path="res://ui/hud/settings/sprites/icons.png" id="7_acr4x"]
 [ext_resource type="PackedScene" uid="uid://csy5nja40cw3j" path="res://ui/hud/debug/debug_ui.tscn" id="7_udyie"]
 [ext_resource type="PackedScene" uid="uid://dxji80jjayie" path="res://ui/environment/environment.tscn" id="8_5xy2s"]
-[ext_resource type="Texture2D" uid="uid://clmp0yvvfpwc2" path="res://entities/items/nodes/food/sprites/food.png" id="10_o6vrp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnnow"]
 bg_color = Color(0, 0, 0, 0.788235)
@@ -261,40 +260,3 @@ y_sort_enabled = true
 visible = false
 offset_left = 2.0
 offset_right = 2.0
-
-[node name="PetInteractionMenu" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="PetInteractionMenu"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 200
-
-[node name="Food" type="Button" parent="PetInteractionMenu/MarginContainer"]
-custom_minimum_size = Vector2(140, 140)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("5_jc2jt")
-text = " "
-
-[node name="Sprite2D" type="Sprite2D" parent="PetInteractionMenu/MarginContainer/Food"]
-position = Vector2(64, 73)
-scale = Vector2(2.43125, 2.5875)
-texture = ExtResource("10_o6vrp")
-hframes = 5

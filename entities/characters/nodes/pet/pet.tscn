@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgd58tknkodwv"]
+[gd_scene load_steps=17 format=3 uid="uid://bgd58tknkodwv"]
 
 [ext_resource type="Script" path="res://entities/characters/nodes/pet/pet.gd" id="1_t2hn5"]
 [ext_resource type="Texture2D" uid="uid://bm6uy3x5dk7qw" path="res://entities/characters/nodes/pet/sprites/tas.png" id="2_dbtwv"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://uwg3nl77trw1" path="res://ui/in_game/chat_bubble/chat_bubble.tscn" id="6_slsed"]
 [ext_resource type="PackedScene" uid="uid://dbciupg0y5qog" path="res://shared/mecanics/states/state_machine.tscn" id="7_0n4qr"]
 [ext_resource type="PackedScene" uid="uid://btpvicx32t5f" path="res://shared/mecanics/navigation/navigation.tscn" id="7_sqe1t"]
+[ext_resource type="PackedScene" uid="uid://c62rvsu2k52vs" path="res://entities/characters/nodes/pet/nodes/loader/loader.tscn" id="8_86gkl"]
 [ext_resource type="Script" path="res://shared/mecanics/states/idle/idle_state.gd" id="8_fngwt"]
 [ext_resource type="PackedScene" uid="uid://b8kgse64epm5s" path="res://shared/mecanics/movement/movement.tscn" id="8_tn5q3"]
 [ext_resource type="PackedScene" uid="uid://b145u2b1gyom3" path="res://shared/mecanics/states/wander/wander.tscn" id="11_w66mi"]
@@ -194,6 +195,9 @@ target_position = Vector2(0, 40)
 navigation = NodePath("../Navigation")
 animation_player = NodePath("../Visuals/AnimationPlayer")
 visuals = NodePath("../Visuals")
+
+[node name="Loader" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("8_86gkl")]
+sprite = NodePath("../Visuals/Sprite")
 
 [node name="States" parent="." node_paths=PackedStringArray("actor", "initial_state") instance=ExtResource("7_0n4qr")]
 position = Vector2(-1, -30)

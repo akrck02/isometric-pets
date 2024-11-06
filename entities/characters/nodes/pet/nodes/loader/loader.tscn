@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c62rvsu2k52vs"]
+
+[ext_resource type="Script" path="res://entities/characters/nodes/pet/nodes/loader/loader.gd" id="1_mu73h"]
+
+[node name="Loader" type="Node2D"]
+script = ExtResource("1_mu73h")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

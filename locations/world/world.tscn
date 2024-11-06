@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=4 uid="uid://cfe218fpwkj7d"]
 
 [ext_resource type="Script" path="res://locations/world/world.gd" id="1_y5n7u"]
-[ext_resource type="Script" path="res://entities/map/nodes/grid_area/tilemap/tilemap_extended.gd" id="2_rh15b"]
+[ext_resource type="Script" path="res://entities/map/nodes/tilemap/tilemap_extended.gd" id="2_rh15b"]
 [ext_resource type="PackedScene" uid="uid://ur810d3ygdls" path="res://entities/world/nodes/sign/nodes/sign.tscn" id="4_cl8bi"]
 [ext_resource type="TileSet" uid="uid://b1vppjetxm2w8" path="res://materials/map/tilemap.tres" id="4_fxkog"]
 [ext_resource type="PackedScene" uid="uid://bb0q2fy8l6iaj" path="res://entities/animals/nodes/cat/nodes/totem/tottem.tscn" id="5_cwnpp"]
