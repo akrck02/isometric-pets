@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://btpvicx32t5f"]
+
+[ext_resource type="PackedScene" uid="uid://b2bwygr8gqpqx" path="res://shared/mecanics/navigation/grid_navigation_agent/navigation_agent_2d.tscn" id="1_63f7i"]
+[ext_resource type="Script" path="res://shared/mecanics/navigation/navigation.gd" id="1_vgtra"]
+
+[node name="Navigation" type="Node2D"]
+script = ExtResource("1_vgtra")
+
+[node name="GridNavigationAgent2D" parent="." instance=ExtResource("1_63f7i")]
+avoidance_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0, 0, 0, 0.0823529)
+debug_path_custom_point_size = 5.0
+debug_path_custom_line_width = 2.0

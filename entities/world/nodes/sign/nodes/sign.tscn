@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ur810d3ygdls"]
+
+[ext_resource type="Script" path="res://entities/world/nodes/sign/nodes/sign.gd" id="1_hvg32"]
+[ext_resource type="Texture2D" uid="uid://d4atoad32t6t0" path="res://entities/world/nodes/sign/sprites/sign.png" id="1_nay4o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8gniy"]
+radius = 24.9317
+height = 60.2613
+
+[node name="Sign" type="Node2D"]
+script = ExtResource("1_hvg32")
+
+[node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(-1.30421, 11.1306)
+texture = ExtResource("1_nay4o")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.00743103, 0.117567)
+shape = SubResource("CapsuleShape2D_8gniy")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -25.7869
+offset_top = -14.054
+offset_right = 22.2131
+offset_bottom = 11.946
+rotation = -0.210463
+bbcode_enabled = true
+text = "[center]Run"

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://de0kp0bflu8l6"]
+
+[ext_resource type="Shader" path="res://shaders/camera.gdshader" id="1_s06ts"]
+[ext_resource type="Texture2D" uid="uid://d3pgrufjmhdg7" path="res://materials/camera/cool_gradient.tres" id="2_rxbib"]
+[ext_resource type="Texture2D" uid="uid://datp43fjnncxf" path="res://materials/camera/warm_gradient.tres" id="3_kagrr"]
+
+[resource]
+shader = ExtResource("1_s06ts")
+shader_parameter/temperature = 0.25
+shader_parameter/warm_color = ExtResource("3_kagrr")
+shader_parameter/cool_color = ExtResource("2_rxbib")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://2iwnsnmc35bj"]
+
+[ext_resource type="Texture2D" uid="uid://bitnbo65hrdej" path="res://entities/animals/nodes/turtle/sprites/gomi.png" id="1_aloht"]
+[ext_resource type="Script" path="res://locations/minigames/nodes/dino_run/nodes/enemy/enemy.gd" id="1_rug5o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urp7u"]
+size = Vector2(19, 129)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_55usi"]
+radius = 15.5
+
+[node name="DinoEnemy" type="CharacterBody2D"]
+script = ExtResource("1_rug5o")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(45, 31)
+scale = Vector2(1.46206, 1.39708)
+texture = ExtResource("1_aloht")
+
+[node name="ScoreArea" type="Area2D" parent="." groups=["dino_run_score_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+position = Vector2(45.5, -53.5)
+shape = SubResource("RectangleShape2D_urp7u")
+
+[node name="DeathArea" type="Area2D" parent="." groups=["dino_run_death_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
+position = Vector2(46.5, 30)
+shape = SubResource("CircleShape2D_55usi")

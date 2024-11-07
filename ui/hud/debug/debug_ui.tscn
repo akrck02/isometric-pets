@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://csy5nja40cw3j"]
+
+[ext_resource type="Script" path="res://ui/hud/debug/debug_ui.gd" id="1_2466k"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_imxut"]
+
+[node name="DebugUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_2466k")
+
+[node name="CoordinatesLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.063
+anchor_top = 0.078
+anchor_right = 0.315
+anchor_bottom = 0.134
+offset_left = 1.36655
+offset_top = 7.144
+offset_right = 1.07054
+offset_bottom = 6.63199
+theme = ExtResource("2_imxut")
+theme_override_font_sizes/font_size = 61
+text = "0,0"
+
+[node name="LocalPositionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.063
+anchor_top = 0.133
+anchor_right = 0.316
+anchor_bottom = 0.187
+offset_left = 1.176
+offset_top = 2.91864
+offset_right = 0.231995
+offset_bottom = 2.71063
+theme = ExtResource("2_imxut")
+theme_override_font_sizes/font_size = 61
+text = "0,0"
+
+[node name="GlobalPositionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.201
+anchor_right = 0.316
+anchor_bottom = 0.255
+offset_left = -1.32158
+offset_top = -19.0215
+offset_right = 0.326416
+offset_bottom = -19.2295
+theme = ExtResource("2_imxut")
+theme_override_font_sizes/font_size = 61
+text = "0,0"
