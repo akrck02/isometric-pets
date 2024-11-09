@@ -98,7 +98,6 @@ metadata/_edit_group_ = true
 
 [node name="Pet" parent="Tilemap/Layers/1/Pet" instance=ExtResource("6_bdx4c")]
 position = Vector2(6305, -1980.55)
-pet_name = "teko"
 metadata/_edit_group_ = true
 
 [node name="0" type="TileMapLayer" parent="Tilemap/Layers"]

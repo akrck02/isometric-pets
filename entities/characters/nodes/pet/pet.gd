@@ -28,6 +28,7 @@ func _ready():
 	TimeManager.tick_reached.connect(_tick_update)
 	TimeManager.night_started.connect(_set_night)
 	TimeManager.day_started.connect(_set_day)
+	NfcManager.pet_change_requested.connect(_change_pet)
 	
 	# Interactions
 	interaction_area.input_event.connect(_handle_interaction)
@@ -48,6 +49,11 @@ func _update_sprite():
 	sprite.texture = load(Paths.get_character("pet").get_sprite("%s.png" % pet_name))
 
 
+func _change_pet(uuid : String) -> void:
+	loader.loaded = loader.uuid == uuid
+	loader.uuid = uuid
+	loader.load_pet_requested.emit()
+
 ## Handle interaction
 func _handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	
@@ -64,9 +70,7 @@ func _handle_touch(event : InputEventScreenTouch):
 		return
 	
 	interaction_active = !interaction_active
-	
-	loader.load_pet_requested.emit()
-	
+		
 	if interaction_active:
 		UIManager.notification_shown.emit("[center] %s is interested" % pet_name)
 		InputManager.context = Game.Context.PetInteraction

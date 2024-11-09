@@ -20,6 +20,7 @@ config/icon="res://android_icon.png"
 [autoload]
 
 OSManager="*res://shared/managers/os/os.gd"
+NfcManager="*res://shared/managers/nfc/nfc.gd"
 SignalDatabase="*res://shared/engine/signal_database.gd"
 GameSprites="*res://shared/constants/game_sprites.gd"
 TimeManager="*res://shared/managers/time/time.gd"
@@ -38,6 +39,10 @@ window/size/viewport_height=1152
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GodotNFC/GodotNFC/plugin.cfg", "res://addons/GodotNFC/plugin.cfg")
 
 [file_customization]
 
