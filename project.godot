@@ -24,7 +24,7 @@ NfcManager="*res://shared/managers/nfc/nfc.gd"
 SignalDatabase="*res://shared/engine/signal_database.gd"
 GameSprites="*res://shared/constants/game_sprites.gd"
 TimeManager="*res://shared/managers/time/time.gd"
-SaveManager="*res://shared/managers/save/save.gd"
+SaveManager="*res://shared/managers/save/save_manager.tscn"
 SettingsManager="*res://shared/managers/settings/settings.gd"
 UIManager="*res://shared/managers/render/ui/ui.gd"
 InputManager="*res://shared/managers/input/input.gd"
@@ -42,7 +42,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotNFC/GodotNFC/plugin.cfg", "res://addons/GodotNFC/plugin.cfg")
+enabled=PackedStringArray("res://addons/GodotNFC/plugin.cfg")
 
 [file_customization]
 

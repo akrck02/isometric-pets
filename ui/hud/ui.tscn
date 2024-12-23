@@ -1,14 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://cba3m5gci8old"]
+[gd_scene load_steps=29 format=3 uid="uid://cba3m5gci8old"]
 
 [ext_resource type="Script" path="res://ui/hud/ui.gd" id="1_yktcp"]
 [ext_resource type="Texture2D" uid="uid://cqutuq0jrsqbu" path="res://ui/hud/settings/sprites/park.svg" id="2_wwa4d"]
 [ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="3_g1lr1"]
+[ext_resource type="Texture2D" uid="uid://d1kchw0drwgpb" path="res://ui/hud/settings/sprites/loader.png" id="4_nm4b8"]
 [ext_resource type="Material" uid="uid://de0kp0bflu8l6" path="res://materials/camera/filter_shader_material_day.tres" id="4_y8ln0"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="5_jc2jt"]
 [ext_resource type="PackedScene" uid="uid://bkxydu410llqn" path="res://ui/hud/settings/settings.tscn" id="6_1eey1"]
 [ext_resource type="Texture2D" uid="uid://dptxys2tpqwm1" path="res://ui/hud/settings/sprites/icons.png" id="7_acr4x"]
 [ext_resource type="PackedScene" uid="uid://csy5nja40cw3j" path="res://ui/hud/debug/debug_ui.tscn" id="7_udyie"]
 [ext_resource type="PackedScene" uid="uid://dxji80jjayie" path="res://ui/environment/environment.tscn" id="8_5xy2s"]
+[ext_resource type="PackedScene" uid="uid://dulkirp0j7yge" path="res://ui/hud/interactions/interaction.tscn" id="10_yoll5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnnow"]
 bg_color = Color(0, 0, 0, 0.788235)
@@ -90,6 +92,72 @@ _data = {
 "notification_out": SubResource("Animation_av3cc")
 }
 
+[sub_resource type="Animation" id="Animation_i56k0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kpdbn"]
+resource_name = "load"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667, 0.8, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.34902), Color(1, 1, 1, 0.34902)]
+}
+
+[sub_resource type="Animation" id="Animation_hluwh"]
+resource_name = "idle"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cs7j5"]
+_data = {
+"RESET": SubResource("Animation_i56k0"),
+"idle": SubResource("Animation_hluwh"),
+"load": SubResource("Animation_kpdbn")
+}
+
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_yktcp")
 
@@ -104,10 +172,10 @@ material = ExtResource("4_y8ln0")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.061
-offset_left = -3871.0
-offset_top = -1249.0
-offset_right = 4025.0
-offset_bottom = 3128.73
+offset_left = -3895.0
+offset_top = -1250.0
+offset_right = 4001.0
+offset_bottom = 3127.73
 
 [node name="UiControl" type="VBoxContainer" parent="."]
 z_index = 4096
@@ -191,9 +259,14 @@ size_flags_vertical = 4
 [node name="Button" type="Button" parent="UiControl/PanelContainer/MarginContainer/Banner/SettingsButton"]
 custom_minimum_size = Vector2(86, 82)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_top = 1.089
+anchor_right = 1.011
+anchor_bottom = 2.089
+offset_left = 2.0
+offset_top = -96.01
+offset_right = 1.00999
+offset_bottom = -96.01
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
@@ -260,3 +333,28 @@ y_sort_enabled = true
 visible = false
 offset_left = 2.0
 offset_right = 2.0
+
+[node name="Interaction" parent="." instance=ExtResource("10_yoll5")]
+visible = false
+
+[node name="Loader" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 146.0
+offset_right = -56.0
+offset_bottom = 237.0
+grow_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Loader"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-1, 1)
+scale = Vector2(6, 6)
+texture = ExtResource("4_nm4b8")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Loader"]
+libraries = {
+"": SubResource("AnimationLibrary_cs7j5")
+}

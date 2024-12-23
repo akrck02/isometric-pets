@@ -35,4 +35,5 @@ func emit_daytime():
 ## Get if it is night or day
 func is_daytime() -> bool:
 	var time = get_real_time()
+	time.hour = 12
 	return time.hour > 6 && time.hour < 20 

@@ -4,11 +4,12 @@ extends CharacterBody2D
 # Pet data
 @export_category("Stats")
 @export var pet_name : String = "tas"
-@export var stats : PetStats
+@export var stats : CareStats
 
 # Visuals
 @onready var sprite : Sprite2D = $Visuals/Sprite
 @onready var point_light : PointLight2D = $Visuals/PointLight2D
+@onready var animation_player : AnimationPlayer = $Visuals/AnimationPlayer
 
 # Emotions
 @onready var chat_bubble = $Visuals/ChatBubble
@@ -39,7 +40,7 @@ func _ready():
 
 ## Load pet data from savestate
 func _load_from_savestate():
-	stats = PetStats.new();
+	stats = CareStats.new();
 
 
 ## Change the sprite according to name
@@ -53,6 +54,7 @@ func _change_pet(uuid : String) -> void:
 	loader.loaded = loader.uuid == uuid
 	loader.uuid = uuid
 	loader.load_pet_requested.emit()
+
 
 ## Handle interaction
 func _handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
@@ -72,14 +74,19 @@ func _handle_touch(event : InputEventScreenTouch):
 	interaction_active = !interaction_active
 		
 	if interaction_active:
+		
+		# TODO: Animation based on the state
+		animation_player.play("happy")
+		
 		UIManager.notification_shown.emit("[center] %s is interested" % pet_name)
+		InputManager.find_requested.emit(InputData.new())
 		InputManager.context = Game.Context.PetInteraction
 		_set_outline(true)
 	else:
 		InputManager.context = Game.Context.Camera
 		_set_outline(false)
 	
-	SignalDatabase.toggle_pet_actions_menu.emit()
+	SignalDatabase.toggle_pet_actions_menu.emit(self)
 		
 
 ## This function will be called every tick
@@ -120,6 +127,13 @@ func _set_outline(value:bool):
 func _interact():
 	pass
 
+
+func save() -> Dictionary:
+	return {
+		"name" : pet_name,
+		"stats" : stats.save(),
+		"uuid" : loader.uuid
+	}
 
 ## Show feelings 
 func _show_feelings():

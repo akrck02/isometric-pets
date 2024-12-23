@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var ui_control : VBoxContainer = $UiControl
 @onready var time_label : Label = $UiControl/PanelContainer/MarginContainer/Banner/Time 
 @onready var filter : ColorRect = $Filter
+@onready var loader_animation : AnimationPlayer = $Loader/AnimationPlayer
 
 # Info banner
 @onready var info_banner : PanelContainer = $UiControl/MarginContainer/InfoBanner
@@ -43,7 +44,8 @@ func _ready():
 	_connect_signals()
 	_update_time()
 	location_label.text = site_name
-	
+	loader_animation.play("idle")
+		
 	if OSManager.is_desktop():
 		info_banner.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 
@@ -56,6 +58,8 @@ func _connect_signals():
 	UIManager.notification_shown.connect(_show_notification)
 	UIManager.notification_hidden.connect(_hide_notification)
 	InputManager.start_requested.connect(_toggle_settings_by_input)
+	SaveManager.save_game_started.connect(_start_loader_animation)
+	SaveManager.save_game_finished.connect(_finish_loader_animation)
 	show_settings_button.pressed.connect(_toggle_settings)
 	
 
@@ -121,3 +125,13 @@ func _toggle_settings():
 		return
 	
 	settings.open_menu()
+
+
+## Start loader animation
+func _start_loader_animation():
+	loader_animation.play("load")
+
+## Finish loader animation
+func _finish_loader_animation():
+	await get_tree().create_timer(1.0).timeout
+	loader_animation.play("RESET")

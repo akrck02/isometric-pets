@@ -4,10 +4,24 @@ const save_path="user://isopets.save"
 ## Signals
 signal new_game_created
 signal save_game_requested
+signal save_game_started
+signal save_game_finished
 
+@onready var timer : Timer = $Timer
+const SAVE_TIME_INTERVAL = 60
+
+func _ready() -> void:
+	save_game_requested.connect(save_game)
+	
+	timer.wait_time = SAVE_TIME_INTERVAL
+	timer.one_shot = false
+	timer.timeout.connect(save_game)
+	timer.start()
 
 ## Save game
 func save_game():
+	print_debug("Saving game")
+	save_game_started.emit()
 	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
 	for node in save_nodes:
@@ -29,6 +43,8 @@ func save_game():
 
 		# Store the save dictionary as a new line in the save file.
 		save_file.store_line(json_string)
+	
+	save_game_finished.emit()
 
 ## Load game
 func load_game():

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dulkirp0j7yge"]
+
+[node name="Interaction" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 148
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(105, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GIVE FOOD"

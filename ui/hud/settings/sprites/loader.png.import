@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://camyardg1tokj"
-path="res://.godot/imported/8dc87417-f4e5-4b39-a3f0-21534f68a6b4.png-52527caeac652aca276ce68990a185a1.ctex"
+uid="uid://d1kchw0drwgpb"
+path="res://.godot/imported/loader.png-d4a805e2c494d48d996e5c820ec2f3b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/characters/nodes/pet/sprites/8dc87417-f4e5-4b39-a3f0-21534f68a6b4.png"
-dest_files=["res://.godot/imported/8dc87417-f4e5-4b39-a3f0-21534f68a6b4.png-52527caeac652aca276ce68990a185a1.ctex"]
+source_file="res://ui/hud/settings/sprites/loader.png"
+dest_files=["res://.godot/imported/loader.png-d4a805e2c494d48d996e5c820ec2f3b7.ctex"]
 
 [params]
 

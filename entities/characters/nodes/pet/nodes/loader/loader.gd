@@ -3,7 +3,7 @@ class_name PetLoader
 
 signal load_pet_requested()
 
-const PET_SERVICE : String = "http://yoga:3000/isopets/1.0"
+const PET_SERVICE : String = "http://isopets.duckdns.org:3000/isopets/1.0"
 const GET_PET_SERVICE : String = PET_SERVICE + "/pets/%s"
 const GET_PET_IMAGE_SERVICE : String = GET_PET_SERVICE + "/image"
 
