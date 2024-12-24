@@ -8,3 +8,7 @@ extends Node
 
 # Camera signals
 @warning_ignore("unused_signal") signal camera_movement_updated(value : bool)
+
+# Interaction ui
+@warning_ignore("unused_signal") signal interaction_started
+@warning_ignore("unused_signal") signal interaction_ended

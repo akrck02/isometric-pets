@@ -74,20 +74,24 @@ func _handle_touch(event : InputEventScreenTouch):
 	interaction_active = !interaction_active
 		
 	if interaction_active:
-		
-		# TODO: Animation based on the state
-		animation_player.play("happy")
-		
-		UIManager.notification_shown.emit("[center] %s is interested" % pet_name)
-		InputManager.find_requested.emit(InputData.new())
-		InputManager.context = Game.Context.PetInteraction
+		InteractionManager.set_interaction_target(self)
 		_set_outline(true)
+		UIManager.interaction_started.emit()
+	
 	else:
 		InputManager.context = Game.Context.Camera
 		_set_outline(false)
+		UIManager.interaction_ended.emit()
 	
 	SignalDatabase.toggle_pet_actions_menu.emit(self)
-		
+
+
+func play_mood_animation():
+	match stats.mood:
+			CareEnums.State.HAPPY : animation_player.play("happy")
+			CareEnums.State.ANGRY : animation_player.play("angry")
+			CareEnums.State.HUNGRY : animation_player.play("hungry")
+			CareEnums.State.SAD : animation_player.play("sad")
 
 ## This function will be called every tick
 func _tick_update():

@@ -31,6 +31,7 @@ InputManager="*res://shared/managers/input/input.gd"
 Canvas="*res://shared/managers/render/scenes/canvas.gd"
 SceneManager="*res://shared/managers/render/scenes/scene.gd"
 TilemapManager="*res://shared/managers/render/tilemap.gd"
+InteractionManager="*res://shared/managers/interaction/interaction.gd"
 
 [display]
 

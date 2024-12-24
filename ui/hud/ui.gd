@@ -46,8 +46,8 @@ func _ready():
 	location_label.text = site_name
 	loader_animation.play("idle")
 		
-	if OSManager.is_desktop():
-		info_banner.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	#if OSManager.is_desktop():
+	#	info_banner.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 
 
 ## Connect the needed signals

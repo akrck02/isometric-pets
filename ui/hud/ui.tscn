@@ -119,6 +119,10 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_hluwh"]
+resource_name = "idle"
+loop_mode = 1
+
 [sub_resource type="Animation" id="Animation_kpdbn"]
 resource_name = "load"
 loop_mode = 1
@@ -146,10 +150,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0.34902), Color(1, 1, 1, 0.34902)]
 }
-
-[sub_resource type="Animation" id="Animation_hluwh"]
-resource_name = "idle"
-loop_mode = 1
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cs7j5"]
 _data = {
