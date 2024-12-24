@@ -1,6 +1,8 @@
 extends Control
 
-@onready var food_button : Button = $VBoxContainer/ButtonsMarginContainer/Button
+@onready var food_button : Button = $VBoxContainer/ButtonsMarginContainer/HBoxContainer/Food
+@onready var play_button : Button = $VBoxContainer/ButtonsMarginContainer/HBoxContainer/Play
+@onready var pet_button : Button = $VBoxContainer/ButtonsMarginContainer/HBoxContainer/Pet
 
 @onready var time_stat_label : Label = $VBoxContainer/StatsMarginContainer/StatsContainer/Time
 @onready var hunger_stat_label : Label = $VBoxContainer/StatsMarginContainer/StatsContainer/Hunger
@@ -14,6 +16,8 @@ func _ready() -> void:
 	UIManager.interaction_started.connect(show)
 	UIManager.interaction_ended.connect(hide)
 	food_button.pressed.connect(_give_food_to_pet)
+	play_button.pressed.connect(_play_with_pet)
+	pet_button.pressed.connect(_pet_the_pet)
 
 func _process(delta: float) -> void:
 	
@@ -26,5 +30,16 @@ func _process(delta: float) -> void:
 
 ## Give food to pet
 func _give_food_to_pet() -> void:
-	InteractionManager.give_food_to_current_pet(1)
+	InteractionManager.current_pet.stats.hunger -= 1
+
+
+## Give food to pet
+func _play_with_pet() -> void:
+	InteractionManager.current_pet.stats.fun += 1
+
+
+
+## Give food to pet
+func _pet_the_pet() -> void:
+	InteractionManager.current_pet.stats.affection += 1
 	

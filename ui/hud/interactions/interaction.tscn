@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dulkirp0j7yge"]
+[gd_scene load_steps=3 format=3 uid="uid://dulkirp0j7yge"]
 
 [ext_resource type="Script" path="res://ui/hud/interactions/interaction.gd" id="1_psb5x"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_qv0ip"]
 
 [node name="Interaction" type="Control"]
 layout_mode = 3
@@ -65,8 +66,30 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_constants/margin_bottom = 148
 
-[node name="Button" type="Button" parent="VBoxContainer/ButtonsMarginContainer"]
-custom_minimum_size = Vector2(105, 43)
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonsMarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Food" type="Button" parent="VBoxContainer/ButtonsMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(163, 43)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "GIVE FOOD"
+theme = ExtResource("2_qv0ip")
+theme_override_font_sizes/font_size = 52
+text = "Food"
+
+[node name="Play" type="Button" parent="VBoxContainer/ButtonsMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(163, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qv0ip")
+theme_override_font_sizes/font_size = 52
+text = "Play"
+
+[node name="Pet" type="Button" parent="VBoxContainer/ButtonsMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(163, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qv0ip")
+theme_override_font_sizes/font_size = 52
+text = "<3"
