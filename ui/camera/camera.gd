@@ -2,32 +2,30 @@ extends Camera2D
 class_name SmartCamera
 
 # Camera focus 
-@export var focus_node : Node2D;
-var focusing : bool = false
+@export var focus_node : Node2D
 
 # Zoom params
-@export var default_zoom : Vector2 = Vector2(3,3);
-@export var min_zoom : float = 1;
-@export var max_zoom : float = 6;
+@export var default_zoom : Vector2 = Vector2(3,3)
+@export var min_zoom : float = 1
+@export var max_zoom : float = 6
 var start_zoom
 
 # Speed variables
-@export var zoom_speed : float = 0.1;
-@export var pan_speed : float = 0.1;
-@export var rotation_speed : float = 0.1;
+@export var zoom_speed : float = 0.1
+@export var pan_speed : float = 0.1
+@export var rotation_speed : float = 0.1
 
 # Flags
-@export var can_move : bool = true;
-@export var can_zoom : bool = true;
-@export var can_pan : bool = true;
-@export var can_rotate : bool = false;
+@export var can_move : bool = true
+@export var can_zoom : bool = true
+@export var can_pan : bool = true
+@export var can_rotate : bool = false
 
 # Movement animation
 @onready var zoom_tween : Tween
 @onready var offset_tween : Tween
-@export var movement_speed = 1.00/1.5;
+@export var movement_speed = 1.00/1.5
 var start_distance = 0
-
 var delta_time = 1
 
 
@@ -45,8 +43,7 @@ func _ready():
 		default_zoom *= 0.65
 
 	zoom = default_zoom
-	if focus_node != null: 
-		focusing = true
+	#focus()
 
 
 ## Process operations
@@ -54,8 +51,7 @@ func _process(delta):
 	
 	delta_time = delta
 	
-	if not is_current_context() or not can_move:
-		return;
+	if not is_current_context() or not can_move: return
 	
 	if camera_is_not_focused(): 
 		var message = ""
@@ -66,10 +62,14 @@ func _process(delta):
 		
 		UIManager.notification_shown.emit("[center] %s" % message) 
 	else: 
-		if focus_node != null:
-			position = focus_node.position - offset
-		
+		#focus()
 		UIManager.notification_hidden.emit() 
+
+
+## Focus the camera to target node
+func focus():
+	if focus_node == null: return
+	position = focus_node.position
 
 
 ## Get if the camera is outside the max offset
@@ -107,7 +107,7 @@ func limit_zoom(new_zoom : Vector2) -> Vector2:
 	if new_zoom.y <= min_zoom: new_zoom.y = min_zoom
 	if new_zoom.y >= max_zoom: new_zoom.y = max_zoom
 	return new_zoom
-	
+
 
 ## Return to default camera position 
 func return_to_default_camera_position(_data : InputData) -> void:

@@ -23,7 +23,7 @@ func _init():
 	energy = DEFAULT_ENERGY
 	mood = DEFAULT_MOOD_STATE
 
-func save() -> Dictionary:
+func to_dictionary() -> Dictionary:
 	return {
 		"time": time,
 		"hunger": hunger,
@@ -32,3 +32,15 @@ func save() -> Dictionary:
 		"energy" : energy,
 		"mood" : mood
 	}
+
+static func from_dictionary(data : Dictionary) -> CareStats:
+	var stats = CareStats.new()
+	
+	stats.time = data.time
+	stats.hunger = data.hunger
+	stats.fun = data.fun
+	stats.affection = data.affection
+	stats.energy = data.energy
+	stats.mood = data.mood
+	
+	return stats

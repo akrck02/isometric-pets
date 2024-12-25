@@ -40,7 +40,10 @@ func _ready():
 
 ## Load pet data from savestate
 func _load_from_savestate():
-	stats = CareStats.new();
+	var pet_data : Dictionary = SaveManager.save_data.pets[pet_name]
+	
+	if pet_data != null: 
+		stats = CareStats.from_dictionary(pet_data.stats);
 
 
 ## Change the sprite according to name
@@ -127,17 +130,12 @@ func _set_outline(value:bool):
 	sprite.material = null
 
 
-## Interact
-func _interact():
-	pass
-
-
 func save() -> Dictionary:
-	return {
-		"name" : pet_name,
-		"stats" : stats.save(),
-		"uuid" : loader.uuid
-	}
+	var data = {}
+	data.uuid = loader.uuid
+	data.stats = stats.to_dictionary()
+	data.name = pet_name
+	return data
 
 ## Show feelings 
 func _show_feelings():

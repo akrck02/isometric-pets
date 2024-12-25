@@ -38,7 +38,6 @@ func _play_with_pet() -> void:
 	InteractionManager.current_pet.stats.fun += 1
 
 
-
 ## Give food to pet
 func _pet_the_pet() -> void:
 	InteractionManager.current_pet.stats.affection += 1

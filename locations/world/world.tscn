@@ -86,19 +86,17 @@ position = Vector2(5968, -2004)
 
 [node name="Tas" parent="Tilemap/Layers/1" instance=ExtResource("6_bdx4c")]
 position = Vector2(5635, -2047)
+pet_name = "tas"
 metadata/_edit_group_ = true
 
-[node name="Pet" type="Node2D" parent="Tilemap/Layers/1"]
-position = Vector2(-95, 108)
-
-[node name="Camera2D" parent="Tilemap/Layers/1/Pet" node_paths=PackedStringArray("focus_node") instance=ExtResource("7_lsj0o")]
+[node name="Camera2D" parent="Tilemap/Layers/1" node_paths=PackedStringArray("focus_node") instance=ExtResource("7_lsj0o")]
 z_index = 1
-position = Vector2(6446, -1946)
-focus_node = NodePath("../Pet")
+position = Vector2(6351, -1838)
+focus_node = NodePath("../Teko")
 metadata/_edit_group_ = true
 
-[node name="Pet" parent="Tilemap/Layers/1/Pet" instance=ExtResource("6_bdx4c")]
-position = Vector2(6305, -1980.55)
+[node name="Teko" parent="Tilemap/Layers/1" instance=ExtResource("6_bdx4c")]
+position = Vector2(6210, -1872.55)
 pet_name = "teko"
 metadata/_edit_group_ = true
 
@@ -108,4 +106,4 @@ tile_set = ExtResource("4_fxkog")
 
 [node name="Ui" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("8_k82j5")]
 site_name = "Central park"
-camera = NodePath("../Tilemap/Layers/1/Pet/Camera2D")
+camera = NodePath("../Tilemap/Layers/1/Camera2D")

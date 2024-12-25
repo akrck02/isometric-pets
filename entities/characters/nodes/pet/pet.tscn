@@ -281,7 +281,7 @@ _data = {
 "walk": SubResource("Animation_okm1f")
 }
 
-[node name="Pet" type="CharacterBody2D" groups=["Persist"]]
+[node name="Pet" type="CharacterBody2D" groups=["persist", "pets"]]
 y_sort_enabled = true
 script = ExtResource("1_t2hn5")
 

@@ -2,7 +2,7 @@ extends CanvasLayer
 
 # Dependency injection
 @export var site_name : String = "" 
-@export var camera : Camera2D
+@export var camera : SmartCamera
 
 # Ui general
 @onready var ui_control : VBoxContainer = $UiControl
@@ -27,7 +27,7 @@ var notification_showing = false;
 # Debug ui
 @onready var debug_ui : DebugUi = $DebugUi
 
-## Dependency management
+# Dependency management
 var dependencies : DependencyDatabase = DependencyDatabase.for_node("Ui")
 
 
@@ -55,13 +55,23 @@ func _connect_signals():
 	TimeManager.tick_reached.connect(_update_tick);
 	TimeManager.night_started.connect(_set_night_color_palette)
 	TimeManager.day_started.connect(_set_day_color_palette)
+	
 	UIManager.notification_shown.connect(_show_notification)
 	UIManager.notification_hidden.connect(_hide_notification)
+	
+	show_settings_button.pressed.connect(_toggle_settings)
 	InputManager.start_requested.connect(_toggle_settings_by_input)
+	
 	SaveManager.save_game_started.connect(_start_loader_animation)
 	SaveManager.save_game_finished.connect(_finish_loader_animation)
-	show_settings_button.pressed.connect(_toggle_settings)
 	
+	UIManager.interaction_started.connect(_target_camera)
+
+
+func _target_camera():
+	camera.focus_node = InteractionManager.current_pet
+	camera.focus()
+	camera.return_to_default_camera_position(null)
 
 ## Toggle the entire ui visibility
 func _toggle_ui():
@@ -130,6 +140,7 @@ func _toggle_settings():
 ## Start loader animation
 func _start_loader_animation():
 	loader_animation.play("load")
+
 
 ## Finish loader animation
 func _finish_loader_animation():

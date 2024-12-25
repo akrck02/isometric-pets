@@ -61,11 +61,12 @@ folder_colors={
 
 [global_group]
 
-Persist=""
 dino_run_score_area=""
 dino_run_death_area=""
 followable=""
 navigation=""
+persist=""
+pets=""
 
 [input]
 
