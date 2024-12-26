@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://d05k2li4vva7j"]
+
+[ext_resource type="Texture2D" uid="uid://cv23i0i8ygm3g" path="res://entities/characters/nodes/npc/sprites/soriel.png" id="1_3byty"]
+[ext_resource type="Script" path="res://ui/hud/interactions/dialogue.gd" id="1_ly0n8"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="1_qs86t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd5s8"]
+bg_color = Color(1, 0.886275, 0.670588, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ly0n8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -260.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="CharacterSprite" type="Sprite2D" parent="MarginContainer/Control"]
+position = Vector2(488, -116)
+scale = Vector2(4.81563, 4.71563)
+texture = ExtResource("1_3byty")
+hframes = 3
+
+[node name="DialogueContainer" type="Panel" parent="MarginContainer"]
+custom_minimum_size = Vector2(580, 210)
+layout_mode = 2
+theme = ExtResource("1_qs86t")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xd5s8")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/DialogueContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/DialogueContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CharacterName" type="Label" parent="MarginContainer/DialogueContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.270588, 0.152941, 1)
+theme_override_font_sizes/font_size = 52
+text = "Soriel"
+
+[node name="Text" type="Label" parent="MarginContainer/DialogueContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
+theme_override_font_sizes/font_size = 39
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="."]

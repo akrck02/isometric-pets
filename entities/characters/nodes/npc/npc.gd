@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var tilemap : TileMapExtended 
 
 # Pet data
-@export var pet_name : String = "soriel"
+@export var character_name : String = "soriel"
 
 # Visuals
 @onready var visuals : Node2D = $Visuals
@@ -21,7 +21,10 @@ extends CharacterBody2D
 @onready var navigation : NavigationNode = $Navigation
 
 # Interactions
-@onready var interaction : Area2D = $Interaction
+@onready var interaction_area : Area2D = $Interaction
+
+# Dialogue
+@onready var dialogue : Dialogue = $Dialogue
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,12 +35,14 @@ func _ready() -> void:
 	
 	# Signal connection
 	TimeManager.tick_reached.connect(tick_process)
-	UIManager.outline.connect(_set_outline)
+	set_outline(false)
 	
-	_set_outline(false)
+	# Interactions
+	interaction_area.input_event.connect(_handle_interaction)
 	
 	# Setup the npc data
 	load_from_savestate();
+	dialogue.load_for_character(character_name)
 	update_sprite()
 	idle()
 	
@@ -52,7 +57,7 @@ func update_sprite() -> void:
 	if not sprite:
 		return;
 	
-	sprite.texture =  load(Paths.get_character("npc").get_sprite("%s.png" % pet_name))
+	sprite.texture =  load(Paths.get_character("npc").get_sprite("%s.png" % character_name))
 
 
 ## This function will be called every tick
@@ -63,15 +68,22 @@ func tick_process() -> void:
 ## Set idle state
 func idle() -> void:
 	animation_player.play("idle")
+
+
+## Handle interaction
+func _handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	
+	if event is not InputEventScreenTouch:
+		return;
 	
-## Interact
-func interact() -> void:
-	pass
+	if not event.double_tap:
+		return
+	
+	InteractionManager.interact_with_npc(self)
 
 
 ## Set sprite outline
-func _set_outline(value:bool):
+func set_outline(value:bool):
 	if value:
 		sprite.material = load("res://materials/general/outline_shader_material.tres")
 		return

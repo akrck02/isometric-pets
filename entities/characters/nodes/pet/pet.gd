@@ -4,7 +4,8 @@ extends CharacterBody2D
 # Pet data
 @export_category("Stats")
 @export var pet_name : String = "tas"
-@export var stats : CareStats
+@export var location : World.Locations = World.Locations.MainSquare
+@export var stats : CareStats = CareStats.new()
 
 # Visuals
 @onready var sprite : Sprite2D = $Visuals/Sprite
@@ -35,15 +36,18 @@ func _ready():
 	interaction_area.input_event.connect(_handle_interaction)
 	
 	# Set outline based on config file
-	_set_outline(false)
+	set_outline(false)
 
 
 ## Load pet data from savestate
 func _load_from_savestate():
+	
 	var pet_data : Dictionary = SaveManager.save_data.pets[pet_name]
 	
 	if pet_data != null: 
 		stats = CareStats.from_dictionary(pet_data.stats);
+		location = pet_data.location
+		if pet_data.has("uuid"): loader.uuid = pet_data.uuid
 
 
 ## Change the sprite according to name
@@ -77,13 +81,10 @@ func _handle_touch(event : InputEventScreenTouch):
 	interaction_active = !interaction_active
 		
 	if interaction_active:
-		InteractionManager.set_interaction_target(self)
-		_set_outline(true)
-		UIManager.interaction_started.emit()
-	
+		InteractionManager.interact_with_pet(self)
 	else:
 		InputManager.context = Game.Context.Camera
-		_set_outline(false)
+		set_outline(false)
 		UIManager.interaction_ended.emit()
 	
 	SignalDatabase.toggle_pet_actions_menu.emit(self)
@@ -91,10 +92,10 @@ func _handle_touch(event : InputEventScreenTouch):
 
 func play_mood_animation():
 	match stats.mood:
-			CareEnums.State.HAPPY : animation_player.play("happy")
-			CareEnums.State.ANGRY : animation_player.play("angry")
-			CareEnums.State.HUNGRY : animation_player.play("hungry")
-			CareEnums.State.SAD : animation_player.play("sad")
+		CareEnums.Mood.HAPPY : animation_player.play("happy")
+		CareEnums.Mood.ANGRY : animation_player.play("angry")
+		CareEnums.Mood.HUNGRY : animation_player.play("hungry")
+		CareEnums.Mood.SAD : animation_player.play("sad")
 
 ## This function will be called every tick
 func _tick_update():
@@ -121,8 +122,8 @@ func _set_day() :
 	point_light.hide()
 
 
-# Toggle the sprite outline
-func _set_outline(value:bool):
+## Toggle the sprite outline
+func set_outline(value:bool):
 	if value:
 		sprite.material = load("res://materials/general/outline_shader_material.tres")
 		return
@@ -132,9 +133,15 @@ func _set_outline(value:bool):
 
 func save() -> Dictionary:
 	var data = {}
-	data.uuid = loader.uuid
-	data.stats = stats.to_dictionary()
+	var coords = TilemapManager.get_coordinates_from_global_position(global_position)
+	
+	if null != loader: data.uuid = loader.uuid
 	data.name = pet_name
+	data.location = location
+	data.coordinates = {}
+	data.coordinates.x = coords.x
+	data.coordinates.y = coords.y
+	data.stats = stats.to_dictionary()
 	return data
 
 ## Show feelings 

@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=3 uid="uid://dulkirp0j7yge"]
+
+[ext_resource type="Script" path="res://ui/hud/interactions/pet_interaction.gd" id="1_on608"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_m3bdy"]
+
+[node name="Pet" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_on608")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="StatsMarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 100
+
+[node name="StatsContainer" type="VBoxContainer" parent="VBoxContainer/StatsMarginContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Time" type="Label" parent="VBoxContainer/StatsMarginContainer/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Time: 0"
+vertical_alignment = 1
+
+[node name="Hunger" type="Label" parent="VBoxContainer/StatsMarginContainer/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Hunger: 0"
+vertical_alignment = 1
+
+[node name="Fun" type="Label" parent="VBoxContainer/StatsMarginContainer/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Fun: 0"
+vertical_alignment = 1
+
+[node name="Affection" type="Label" parent="VBoxContainer/StatsMarginContainer/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Affection: 0"
+vertical_alignment = 1
+
+[node name="Energy" type="Label" parent="VBoxContainer/StatsMarginContainer/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Energy: 0"
+vertical_alignment = 1
+
+[node name="ButtonsMarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 148
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ButtonsMarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Food" type="Button" parent="VBoxContainer/ButtonsMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(163, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_m3bdy")
+theme_override_font_sizes/font_size = 52
+text = "Food"
+
+[node name="Play" type="Button" parent="VBoxContainer/ButtonsMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(163, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_m3bdy")
+theme_override_font_sizes/font_size = 52
+text = "Play"
+
+[node name="Pet" type="Button" parent="VBoxContainer/ButtonsMarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(163, 43)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_m3bdy")
+theme_override_font_sizes/font_size = 52
+text = "<3"

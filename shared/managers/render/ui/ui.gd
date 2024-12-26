@@ -12,3 +12,4 @@ extends Node
 # Interaction ui
 @warning_ignore("unused_signal") signal interaction_started
 @warning_ignore("unused_signal") signal interaction_ended
+@warning_ignore("unused_signal") signal dialogue_started

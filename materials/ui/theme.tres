@@ -1,33 +1,38 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://fk4bfu837bvc"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://fk4bfu837bvc"]
 
 [ext_resource type="Texture2D" uid="uid://dfkmx8ud2ixjl" path="res://ui/hud/settings/sprites/catbrightnessdown.png" id="1_cbvwn"]
 [ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="1_i8spk"]
 [ext_resource type="StyleBox" uid="uid://cn0xm81r1djb1" path="res://materials/ui/button_pressed.tres" id="2_jbinl"]
+[ext_resource type="StyleBox" uid="uid://cf3vx3oawdia7" path="res://materials/ui/button_normal.tres" id="3_fte3n"]
 [ext_resource type="StyleBox" uid="uid://bagl0oxvrcjqi" path="res://materials/ui/button_hover.tres" id="3_xul5r"]
+[ext_resource type="StyleBox" uid="uid://woclggw5lgn0" path="res://materials/ui/grabber_area_highlight.tres" id="6_ocmf0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gs6ee"]
-bg_color = Color(0, 0, 0, 0.298039)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 0.423529)
+content_margin_left = 30.0
+content_margin_top = 5.0
+content_margin_right = 30.0
+content_margin_bottom = 5.0
+bg_color = Color(0.592157, 0.439216, 0.298039, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-expand_margin_left = 20.0
-expand_margin_right = 20.0
 anti_aliasing = false
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xj6wt"]
+color = Color(0.592157, 0.439216, 0.298039, 1)
+thickness = 8
 
 [resource]
 default_font = ExtResource("1_i8spk")
+Button/colors/font_color = Color(1, 0.886275, 0.670588, 1)
+Button/colors/font_hover_color = Color(1, 0.872592, 0.629493, 1)
 Button/font_sizes/font_size = 50
 Button/fonts/font = ExtResource("1_i8spk")
 Button/styles/focus = ExtResource("3_xul5r")
 Button/styles/hover = ExtResource("3_xul5r")
 Button/styles/hover_pressed = ExtResource("3_xul5r")
-Button/styles/normal = ExtResource("2_jbinl")
+Button/styles/normal = ExtResource("3_fte3n")
 Button/styles/pressed = SubResource("StyleBoxFlat_gs6ee")
 CheckButton/font_sizes/font_size = 50
 CheckButton/fonts/font = ExtResource("1_i8spk")
@@ -39,13 +44,20 @@ CheckButton/styles/pressed = ExtResource("2_jbinl")
 HSlider/icons/grabber = ExtResource("1_cbvwn")
 HSlider/icons/grabber_disabled = null
 HSlider/icons/grabber_highlight = ExtResource("1_cbvwn")
+HSlider/styles/grabber_area = ExtResource("6_ocmf0")
+HSlider/styles/grabber_area_highlight = ExtResource("6_ocmf0")
+HSlider/styles/slider = SubResource("StyleBoxLine_xj6wt")
+Label/colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_i8spk")
 RichTextLabel/font_sizes/normal_font_size = 40
 RichTextLabel/fonts/normal_font = ExtResource("1_i8spk")
 Title1/base_type = &"Label"
+Title1/colors/font_color = Color(0.4, 0.270588, 0.152941, 1)
 Title1/font_sizes/font_size = 90
 Title2/base_type = &"Label"
+Title2/colors/font_color = Color(0.4, 0.270588, 0.152941, 1)
 Title2/font_sizes/font_size = 70
 Title3/base_type = &"Label"
+Title3/colors/font_color = Color(0.4, 0.270588, 0.152941, 1)
 Title3/font_sizes/font_size = 50

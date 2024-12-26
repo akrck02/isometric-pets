@@ -101,7 +101,7 @@ func show_results():
 	results_container.visible = true
 
 func exit():
-	SignalDatabase.scene_change_requested.emit(Paths.get_world().get_scene())
+	SceneManager.scene_change_requested.emit(Paths.get_world().get_scene())
 	
 func retry():
-	SignalDatabase.scene_change_requested.emit(Paths.get_minigame("dino_run").get_scene())
+	SceneManager.scene_change_requested.emit(Paths.get_minigame("dino_run").get_scene())

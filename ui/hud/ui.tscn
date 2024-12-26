@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cba3m5gci8old"]
+[gd_scene load_steps=30 format=3 uid="uid://cba3m5gci8old"]
 
 [ext_resource type="Script" path="res://ui/hud/ui.gd" id="1_yktcp"]
 [ext_resource type="Texture2D" uid="uid://cqutuq0jrsqbu" path="res://ui/hud/settings/sprites/park.svg" id="2_wwa4d"]
@@ -10,10 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://dptxys2tpqwm1" path="res://ui/hud/settings/sprites/icons.png" id="7_acr4x"]
 [ext_resource type="PackedScene" uid="uid://csy5nja40cw3j" path="res://ui/hud/debug/debug_ui.tscn" id="7_udyie"]
 [ext_resource type="PackedScene" uid="uid://dxji80jjayie" path="res://ui/environment/environment.tscn" id="8_5xy2s"]
-[ext_resource type="PackedScene" uid="uid://dulkirp0j7yge" path="res://ui/hud/interactions/interaction.tscn" id="10_yoll5"]
+[ext_resource type="PackedScene" uid="uid://d05k2li4vva7j" path="res://ui/hud/interactions/dialogue.tscn" id="10_6hpgf"]
+[ext_resource type="PackedScene" uid="uid://dulkirp0j7yge" path="res://ui/hud/interactions/pet_interaction.tscn" id="10_yoll5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnnow"]
-bg_color = Color(0, 0, 0, 0.788235)
+bg_color = Color(0, 0, 0, 0.862745)
 
 [sub_resource type="LabelSettings" id="LabelSettings_br3iv"]
 font_size = 38
@@ -177,6 +178,22 @@ offset_top = -1250.0
 offset_right = 4001.0
 offset_bottom = 3127.73
 
+[node name="Interaction" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dialogue" parent="Interaction" instance=ExtResource("10_6hpgf")]
+visible = false
+layout_mode = 1
+
+[node name="Pet" parent="Interaction" instance=ExtResource("10_yoll5")]
+visible = false
+layout_mode = 1
+
 [node name="UiControl" type="VBoxContainer" parent="."]
 z_index = 4096
 y_sort_enabled = true
@@ -284,12 +301,6 @@ scale = Vector2(2.8, 2.8)
 texture = ExtResource("7_acr4x")
 hframes = 8
 
-[node name="ShowSettings" type="MarginContainer" parent="UiControl"]
-custom_minimum_size = Vector2(1, 60)
-layout_mode = 2
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 16
-
 [node name="MarginContainer" type="MarginContainer" parent="UiControl"]
 layout_mode = 2
 size_flags_vertical = 10
@@ -329,13 +340,10 @@ visible = false
 z_index = 4096
 y_sort_enabled = true
 
-[node name="DebugUi" parent="." instance=ExtResource("7_udyie")]
+[node name="Debug" parent="." instance=ExtResource("7_udyie")]
 visible = false
 offset_left = 2.0
 offset_right = 2.0
-
-[node name="Interaction" parent="." instance=ExtResource("10_yoll5")]
-visible = false
 
 [node name="Loader" type="MarginContainer" parent="."]
 anchors_preset = 1

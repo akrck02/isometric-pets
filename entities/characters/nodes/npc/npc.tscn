@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://xtpk8a7u1agl"]
+[gd_scene load_steps=13 format=3 uid="uid://xtpk8a7u1agl"]
 
 [ext_resource type="Script" path="res://entities/characters/nodes/npc/npc.gd" id="1_7m8e0"]
+[ext_resource type="PackedScene" uid="uid://qhh2x2eygki0" path="res://shared/mecanics/dialogue/Dialogue.tscn" id="2_5n8eo"]
 [ext_resource type="Material" uid="uid://c0q6k8bo0nc7y" path="res://materials/general/outline_shader_material.tres" id="2_jyriw"]
 [ext_resource type="Texture2D" uid="uid://bm6uy3x5dk7qw" path="res://entities/characters/nodes/pet/sprites/tas.png" id="3_hlgbg"]
 [ext_resource type="Texture2D" uid="uid://dtnrq3qm6emc" path="res://entities/characters/sprites/shadow.png" id="4_qutbh"]
@@ -140,6 +141,8 @@ show_behind_parent = true
 position = Vector2(-0.125, -0.500023)
 shape = SubResource("CapsuleShape2D_ketbd")
 debug_color = Color(0, 0.6, 0.701961, 0.101961)
+
+[node name="Dialogue" parent="." instance=ExtResource("2_5n8eo")]
 
 [node name="Navigation" parent="." instance=ExtResource("5_qd26c")]
 

@@ -15,7 +15,6 @@ position = Vector2(315, 558)
 
 [node name="Tas" parent="." instance=ExtResource("3_nl8pc")]
 position = Vector2(68, 677)
-pet_name = "tas"
 
 [node name="Teko" parent="." instance=ExtResource("3_nl8pc")]
 position = Vector2(416, 670)

@@ -25,7 +25,7 @@ var notification_showing = false;
 @onready var location_label : Label = $UiControl/PanelContainer/MarginContainer/Banner/LocationContainer/Location 
 
 # Debug ui
-@onready var debug_ui : DebugUi = $DebugUi
+@onready var debug_ui : DebugUi = $Debug
 
 # Dependency management
 var dependencies : DependencyDatabase = DependencyDatabase.for_node("Ui")
@@ -50,6 +50,12 @@ func _ready():
 	#	info_banner.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 
 
+## Process inputs
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed(&'ui_debug'):
+		debug_ui.visible =! debug_ui.visible
+
+
 ## Connect the needed signals
 func _connect_signals():
 	TimeManager.tick_reached.connect(_update_tick);
@@ -68,10 +74,12 @@ func _connect_signals():
 	UIManager.interaction_started.connect(_target_camera)
 
 
+## Target the camera to the current selected pet
 func _target_camera():
 	camera.focus_node = InteractionManager.current_pet
 	camera.focus()
 	camera.return_to_default_camera_position(null)
+
 
 ## Toggle the entire ui visibility
 func _toggle_ui():

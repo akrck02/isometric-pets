@@ -36,8 +36,10 @@ static func from_json(json : String) -> SaveData:
 	var save_data = SaveData.new()
 	var parsed_data = JSON.parse_string(json)
 
+	if null == parsed_data:
+		return save_data
+
 	for pet in parsed_data["pets"]:
-		print(pet)
 		save_data.set_pet(parsed_data["pets"][pet])
 
 	for quest in parsed_data["quests"]:
