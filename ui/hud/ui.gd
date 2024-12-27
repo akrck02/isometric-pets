@@ -72,13 +72,17 @@ func _connect_signals():
 	SaveManager.save_game_finished.connect(_finish_loader_animation)
 	
 	UIManager.interaction_started.connect(_target_camera)
+	UIManager.dialogue_started.connect(_target_camera)
 
 
 ## Target the camera to the current selected pet
 func _target_camera():
-	camera.focus_node = InteractionManager.current_pet
-	camera.focus()
+	
+	if null != InteractionManager.current_pet: camera.focus_node = InteractionManager.current_pet
+	elif null != InteractionManager.current_npc: camera.focus_node = InteractionManager.current_npc
 	camera.return_to_default_camera_position(null)
+	camera.focus()
+	
 
 
 ## Toggle the entire ui visibility

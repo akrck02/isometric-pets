@@ -1,8 +1,12 @@
 {
 	"foxy" : {
-		"hello" : "Hello there!"
+		"hello" : [
+			"Welcome to the isometric village, I hope you take good care of your little one.",
+			"As you can see, all the inhabitants prepare different games to have fun together.",
+			"I organise the ‘dinosaur-style’ obstacle courses, if you want to try them, let me know."
+		]
 	},
 	"soriel" : {
-		"hello" : "Hi there!"
+		"hello" : ["Hi there!"]
 	}
 }

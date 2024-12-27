@@ -78,16 +78,13 @@ func _handle_touch(event : InputEventScreenTouch):
 	if not event.double_tap:
 		return
 	
+	InteractionManager.stop_interactions()
 	interaction_active = !interaction_active
-		
+	
 	if interaction_active:
 		InteractionManager.interact_with_pet(self)
-	else:
-		InputManager.context = Game.Context.Camera
-		set_outline(false)
-		UIManager.interaction_ended.emit()
 	
-	SignalDatabase.toggle_pet_actions_menu.emit(self)
+
 
 
 func play_mood_animation():

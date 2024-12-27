@@ -7,13 +7,7 @@ var current_npc : Npc
 ## Interact with a pet
 func interact_with_pet(pet : Pet):
 	
-	if null != current_npc:
-		current_npc.set_outline(false)
-	
-	if null != current_pet:
-		current_pet.set_outline(false)
-	
-	current_npc = null
+	stop_interactions()
 	current_pet = pet
 	current_pet.play_mood_animation()
 	
@@ -34,15 +28,28 @@ func interact_with_npc(npc : Npc) -> void:
 	if Game.Context.Dialogue == InputManager.context:
 		return
 	
+	stop_interactions()
+	current_npc = npc
+	InputManager.context = Game.Context.Dialogue
+	
+	UIManager.dialogue_started.emit()
+	npc.set_outline(true)
+
+
+## Reset the outlines for the selected items 
+func _reset_outlines() -> void:
 	if null != current_npc:
 		current_npc.set_outline(false)
 	
 	if null != current_pet:
 		current_pet.set_outline(false)
-	
-	current_npc = npc
+
+
+## Stop the interactions
+func stop_interactions() -> void:
+	InputManager.context = Game.Context.Camera
+	_reset_outlines()
+	current_npc = null
 	current_pet = null
+	UIManager.interaction_ended.emit()
 	
-	UIManager.dialogue_started.emit()
-	InputManager.context = Game.Context.Dialogue
-	npc.set_outline(true)

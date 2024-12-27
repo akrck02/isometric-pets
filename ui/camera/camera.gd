@@ -43,7 +43,6 @@ func _ready():
 		default_zoom *= 0.65
 
 	zoom = default_zoom
-	#focus()
 
 
 ## Process operations
@@ -60,9 +59,8 @@ func _process(delta):
 			Controls.Type.KeyboardAndMouse: message = "Press E to center the camera"
 			Controls.Type.Gamepad: 			message = "Press R1 to center the camera"
 		
-		UIManager.notification_shown.emit("[center] %s" % message) 
+		## UIManager.notification_shown.emit("[center] %s" % message) 
 	else: 
-		#focus()
 		UIManager.notification_hidden.emit() 
 
 

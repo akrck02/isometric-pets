@@ -167,6 +167,7 @@ offset_left = 7.0
 offset_top = 2.0
 offset_right = 7.0
 offset_bottom = 2.0
+mouse_filter = 1
 
 [node name="Filter" type="ColorRect" parent="."]
 material = ExtResource("4_y8ln0")
@@ -177,22 +178,7 @@ offset_left = -3895.0
 offset_top = -1250.0
 offset_right = 4001.0
 offset_bottom = 3127.73
-
-[node name="Interaction" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Dialogue" parent="Interaction" instance=ExtResource("10_6hpgf")]
-visible = false
-layout_mode = 1
-
-[node name="Pet" parent="Interaction" instance=ExtResource("10_yoll5")]
-visible = false
-layout_mode = 1
+mouse_filter = 1
 
 [node name="UiControl" type="VBoxContainer" parent="."]
 z_index = 4096
@@ -206,6 +192,7 @@ grow_vertical = 2
 [node name="PanelContainer" type="PanelContainer" parent="UiControl"]
 layout_mode = 2
 size_flags_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_bnnow")
 
 [node name="MarginContainer" type="MarginContainer" parent="UiControl/PanelContainer"]
@@ -335,6 +322,23 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="UiControl/MarginContainer/InfoBanner"]
 
+[node name="Interaction" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dialogue" parent="Interaction" instance=ExtResource("10_6hpgf")]
+visible = false
+layout_mode = 1
+
+[node name="Pet" parent="Interaction" instance=ExtResource("10_yoll5")]
+visible = false
+layout_mode = 1
+
 [node name="Settings" parent="." instance=ExtResource("6_1eey1")]
 visible = false
 z_index = 4096
@@ -344,6 +348,7 @@ y_sort_enabled = true
 visible = false
 offset_left = 2.0
 offset_right = 2.0
+mouse_filter = 1
 
 [node name="Loader" type="MarginContainer" parent="."]
 anchors_preset = 1

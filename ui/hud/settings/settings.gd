@@ -1,5 +1,6 @@
 extends MarginContainer
 @onready var exit_button : Button = $Scroll/Controls/ExitControlsMargin/ExitControls/ExitGameButton
+@onready var general_volume_label : Label =  $Scroll/Controls/VolumeLabel
 @onready var general_volume_h_slider: HSlider = $Scroll/Controls/VolumeControls/GeneralVolumeHSlider
 
 @onready var graphics_label : Label = $Scroll/Controls/GraphicsLabel
@@ -9,8 +10,11 @@ extends MarginContainer
 @onready var windowed_button : Button = $Scroll/Controls/GraphicControls/DisplayControls/Windowed
 @onready var tween : Tween
 
+var animation_playing : bool = false
+
 ## Called when the node enters the scene tree for the first time.
 func _ready():
+	general_volume_label.text = "Volume - %s%%" % (AudioSettings.get_general_volume() * 100)
 	general_volume_h_slider.value = AudioSettings.get_general_volume()
 	general_volume_h_slider.value_changed.connect(change_general_volume)
 	
@@ -33,6 +37,10 @@ func exit_game():
 
 ## Open menu
 func open_menu() -> void:
+	
+	if animation_playing: return
+	
+	animation_playing = true
 	InputManager.context = Game.Context.Settings
 	set_visible(true)
 	
@@ -42,10 +50,15 @@ func open_menu() -> void:
 	await tween.finished
 	
 	general_volume_h_slider.grab_focus()
+	animation_playing = false
 
 
 ## Close menu
 func close_menu() -> void:
+	
+	if animation_playing: return
+	
+	animation_playing = true
 	InputManager.context = Game.Context.Camera
 	
 	tween = create_tween()
@@ -54,10 +67,12 @@ func close_menu() -> void:
 	await tween.finished
 	
 	set_visible(false)
+	animation_playing = false
 
 
 ## Change general volume
 func change_general_volume(value : float):
+	general_volume_label.text = "Volume - %s%%" % (value * 100)
 	SettingsManager.change_general_volume.emit(value)
 
 

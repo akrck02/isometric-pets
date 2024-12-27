@@ -19,16 +19,15 @@ func load_for_character(character_name: String) -> void:
 
 
 ## Get the current dialogue
-func current() -> String:
+func current() -> Array[String]:
 	return DialogueManager.get_dialogue(character, dialogue_keys[current_dialogue_id])
 
 
 ## Skip to the next dialogue and return it
-func next() -> String:
+func next() -> Array[String]:
 	
 	if current_dialogue_id < dialogue_keys.size() - 1:
 		current_dialogue_id += 1 
+		return current()
 	
-	return current()
-	
-	
+	return []

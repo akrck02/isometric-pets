@@ -4,25 +4,36 @@ extends Control
 @onready var character_name_label : Label = $MarginContainer/DialogueContainer/MarginContainer/VBoxContainer/CharacterName
 @onready var character_sprite : Sprite2D = $MarginContainer/Control/CharacterSprite
 @onready var text_label : Label = $MarginContainer/DialogueContainer/MarginContainer/VBoxContainer/Text
+@onready var next_dialogue_button = $NextMarginContainer/NextButton
 @onready var timer : Timer = $Timer
 
 var on_track : bool = false
+var current_dialogue : Array[String] = []
+var current_dialogue_index : int = 0
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	UIManager.dialogue_started.connect(_show_dialogue)
+	next_dialogue_button.pressed.connect(_next_dialogue)
+
 
 ## Show the dialogue
 func _show_dialogue():
-	show()
 	
 	if on_track: return
 
-	on_track = true	
+	show()
 	character_name_label.text = InteractionManager.current_npc.character_name.to_pascal_case()
 	character_sprite.texture = InteractionManager.current_npc.sprite.texture
 	
-	var text =  InteractionManager.current_npc.dialogue.current()
+	_load_current_dialogue()
+	_show_line()
+
+
+func _show_line() -> void:
+	
+	on_track = true
+	var text = current_dialogue[current_dialogue_index]
 	text_label.text = ""
 
 	for character in text:
@@ -35,5 +46,27 @@ func _show_dialogue():
 
 		timer.start()
 		await timer.timeout
-		
+	
 	on_track = false
+
+
+## Load current dialogue
+func _load_current_dialogue() -> void:
+	
+	current_dialogue =  InteractionManager.current_npc.dialogue.current()
+	current_dialogue_index = 0
+
+## Show next dialogue
+func _next_dialogue():
+
+	if on_track: return
+
+	if current_dialogue_index >= current_dialogue.size() - 1: 
+		on_track = false
+		InteractionManager.stop_interactions()
+		InputManager.context = Game.Context.Camera
+		hide()
+		return
+
+	current_dialogue_index += 1
+	_show_line()

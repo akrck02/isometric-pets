@@ -16,16 +16,18 @@ func _ready() -> void:
 
 
 ## Get a given dialogue for a character
-func get_dialogue(character: String, key : String) -> String:
+func get_dialogue(character: String, key : String) -> Array[String]:
 	
 	if not data.has(character): 
-		return ""
+		return []
 		
 	var character_dialogues : Dictionary = data[character]
 	if not character_dialogues.has(key):
-		return ""
-		
-	return character_dialogues[key]
+		return []
+	
+	var result : Array[String] = []
+	result.assign(character_dialogues[key])
+	return result
 
 
 ## Get the dialogue keys for a character

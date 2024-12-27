@@ -27,6 +27,7 @@ offset_top = 7.144
 offset_right = 1.07054
 offset_bottom = 6.63199
 theme = ExtResource("2_imxut")
+theme_override_colors/font_color = Color(1, 1, 1, 0.835294)
 theme_override_font_sizes/font_size = 61
 text = "0,0"
 
@@ -42,6 +43,7 @@ offset_top = 2.91864
 offset_right = 0.231995
 offset_bottom = 2.71063
 theme = ExtResource("2_imxut")
+theme_override_colors/font_color = Color(1, 1, 1, 0.835294)
 theme_override_font_sizes/font_size = 61
 text = "0,0"
 
@@ -57,5 +59,6 @@ offset_top = -19.0215
 offset_right = 0.326416
 offset_bottom = -19.2295
 theme = ExtResource("2_imxut")
+theme_override_colors/font_color = Color(1, 1, 1, 0.835294)
 theme_override_font_sizes/font_size = 61
 text = "0,0"
