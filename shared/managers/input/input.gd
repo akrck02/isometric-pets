@@ -46,6 +46,6 @@ func _input(event) -> void:
 		KeyboardInput.handle_input_event_key(event, delta)
 		return
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(Controls.CANCEL):
 		get_tree().quit()

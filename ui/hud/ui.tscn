@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cba3m5gci8old"]
+[gd_scene load_steps=24 format=3 uid="uid://cba3m5gci8old"]
 
 [ext_resource type="Script" path="res://ui/hud/ui.gd" id="1_yktcp"]
 [ext_resource type="Texture2D" uid="uid://cqutuq0jrsqbu" path="res://ui/hud/settings/sprites/park.svg" id="2_wwa4d"]
@@ -6,8 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d1kchw0drwgpb" path="res://ui/hud/settings/sprites/loader.png" id="4_nm4b8"]
 [ext_resource type="Material" uid="uid://de0kp0bflu8l6" path="res://materials/camera/filter_shader_material_day.tres" id="4_y8ln0"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="5_jc2jt"]
-[ext_resource type="PackedScene" uid="uid://bkxydu410llqn" path="res://ui/hud/settings/settings.tscn" id="6_1eey1"]
-[ext_resource type="Texture2D" uid="uid://dptxys2tpqwm1" path="res://ui/hud/settings/sprites/icons.png" id="7_acr4x"]
+[ext_resource type="PackedScene" uid="uid://bkxydu410llqn" path="res://ui/hud/apps/apps.tscn" id="6_1eey1"]
 [ext_resource type="PackedScene" uid="uid://csy5nja40cw3j" path="res://ui/hud/debug/debug_ui.tscn" id="7_udyie"]
 [ext_resource type="PackedScene" uid="uid://dxji80jjayie" path="res://ui/environment/environment.tscn" id="8_5xy2s"]
 [ext_resource type="PackedScene" uid="uid://d05k2li4vva7j" path="res://ui/hud/interactions/dialogue.tscn" id="10_6hpgf"]
@@ -21,16 +20,6 @@ font_size = 38
 
 [sub_resource type="LabelSettings" id="LabelSettings_aes4b"]
 font_size = 38
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mo36"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2pxu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3q2we"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_400cc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yld6r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjwsg"]
 bg_color = Color(0, 0, 0, 0.737255)
@@ -162,13 +151,6 @@ _data = {
 [node name="Ui" type="CanvasLayer"]
 script = ExtResource("1_yktcp")
 
-[node name="Environment" parent="." instance=ExtResource("8_5xy2s")]
-offset_left = 7.0
-offset_top = 2.0
-offset_right = 7.0
-offset_bottom = 2.0
-mouse_filter = 1
-
 [node name="Filter" type="ColorRect" parent="."]
 material = ExtResource("4_y8ln0")
 anchors_preset = -1
@@ -178,56 +160,50 @@ offset_left = -3895.0
 offset_top = -1250.0
 offset_right = 4001.0
 offset_bottom = 3127.73
-mouse_filter = 1
+mouse_filter = 2
 
-[node name="UiControl" type="VBoxContainer" parent="."]
-z_index = 4096
-y_sort_enabled = true
-anchors_preset = 15
+[node name="TopBar" type="PanelContainer" parent="."]
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 92.0
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="UiControl"]
-layout_mode = 2
 size_flags_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bnnow")
 
-[node name="MarginContainer" type="MarginContainer" parent="UiControl/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TopBar"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 1
 
-[node name="Banner" type="BoxContainer" parent="UiControl/PanelContainer/MarginContainer"]
+[node name="Banner" type="BoxContainer" parent="TopBar/MarginContainer"]
 custom_minimum_size = Vector2(0, 74)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Icon" type="Control" parent="UiControl/PanelContainer/MarginContainer/Banner"]
+[node name="Icon" type="Control" parent="TopBar/MarginContainer/Banner"]
 custom_minimum_size = Vector2(67, 46)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="Icon" type="Sprite2D" parent="UiControl/PanelContainer/MarginContainer/Banner/Icon"]
+[node name="Icon" type="Sprite2D" parent="TopBar/MarginContainer/Banner/Icon"]
 position = Vector2(23.5, 22.5)
 scale = Vector2(1.625, 1.625)
 texture = ExtResource("2_wwa4d")
 
-[node name="Icon2" type="Sprite2D" parent="UiControl/PanelContainer/MarginContainer/Banner/Icon"]
+[node name="Icon2" type="Sprite2D" parent="TopBar/MarginContainer/Banner/Icon"]
 position = Vector2(50, 28)
 scale = Vector2(1.00521, 1.00521)
 texture = ExtResource("2_wwa4d")
 
-[node name="LocationContainer" type="MarginContainer" parent="UiControl/PanelContainer/MarginContainer/Banner"]
+[node name="LocationContainer" type="MarginContainer" parent="TopBar/MarginContainer/Banner"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 
-[node name="Location" type="Label" parent="UiControl/PanelContainer/MarginContainer/Banner/LocationContainer"]
+[node name="Location" type="Label" parent="TopBar/MarginContainer/Banner/LocationContainer"]
 y_sort_enabled = true
 custom_minimum_size = Vector2(305, 90)
 layout_mode = 2
@@ -237,11 +213,12 @@ text = " Central park"
 label_settings = SubResource("LabelSettings_br3iv")
 vertical_alignment = 1
 
-[node name="Spacing" type="MarginContainer" parent="UiControl/PanelContainer/MarginContainer/Banner"]
+[node name="Spacing" type="MarginContainer" parent="TopBar/MarginContainer/Banner"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/margin_right = 20
 
-[node name="Time" type="Label" parent="UiControl/PanelContainer/MarginContainer/Banner"]
+[node name="Time" type="Label" parent="TopBar/MarginContainer/Banner/Spacing"]
 y_sort_enabled = true
 custom_minimum_size = Vector2(73, 90)
 layout_direction = 2
@@ -254,55 +231,28 @@ horizontal_alignment = 2
 vertical_alignment = 1
 justification_flags = 162
 
-[node name="SettingsButton" type="Control" parent="UiControl/PanelContainer/MarginContainer/Banner"]
-custom_minimum_size = Vector2(90, 90)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-
-[node name="Button" type="Button" parent="UiControl/PanelContainer/MarginContainer/Banner/SettingsButton"]
-custom_minimum_size = Vector2(86, 82)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.089
-anchor_right = 1.011
-anchor_bottom = 2.089
-offset_left = 2.0
-offset_top = -96.01
-offset_right = 1.00999
-offset_bottom = -96.01
+[node name="MessageContainer" type="MarginContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -143.0
 grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4mo36")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_m2pxu")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_3q2we")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_400cc")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_yld6r")
-
-[node name="Icons" type="Sprite2D" parent="UiControl/PanelContainer/MarginContainer/Banner/SettingsButton"]
-modulate = Color(1, 1, 1, 0.729412)
-position = Vector2(44, 46)
-scale = Vector2(2.8, 2.8)
-texture = ExtResource("7_acr4x")
-hframes = 8
-
-[node name="MarginContainer" type="MarginContainer" parent="UiControl"]
-layout_mode = 2
-size_flags_vertical = 10
+grow_vertical = 0
+size_flags_vertical = 8
+mouse_filter = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 19
+theme_override_constants/margin_bottom = 80
 
-[node name="InfoBanner" type="PanelContainer" parent="UiControl/MarginContainer"]
+[node name="InfoBanner" type="PanelContainer" parent="MessageContainer"]
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(19, 63)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_xjwsg")
 
-[node name="Info" type="RichTextLabel" parent="UiControl/MarginContainer/InfoBanner"]
+[node name="Info" type="RichTextLabel" parent="MessageContainer/InfoBanner"]
 z_index = 2
 y_sort_enabled = true
 custom_minimum_size = Vector2(519, 35)
@@ -315,40 +265,12 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]Tap  with 3 fingers  to center the camera"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UiControl/MarginContainer/InfoBanner"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MessageContainer/InfoBanner"]
 libraries = {
 "": SubResource("AnimationLibrary_fht44")
 }
 
-[node name="Timer" type="Timer" parent="UiControl/MarginContainer/InfoBanner"]
-
-[node name="Interaction" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Dialogue" parent="Interaction" instance=ExtResource("10_6hpgf")]
-visible = false
-layout_mode = 1
-
-[node name="Pet" parent="Interaction" instance=ExtResource("10_yoll5")]
-visible = false
-layout_mode = 1
-
-[node name="Settings" parent="." instance=ExtResource("6_1eey1")]
-visible = false
-z_index = 4096
-y_sort_enabled = true
-
-[node name="Debug" parent="." instance=ExtResource("7_udyie")]
-visible = false
-offset_left = 2.0
-offset_right = 2.0
-mouse_filter = 1
+[node name="Timer" type="Timer" parent="MessageContainer/InfoBanner"]
 
 [node name="Loader" type="MarginContainer" parent="."]
 anchors_preset = 1
@@ -371,3 +293,37 @@ hframes = 8
 libraries = {
 "": SubResource("AnimationLibrary_cs7j5")
 }
+
+[node name="Apps" parent="." instance=ExtResource("6_1eey1")]
+z_index = 4096
+y_sort_enabled = true
+
+[node name="Interaction" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dialogue" parent="Interaction" instance=ExtResource("10_6hpgf")]
+visible = false
+layout_mode = 1
+
+[node name="Pet" parent="Interaction" instance=ExtResource("10_yoll5")]
+visible = false
+layout_mode = 1
+
+[node name="Debug" parent="." instance=ExtResource("7_udyie")]
+visible = false
+offset_left = 2.0
+offset_right = 2.0
+
+[node name="Environment" parent="." instance=ExtResource("8_5xy2s")]
+offset_left = 7.0
+offset_top = 2.0
+offset_right = 7.0
+offset_bottom = 2.0
+mouse_filter = 2
+type = 1

@@ -7,6 +7,8 @@ extends Control
 @onready var next_dialogue_button = $NextMarginContainer/NextButton
 @onready var timer : Timer = $Timer
 
+@export var speed : int = 50 
+
 var on_track : bool = false
 var current_dialogue : Array[String] = []
 var current_dialogue_index : int = 0
@@ -15,6 +17,7 @@ var current_dialogue_index : int = 0
 func _ready() -> void:
 	UIManager.dialogue_started.connect(_show_dialogue)
 	next_dialogue_button.pressed.connect(_next_dialogue)
+	speed = SettingsManager.get_text_speed()
 
 
 ## Show the dialogue
@@ -33,16 +36,20 @@ func _show_dialogue():
 func _show_line() -> void:
 	
 	on_track = true
-	var text = current_dialogue[current_dialogue_index]
+	var text = ["..."]
+	
+	if current_dialogue.size() > current_dialogue_index:
+		text = current_dialogue[current_dialogue_index]
+	
 	text_label.text = ""
 
 	for character in text:
 		text_label.text += character
 		
 		match character:
-			" " :  timer.wait_time = randf_range(.06,.07)
-			",", ".": timer.wait_time = randf_range(.15,.25)
-			_: timer.wait_time = randf_range(.02,.05)
+			" " :  timer.wait_time = randf_range(.06,.07) / speed
+			",", ".": timer.wait_time = randf_range(.15,.25) / speed
+			_: timer.wait_time = randf_range(.02,.05) / speed
 
 		timer.start()
 		await timer.timeout

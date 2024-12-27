@@ -1,5 +1,6 @@
 extends Node
 
+static var TEXT_KEY = "Text"
 
 ## General config data
 const settings_path = "user://kinokoro.esettings.cfg"
@@ -13,12 +14,15 @@ var default_settings = {
 		"Mode" : Display.WindowMode.Fullscreen,
 		"Size" : 1920,
 		"Position" : 1080
-	}
-}
+	},
+	"Text" : { "Speed" : 50 }
+} 
 
 ## Signals
 signal change_volume(bus : Audio.Bus, value : float)
 signal change_general_volume(value : float)
+
+signal set_text_speed(value : int)
 
 signal set_fullscreen()
 signal set_windowed_screen()
@@ -28,13 +32,14 @@ signal toggle_fullscreen()
 func _ready():
 	_connect_signals()
 	_gather_config_data()
-	# get_window().size = Vector2(960,640)
 
 
 ## Connect the needed settings related signals
 func _connect_signals():
 	change_volume.connect(AudioSettings.change_volume)
 	change_general_volume.connect(AudioSettings.change_general_volume)
+	
+	set_text_speed.connect(_set_text_speed)
 	
 	set_fullscreen.connect(GraphicSettings.set_fullscreen)
 	set_windowed_screen.connect(GraphicSettings.set_windowed_screen)
@@ -109,5 +114,17 @@ func set_value(section : String, key : String, value : Variant):
 func get_value(section : String, key : String):
 	return config.get_value(section, key)
 
+
+## Get the general volume
 func get_general_volume() -> float:
 	return AudioSettings.get_general_volume();
+
+
+## Set text speed
+func _set_text_speed(value : int) -> void:
+	config.set_value(TEXT_KEY, "Speed", value)
+	config.save(settings_path)
+
+## Get text speed
+func get_text_speed() -> int:
+	return get_value(TEXT_KEY,"Speed")

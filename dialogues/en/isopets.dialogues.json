@@ -8,5 +8,13 @@
 	},
 	"soriel" : {
 		"hello" : ["Hi there!"]
+	},
+	"catotem" : {
+		"meow" : [
+			"Meow meow meow meow meow meow meow meow meow meow meow.",
+			"Prrrr",
+			"...",
+			"Moku le gana."
+		]
 	}
 }

@@ -1,86 +1,84 @@
-extends MarginContainer
-@onready var exit_button : Button = $Scroll/Controls/ExitControlsMargin/ExitControls/ExitGameButton
-@onready var general_volume_label : Label =  $Scroll/Controls/VolumeLabel
-@onready var general_volume_h_slider: HSlider = $Scroll/Controls/VolumeControls/GeneralVolumeHSlider
+extends VBoxContainer
 
-@onready var graphics_label : Label = $Scroll/Controls/GraphicsLabel
-@onready var graphic_controls : VBoxContainer = $Scroll/Controls/GraphicControls
+@onready var exit_button : Button = $ExitControlsMargin/ExitControls/ExitGameButton
+@onready var general_volume_label : Label =  $VolumeLabel
+@onready var general_volume_h_slider: HSlider = $VolumeControls/GeneralVolumeHSlider
 
-@onready var fullscreen_button : Button = $Scroll/Controls/GraphicControls/DisplayControls/FullScreen
-@onready var windowed_button : Button = $Scroll/Controls/GraphicControls/DisplayControls/Windowed
-@onready var tween : Tween
+@onready var graphics_label : Label = $GraphicsLabel
+@onready var graphic_controls : VBoxContainer = $GraphicControls
 
-var animation_playing : bool = false
+@onready var speed_normal_button : Button = $TextSpeedControls/TextSpeedControls/Normal
+@onready var speed_fast_button : Button = $TextSpeedControls/TextSpeedControls/Fast
+
+@onready var fullscreen_button : Button = $GraphicControls/DisplayControls/FullScreen
+@onready var windowed_button : Button = $GraphicControls/DisplayControls/Windowed
+
+const NORMAL_TEXT_SPEED : int = 50
+const FAST_TEXT_SPEED : int = 100
 
 ## Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	general_volume_label.text = "Volume - %s%%" % (AudioSettings.get_general_volume() * 100)
 	general_volume_h_slider.value = AudioSettings.get_general_volume()
 	general_volume_h_slider.value_changed.connect(change_general_volume)
+	
+	speed_normal_button.pressed.connect(_set_normal_text_speed)
+	speed_fast_button.pressed.connect(_set_fast_text_speed)
 	
 	if OSManager.is_desktop():
 		fullscreen_button.pressed.connect(set_fullscreen)
 		windowed_button.pressed.connect(set_windowed_screen)
 		exit_button.pressed.connect(exit_game)
-		custom_minimum_size = Vector2(0,600)
 	else:
 		graphics_label.hide()
 		graphic_controls.hide()
 		exit_button.hide()
-		custom_minimum_size = Vector2(0,350)
-		
+
+
+## Open settings app
+func open() -> void: 
+	general_volume_h_slider.grab_focus()
+
 
 ## Exit game
-func exit_game():
+func exit_game() -> void:
 	get_tree().quit()
 
 
-## Open menu
-func open_menu() -> void:
-	
-	if animation_playing: return
-	
-	animation_playing = true
-	InputManager.context = Game.Context.Settings
-	set_visible(true)
-	
-	tween = create_tween()
-	var new_position = Vector2(position.x,get_viewport_rect().size.y - size.y)
-	tween.tween_property(self, NodeProperties.Position, new_position, 1.00 / 3).set_trans(Tween.TRANS_CUBIC)
-	await tween.finished
-	
-	general_volume_h_slider.grab_focus()
-	animation_playing = false
-
-
-## Close menu
-func close_menu() -> void:
-	
-	if animation_playing: return
-	
-	animation_playing = true
-	InputManager.context = Game.Context.Camera
-	
-	tween = create_tween()
-	var new_position = Vector2(position.x, get_viewport_rect().size.y)
-	tween.tween_property(self, NodeProperties.Position, new_position, 1.00 / 3).set_trans(Tween.TRANS_CUBIC)
-	await tween.finished
-	
-	set_visible(false)
-	animation_playing = false
-
-
 ## Change general volume
-func change_general_volume(value : float):
+func change_general_volume(value : float) -> void:
 	general_volume_label.text = "Volume - %s%%" % (value * 100)
 	SettingsManager.change_general_volume.emit(value)
 
 
 ## Set windowed screen
-func set_windowed_screen():
+func set_windowed_screen() -> void:
 	SettingsManager.set_windowed_screen.emit()
 
 
 ## Set fullscreen
-func set_fullscreen():
+func set_fullscreen() -> void:
 	SettingsManager.set_fullscreen.emit()
+
+
+## Set normal text speed
+func _set_normal_text_speed() -> void:
+	SettingsManager.set_text_speed.emit(NORMAL_TEXT_SPEED)
+	_decorate_text_speed_buttons()
+
+
+## Set fast text speed
+func _set_fast_text_speed() -> void:
+	SettingsManager.set_text_speed.emit(FAST_TEXT_SPEED)
+	_decorate_text_speed_buttons()
+
+
+## Decorate text speed buttons
+func _decorate_text_speed_buttons() -> void:
+	var text_speed = SettingsManager.get_text_speed()
+	if text_speed == NORMAL_TEXT_SPEED:
+		speed_normal_button.disabled = true
+		speed_fast_button.disabled = false
+	elif text_speed == FAST_TEXT_SPEED:
+		speed_fast_button.disabled = true
+		speed_normal_button.disabled = false

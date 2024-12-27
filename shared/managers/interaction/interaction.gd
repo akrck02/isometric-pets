@@ -30,9 +30,9 @@ func interact_with_npc(npc : Npc) -> void:
 	
 	stop_interactions()
 	current_npc = npc
+	UIManager.dialogue_started.emit()
 	InputManager.context = Game.Context.Dialogue
 	
-	UIManager.dialogue_started.emit()
 	npc.set_outline(true)
 
 

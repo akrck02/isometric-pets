@@ -34,7 +34,6 @@ func _ready():
 	
 	InputManager.prepare_zoom_requested.connect(prepare_zoom_camera)
 	InputManager.zoom_requested.connect(zoom_camera)
-	InputManager.find_requested.connect(return_to_default_camera_position)
 	InputManager.movement_requested.connect(pan_camera)
 	UIManager.camera_movement_updated.connect(update_can_move)
 
@@ -52,16 +51,15 @@ func _process(delta):
 	
 	if not is_current_context() or not can_move: return
 	
-	if camera_is_not_focused(): 
-		var message = ""
-		match InputManager.current_input:
-			Controls.Type.Touch: 			message = "Tap with 3 fingers to center the camera";
-			Controls.Type.KeyboardAndMouse: message = "Press E to center the camera"
-			Controls.Type.Gamepad: 			message = "Press R1 to center the camera"
-		
-		## UIManager.notification_shown.emit("[center] %s" % message) 
-	else: 
-		UIManager.notification_hidden.emit() 
+#	if camera_is_not_focused():
+#		var message = ""
+#		match InputManager.current_input:
+#			Controls.Type.Touch: 			message = "Tap with 3 fingers to center the camera";
+#			Controls.Type.KeyboardAndMouse: message = "Press E to center the camera"
+#			Controls.Type.Gamepad: 			message = "Press R1 to center the camera"
+#		# UIManager.notification_shown.emit("[center] %s" % message) 
+#	else: 
+#		UIManager.notification_hidden.emit() 
 
 
 ## Focus the camera to target node

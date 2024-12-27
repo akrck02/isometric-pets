@@ -5,31 +5,28 @@ extends CanvasLayer
 @export var camera : SmartCamera
 
 # Ui general
-@onready var ui_control : VBoxContainer = $UiControl
-@onready var time_label : Label = $UiControl/PanelContainer/MarginContainer/Banner/Time 
 @onready var filter : ColorRect = $Filter
+@onready var time_label : Label = $TopBar/MarginContainer/Banner/Spacing/Time
 @onready var loader_animation : AnimationPlayer = $Loader/AnimationPlayer
 
 # Info banner
-@onready var info_banner : PanelContainer = $UiControl/MarginContainer/InfoBanner
-@onready var info : RichTextLabel = $UiControl/MarginContainer/InfoBanner/Info
-@onready var info_animation_player : AnimationPlayer = $UiControl/MarginContainer/InfoBanner/AnimationPlayer
-@onready var info_timer : Timer = $UiControl/MarginContainer/InfoBanner/Timer
+@onready var info_banner : PanelContainer = $MessageContainer/InfoBanner
+@onready var info : RichTextLabel = $MessageContainer/InfoBanner/Info
+@onready var info_animation_player : AnimationPlayer = $MessageContainer/InfoBanner/AnimationPlayer
+@onready var info_timer : Timer = $MessageContainer/InfoBanner/Timer
 var notification_showing = false;
 
-# Settings
-@onready var show_settings_button : Button = $UiControl/PanelContainer/MarginContainer/Banner/SettingsButton/Button
-@onready var settings = $Settings
+# Apps
+@onready var apps = $Apps
 
 # Location title
-@onready var location_label : Label = $UiControl/PanelContainer/MarginContainer/Banner/LocationContainer/Location 
+@onready var location_label : Label = $TopBar/MarginContainer/Banner/LocationContainer/Location
 
 # Debug ui
 @onready var debug_ui : DebugUi = $Debug
 
 # Dependency management
 var dependencies : DependencyDatabase = DependencyDatabase.for_node("Ui")
-
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,9 +42,6 @@ func _ready():
 	_update_time()
 	location_label.text = site_name
 	loader_animation.play("idle")
-		
-	#if OSManager.is_desktop():
-	#	info_banner.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 
 
 ## Process inputs
@@ -65,8 +59,7 @@ func _connect_signals():
 	UIManager.notification_shown.connect(_show_notification)
 	UIManager.notification_hidden.connect(_hide_notification)
 	
-	show_settings_button.pressed.connect(_toggle_settings)
-	InputManager.start_requested.connect(_toggle_settings_by_input)
+	InputManager.start_requested.connect(_toggle_apps_by_input)
 	
 	SaveManager.save_game_started.connect(_start_loader_animation)
 	SaveManager.save_game_finished.connect(_finish_loader_animation)
@@ -80,15 +73,9 @@ func _target_camera():
 	
 	if null != InteractionManager.current_pet: camera.focus_node = InteractionManager.current_pet
 	elif null != InteractionManager.current_npc: camera.focus_node = InteractionManager.current_npc
-	camera.return_to_default_camera_position(null)
 	camera.focus()
+	camera.return_to_default_camera_position(null)
 	
-
-
-## Toggle the entire ui visibility
-func _toggle_ui():
-	ui_control.visible = !ui_control.visible
-
 
 ## Update tick
 func _update_tick():
@@ -134,19 +121,9 @@ func _hide_notification():
 	notification_showing = false
 
 
-## Toggle settings by input
-func _toggle_settings_by_input(_data : InputData):
-	_toggle_settings()
-	
-
-## Toggle settings 
-func _toggle_settings():
-	
-	if settings.visible:
-		settings.close_menu()
-		return
-	
-	settings.open_menu()
+## Toggle apps by input
+func _toggle_apps_by_input(_data : InputData):
+	apps.toggle()
 
 
 ## Start loader animation

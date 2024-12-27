@@ -1,7 +1,7 @@
 extends Node
 
 ## Signals
-signal new_game_created
+@warning_ignore("unused_signal") signal new_game_created
 signal save_game_requested
 signal save_game_started
 signal save_game_finished

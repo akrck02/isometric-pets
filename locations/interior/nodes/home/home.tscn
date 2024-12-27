@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://d0ne5f5d2ni1p"]
+[gd_scene load_steps=7 format=4 uid="uid://d0ne5f5d2ni1p"]
 
 [ext_resource type="Script" path="res://locations/interior/nodes/home/home.gd" id="1_bf8e2"]
 [ext_resource type="TileSet" uid="uid://b1vppjetxm2w8" path="res://materials/map/tilemap.tres" id="1_rj68t"]
 [ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="2_iftty"]
 [ext_resource type="PackedScene" uid="uid://cba3m5gci8old" path="res://ui/hud/ui.tscn" id="3_p2s5v"]
+[ext_resource type="PackedScene" uid="uid://xtpk8a7u1agl" path="res://entities/characters/nodes/npc/npc.tscn" id="5_7fbur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sjdij"]
 size = Vector2(98.4482, 27.3666)
@@ -36,3 +37,7 @@ rotation = -0.478128
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
 position = Vector2(28.8033, 3.10052)
 shape = SubResource("RectangleShape2D_sjdij")
+
+[node name="Soriel" parent="." instance=ExtResource("5_7fbur")]
+position = Vector2(1127, -890)
+character_name = "catotem"

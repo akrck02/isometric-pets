@@ -21,6 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_ly0n8")
+speed = null
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(583, 0)
@@ -39,7 +40,7 @@ mouse_filter = 0
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_bottom = 100
 
 [node name="Control" type="Control" parent="MarginContainer"]
 layout_mode = 2

@@ -20,6 +20,9 @@ func load_for_character(character_name: String) -> void:
 
 ## Get the current dialogue
 func current() -> Array[String]:
+	if dialogue_keys.size() <= current_dialogue_id: 
+		return []
+	
 	return DialogueManager.get_dialogue(character, dialogue_keys[current_dialogue_id])
 
 
