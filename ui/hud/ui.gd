@@ -29,7 +29,7 @@ var notification_showing = false;
 var dependencies : DependencyDatabase = DependencyDatabase.for_node("Ui")
 
 ## Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	dependencies.add("camera", camera)
 	
 	if not dependencies.check():
@@ -40,6 +40,7 @@ func _ready():
 	
 	_connect_signals()
 	_update_time()
+	
 	location_label.text = site_name
 	loader_animation.play("idle")
 
@@ -51,15 +52,13 @@ func _process(_delta: float) -> void:
 
 
 ## Connect the needed signals
-func _connect_signals():
+func _connect_signals() -> void:
 	TimeManager.tick_reached.connect(_update_tick);
 	TimeManager.night_started.connect(_set_night_color_palette)
 	TimeManager.day_started.connect(_set_day_color_palette)
 	
 	UIManager.notification_shown.connect(_show_notification)
 	UIManager.notification_hidden.connect(_hide_notification)
-	
-	InputManager.start_requested.connect(_toggle_apps_by_input)
 	
 	SaveManager.save_game_started.connect(_start_loader_animation)
 	SaveManager.save_game_finished.connect(_finish_loader_animation)
@@ -69,7 +68,7 @@ func _connect_signals():
 
 
 ## Target the camera to the current selected pet
-func _target_camera():
+func _target_camera() -> void:
 	
 	if null != InteractionManager.current_pet: camera.focus_node = InteractionManager.current_pet
 	elif null != InteractionManager.current_npc: camera.focus_node = InteractionManager.current_npc
@@ -78,29 +77,29 @@ func _target_camera():
 	
 
 ## Update tick
-func _update_tick():
+func _update_tick() -> void:
 	_update_time()
 
 
 ## Update time clock
-func _update_time():
+func _update_time() -> void:
 	var time = TimeManager.get_real_time();
 	time_label.text = "{hh}:{mm}".format({"hh": "%02d" % time.hour, "mm": "%02d" % time.minute })
 	TimeManager.emit_daytime()
 
-	
+
 ## Set night color palette
-func _set_night_color_palette():
+func _set_night_color_palette() -> void:
 	filter.material = load("res://materials/camera/filter_shader_material_night.tres")
 
 
 ## Set day color palette
-func _set_day_color_palette():
+func _set_day_color_palette() -> void:
 	filter.material = load("res://materials/camera/filter_shader_material_day.tres")
 
 
 ## Show notification
-func _show_notification(message : String):
+func _show_notification(message : String) -> void:
 	
 	if notification_showing and info.text == message: 
 		return
@@ -111,7 +110,7 @@ func _show_notification(message : String):
 
 
 ## Hide notification
-func _hide_notification():
+func _hide_notification() -> void:
 	
 	if not notification_showing:
 		return
@@ -121,17 +120,12 @@ func _hide_notification():
 	notification_showing = false
 
 
-## Toggle apps by input
-func _toggle_apps_by_input(_data : InputData):
-	apps.toggle()
-
-
 ## Start loader animation
-func _start_loader_animation():
+func _start_loader_animation() -> void:
 	loader_animation.play("load")
 
 
 ## Finish loader animation
-func _finish_loader_animation():
+func _finish_loader_animation() -> void:
 	await get_tree().create_timer(1.0).timeout
 	loader_animation.play("RESET")
