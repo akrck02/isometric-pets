@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://cba3m5gci8old"]
 
 [ext_resource type="Script" path="res://ui/hud/ui.gd" id="1_yktcp"]
-[ext_resource type="Texture2D" uid="uid://cqutuq0jrsqbu" path="res://ui/hud/settings/sprites/park.svg" id="2_wwa4d"]
+[ext_resource type="Texture2D" uid="uid://cqutuq0jrsqbu" path="res://ui/hud/apps/settings/sprites/park.svg" id="2_wwa4d"]
 [ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="3_g1lr1"]
-[ext_resource type="Texture2D" uid="uid://d1kchw0drwgpb" path="res://ui/hud/settings/sprites/loader.png" id="4_nm4b8"]
+[ext_resource type="Texture2D" uid="uid://d1kchw0drwgpb" path="res://ui/hud/apps/settings/sprites/loader.png" id="4_nm4b8"]
 [ext_resource type="Material" uid="uid://de0kp0bflu8l6" path="res://materials/camera/filter_shader_material_day.tres" id="4_y8ln0"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="5_jc2jt"]
 [ext_resource type="PackedScene" uid="uid://bkxydu410llqn" path="res://ui/hud/apps/apps.tscn" id="6_1eey1"]

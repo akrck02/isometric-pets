@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://ne24t3mifa7y"]
+
+[ext_resource type="Script" path="res://ui/hud/selectors/pet/pet_selector_button.gd" id="1_6cekr"]
+[ext_resource type="Texture2D" uid="uid://dqp30tsofkpqk" path="res://entities/animals/nodes/cat/sprites/cat.png" id="1_jrp6p"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_1jdl7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ure4f"]
+bg_color = Color(0.915112, 0.78171, 0.581963, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="PetSelectorButton" type="MarginContainer"]
+custom_minimum_size = Vector2(153, 180)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 169.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 15
+script = ExtResource("1_6cekr")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ure4f")
+
+[node name="Columns" type="HBoxContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Button/Columns"]
+custom_minimum_size = Vector2(155, 0)
+layout_mode = 2
+texture = ExtResource("1_jrp6p")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Button/Columns"]
+layout_mode = 2
+theme = ExtResource("2_1jdl7")
+theme_override_font_sizes/font_size = 51
+text = "Random cat"

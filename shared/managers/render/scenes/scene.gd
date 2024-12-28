@@ -2,8 +2,11 @@ extends Node
 
 signal scene_change_requested(scene : String) 
 
+
+
 func _ready():
 	scene_change_requested.connect(change_scene)
+
 
 ## Change scene with progress
 func change_scene(scene_name : String):

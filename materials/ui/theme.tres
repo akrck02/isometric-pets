@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=10 format=3 uid="uid://fk4bfu837bvc"]
 
-[ext_resource type="Texture2D" uid="uid://dfkmx8ud2ixjl" path="res://ui/hud/settings/sprites/catbrightnessdown.png" id="1_cbvwn"]
+[ext_resource type="Texture2D" uid="uid://dfkmx8ud2ixjl" path="res://ui/hud/apps/settings/sprites/catbrightnessdown.png" id="1_cbvwn"]
 [ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="1_i8spk"]
 [ext_resource type="StyleBox" uid="uid://cn0xm81r1djb1" path="res://materials/ui/button_pressed.tres" id="2_jbinl"]
 [ext_resource type="StyleBox" uid="uid://cf3vx3oawdia7" path="res://materials/ui/button_normal.tres" id="3_fte3n"]

@@ -44,7 +44,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotNFC/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 

@@ -10,15 +10,15 @@ enum AvailableApps {
 }
 
 ## General
-@onready var open_button : Button = $MarginContainer/OpenButton
+@onready var open_button : Button = $OpenButton
 
 ## Apps
-@onready var menu : MarginContainer = $Scroll/Menu
-@onready var pets : MarginContainer = $Scroll/Pets
-@onready var inventory : MarginContainer = $Scroll/Inventory
-@onready var quests : MarginContainer = $Scroll/Quests
-@onready var settings : VBoxContainer = $Scroll/Settings
-var apps : Array[Node] = []
+@onready var menu : App = $Scroll/Menu
+@onready var pets : App = $Scroll/Pets
+@onready var inventory : App = $Scroll/Inventory
+@onready var quests : App = $Scroll/Quests
+@onready var settings : App = $Scroll/Settings
+var apps : Array[App] = []
 
 ## App buttons
 @onready var pets_button : Button = $Scroll/Menu/Rows/Row1/PetsMargin/PetsButton
@@ -103,9 +103,9 @@ func close_menu() -> void:
 
 ## Open an app
 func open_app(app_index : int) -> void: 
-	var current_app = apps[app_index]
+	var current_app : App = apps[app_index]
 	
 	for app in apps:
-		app.hide()
+		app.close()
 	
-	current_app.show()
+	current_app.open()
