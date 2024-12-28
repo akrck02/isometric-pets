@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://qa0nlneg2kps"]
+
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="1_ngilf"]
+[ext_resource type="StyleBox" uid="uid://byyjpj3nygawn" path="res://materials/ui/icon_button/icon_button_bg.tres" id="2_58pmx"]
+[ext_resource type="StyleBox" uid="uid://b7k76eh8jp8ta" path="res://materials/ui/icon_button/icon_button_pressed_bg.tres" id="2_b7nmu"]
+[ext_resource type="Texture2D" uid="uid://b7apxw8jivqhv" path="res://ui/hud/interactions/sprites/app_icons.png" id="2_ul11d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bo0w3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1t3n"]
+bg_color = Color(0.832786, 0.689838, 0.461232, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="IconButton" type="Button"]
+custom_minimum_size = Vector2(40, 40)
+scale = Vector2(3, 3)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("1_ngilf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bo0w3")
+theme_override_styles/hover_pressed = ExtResource("2_b7nmu")
+theme_override_styles/hover = ExtResource("2_58pmx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f1t3n")
+theme_override_styles/normal = ExtResource("2_58pmx")
+
+[node name="IconMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="IconMargin"]
+layout_mode = 2
+texture = ExtResource("2_ul11d")

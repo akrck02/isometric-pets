@@ -1,10 +1,15 @@
 extends Control
 
-@onready var container : MarginContainer = $MarginContainer
-@onready var character_name_label : Label = $MarginContainer/DialogueContainer/MarginContainer/VBoxContainer/CharacterName
-@onready var character_sprite : Sprite2D = $MarginContainer/Control/CharacterSprite
-@onready var text_label : Label = $MarginContainer/DialogueContainer/MarginContainer/VBoxContainer/Text
-@onready var next_dialogue_button = $NextMarginContainer/NextButton
+@onready var container : MarginContainer = $Rows/DialogueMargin
+
+@onready var character_name_label : Label = $Rows/DialogueMargin/DialogueContainer/Rows/CharacterName
+@onready var character_sprite : Sprite2D = $SpriteMargin/CharacterSprite
+
+
+@onready var text_label : Label = $Rows/DialogueMargin/DialogueContainer/Rows/Text
+
+@onready var next_dialogue_button : Button = $NextButtonMargin/NextButton
+@onready var minigame_button : Button = $Rows/ButtonBarMargin/MinigameButton
 @onready var timer : Timer = $Timer
 
 @export var speed : int = 50 
@@ -17,6 +22,7 @@ var current_dialogue_index : int = 0
 func _ready() -> void:
 	UIManager.dialogue_started.connect(_show_dialogue)
 	next_dialogue_button.pressed.connect(_next_dialogue)
+	minigame_button.pressed.connect(_spawn_minigame)
 	speed = SettingsManager.get_text_speed()
 
 
@@ -28,6 +34,9 @@ func _show_dialogue():
 	show()
 	character_name_label.text = InteractionManager.current_npc.character_name.to_pascal_case()
 	character_sprite.texture = InteractionManager.current_npc.sprite.texture
+	
+	if SceneEnums.Minigames.None == InteractionManager.current_npc.minigame: minigame_button.hide()
+	else: minigame_button.show()
 	
 	_load_current_dialogue()
 	_show_line()
@@ -69,11 +78,26 @@ func _next_dialogue():
 	if on_track: return
 
 	if current_dialogue_index >= current_dialogue.size() - 1: 
-		on_track = false
-		InteractionManager.stop_interactions()
-		InputManager.context = Game.Context.Camera
-		hide()
+		_close_dialogue()
 		return
 
 	current_dialogue_index += 1
 	_show_line()
+
+
+## Close the dialogue
+func _close_dialogue() -> void:
+	on_track = false
+	InteractionManager.stop_interactions()
+	InputManager.context = Game.Context.Camera
+	hide()
+
+
+## Spawn the current minigame
+func _spawn_minigame() -> void:
+	
+	match InteractionManager.current_npc.minigame:
+		SceneEnums.Minigames.DinoRun: SceneManager.change_scene(Paths.get_minigame("dino_run").get_scene())
+		_: pass
+	
+	_close_dialogue()

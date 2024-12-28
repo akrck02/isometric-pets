@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=4 uid="uid://cfe218fpwkj7d"]
+[gd_scene load_steps=12 format=4 uid="uid://cfe218fpwkj7d"]
 
 [ext_resource type="Script" path="res://locations/world/world.gd" id="1_y5n7u"]
 [ext_resource type="Script" path="res://entities/map/nodes/tilemap/tilemap_extended.gd" id="2_rh15b"]
-[ext_resource type="PackedScene" uid="uid://ur810d3ygdls" path="res://entities/world/nodes/sign/nodes/sign.tscn" id="4_cl8bi"]
 [ext_resource type="TileSet" uid="uid://b1vppjetxm2w8" path="res://materials/map/tilemap.tres" id="4_fxkog"]
 [ext_resource type="PackedScene" uid="uid://bb0q2fy8l6iaj" path="res://entities/animals/nodes/cat/nodes/totem/tottem.tscn" id="5_cwnpp"]
 [ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="7_lsj0o"]
@@ -68,18 +67,13 @@ y_sort_enabled = true
 position = Vector2(6114, -2199)
 interactable = true
 
-[node name="RunSign" parent="Tilemap/Layers/1" instance=ExtResource("4_cl8bi")]
-y_sort_enabled = true
-position = Vector2(5734, -2181)
-scene = "dino_run"
-scene_type = 2
-
 [node name="Soriel" parent="Tilemap/Layers/1" instance=ExtResource("9_p24x2")]
 position = Vector2(5968, -2004)
 
 [node name="Foxy" parent="Tilemap/Layers/1" instance=ExtResource("9_p24x2")]
 position = Vector2(5911, -2034)
 character_name = "foxy"
+minigame = 1
 
 [node name="Turtle" parent="Tilemap/Layers/1" instance=ExtResource("11_ind7k")]
 position = Vector2(5936, -1791)

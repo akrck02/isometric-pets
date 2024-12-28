@@ -10,6 +10,9 @@ extends CharacterBody2D
 # Pet data
 @export var character_name : String = "soriel"
 
+# Minigame
+@export var minigame : SceneEnums.Minigames = SceneEnums.Minigames.None
+
 # Visuals
 @onready var visuals : Node2D = $Visuals
 @onready var sprite : Sprite2D = $Visuals/Sprite

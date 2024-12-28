@@ -11,7 +11,11 @@ func _ready() -> void:
 	position = Vector2(position.x, get_viewport_rect().size.y - 70)
 	open_button.pressed.connect(toggle)
 	InputManager.find_requested.connect(_toggle_by_input_data)
-
+	
+	if OSManager.is_desktop(): 
+		size.x = 400
+		
+	else: pass
 
 func _toggle_by_input_data(_data):
 	toggle()

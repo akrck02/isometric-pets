@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d05k2li4vva7j"]
+[gd_scene load_steps=7 format=3 uid="uid://d05k2li4vva7j"]
 
 [ext_resource type="Texture2D" uid="uid://cv23i0i8ygm3g" path="res://entities/characters/nodes/npc/sprites/soriel.png" id="1_3byty"]
 [ext_resource type="Script" path="res://ui/hud/interactions/dialogue.gd" id="1_ly0n8"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="1_qs86t"]
+[ext_resource type="PackedScene" uid="uid://qa0nlneg2kps" path="res://ui/hud/icon_button.tscn" id="4_1bpro"]
 [ext_resource type="StyleBox" uid="uid://diqin5hrkaga1" path="res://materials/ui/black_layer.tres" id="4_am2jp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd5s8"]
@@ -21,74 +22,31 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_ly0n8")
-speed = null
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(583, 0)
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SpriteMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(580, 454)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -25.0
-offset_top = -260.0
-offset_right = 25.0
+offset_left = -290.0
+offset_top = -454.0
+offset_right = 290.0
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 0
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 100
+size_flags_vertical = 10
 
-[node name="Control" type="Control" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="CharacterSprite" type="Sprite2D" parent="MarginContainer/Control"]
-position = Vector2(488, -116)
+[node name="CharacterSprite" type="Sprite2D" parent="SpriteMargin"]
+position = Vector2(513, 48)
 scale = Vector2(4.81563, 4.71563)
 texture = ExtResource("1_3byty")
 hframes = 3
 
-[node name="DialogueContainer" type="Panel" parent="MarginContainer"]
-custom_minimum_size = Vector2(580, 210)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("1_qs86t")
-theme_override_styles/panel = SubResource("StyleBoxFlat_xd5s8")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/DialogueContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/DialogueContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="CharacterName" type="Label" parent="MarginContainer/DialogueContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.270588, 0.152941, 1)
-theme_override_font_sizes/font_size = 52
-text = "¿?"
-
-[node name="Text" type="Label" parent="MarginContainer/DialogueContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(550, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
-theme_override_font_sizes/font_size = 39
-text = "..."
-autowrap_mode = 2
-
-[node name="NextMarginContainer" type="MarginContainer" parent="."]
+[node name="NextButtonMargin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_top = 90
 
-[node name="NextButton" type="Button" parent="NextMarginContainer"]
+[node name="NextButton" type="Button" parent="NextButtonMargin"]
 z_index = -1
 layout_mode = 2
 mouse_filter = 1
@@ -105,4 +63,66 @@ theme_override_styles/hover = ExtResource("4_am2jp")
 theme_override_styles/pressed = ExtResource("4_am2jp")
 theme_override_styles/normal = ExtResource("4_am2jp")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Rows" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_top = -400.0
+offset_right = 315.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ButtonBarMargin" type="MarginContainer" parent="Rows"]
+custom_minimum_size = Vector2(327, 100)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_right = 50
+
+[node name="MinigameButton" parent="Rows/ButtonBarMargin" instance=ExtResource("4_1bpro")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="DialogueMargin" type="MarginContainer" parent="Rows"]
+custom_minimum_size = Vector2(583, 0)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 100
+
+[node name="DialogueContainer" type="Panel" parent="Rows/DialogueMargin"]
+custom_minimum_size = Vector2(580, 210)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("1_qs86t")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xd5s8")
+
+[node name="Rows" type="VBoxContainer" parent="Rows/DialogueMargin/DialogueContainer"]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 566.0
+offset_bottom = 210.0
+mouse_filter = 2
+
+[node name="CharacterName" type="Label" parent="Rows/DialogueMargin/DialogueContainer/Rows"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.270588, 0.152941, 1)
+theme_override_font_sizes/font_size = 52
+text = "¿?"
+
+[node name="Text" type="Label" parent="Rows/DialogueMargin/DialogueContainer/Rows"]
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
+theme_override_font_sizes/font_size = 39
+text = "..."
+autowrap_mode = 2
