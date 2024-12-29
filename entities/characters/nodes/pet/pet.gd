@@ -1,42 +1,51 @@
 class_name Pet
 extends CharacterBody2D
 
-# Pet data
+## Pet data
 @export_category("Stats")
 @export var pet_name : String = "tas"
 @export var location : World.Locations = World.Locations.MainSquare
 @export var stats : CareStats = CareStats.new()
 
-# Visuals
+## Visuals
 @onready var sprite : Sprite2D = $Visuals/Sprite
 @onready var point_light : PointLight2D = $Visuals/PointLight2D
 @onready var animation_player : AnimationPlayer = $Visuals/AnimationPlayer
 
-# Emotions
+## Emotions
 @onready var chat_bubble = $Visuals/ChatBubble
 
-# Interactions
+## Interactions
 @onready var interaction_area : Area2D = $Interaction
 var interaction_active : bool  = false
 
-# Loader module
+## Loader
 @onready var loader : PetLoader = $Loader
+
 
 ## Called when the node enters the scene tree for the first time.
 func _ready():
 	_load_from_savestate();
 	_update_sprite()
+	_connect_signals()
+	
+	stats.hunger = 80
+	stats.fun = 17
+	stats.affection = 17
 
+
+## Connect signals
+func _connect_signals():
 	TimeManager.tick_reached.connect(_tick_update)
 	TimeManager.night_started.connect(_set_night)
 	TimeManager.day_started.connect(_set_day)
 	NfcManager.pet_change_requested.connect(_change_pet)
-	
-	# Interactions
 	interaction_area.input_event.connect(_handle_interaction)
-	
-	# Set outline based on config file
-	set_outline(false)
+
+
+## This function will be called every tick
+func _tick_update():
+	stats.time += 1
 
 
 ## Load pet data from savestate
@@ -57,6 +66,7 @@ func _update_sprite():
 	sprite.texture = load(Paths.get_character("pet").get_sprite("%s.png" % pet_name))
 
 
+## Change the pet by uuid
 func _change_pet(uuid : String) -> void:
 	loader.loaded = loader.uuid == uuid
 	loader.uuid = uuid
@@ -83,30 +93,16 @@ func _handle_touch(event : InputEventScreenTouch):
 	
 	if interaction_active:
 		InteractionManager.interact_with_pet(self)
-	
 
 
 
+## Play animation based in mood
 func play_mood_animation():
 	match stats.mood:
 		CareEnums.Mood.HAPPY : animation_player.play("happy")
 		CareEnums.Mood.ANGRY : animation_player.play("angry")
 		CareEnums.Mood.HUNGRY : animation_player.play("hungry")
 		CareEnums.Mood.SAD : animation_player.play("sad")
-
-## This function will be called every tick
-func _tick_update():
-	stats.time += 1
-	_normalize_stats()
-	_show_feelings()
-
-
-## Normalize stat values
-func _normalize_stats():
-	stats.hunger = clamp(stats.hunger,0,100)
-	stats.affection = clamp(stats.affection,0,100)
-	stats.energy =  clamp(stats.energy,0,100)
-	stats.fun =  clamp(stats.fun,0,100)
 
 
 ## Prepare the visuals for nighttime
@@ -128,6 +124,7 @@ func set_outline(value:bool):
 	sprite.material = null
 
 
+## Save the pet as dictionary
 func save() -> Dictionary:
 	var data = {}
 	var coords = TilemapManager.get_coordinates_from_global_position(global_position)
@@ -140,8 +137,3 @@ func save() -> Dictionary:
 	data.coordinates.y = coords.y
 	data.stats = stats.to_dictionary()
 	return data
-
-## Show feelings 
-func _show_feelings():
-	if stats.hunger > 80:
-		chat_bubble.visible = true

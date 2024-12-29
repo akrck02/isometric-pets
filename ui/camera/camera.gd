@@ -5,6 +5,7 @@ class_name SmartCamera
 @export var focus_node : Node2D
 
 # Zoom params
+@export var default_zoom_desktop_override : bool = true
 @export var default_zoom : Vector2 = Vector2(3,3)
 @export var min_zoom : float = 1
 @export var max_zoom : float = 6
@@ -38,7 +39,7 @@ func _ready():
 	UIManager.camera_movement_updated.connect(update_can_move)
 
 	# if it is being played on desktop, show more 
-	if OSManager.is_desktop():
+	if default_zoom_desktop_override and OSManager.is_desktop():
 		default_zoom *= 0.65
 
 	zoom = default_zoom

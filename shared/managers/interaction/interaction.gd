@@ -11,11 +11,6 @@ func interact_with_pet(pet : Pet):
 	current_pet = pet
 	current_pet.play_mood_animation()
 	
-	UIManager.notification_shown.emit("[center] {name} is {mood}".format({
-		"name" : current_pet.pet_name,
-		"mood" : CareEnums.mood_name_for(current_pet.stats.mood),
-	}))
-	
 	UIManager.interaction_started.emit()
 	InputManager.context = Game.Context.PetInteraction
 	pet.set_outline(true)

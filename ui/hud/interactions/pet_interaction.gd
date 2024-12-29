@@ -11,7 +11,7 @@ extends Control
 @onready var energy_stat_label : Label = $VBoxContainer/StatsMarginContainer/StatsContainer/Energy
 
 
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	UIManager.interaction_started.connect(show)
 	UIManager.interaction_ended.connect(hide)
@@ -19,26 +19,42 @@ func _ready() -> void:
 	play_button.pressed.connect(_play_with_pet)
 	pet_button.pressed.connect(_pet_the_pet)
 
+
+## Process 
 func _process(_delta: float) -> void:
+	_refresh()
+
+
+## Refresh UI
+func _refresh() -> void:
 	
-	if InteractionManager.current_pet != null:	
-		time_stat_label.text = "Time: %s" % InteractionManager.current_pet.stats.time
-		hunger_stat_label.text = "Hunger: %s" % InteractionManager.current_pet.stats.hunger
-		fun_stat_label.text = "Fun: %s" % InteractionManager.current_pet.stats.fun
-		affection_stat_label.text = "Affection: %s" % InteractionManager.current_pet.stats.affection
-		energy_stat_label.text = "Energy: %s" % InteractionManager.current_pet.stats.energy
+	if null == InteractionManager.current_pet:
+		return
+	
+	UIManager.notification_shown.emit("[center] {name} is {mood}".format({
+		"name" : InteractionManager.current_pet.pet_name,
+		"mood" : CareEnums.mood_name_for(InteractionManager.current_pet.stats.mood),
+	}))
+	
+	time_stat_label.text = "Time: %s" % InteractionManager.current_pet.stats.time
+	hunger_stat_label.text = "Hunger: %s" % InteractionManager.current_pet.stats.hunger
+	fun_stat_label.text = "Fun: %s" % InteractionManager.current_pet.stats.fun
+	affection_stat_label.text = "Affection: %s" % InteractionManager.current_pet.stats.affection
+	energy_stat_label.text = "Energy: %s" % InteractionManager.current_pet.stats.energy
+
 
 ## Give food to pet
 func _give_food_to_pet() -> void:
 	InteractionManager.current_pet.stats.hunger -= 1
+	_refresh()
 
 
 ## Give food to pet
 func _play_with_pet() -> void:
 	InteractionManager.current_pet.stats.fun += 1
-
+	_refresh()
 
 ## Give food to pet
 func _pet_the_pet() -> void:
 	InteractionManager.current_pet.stats.affection += 1
-	
+	_refresh()
