@@ -16,10 +16,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 45
-theme_override_constants/margin_top = 45
+theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 45
-theme_override_constants/margin_bottom = 45
+theme_override_constants/margin_bottom = 80
 script = ExtResource("1_tw4d0")
 
 [node name="Scroll" type="ScrollContainer" parent="."]

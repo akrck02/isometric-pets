@@ -1,15 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ne24t3mifa7y"]
+[gd_scene load_steps=8 format=3 uid="uid://ne24t3mifa7y"]
 
 [ext_resource type="Script" path="res://ui/hud/selectors/pet/pet_selector_button.gd" id="1_6cekr"]
-[ext_resource type="Texture2D" uid="uid://dqp30tsofkpqk" path="res://entities/animals/nodes/cat/sprites/cat.png" id="1_jrp6p"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_1jdl7"]
+[ext_resource type="StyleBox" uid="uid://b8ihspmnyjuyn" path="res://materials/ui/selectors/pet_selector/pet_selector_button_selected.tres" id="2_dik64"]
+[ext_resource type="Texture2D" uid="uid://cv23i0i8ygm3g" path="res://entities/characters/nodes/npc/sprites/soriel.png" id="2_qsgc8"]
+[ext_resource type="Texture2D" uid="uid://qumbafhlij1j" path="res://entities/characters/sprites/eyes.png" id="2_t6vb5"]
+[ext_resource type="StyleBox" uid="uid://5avgqlr8knoq" path="res://materials/ui/selectors/pet_selector/pet_selector_button.tres" id="3_x5tvi"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ure4f"]
-bg_color = Color(0.915112, 0.78171, 0.581963, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7836l"]
 
 [node name="PetSelectorButton" type="MarginContainer"]
 custom_minimum_size = Vector2(153, 180)
@@ -25,7 +23,11 @@ script = ExtResource("1_6cekr")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_ure4f")
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7836l")
+theme_override_styles/hover = ExtResource("2_dik64")
+theme_override_styles/pressed = ExtResource("2_dik64")
+theme_override_styles/normal = ExtResource("3_x5tvi")
 
 [node name="Columns" type="HBoxContainer" parent="Button"]
 layout_mode = 1
@@ -35,13 +37,34 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Button/Columns"]
-custom_minimum_size = Vector2(155, 0)
+[node name="Container" type="MarginContainer" parent="Button/Columns"]
+clip_contents = true
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture = ExtResource("1_jrp6p")
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 25
+
+[node name="PetTextureRect" type="TextureRect" parent="Button/Columns/Container"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture = ExtResource("2_qsgc8")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Button/Columns"]
+[node name="DecorationTextureRect" type="TextureRect" parent="Button/Columns/Container"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture = ExtResource("2_t6vb5")
+stretch_mode = 5
+
+[node name="LabelMargin" type="MarginContainer" parent="Button/Columns"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="Label" type="Label" parent="Button/Columns/LabelMargin"]
 layout_mode = 2
 theme = ExtResource("2_1jdl7")
 theme_override_font_sizes/font_size = 51

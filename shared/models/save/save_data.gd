@@ -5,8 +5,20 @@ var quests : Dictionary = {}
 var inventory : Dictionary = {}
 var minigames : Dictionary = {}
 
+## Set pet
 func set_pet(pet : Dictionary) -> void:
 	pets[pet.name] = pet
+
+
+## Get if pet exists
+func pet_exists(name : String) -> bool:
+	return null != pets.has(name)
+
+
+## Get pet
+func get_pet(name : String) -> Dictionary:
+	return pets[name]
+
 
 func set_quest() -> void:
 	pass
