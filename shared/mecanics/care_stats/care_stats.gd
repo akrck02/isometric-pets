@@ -58,7 +58,7 @@ func to_dictionary() -> Dictionary:
 static func from_dictionary(data : Dictionary) -> CareStats:
 	var stats = CareStats.new()
 	
-	stats.level
+	stats.level = data.level
 	stats.time = data.time
 	stats.hunger = data.hunger
 	stats.fun = data.fun
@@ -71,6 +71,9 @@ static func from_dictionary(data : Dictionary) -> CareStats:
 
 ## Calculate mood based on stats
 func _calculate_mood() -> CareEnums.Mood: 
+	
+	if energy <= 20:
+		return CareEnums.Mood.TIRED
 	
 	if hunger >= 80: 
 		return CareEnums.Mood.HUNGRY

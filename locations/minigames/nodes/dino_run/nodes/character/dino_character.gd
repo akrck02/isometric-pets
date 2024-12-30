@@ -1,6 +1,9 @@
 extends Node2D
 class_name DinoRunCharacter
 
+## Pet
+var current_pet_name : String = ""
+
 ## Motion parameters
 @export var global_speed : float = 1;
 var capture_motion = true
@@ -80,4 +83,5 @@ func set_pet(pet_name : String) -> void:
 	if not SaveManager.save_data.pet_exists(pet_name):
 		return 
 
+	current_pet_name = pet_name
 	sprite.texture = load(Paths.get_pets().get_sprite("%s.png" % pet_name))

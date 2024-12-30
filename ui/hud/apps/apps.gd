@@ -52,7 +52,9 @@ func _connect_signals() -> void:
 
 
 ## Toggle apps for input data
-func _toggle_by_input_data(_data):
+func _toggle_by_input_data(_data : InputData) -> void:
+	if Game.Context.Camera != InputManager.context and Game.Context.Apps != InputManager.context:
+		return
 	toggle()
 
 
@@ -72,7 +74,7 @@ func open_menu() -> void:
 	if animation_playing: return
 	
 	animation_playing = true
-	InputManager.context = Game.Context.Settings
+	InputManager.context = Game.Context.Apps
 	open_app(AvailableApps.Menu)
 	
 	tween = create_tween()
@@ -99,6 +101,8 @@ func close_menu() -> void:
 	
 	animation_playing = false
 	expanded = false
+	for app in apps:
+		app.close()
 
 
 ## Open an app

@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var sprite : Sprite2D = $Visuals/Sprite
 @onready var point_light : PointLight2D = $Visuals/PointLight2D
 @onready var animation_player : AnimationPlayer = $Visuals/AnimationPlayer
+const OUTLINE_SHADER_MATERIAL : ShaderMaterial = preload("res://materials/general/outline_shader_material.tres")
 
 ## Emotions
 @onready var chat_bubble = $Visuals/ChatBubble
@@ -24,18 +25,14 @@ var interaction_active : bool  = false
 
 
 ## Called when the node enters the scene tree for the first time.
-func _ready():
-	_load_from_savestate();
+func _ready() -> void:
+	_load_from_savestate()
 	_update_sprite()
 	_connect_signals()
-	
-	stats.hunger = 80
-	stats.fun = 17
-	stats.affection = 17
 
 
 ## Connect signals
-func _connect_signals():
+func _connect_signals() -> void:
 	TimeManager.tick_reached.connect(_tick_update)
 	TimeManager.night_started.connect(_set_night)
 	TimeManager.day_started.connect(_set_day)
@@ -44,25 +41,28 @@ func _connect_signals():
 
 
 ## This function will be called every tick
-func _tick_update():
+func _tick_update() -> void:
 	stats.time += 1
 
 
 ## Load pet data from savestate
-func _load_from_savestate():
+func _load_from_savestate() -> void:
 	
 	var pet_data : Dictionary = SaveManager.save_data.pets[pet_name]
+	if pet_data == null: 
+		return
 	
-	if pet_data != null: 
-		stats = CareStats.from_dictionary(pet_data.stats);
-		location = pet_data.location
-		if pet_data.has("uuid"): loader.uuid = pet_data.uuid
+	stats = CareStats.from_dictionary(pet_data.stats)
+	location = pet_data.location
+	if pet_data.has("uuid"): 
+		loader.uuid = pet_data.uuid
 
 
 ## Change the sprite according to name
-func _update_sprite():
+func _update_sprite() -> void:
 	if not sprite:
-		return;
+		return
+	
 	sprite.texture = load(Paths.get_character("pet").get_sprite("%s.png" % pet_name))
 
 
@@ -74,10 +74,10 @@ func _change_pet(uuid : String) -> void:
 
 
 ## Handle interaction
-func _handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
+func _handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	
 	if event is not InputEventScreenTouch:
-		return;
+		return
 	
 	_handle_touch(event)
 
@@ -104,6 +104,7 @@ func play_mood_animation():
 		CareEnums.Mood.HUNGRY : animation_player.play("hungry")
 		CareEnums.Mood.SAD : animation_player.play("sad")
 
+	await animation_player.animation_finished
 
 ## Prepare the visuals for nighttime
 func _set_night() : 
@@ -118,7 +119,7 @@ func _set_day() :
 ## Toggle the sprite outline
 func set_outline(value:bool):
 	if value:
-		sprite.material = load("res://materials/general/outline_shader_material.tres")
+		sprite.material = OUTLINE_SHADER_MATERIAL
 		return
 		
 	sprite.material = null
@@ -129,7 +130,9 @@ func save() -> Dictionary:
 	var data = {}
 	var coords = TilemapManager.get_coordinates_from_global_position(global_position)
 	
-	if null != loader: data.uuid = loader.uuid
+	if null != loader: 
+		data.uuid = loader.uuid
+	
 	data.name = pet_name
 	data.location = location
 	data.coordinates = {}

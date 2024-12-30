@@ -44,7 +44,12 @@ func _reset_outlines() -> void:
 func stop_interactions() -> void:
 	InputManager.context = Game.Context.Camera
 	_reset_outlines()
+	
+	if null != current_pet:
+		current_pet.interaction_active = false
+	
 	current_npc = null
 	current_pet = null
+	
 	UIManager.interaction_ended.emit()
 	

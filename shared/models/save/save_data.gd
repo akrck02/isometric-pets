@@ -79,7 +79,7 @@ func _to_string() -> String:
 	data.quests = quests
 	data.inventory = inventory
 	data.minigames = minigames
-	return JSON.stringify(data,"    ")
+	return JSON.stringify(data,"")
 
 
 ## Returns a parsed SaveData object fromn a String in json format.

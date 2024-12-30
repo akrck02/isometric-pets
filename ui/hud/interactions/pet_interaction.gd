@@ -1,23 +1,34 @@
 extends Control
 
-@onready var food_button : Button = $VBoxContainer/ButtonsMarginContainer/HBoxContainer/Food
-@onready var play_button : Button = $VBoxContainer/ButtonsMarginContainer/HBoxContainer/Play
-@onready var pet_button : Button = $VBoxContainer/ButtonsMarginContainer/HBoxContainer/Pet
+@onready var name_label : Label = $Container/Scroll/Rows/Header/Rows/Name
 
-@onready var time_stat_label : Label = $VBoxContainer/StatsMarginContainer/StatsContainer/Time
-@onready var hunger_stat_label : Label = $VBoxContainer/StatsMarginContainer/StatsContainer/Hunger
-@onready var fun_stat_label : Label = $VBoxContainer/StatsMarginContainer/StatsContainer/Fun
-@onready var affection_stat_label : Label = $VBoxContainer/StatsMarginContainer/StatsContainer/Affection
-@onready var energy_stat_label : Label = $VBoxContainer/StatsMarginContainer/StatsContainer/Energy
+@onready var time_stat_label : Label = $Container/Scroll/Rows/Header/Rows/Time
+@onready var level_stat_label : Label = $Container/Scroll/Rows/Header/Rows/Level
+
+@onready var hunger_stat_label : Label = $Container/Scroll/Rows/StatControlsContainer/Rows/HungerContainer/Label
+@onready var hunger_stat_slider : HSlider = $Container/Scroll/Rows/StatControlsContainer/Rows/HungerContainer/HSlider
+
+@onready var fun_stat_label : Label = $Container/Scroll/Rows/StatControlsContainer/Rows/FunContainer/Label
+@onready var fun_stat_slider : HSlider = $Container/Scroll/Rows/StatControlsContainer/Rows/FunContainer/HSlider
+
+@onready var affection_stat_label : Label = $Container/Scroll/Rows/StatControlsContainer/Rows/AffectionContainer/Label
+@onready var affection_stat_slider : HSlider = $Container/Scroll/Rows/StatControlsContainer/Rows/AffectionContainer/HSlider
+
+@onready var energy_stat_label : Label = $Container/Scroll/Rows/StatControlsContainer/Rows/EnergyContainer/Label
+@onready var energy_stat_slider : HSlider = $Container/Scroll/Rows/StatControlsContainer/Rows/EnergyContainer/HSlider
+
+@onready var exit_button : Button = $Container/Scroll/Rows/ButtonsContainer/ExitButton
 
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	UIManager.interaction_started.connect(show)
 	UIManager.interaction_ended.connect(hide)
-	food_button.pressed.connect(_give_food_to_pet)
-	play_button.pressed.connect(_play_with_pet)
-	pet_button.pressed.connect(_pet_the_pet)
+	hunger_stat_slider.value_changed.connect(_set_hunger)
+	fun_stat_slider.value_changed.connect(_set_fun)
+	affection_stat_slider.value_changed.connect(_set_affection)
+	energy_stat_slider.value_changed.connect(_set_energy)
+	exit_button.pressed.connect(_exit)
 
 
 ## Process 
@@ -30,31 +41,65 @@ func _refresh() -> void:
 	
 	if null == InteractionManager.current_pet:
 		return
+
+	var nameformatData = {}
+	nameformatData.name =  InteractionManager.current_pet.name.to_pascal_case()
+	nameformatData.mood = CareEnums.mood_name_for(InteractionManager.current_pet.stats.mood)
+	name_label.text = "{name} ({mood})".format(nameformatData)
+
+	var raw_seconds = InteractionManager.current_pet.stats.time * TimeManager.tick_time
+	var hours : int = raw_seconds / 60 / 60
+	var minutes : int = raw_seconds / 60 - hours * 60
 	
-	UIManager.notification_shown.emit("[center] {name} is {mood}".format({
-		"name" : InteractionManager.current_pet.pet_name,
-		"mood" : CareEnums.mood_name_for(InteractionManager.current_pet.stats.mood),
-	}))
+	var time = {
+		"hh" : "%02d" % hours,
+		"mm" :  "%02d" % minutes
+	}
 	
-	time_stat_label.text = "Time: %s" % InteractionManager.current_pet.stats.time
-	hunger_stat_label.text = "Hunger: %s" % InteractionManager.current_pet.stats.hunger
-	fun_stat_label.text = "Fun: %s" % InteractionManager.current_pet.stats.fun
-	affection_stat_label.text = "Affection: %s" % InteractionManager.current_pet.stats.affection
-	energy_stat_label.text = "Energy: %s" % InteractionManager.current_pet.stats.energy
+	time_stat_label.text = "Time {hh}:{mm}".format(time)
+	level_stat_label.text = "Level %s" % InteractionManager.current_pet.stats.level
+	
+	hunger_stat_label.text = "Hunger %s" % InteractionManager.current_pet.stats.hunger
+	hunger_stat_slider.value = InteractionManager.current_pet.stats.hunger
+	
+	fun_stat_label.text = "Fun %s" % InteractionManager.current_pet.stats.fun
+	fun_stat_slider.value = InteractionManager.current_pet.stats.fun
+	
+	affection_stat_label.text = "Affection %s" % InteractionManager.current_pet.stats.affection
+	affection_stat_slider.value = InteractionManager.current_pet.stats.affection
+	
+	energy_stat_label.text = "Energy %s" % InteractionManager.current_pet.stats.energy
+	energy_stat_slider.value = InteractionManager.current_pet.stats.energy
 
 
-## Give food to pet
-func _give_food_to_pet() -> void:
-	InteractionManager.current_pet.stats.hunger -= 1
+## Set pet hunger
+func _set_hunger(value : int) -> void:
+	InteractionManager.current_pet.stats.hunger = value
 	_refresh()
 
 
-## Give food to pet
-func _play_with_pet() -> void:
-	InteractionManager.current_pet.stats.fun += 1
+## Set pet fun
+func _set_fun(value : int) -> void:
+
+	InteractionManager.current_pet.stats.fun = value
 	_refresh()
 
-## Give food to pet
-func _pet_the_pet() -> void:
-	InteractionManager.current_pet.stats.affection += 1
+
+## Set pet affection
+func _set_affection(value : int) -> void:
+	
+	InteractionManager.current_pet.stats.affection = value
 	_refresh()
+
+
+## Set pet energy 
+func _set_energy(value : int) -> void:
+
+	InteractionManager.current_pet.stats.energy = value
+	_refresh()
+
+
+## Exit the ui
+func _exit() -> void:
+	hide()
+	InteractionManager.stop_interactions()
