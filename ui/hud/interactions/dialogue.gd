@@ -98,6 +98,7 @@ func _spawn_minigame() -> void:
 	
 	match InteractionManager.current_npc.minigame:
 		SceneEnums.Minigames.DinoRun: SceneManager.change_scene(Paths.get_minigame("dino_run").get_scene())
+		SceneEnums.Minigames.Liar: SceneManager.change_scene(Paths.get_minigame("liar").get_scene())
 		_: pass
 	
 	_close_dialogue()

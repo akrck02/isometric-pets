@@ -8,5 +8,6 @@ enum Type {
 
 enum Minigames {
 	None,
-	DinoRun
+	DinoRun,
+	Liar
 }

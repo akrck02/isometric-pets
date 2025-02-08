@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhi2gelqnmo12"]
+
+[ext_resource type="Script" path="res://scenes/liar/player.gd" id="1_w64fi"]
+[ext_resource type="PackedScene" uid="uid://bgd58tknkodwv" path="res://nodes/pet/pet.tscn" id="2_tbp88"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_w64fi")
+
+[node name="Pet" parent="." instance=ExtResource("2_tbp88")]

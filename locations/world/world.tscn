@@ -69,6 +69,7 @@ interactable = true
 
 [node name="Soriel" parent="Tilemap/Layers/1" instance=ExtResource("9_p24x2")]
 position = Vector2(5968, -2004)
+minigame = 2
 
 [node name="Foxy" parent="Tilemap/Layers/1" instance=ExtResource("9_p24x2")]
 position = Vector2(5911, -2034)

@@ -10,3 +10,6 @@ const TILE_SIZE = 80
 const AUDIO_MASTER_BUS = "Master";
 const AUDIO_MUSIC_BUS = "Music";
 const AUDIO_EFFECTS_BUS = "Effects";
+
+# Liar minigame
+enum FACING { UP, DOWN, LEFT, RIGHT }
