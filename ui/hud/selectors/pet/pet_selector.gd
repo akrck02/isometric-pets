@@ -19,6 +19,6 @@ func _ready() -> void:
 		var button : PetSelectorButton = PET_SELECTOR_BUTTON_SCENE.instantiate()
 		button.selected.connect(selected.emit)
 		rows.add_child(button)
-		
+
 		var texture : Texture2D = load(Paths.get_pets().get_sprite("%s.png" % pet_name))
-		button.set_pet("%s" % pet_name, texture)
+    button.set_pet("%s" % pet_name, texture)
