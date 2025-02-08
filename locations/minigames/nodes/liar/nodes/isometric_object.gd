@@ -1,5 +1,4 @@
 ## Class that contains methods to move in a isometric map
-class_name IsometricObject
 extends Node2D 
 
 ## Space between positions
@@ -19,13 +18,10 @@ func _cartesian_to_isometric(x: int, y: int):
 	y = isometric_pos.y
 	return isometric_pos
 
-
 ## Changes the object global position
-func move_global(x: int, y: int):
-	#print(x,", ",y, tilemaplayer.map_to_local(Vector2(x,y)))
-	self.global_position = _cartesian_to_isometric(x, y)
-
+func move_global(global_x: int, global_y: int):
+	self.global_position = _cartesian_to_isometric(global_x, global_y)
 
 ## Changes the object local position. The local position is the position relative to its parent.
-func move_local(x: int, y: int):
-	self.position = _cartesian_to_isometric(x, y)
+func move_local(local_x: int, local_y: int):
+	self.position = _cartesian_to_isometric(local_x, local_y)

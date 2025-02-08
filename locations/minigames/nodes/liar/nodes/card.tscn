@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c22g7l1a1tbct"]
 
-[ext_resource type="Script" path="res://locations/minigames/nodes/liar/card.gd" id="1_iup7b"]
-[ext_resource type="Texture2D" path="res://resources/sprites/cards/white.png" id="2_vv4fo"]
+[ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/card.gd" id="1_iup7b"]
+[ext_resource type="Texture2D" uid="uid://b2hnlc810gd8v" path="res://locations/minigames/nodes/liar/sprites/white_card.png" id="2_vv4fo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ne6p"]
 size = Vector2(45, 23)

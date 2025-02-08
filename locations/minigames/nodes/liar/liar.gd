@@ -1,25 +1,23 @@
 extends Node
-@onready var pet: Pet = $Pet
 
+# Constants
 const NUM_PLAYERS = 4
 const CARDS_PER_HAND = 5
 const TURN_TIME = 120
 
-@onready var control: Control = $Control
-@onready var spin_box_y: SpinBox = $Control/HBoxContainer/SpinBoxY
-@onready var spin_box_x: SpinBox = $Control/HBoxContainer/SpinBoxX
-@onready var button: Button = $Control/HBoxContainer/Button
+# UI elements
+@onready var play_button: Button = $UI/Margin/HBoxContainer/PlayButton
+@onready var liar_button: Button = $UI/Margin/HBoxContainer/LiarButton
+@onready var spin_box: SpinBox = $UI/Margin/HBoxContainer/SpinBox
+
+# Game logic
+@onready var stack: Stack = $Stack
+@onready var timer: TurnTimer = $Timer
+
 @onready var player_0: Player = $Player0
 @onready var player_1: Player = $Player1
 @onready var player_2: Player = $Player2
 @onready var player_3: Player = $Player3
-@onready var button_2: Button = $Control/HBoxContainer/Button2
-@onready var play_button: Button = $Control2/HBoxContainer/PlayButton
-@onready var liar_button: Button = $Control2/HBoxContainer/LiarButton
-@onready var spin_box: SpinBox = $Control2/HBoxContainer/SpinBox
-@onready var stack: Stack = $Stack
-@onready var timer: TurnTimer = $Timer
-
 
 var turn: int = 0
 var game_finished: bool = false
@@ -67,7 +65,7 @@ func _ready() -> void:
 	play_button.disabled = true
 	liar_button.disabled = true
 
-	SignalDatabase.tick_reached.connect(tick_update)
+	TimeManager.tick_reached.connect(tick_update)
 	play_button.pressed.connect(on_play_button)
 	liar_button.pressed.connect(on_liar_button)
 
@@ -90,11 +88,11 @@ func liar()->void:
 	print("Latest Statement: ",latest_statement)
 
 	if stack.latest_statement_true(latest_statement):
-		print("Era verdad")
+		print("It was true statement")
 		actual_player.add_cards(stack.pop_cards())
 
 	else:
-		print("Era mentira")
+		print("It was false statement")
 		previous_player.add_cards(stack.pop_cards())
 		
 		# If the player discovers a lie, starts the next round

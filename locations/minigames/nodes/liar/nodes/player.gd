@@ -1,27 +1,22 @@
-extends IsometricObject
+extends Node2D
 class_name Player
+
 ## Players of the [Liar] minigame
 var id: int
 var player_name: String = "teko"
+
 ## List of [Card]s
 var _hand: Hand
-@onready var pet: Pet = $Pet
 var facing: Constants.FACING
 var latest_statement: int = 0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#self.move_global(x,y)
-	pet.pet_name = self.player_name
-	pet.control = true
-	pet.update_sprite()
-
+	pass
 
 func _to_string() -> String:
 	return "{0} {1}".format([id, player_name])
-
-
 
 ## Gets a random number of random cards
 ## Returns [Array] of [Card]
@@ -40,7 +35,6 @@ func lie()->Array:
 	latest_statement=randi_range(0,9)
 	
 	for i in num_cards:
-		var random_card
 		output.append(pop_random_card())
 		
 	return output
@@ -80,8 +74,14 @@ func pop_random_card()->Card:
 
 ## Removes given [Card] from [Hand]
 func remove_card(card: Card)->void:
-	_hand.cards.remove_at(_hand.cards.find(card))
-	_hand.cards_array.remove_at(_hand.cards_array.find(card))
+	
+	var index = _hand.cards.find(card);
+	if -1 == index or _hand.cards_array.size() <= index:
+		printerr("Card %s doesn't exist in the hand." % card.name)
+		return
+	
+	_hand.cards.remove_at(index)
+	_hand.cards_array.remove_at(index)
 	_hand.remove_child(card)
 	card.set_reveal(false)
 	card.move_global(0, 0)
@@ -103,8 +103,7 @@ func add_cards(cards: Array):
 
 func set_player_name(name: String):
 	self.player_name = name
-	pet.pet_name = name
-	pet.update_sprite()
+	# TODO: update sprite
 
 
 func set_reveal_cards(value: bool):

@@ -1,15 +1,13 @@
-extends IsometricObject
+extends Node2D
 class_name Stack
 const PLAYERS = 4
 const CARDS_PER_HAND = 10
 ## Array containing the cards
 var cards: Array
 enum COLORS_ENUM { red, yellow, green, blue }
-
-var card_scene = preload("res://scenes/liar/card.tscn")
+const card_scene = preload("res://locations/minigames/nodes/liar/nodes/card.tscn");
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
-
 var latest_added_cards: Array
 
 
@@ -57,16 +55,16 @@ func update_sprite():
 	sprite_2d.frame = 0
 	sprite_2d.hframes = 1
 	sprite_2d.vframes = 2
-	sprite_2d.texture = load("res://resources/sprites/cards/white.png")
+	sprite_2d.texture = load(Paths.get_minigame("liar").get_sprite("white_card.png"));
 
 
 func pop_latest_added_cards():
-	var cards = latest_added_cards
-	for card in cards:
+	var latest_cards = latest_added_cards
+	for card in latest_added_cards:
 		remove_child(card)
 	print_tree()
 	latest_added_cards = []
-	return cards
+	return latest_cards
 	
 	
 func pop_cards():

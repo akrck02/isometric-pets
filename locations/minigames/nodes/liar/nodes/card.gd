@@ -1,5 +1,5 @@
 class_name Card
-extends IsometricObject
+extends Node2D
 
 const movement_speed = 1.00 / 1.5
 @export var number: int
@@ -62,7 +62,7 @@ func show_card_sprite():
 func set_outline(value:bool):
 	
 	if value:
-		sprite_2d.material=load("res://materials/card_selected_material.tres")
+		sprite_2d.material=load("res://locations/minigames/nodes/liar/materials/card_selected_material.tres")
 		sprite_2d.material.set_shader_parameter("width",3)
 		return
 	
@@ -92,12 +92,12 @@ func update_sprite():
 	var frame_cords_x=0
 
 	if self.reveal:
-		sprite_2d.texture = load("res://resources/sprites/cards/" + color + ".png")
+		sprite_2d.texture = load(Paths.get_minigame("liar").get_sprite("%s_cards.png" % color))
 		sprite_2d.hframes = 10
 		sprite_2d.vframes = 2
 		frame_cords_x=self.number
 	else:
-		sprite_2d.texture = load("res://resources/sprites/cards/white.png")
+		sprite_2d.texture = load(Paths.get_minigame("liar").get_sprite("white_card.png"))
 		sprite_2d.hframes = 1
 		sprite_2d.vframes = 2
 

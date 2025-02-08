@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhi2gelqnmo12"]
+
+[ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/player.gd" id="1_w64fi"]
+[ext_resource type="Texture2D" uid="uid://cv23i0i8ygm3g" path="res://entities/characters/nodes/npc/sprites/soriel.png" id="3_4dt4v"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_w64fi")
+x = null
+y = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3.97298, -28.3406)
+texture = ExtResource("3_4dt4v")
+hframes = 3

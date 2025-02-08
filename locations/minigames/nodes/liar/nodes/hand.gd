@@ -1,4 +1,3 @@
-extends IsometricObject
 class_name Hand
 
 ## Class that represents the list of [Card] objects that a [Player] has
