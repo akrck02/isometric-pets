@@ -21,4 +21,4 @@ func _ready() -> void:
 		rows.add_child(button)
 
 		var texture : Texture2D = load(Paths.get_pets().get_sprite("%s.png" % pet_name))
-    button.set_pet("%s" % pet_name, texture)
+		button.set_pet("%s" % pet_name, texture)
