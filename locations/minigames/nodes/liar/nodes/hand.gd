@@ -55,8 +55,6 @@ func get_selected_cards() -> Array:
 
 ## Add a card to the array on the back
 func add_card(card: Card):
-	if card.facing != self.facing:
-		card.set_facing(self.facing)
 		
 	card.set_reveal(reveal)
 	card.show_card_sprite()

@@ -96,7 +96,6 @@ func generate_hands() -> Array:
 		var hand = Hand.new()
 		for c in CARDS_PER_HAND:
 			var card = self.get_random_card()
-			card.facing = facing
 			hand.facing = facing
 			hand.add_card(card)
 		hands.append(hand)
