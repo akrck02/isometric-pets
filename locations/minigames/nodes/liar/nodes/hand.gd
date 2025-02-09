@@ -1,7 +1,7 @@
+extends Node2D
 class_name Hand
 
 ## Class that represents the list of [Card] objects that a [Player] has
-@onready var hand: Node2D = $"."
 
 ## List of [Card] objects
 var cards: Array
@@ -61,21 +61,6 @@ func add_card(card: Card):
 	card.set_reveal(reveal)
 	card.show_card_sprite()
 	
-	add_child(card, true)
 	card.visible = true
 	cards.append(card)
-	for i in range(3):
-		for j in range(5):
-			if self.cards_array[2 - i][4 - j] == null:
-				match card.facing:
-					Constants.FACING.DOWN:
-						card.move_local(4 - j, 2 - i)
-					Constants.FACING.UP:
-						card.move_local(4 - j, i - 2)
-					Constants.FACING.RIGHT:
-						card.move_local(2 - i, 4 - j)
-					Constants.FACING.LEFT:
-						card.move_local(i - 2, 4 - j)
-
-				self.cards_array[2 - i][4 - j] = card
-				return
+	

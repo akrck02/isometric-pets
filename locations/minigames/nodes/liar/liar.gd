@@ -41,25 +41,21 @@ func _ready() -> void:
 	player_0.set_hand(hands_down)
 	player_0.set_reveal_cards(true)
 	player_0.set_player_name("tas")
-	player_0._hand.move_local(-2, 3)
 
 	player_1.id = 1
 	player_1.facing = Constants.FACING.RIGHT
 	player_1.set_hand(hands_right)
 	player_1.set_player_name("foxy")
-	player_1._hand.move_local(3, -2)
 
 	player_2.id = 2
 	player_2.facing = Constants.FACING.UP
 	player_2.set_hand(hands_up)
 	player_2.set_player_name("teko")
-	player_2._hand.move_local(-2, -3)
 
 	player_3.id = 3
 	player_3.facing = Constants.FACING.LEFT
 	player_3.set_hand(hands_left)
 	player_3.set_player_name("soriel")
-	player_3._hand.move_local(-3, -2)
 
 
 	play_button.disabled = true
