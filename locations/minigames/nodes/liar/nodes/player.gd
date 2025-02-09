@@ -1,12 +1,11 @@
-extends Node2D
 class_name Player
 
 ## Players of the [Liar] minigame
 var id: int
 var player_name: String = "teko"
+@onready var hand: Hand = $Hand
 
 ## List of [Card]s
-var _hand: Hand
 var facing: Constants.FACING
 var latest_statement: int = 0
 
@@ -24,8 +23,8 @@ func lie()->Array:
 	var output=[]
 	var max_num=3
 	
-	if _hand.cards.size()<3:
-		max_num=_hand.cards.size()
+	if hand.cards.size()<3:
+		max_num=hand.cards.size()
 		
 	# Number of cards to play
 	var num_cards=randi_range(1,max_num)
@@ -46,7 +45,7 @@ func truth()->Array:
 	var random_card=pop_random_card()
 	latest_statement=random_card.number
 	output.append(random_card)
-	for card in _hand.cards:
+	for card in hand.cards:
 		if card.number==random_card.number:
 			output.append(card)
 			remove_card(card)
@@ -57,7 +56,7 @@ func truth()->Array:
 ## Removes and returns Cards with selected [code]true[/code]
 func pop_selected_cards()->Array:
 	var output = []
-	for card in _hand.cards:
+	for card in hand.cards:
 		if card.selected:
 			remove_card(card)
 			output.append(card)
@@ -65,8 +64,8 @@ func pop_selected_cards()->Array:
 
 ## Gets a random card
 func pop_random_card()->Card:
-	var random = randi() % _hand.cards.size()
-	var random_card=_hand.cards[random]
+	var random = randi() % hand.cards.size()
+	var random_card=hand.cards[random]
 	
 	remove_card(random_card)
 	
@@ -75,14 +74,14 @@ func pop_random_card()->Card:
 ## Removes given [Card] from [Hand]
 func remove_card(card: Card)->void:
 	
-	var index = _hand.cards.find(card);
-	if -1 == index or _hand.cards_array.size() <= index:
+	var index = hand.cards.find(card);
+	if -1 == index or hand.cards_array.size() <= index:
 		printerr("Card %s doesn't exist in the hand." % card.name)
 		return
 	
-	_hand.cards.remove_at(index)
-	_hand.cards_array.remove_at(index)
-	_hand.remove_child(card)
+	hand.cards.remove_at(index)
+	hand.cards_array.remove_at(index)
+	hand.remove_child(card)
 	card.set_reveal(false)
 	card.move_global(0, 0)
 	card.unselect()
@@ -94,7 +93,7 @@ func remove_cards(cards: Array)->void:
 
 func add_card(card: Card):
 	card.user=self.id
-	_hand.add_card(card)
+	hand.add_card(card)
 
 
 func add_cards(cards: Array):
@@ -107,12 +106,11 @@ func set_player_name(name: String):
 
 
 func set_reveal_cards(value: bool):
-	_hand.reveal=value
-	for card in _hand.cards:
+	hand.reveal=value
+	for card in hand.cards:
 		card.set_reveal(value)
 
 
 func set_hand(hand: Hand):
-	hand.set_user(id)
-	self._hand = hand
-	self._hand.show_cards()
+	self.hand = hand
+	self.hand.show_cards()

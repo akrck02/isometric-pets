@@ -4,7 +4,6 @@ const PLAYERS = 4
 const CARDS_PER_HAND = 10
 ## Array containing the cards
 var cards: Array
-enum COLORS_ENUM { red, yellow, green, blue }
 const card_scene = preload("res://locations/minigames/nodes/liar/nodes/card.tscn");
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -13,12 +12,17 @@ var latest_added_cards: Array
 
 func _init() -> void:
 	self.cards = []
-	for color in COLORS_ENUM.keys():
+	for color_name in Constants.COLORS.keys():
+		var color = Constants.COLORS[color_name]
 		for num in range(10):
-			var card = card_scene.instantiate()
-			card.color = color
-			card.number = num
-			cards.append(card)
+			var card_instance = card_scene.instantiate()
+			card_instance.color = color
+			card_instance.number = num
+			card_instance.update_sprite()
+			add_child(card_instance)
+			cards.append(card_instance)
+			
+	print(cards.size())
 
 
 # Called when the node enters the scene tree for the first time.
@@ -96,6 +100,7 @@ func generate_hands() -> Array:
 		var hand = Hand.new()
 		for c in CARDS_PER_HAND:
 			var card = self.get_random_card()
+			self.add_child(card)
 			hand.facing = facing
 			hand.add_card(card)
 		hands.append(hand)

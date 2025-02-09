@@ -38,7 +38,7 @@ tile_set = ExtResource("4_3nft3")
 [node name="Timer" parent="." instance=ExtResource("4_lk7y7")]
 
 [node name="Player0" parent="." instance=ExtResource("6_3f0sk")]
-position = Vector2(3, 695)
+position = Vector2(1, 633)
 
 [node name="Player1" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(-380, 32)

@@ -2,12 +2,13 @@ class_name Card
 extends Node2D
 
 const movement_speed = 1.00 / 1.5
-@export var number: int
-@export var color: String
+var number: int
+var color: Color
 
 @onready var area_2d: Area2D = $Area2D
 @onready var color_rect: ColorRect = $ColorRect
 @onready var label: Label = $Label
+
 
 ## If the number and color is shown
 var reveal: bool = false
@@ -20,11 +21,13 @@ var selected:bool=false
 var selectable:bool=false
 
 func _ready() -> void:
-	area_2d.input_event.connect(handle_interaction)
+	#area_2d.input_event.connect(handle_interaction)
 	name=str(color)+" "+str(number)
 	update_sprite()
+	
+func _init() -> void:
 	pass
-
+	
 
 func _to_string() -> String:
 	return "{0} {1}".format([color, number])
@@ -76,10 +79,20 @@ func set_selectable(value: bool):
 	self.selectable=value
 
 
+
 func update_sprite():
 	
-	if not color_rect or label:
+	if not color_rect:
+		print("not color_rect")
 		return
+		
+	if not label:
+		print("not label")
+		return
+		
+		
+	label.text=str(number)
+	color_rect.color=color
 		
 	if reveal:
 		label.hide()

@@ -127,14 +127,14 @@ func tick_update() -> void:
 	
 	
 	if actual_player.id == 0:
-		player_0._hand.set_selectable(true)
+		player_0.hand.set_selectable(true)
 		play_button.disabled = false
 		liar_button.disabled = false
 		timer.start(player_0,60)
 	else:
-		player_0._hand.set_selectable(false)
+		player_0.hand.set_selectable(false)
 		# Unselect selected cards
-		player_0._hand.unselect()
+		player_0.hand.unselect()
 
 		play_button.disabled = true
 		liar_button.disabled = true

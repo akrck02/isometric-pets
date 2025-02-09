@@ -11,7 +11,6 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_iup7b")
-color = "red"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 40.0
