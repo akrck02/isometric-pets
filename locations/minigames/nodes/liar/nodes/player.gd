@@ -85,6 +85,7 @@ func remove_card(card: Card)->void:
 	hand.remove_child(card)
 	card.set_reveal(false)
 	card.move_global(0, 0)
+	
 	card.unselect()
 
 ## Removes given [Card]s from [Hand]

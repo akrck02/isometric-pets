@@ -1,30 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://c22g7l1a1tbct"]
+[gd_scene load_steps=5 format=3 uid="uid://c22g7l1a1tbct"]
 
 [ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/card.gd" id="1_iup7b"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ne6p"]
-size = Vector2(40, 60)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqocm"]
+size = Vector2(80, 120)
 
 [sub_resource type="LabelSettings" id="LabelSettings_v1hbu"]
-font_size = 40
+font_size = 80
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtu6w"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_iup7b")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -120.0
 offset_right = 40.0
-offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="ColorRect"]
+position = Vector2(0, 120)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(20, 30)
-shape = SubResource("RectangleShape2D_4ne6p")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/Area2D"]
+position = Vector2(40, -60)
+shape = SubResource("RectangleShape2D_wqocm")
 
 [node name="Label" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -120.0
 offset_right = 40.0
-offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "0"
 label_settings = SubResource("LabelSettings_v1hbu")
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -120.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qtu6w")

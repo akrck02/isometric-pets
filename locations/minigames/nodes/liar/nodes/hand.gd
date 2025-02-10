@@ -52,8 +52,19 @@ func add_card(card: Card):
 	print("Added card")
 	cards.append(card)
 	add_child(card)
-	card.move_local_x(global_position.x+50*cards.size())
-	card.move_local_y(global_position.y)
+	card.global_position=global_position
+	
+	# Calculate the angle and position for each card
+	var step=180/cards.size()
+
+	var degree=90
+	for i in range(cards.size()):
+		var c:Card=cards[i]
+		c.z_index=i
+		c.rotation_degrees = degree
+		degree-=step
+		
+
 	card.set_reveal(reveal)
 	card.show_card_sprite()
 	

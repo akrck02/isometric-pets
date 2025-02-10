@@ -15,9 +15,6 @@ zoom = Vector2(0.8, 0.8)
 default_zoom_desktop_override = false
 default_zoom = Vector2(0.8, 0.8)
 max_zoom = 500.0
-can_move = false
-can_zoom = false
-can_pan = false
 
 [node name="Stack" parent="." instance=ExtResource("7_bjnwe")]
 
@@ -28,16 +25,19 @@ position = Vector2(1, 633)
 player_name = "tas"
 
 [node name="Player1" parent="." instance=ExtResource("6_3f0sk")]
-position = Vector2(-380, 32)
+position = Vector2(-310, 0)
+rotation = 1.5708
 id = 1
 player_name = "foxy"
 
 [node name="Player2" parent="." instance=ExtResource("6_3f0sk")]
-position = Vector2(0, -667)
+position = Vector2(-4, -623)
+rotation = 3.14159
 id = 2
 
 [node name="Player3" parent="." instance=ExtResource("6_3f0sk")]
-position = Vector2(385, 31)
+position = Vector2(327, 5)
+rotation = -1.5708
 id = 3
 player_name = "soriel"
 
@@ -72,3 +72,5 @@ max_value = 9.0
 [node name="LiarButton" type="Button" parent="UI/Margin/HBoxContainer"]
 layout_mode = 2
 text = "Liar!"
+
+[node name="Background" type="CanvasLayer" parent="."]

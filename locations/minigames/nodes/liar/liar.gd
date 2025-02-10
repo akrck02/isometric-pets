@@ -20,6 +20,7 @@ const Player = preload("res://locations/minigames/nodes/liar/nodes/player.gd")
 @onready var player_1: Player = $Player1
 @onready var player_2: Player = $Player2
 @onready var player_3: Player = $Player3
+@onready var camera_2d: SmartCamera = $Camera2D
 
 var turn: int = 0
 var game_finished: bool = false
@@ -35,6 +36,7 @@ func _ready() -> void:
 		for x in 10:
 			var card=stack.get_random_card()
 			player.add_card(card)
+
 	
 	
 
