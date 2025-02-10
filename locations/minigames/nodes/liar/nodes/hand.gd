@@ -15,7 +15,7 @@ func _init() -> void:
 	pass
 
 func _to_string() -> String:
-	return str(cards)
+	return "hand"+ str(cards)
 
 ## Shows all [Card] objects in the [Hand]
 func show_cards():

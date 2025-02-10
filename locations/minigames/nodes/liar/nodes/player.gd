@@ -2,7 +2,7 @@ extends Node2D
 class_name Player
 
 
-enum PLAYER_TYPE{
+enum PLAYER_TYPE {
 	NPC,
 	PET
 }
@@ -10,7 +10,7 @@ enum PLAYER_TYPE{
 ## Players of the [Liar] minigame
 @export var id: int
 @export var player_name: String = "teko"
-@export var player_type:PLAYER_TYPE=PLAYER_TYPE.NPC
+@export var player_type: PLAYER_TYPE = PLAYER_TYPE.NPC
 @export var hide_cards: bool
 @export var color: Color
 
@@ -26,9 +26,9 @@ var latest_statement: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	var char="npc"
-	if player_type==PLAYER_TYPE.PET:
-		char="pet"
+	var char = "npc"
+	if player_type == PLAYER_TYPE.PET:
+		char = "pet"
 	
 	sprite_2d.texture = load(Paths.get_character(char).get_sprite("%s.png" % player_name))
 	
@@ -106,12 +106,10 @@ func remove_card(card: Card) -> void:
 		printerr("Card %s doesn't exist in the hand." % card.name)
 		return
 	
-	hand.cards.remove_at(index)
-	hand.remove_child(card)
-	card.set_hide(true)
-	card.global_position=Vector2(0, 0)
-	
 	card.unselect()
+	hand.cards.remove_at(index)
+	#hand.remove_child(card)
+	card.set_hide(true)
 
 ## Removes given [Card]s from [Hand]
 func remove_cards(cards: Array) -> void:

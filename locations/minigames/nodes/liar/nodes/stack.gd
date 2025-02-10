@@ -38,8 +38,12 @@ func latest_statement_true(latest_statement: int) -> bool:
 
 func add_card(card: Card):
 	cards.append(card)
-	card.global_position=Vector2(0,0)
-	add_child(card)
+	var tween = create_tween()
+	tween.tween_property(card, NodeProperties.GlobalPosition, Vector2(0,0),0.5).set_trans(Tween.TRANS_EXPO)
+	await tween.finished
+	tween.kill()
+	card.reparent(self)
+	
 	if cards.size() > 1:
 		update_sprite()
 
@@ -54,11 +58,6 @@ func add_cards(cards: Array):
 func update_sprite():
 	if not sprite_2d:
 		return
-
-	sprite_2d.frame = 0
-	sprite_2d.hframes = 1
-	sprite_2d.vframes = 2
-	sprite_2d.texture = load(Paths.get_minigame("liar").get_sprite("white_card.png"));
 
 
 func pop_latest_added_cards():
@@ -80,7 +79,7 @@ func pop_cards():
 
 
 func _to_string() -> String:
-	return str(cards)
+	return "stack: "+ str(cards)
 
 
 ## Returns a random [Card] while removing it from the [Deck]
