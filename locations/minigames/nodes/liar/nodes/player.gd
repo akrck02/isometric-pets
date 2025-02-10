@@ -19,7 +19,7 @@ var latest_statement: int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Set if cards in hand are hidden
-	hand.reveal = hide_cards
+	hand.hide = hide_cards
 	
 	# Set circle color
 	var styleBox: StyleBoxFlat = circle.get_theme_stylebox("panel").duplicate()
@@ -94,8 +94,8 @@ func remove_card(card: Card) -> void:
 	
 	hand.cards.remove_at(index)
 	hand.remove_child(card)
-	card.set_reveal(false)
-	card.move_global(0, 0)
+	card.set_hide(true)
+	card.global_position=Vector2(0, 0)
 	
 	card.unselect()
 
@@ -117,7 +117,7 @@ func set_player_name(name: String):
 	# TODO: update sprite
 
 
-func set_reveal_cards(value: bool):
+func set_hide_cards(value: bool):
 	hand.reveal = value
 	for card in hand.cards:
 		card.set_reveal(value)

@@ -7,11 +7,12 @@ var color: Color
 
 @onready var color_rect: ColorRect = $ColorRect
 @onready var label: Label = $Label
+@onready var panel: Panel = $Panel
+@onready var area_2d: Area2D = $ColorRect/Area2D
 
 
 ## If the number and color is shown
-var reveal: bool = false
-var user: int = -1
+var hide: bool = false
 
 ## If card is selected
 var selected: bool = false
@@ -20,7 +21,7 @@ var selected: bool = false
 var selectable: bool = false
 
 func _ready() -> void:
-	#area_2d.input_event.connect(handle_interaction)
+	area_2d.input_event.connect(handle_interaction)
 	name = str(color) + " " + str(number)
 	update_sprite()
 	
@@ -36,12 +37,10 @@ func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if event is not InputEventScreenTouch and event.is_pressed() == false:
 		return ;
 	
-	if user != 0:
-		return
 		
 	if not selectable:
 		return
-		
+	
 	selected = !selected
 	
 	if selected:
@@ -58,7 +57,15 @@ func unselect():
 
 func set_outline(value: bool):
 	# TODO 	
-	pass
+	var styleBox: StyleBoxFlat = panel.get_theme_stylebox("panel").duplicate()
+	if value:
+		
+		styleBox.set("border_color", Color(1,1,1))
+		styleBox.set_border_width_all(10)
+	else:
+		styleBox.set("border_color", Color(0,0,0))
+		styleBox.set_border_width_all(5)
+	panel.add_theme_stylebox_override("panel", styleBox)
 	
 	
 func set_facing(facing: Constants.FACING):
@@ -66,8 +73,8 @@ func set_facing(facing: Constants.FACING):
 	update_sprite()
 
 
-func set_reveal(value: bool):
-	self.reveal = value
+func set_hide(value: bool):
+	self.hide = value
 	update_sprite()
 
 func set_selectable(value: bool):
@@ -86,7 +93,7 @@ func update_sprite():
 	label.text = str(number)
 	color_rect.color = color
 		
-	if reveal:
+	if hide:
 		label.hide()
 		color_rect.color = Color(1, 1, 1)
 	

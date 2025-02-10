@@ -6,7 +6,7 @@ class_name Hand
 ## List of [Card] objects
 var cards: Array
 var facing: Constants.FACING
-var reveal: bool = false
+var hide: bool = true
 
 ## If user can select cards
 var selectable: bool = false
@@ -59,10 +59,19 @@ func arrange_cards_in_arc() -> void:
 		c.position += offset # Displace to the right
 		degree -= step
 		
+	_center()
+	
+func _center():
 	# Center the hand inside its parent node
 	var parent_size = get_parent().circle.size.x
 	var hand_size = get_combined_bounding_box().size.x
 	position.x = (parent_size - hand_size) / 2
+	
+func arrange_cards_in_line()->void:
+	for i in range(cards.size()):
+		var c: Card = cards[i]
+		c.position.x=i*80+20
+	_center()
 
 func get_combined_bounding_box() -> Rect2:
 	var rect = Rect2()
@@ -74,9 +83,12 @@ func get_combined_bounding_box() -> Rect2:
 ## Add a card to the array on the back
 func add_card(card: Card):
 	cards.append(card)
-	card.set_reveal(reveal)
+	card.set_hide(hide)
 	add_child(card)
 	card.global_position = global_position
 	card.global_rotation = global_rotation
 	
-	arrange_cards_in_arc()
+	if hide:
+		arrange_cards_in_arc()
+	else:
+		arrange_cards_in_line()

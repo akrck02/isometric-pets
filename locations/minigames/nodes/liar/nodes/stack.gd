@@ -38,7 +38,7 @@ func latest_statement_true(latest_statement: int) -> bool:
 
 func add_card(card: Card):
 	cards.append(card)
-	card.move_global(0,0)
+	card.global_position=Vector2(0,0)
 	add_child(card)
 	if cards.size() > 1:
 		update_sprite()
