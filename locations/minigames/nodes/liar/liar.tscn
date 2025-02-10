@@ -30,6 +30,7 @@ offset_bottom = -337.0
 [node name="Player0" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(4, 545)
 player_name = "tas"
+player_type = 1
 color = Color(0.768627, 0.419608, 0.419608, 1)
 
 [node name="Player1" parent="." instance=ExtResource("6_3f0sk")]
@@ -44,6 +45,8 @@ color = Color(0.866667, 0.74902, 0.360784, 1)
 position = Vector2(-2, -559)
 rotation = 3.14159
 id = 2
+player_name = "tuko"
+player_type = 1
 hide_cards = true
 color = Color(0.733333, 0.431373, 0.854902, 1)
 

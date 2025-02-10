@@ -1,9 +1,16 @@
 extends Node2D
 class_name Player
 
+
+enum PLAYER_TYPE{
+	NPC,
+	PET
+}
+
 ## Players of the [Liar] minigame
 @export var id: int
 @export var player_name: String = "teko"
+@export var player_type:PLAYER_TYPE=PLAYER_TYPE.NPC
 @export var hide_cards: bool
 @export var color: Color
 
@@ -18,6 +25,13 @@ var latest_statement: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	var char="npc"
+	if player_type==PLAYER_TYPE.PET:
+		char="pet"
+	
+	sprite_2d.texture = load(Paths.get_character(char).get_sprite("%s.png" % player_name))
+	
 	# Set if cards in hand are hidden
 	hand.hide = hide_cards
 	
