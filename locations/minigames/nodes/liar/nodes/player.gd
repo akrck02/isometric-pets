@@ -4,8 +4,12 @@ class_name Player
 ## Players of the [Liar] minigame
 @export var id: int
 @export var player_name: String = "teko"
+@export var hide_cards:bool
+@export var color:Color
+
 @onready var hand: Hand = $Hand
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var circle: Panel = $Circle
 
 ## List of [Card]s
 var facing: Constants.FACING
@@ -14,7 +18,15 @@ var latest_statement: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	# Set if cards in hand are hidden
+	hand.reveal=hide_cards
+	print(color)
+	
+	# Set circle color
+	print(circle)
+	var styleBox: StyleBoxFlat = circle.get_theme_stylebox("panel").duplicate()
+	styleBox.set("border_color", color)
+	circle.add_theme_stylebox_override("panel", styleBox)
 
 func _to_string() -> String:
 	return "{0} {1}".format([id, player_name])

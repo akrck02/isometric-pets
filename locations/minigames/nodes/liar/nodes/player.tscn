@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhi2gelqnmo12"]
+[gd_scene load_steps=5 format=3 uid="uid://bhi2gelqnmo12"]
 
 [ext_resource type="Texture2D" uid="uid://cv23i0i8ygm3g" path="res://entities/characters/nodes/npc/sprites/soriel.png" id="3_4dt4v"]
 [ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/player.gd" id="3_5b8qw"]
 [ext_resource type="PackedScene" uid="uid://cxo4x8f8l2ibw" path="res://locations/minigames/nodes/liar/nodes/hand.tscn" id="3_s8h24"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogxxs"]
+bg_color = Color(0.634175, 0.507385, 0.946914, 1)
+draw_center = false
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="Player" type="Node2D"]
 script = ExtResource("3_5b8qw")
@@ -14,3 +26,10 @@ hframes = 3
 
 [node name="Hand" parent="." instance=ExtResource("3_s8h24")]
 position = Vector2(-1, -125)
+
+[node name="Circle" type="Panel" parent="."]
+offset_left = -41.0
+offset_top = -70.0
+offset_right = 39.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogxxs")

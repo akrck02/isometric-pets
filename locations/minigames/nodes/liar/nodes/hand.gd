@@ -64,9 +64,6 @@ func add_card(card: Card):
 		c.z_index=i
 		c.rotation_degrees = degree
 		degree-=step
-		
-
 	card.set_reveal(reveal)
-	card.show_card_sprite()
 	
 	

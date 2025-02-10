@@ -55,8 +55,6 @@ func select():
 func unselect():
 	set_outline(false)
 		
-func show_card_sprite():
-	update_sprite()
 
 func set_outline(value:bool):
 	# TODO 	
@@ -71,7 +69,6 @@ func set_facing(facing: Constants.FACING):
 
 func set_reveal(value: bool):
 	self.reveal = value
-
 	update_sprite()
 
 func set_selectable(value: bool):
