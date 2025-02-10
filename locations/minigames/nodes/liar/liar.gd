@@ -2,7 +2,6 @@ extends Node
 
 # Constants
 const NUM_PLAYERS = 4
-const CARDS_PER_HAND = 5
 const TURN_TIME = 120
 
 # UI elements
@@ -13,6 +12,9 @@ const TURN_TIME = 120
 # Game logic
 @onready var stack: Stack = $Stack
 @onready var timer: TurnTimer = $Timer
+
+const Player = preload("res://locations/minigames/nodes/liar/nodes/player.gd")
+
 
 @onready var player_0: Player = $Player0
 @onready var player_1: Player = $Player1
@@ -28,35 +30,13 @@ var actual_player:Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	players = [player_0, player_1, player_2, player_3]
-
-	# Create hands
-	var hands = stack.generate_hands()
-	var hands_up = hands[0]
-	var hands_down = hands[1]
-	var hands_left = hands[2]
-	var hands_right = hands[3]
-
-	player_0.id = 0
-	player_0.facing = Constants.FACING.DOWN
-	player_0.set_hand(hands_down)
-	player_0.set_reveal_cards(true)
-	player_0.set_player_name("tas")
-
-	player_1.id = 1
-	player_1.facing = Constants.FACING.RIGHT
-	player_1.set_hand(hands_right)
-	player_1.set_player_name("foxy")
-
-	player_2.id = 2
-	player_2.facing = Constants.FACING.UP
-	player_2.set_hand(hands_up)
-	player_2.set_player_name("teko")
-
-	player_3.id = 3
-	player_3.facing = Constants.FACING.LEFT
-	player_3.set_hand(hands_left)
-	player_3.set_player_name("soriel")
-
+	
+	for player:Player in players:
+		for x in 10:
+			var card=stack.get_random_card()
+			player.add_card(card)
+	
+	
 
 	play_button.disabled = true
 	liar_button.disabled = true

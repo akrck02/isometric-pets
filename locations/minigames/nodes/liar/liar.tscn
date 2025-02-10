@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://h15omfbp4itu"]
+[gd_scene load_steps=7 format=3 uid="uid://h15omfbp4itu"]
 
 [ext_resource type="Script" path="res://locations/minigames/nodes/liar/liar.gd" id="1_h8pm3"]
-[ext_resource type="TileSet" uid="uid://b1vppjetxm2w8" path="res://materials/map/tilemap.tres" id="4_3nft3"]
 [ext_resource type="PackedScene" uid="uid://bvhg7a5q5tmws" path="res://locations/minigames/nodes/liar/nodes/timer.tscn" id="4_lk7y7"]
 [ext_resource type="PackedScene" uid="uid://bhi2gelqnmo12" path="res://locations/minigames/nodes/liar/nodes/player.tscn" id="6_3f0sk"]
-[ext_resource type="PackedScene" uid="uid://c22g7l1a1tbct" path="res://locations/minigames/nodes/liar/nodes/card.tscn" id="6_mnfdn"]
 [ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="6_v1bv8"]
 [ext_resource type="PackedScene" uid="uid://d24f6jscr5rhj" path="res://locations/minigames/nodes/liar/nodes/stack.tscn" id="7_bjnwe"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="9_whx6x"]
@@ -21,33 +19,27 @@ can_move = false
 can_zoom = false
 can_pan = false
 
-[node name="Card" parent="." instance=ExtResource("6_mnfdn")]
-visible = false
-z_index = 4
-position = Vector2(40, 20)
-script = null
-
 [node name="Stack" parent="." instance=ExtResource("7_bjnwe")]
-
-[node name="TestCards" type="TileMapLayer" parent="."]
-visible = false
-z_index = -2
-tile_map_data = PackedByteArray("AAD//wMABQABAAAAAAAAAAMABQABAAAAAAABAAMABQABAAAAAAD+/wMABQABAAAAAAD9/wMABQABAAAAAAD9/wQABQABAAAAAAD+/wQABQABAAAAAAD//wQABQABAAAAAAAAAAQABQABAAAAAAABAAQABQABAAAAAAABAAUABQABAAAAAAAAAAUABQABAAAAAAD//wUABQABAAAAAAD+/wUABQABAAAAAAD9/wUABQABAAAAAAD6/wAABQABAAEAAAD6////BQABAAEAAAD6//7/BQABAAEAAAD6/wEABQABAAEAAAD6/wIABQABAAEAAAD7//7/BQABAAEAAAD7////BQABAAEAAAD7/wAABQABAAEAAAD7/wEABQABAAEAAAD7/wIABQABAAEAAAD8/wIABQABAAEAAAD8/wEABQABAAEAAAD8/wAABQABAAEAAAD8////BQABAAEAAAD8//7/BQABAAEAAAA=")
-tile_set = ExtResource("4_3nft3")
 
 [node name="Timer" parent="." instance=ExtResource("4_lk7y7")]
 
 [node name="Player0" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(1, 633)
+player_name = "tas"
 
 [node name="Player1" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(-380, 32)
+id = 1
+player_name = "foxy"
 
 [node name="Player2" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(0, -667)
+id = 2
 
 [node name="Player3" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(385, 31)
+id = 3
+player_name = "soriel"
 
 [node name="UI" type="CanvasLayer" parent="."]
 

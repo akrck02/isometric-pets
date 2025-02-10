@@ -1,21 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhvo1edpjx72h"]
+[gd_scene load_steps=2 format=3 uid="uid://cxo4x8f8l2ibw"]
 
 [ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/hand.gd" id="1_lb3d3"]
-[ext_resource type="PackedScene" uid="uid://c22g7l1a1tbct" path="res://locations/minigames/nodes/liar/nodes/card.tscn" id="2_roil4"]
 
 [node name="Hand" type="Node2D"]
 script = ExtResource("1_lb3d3")
-
-[node name="Card0" parent="." instance=ExtResource("2_roil4")]
-
-[node name="Card1" parent="." instance=ExtResource("2_roil4")]
-position = Vector2(50, 0)
-
-[node name="Card2" parent="." instance=ExtResource("2_roil4")]
-position = Vector2(100, 0)
-
-[node name="Card3" parent="." instance=ExtResource("2_roil4")]
-position = Vector2(150, 0)
-
-[node name="Card4" parent="." instance=ExtResource("2_roil4")]
-position = Vector2(200, 0)

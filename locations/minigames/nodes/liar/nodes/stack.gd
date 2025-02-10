@@ -5,7 +5,7 @@ const CARDS_PER_HAND = 10
 ## Array containing the cards
 var cards: Array
 const card_scene = preload("res://locations/minigames/nodes/liar/nodes/card.tscn");
-
+const hand_scene = preload("res://locations/minigames/nodes/liar/nodes/hand.tscn");
 @onready var sprite_2d: Sprite2D = $Sprite2D
 var latest_added_cards: Array
 
@@ -22,7 +22,6 @@ func _init() -> void:
 			add_child(card_instance)
 			cards.append(card_instance)
 			
-	print(cards.size())
 
 
 # Called when the node enters the scene tree for the first time.
@@ -88,22 +87,3 @@ func _to_string() -> String:
 func get_random_card() -> Card:
 	var random = randi() % cards.size()
 	return cards.pop_at(random)
-
-
-## Generates the hands of the game depending on the
-## number of [constant PLAYERS] and [constant CARDS_PER_HAND] [br]
-## Returns an [Array] containing [Hand]
-func generate_hands() -> Array:
-	var hands: Array = []
-	var facing = 0
-	for player in PLAYERS:
-		var hand = Hand.new()
-		for c in CARDS_PER_HAND:
-			var card = self.get_random_card()
-			self.add_child(card)
-			hand.facing = facing
-			hand.add_card(card)
-		hands.append(hand)
-		facing += 1
-
-	return hands

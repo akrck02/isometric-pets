@@ -5,7 +5,6 @@ class_name Hand
 
 ## List of [Card] objects
 var cards: Array
-var cards_array: Array[Array]
 var facing: Constants.FACING
 var reveal: bool = false
 
@@ -13,12 +12,7 @@ var reveal: bool = false
 var selectable: bool = false
 
 func _init() -> void:
-	# Initialize 5x3 array
-	for i in range(3):
-		var row = []
-		for j in range(5):
-			row.append(null)
-		cards_array.append(row)
+	pass
 
 func _to_string() -> String:
 	return str(cards)
@@ -55,9 +49,12 @@ func get_selected_cards() -> Array:
 
 ## Add a card to the array on the back
 func add_card(card: Card):
+	print("Added card")
+	cards.append(card)
+	add_child(card)
+	card.move_local_x(global_position.x+50*cards.size())
+	card.move_local_y(global_position.y)
 	card.set_reveal(reveal)
 	card.show_card_sprite()
 	
-	card.visible = true
-	cards.append(card)
 	

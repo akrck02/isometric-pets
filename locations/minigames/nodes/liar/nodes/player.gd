@@ -1,9 +1,11 @@
+extends Node2D
 class_name Player
 
 ## Players of the [Liar] minigame
-var id: int
-var player_name: String = "teko"
+@export var id: int
+@export var player_name: String = "teko"
 @onready var hand: Hand = $Hand
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 ## List of [Card]s
 var facing: Constants.FACING
@@ -75,12 +77,11 @@ func pop_random_card()->Card:
 func remove_card(card: Card)->void:
 	
 	var index = hand.cards.find(card);
-	if -1 == index or hand.cards_array.size() <= index:
+	if -1 == index or hand.cards.size() <= index:
 		printerr("Card %s doesn't exist in the hand." % card.name)
 		return
 	
 	hand.cards.remove_at(index)
-	hand.cards_array.remove_at(index)
 	hand.remove_child(card)
 	card.set_reveal(false)
 	card.move_global(0, 0)
@@ -92,7 +93,6 @@ func remove_cards(cards: Array)->void:
 		remove_card(card)
 
 func add_card(card: Card):
-	card.user=self.id
 	hand.add_card(card)
 
 
@@ -112,5 +112,6 @@ func set_reveal_cards(value: bool):
 
 
 func set_hand(hand: Hand):
+	print("Set hand")
 	self.hand = hand
 	self.hand.show_cards()

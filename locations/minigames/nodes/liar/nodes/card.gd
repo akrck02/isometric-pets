@@ -2,7 +2,7 @@ class_name Card
 extends Node2D
 
 const movement_speed = 1.00 / 1.5
-var number: int
+var number: int=-1
 var color: Color
 
 @onready var area_2d: Area2D = $Area2D
