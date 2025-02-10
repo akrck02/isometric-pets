@@ -92,6 +92,7 @@ func update_sprite():
 		
 	if reveal:
 		label.hide()
+		color_rect.color=Color(1,1,1)
 	
 	else:
 		label.show()
