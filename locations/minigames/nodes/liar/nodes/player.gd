@@ -20,10 +20,8 @@ var latest_statement: int = 0
 func _ready() -> void:
 	# Set if cards in hand are hidden
 	hand.reveal = hide_cards
-	print(color)
 	
 	# Set circle color
-	print(circle)
 	var styleBox: StyleBoxFlat = circle.get_theme_stylebox("panel").duplicate()
 	styleBox.set("border_color", color)
 	circle.add_theme_stylebox_override("panel", styleBox)

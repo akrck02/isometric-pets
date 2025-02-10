@@ -2,7 +2,7 @@ class_name Card
 extends Node2D
 
 const movement_speed = 1.00 / 1.5
-var number: int=-1
+var number: int = -1
 var color: Color
 
 @onready var color_rect: ColorRect = $ColorRect
@@ -14,14 +14,14 @@ var reveal: bool = false
 var user: int = -1
 
 ## If card is selected
-var selected:bool=false
+var selected: bool = false
 
 ## If user can select this card
-var selectable:bool=false
+var selectable: bool = false
 
 func _ready() -> void:
 	#area_2d.input_event.connect(handle_interaction)
-	name=str(color)+" "+str(number)
+	name = str(color) + " " + str(number)
 	update_sprite()
 	
 func _init() -> void:
@@ -33,16 +33,16 @@ func _to_string() -> String:
 
 
 func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
-	if event is not InputEventScreenTouch and event.is_pressed()==false:
-		return;
+	if event is not InputEventScreenTouch and event.is_pressed() == false:
+		return ;
 	
-	if user!=0:
+	if user != 0:
 		return
 		
 	if not selectable:
 		return
 		
-	selected=!selected
+	selected = !selected
 	
 	if selected:
 		select()
@@ -56,12 +56,11 @@ func unselect():
 	set_outline(false)
 		
 
-func set_outline(value:bool):
+func set_outline(value: bool):
 	# TODO 	
 	pass
 	
 	
-
 func set_facing(facing: Constants.FACING):
 	self.facing = facing
 	update_sprite()
@@ -72,27 +71,24 @@ func set_reveal(value: bool):
 	update_sprite()
 
 func set_selectable(value: bool):
-	self.selectable=value
-
+	self.selectable = value
 
 
 func update_sprite():
 	
 	if not color_rect:
-		print("not color_rect")
 		return
 		
 	if not label:
-		print("not label")
 		return
 		
 		
-	label.text=str(number)
-	color_rect.color=color
+	label.text = str(number)
+	color_rect.color = color
 		
 	if reveal:
 		label.hide()
-		color_rect.color=Color(1,1,1)
+		color_rect.color = Color(1, 1, 1)
 	
 	else:
 		label.show()

@@ -41,7 +41,6 @@ func _ready() -> void:
 	liar_button.pressed.connect(on_liar_button)
 	
 	var screen_size=DisplayServer.screen_get_size()
-	print(screen_size)
 	player_0.global_position=Vector2(0,screen_size.y/2)
 	player_1.global_position=Vector2(-screen_size.x/2,0)
 	player_2.global_position=Vector2(0,-screen_size.y/2)

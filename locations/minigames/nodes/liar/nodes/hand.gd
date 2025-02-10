@@ -73,7 +73,6 @@ func get_combined_bounding_box() -> Rect2:
 	
 ## Add a card to the array on the back
 func add_card(card: Card):
-	print("Added card")
 	cards.append(card)
 	card.set_reveal(reveal)
 	add_child(card)
