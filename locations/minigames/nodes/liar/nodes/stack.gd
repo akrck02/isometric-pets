@@ -86,4 +86,6 @@ func _to_string() -> String:
 ## Returns a random [Card] while removing it from the [Deck]
 func get_random_card() -> Card:
 	var random = randi() % cards.size()
-	return cards.pop_at(random)
+	var card=cards.pop_at(random)
+	remove_child(card)
+	return card

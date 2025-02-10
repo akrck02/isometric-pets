@@ -13,4 +13,4 @@ texture = ExtResource("3_4dt4v")
 hframes = 3
 
 [node name="Hand" parent="." instance=ExtResource("3_s8h24")]
-position = Vector2(-119, 7)
+position = Vector2(-1, -125)

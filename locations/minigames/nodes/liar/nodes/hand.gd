@@ -53,12 +53,13 @@ func add_card(card: Card):
 	cards.append(card)
 	add_child(card)
 	card.global_position=global_position
+	card.global_rotation=global_rotation
 	
-	# Calculate the angle and position for each card
 	var step=180/cards.size()
 
 	var degree=90
 	for i in range(cards.size()):
+		
 		var c:Card=cards[i]
 		c.z_index=i
 		c.rotation_degrees = degree
