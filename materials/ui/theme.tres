@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://cn0xm81r1djb1" path="res://materials/ui/button_pressed.tres" id="2_jbinl"]
 [ext_resource type="StyleBox" uid="uid://cf3vx3oawdia7" path="res://materials/ui/button_normal.tres" id="3_fte3n"]
 [ext_resource type="StyleBox" uid="uid://bagl0oxvrcjqi" path="res://materials/ui/button_hover.tres" id="3_xul5r"]
-[ext_resource type="StyleBox" uid="uid://woclggw5lgn0" path="res://materials/ui/grabber_area_highlight.tres" id="6_ocmf0"]
+[ext_resource type="StyleBox" path="res://materials/ui/grabber_area_highlight.tres" id="6_ocmf0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qv88"]
 content_margin_left = 30.0
@@ -61,9 +61,20 @@ HSlider/icons/grabber_highlight = ExtResource("1_cbvwn")
 HSlider/styles/grabber_area = ExtResource("6_ocmf0")
 HSlider/styles/grabber_area_highlight = ExtResource("6_ocmf0")
 HSlider/styles/slider = SubResource("StyleBoxLine_xj6wt")
-Label/colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
+HeaderLarge/colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
+HeaderLarge/font_sizes/font_size = 80
+HeaderLarge/fonts/font = ExtResource("1_i8spk")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 0
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 0
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_i8spk")
+Label/styles/normal = null
 RichTextLabel/font_sizes/normal_font_size = 40
 RichTextLabel/fonts/normal_font = ExtResource("1_i8spk")
 Title1/base_type = &"Label"

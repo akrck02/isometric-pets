@@ -45,18 +45,9 @@ func get_selected_cards() -> Array:
 			output.append(card)
 
 	return output
-
-
-## Add a card to the array on the back
-func add_card(card: Card):
-	print("Added card")
-	cards.append(card)
-	add_child(card)
-	card.global_position=global_position
-	card.global_rotation=global_rotation
 	
+func arrange_cards_in_arc()->void:
 	var step=180/cards.size()
-
 	var degree=90
 	for i in range(cards.size()):
 		
@@ -64,6 +55,18 @@ func add_card(card: Card):
 		c.z_index=i
 		c.rotation_degrees = degree
 		degree-=step
+		
+
+
+## Add a card to the array on the back
+func add_card(card: Card):
+	print("Added card")
+	cards.append(card)
 	card.set_reveal(reveal)
+	add_child(card)
+	card.global_position=global_position
+	card.global_rotation=global_rotation
+	
+	arrange_cards_in_arc()
 	
 	

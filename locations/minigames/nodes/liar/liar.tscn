@@ -48,6 +48,59 @@ player_name = "soriel"
 hide_cards = true
 color = Color(0.419608, 0.768627, 0.701961, 1)
 
+[node name="Welcome" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="Welcome"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1902.0
+offset_top = -986.0
+offset_right = -1902.0
+offset_bottom = -986.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.222, 2.27416)
+theme = ExtResource("9_whx6x")
+color = Color(1, 0.886275, 0.670588, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Welcome"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_whx6x")
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HFlowContainer" type="VBoxContainer" parent="Welcome/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("9_whx6x")
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Welcome/MarginContainer/HFlowContainer"]
+layout_mode = 2
+theme = ExtResource("9_whx6x")
+theme_type_variation = &"HeaderLarge"
+text = "Liar Game"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="Welcome/MarginContainer/HFlowContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="HowToPlayButton" type="Button" parent="Welcome/MarginContainer/HFlowContainer"]
+layout_mode = 2
+text = "How to play"
+
+[node name="ExitButton" type="Button" parent="Welcome/MarginContainer/HFlowContainer"]
+layout_mode = 2
+text = "Exit"
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Margin" type="MarginContainer" parent="UI"]
@@ -79,9 +132,3 @@ max_value = 9.0
 [node name="LiarButton" type="Button" parent="UI/Margin/HBoxContainer"]
 layout_mode = 2
 text = "Liar!"
-
-[node name="Background" type="CanvasLayer" parent="."]
-
-[node name="Panel" type="Panel" parent="."]
-offset_right = 1920.0
-offset_bottom = 1920.0

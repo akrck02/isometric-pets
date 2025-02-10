@@ -9,6 +9,12 @@ const TURN_TIME = 120
 @onready var liar_button: Button = $UI/Margin/HBoxContainer/LiarButton
 @onready var spin_box: SpinBox = $UI/Margin/HBoxContainer/SpinBox
 
+# Welcome Screen
+@onready var welcome: CanvasLayer = $Welcome
+@onready var start_button: Button = $Welcome/MarginContainer/HFlowContainer/StartButton
+@onready var how_to_play_button: Button = $Welcome/MarginContainer/HFlowContainer/HowToPlayButton
+@onready var exit_button: Button = $Welcome/MarginContainer/HFlowContainer/ExitButton
+
 # Game logic
 @onready var stack: Stack = $Stack
 @onready var timer: TurnTimer = $Timer
@@ -24,32 +30,45 @@ const Player = preload("res://locations/minigames/nodes/liar/nodes/player.gd")
 
 var turn: int = 0
 var game_finished: bool = false
-var players: Array
+var players: Array = [player_0, player_1, player_2, player_3]
 var previous_player:Player 
 var actual_player:Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	players = [player_0, player_1, player_2, player_3]
+	play_button.pressed.connect(on_play_button)
+	liar_button.pressed.connect(on_liar_button)
 	
+	start_button.pressed.connect(on_start_button)
+	how_to_play_button.pressed.connect(on_how_to_play_button)
+	exit_button.pressed.connect(on_exit_button)
+	
+	
+func start_game():
+	players=[player_0, player_1, player_2, player_3]
 	for player:Player in players:
 		for x in 10:
 			var card=stack.get_random_card()
 			player.add_card(card)
 
-	
-	
-
 	play_button.disabled = true
 	liar_button.disabled = true
 
 	TimeManager.tick_reached.connect(tick_update)
-	play_button.pressed.connect(on_play_button)
-	liar_button.pressed.connect(on_liar_button)
+	
+func on_start_button():
+	welcome.hide()
+	start_game()
+	
+func on_how_to_play_button():
+	# TODO
+	pass
+	
+func on_exit_button():
+	SceneManager.scene_change_requested.emit(Paths.get_world().get_scene())
 
 func on_play_button():
 	var selected_cards = player_0.pop_selected_cards()
-	print(selected_cards)
 	stack.add_cards(selected_cards)
 	player_0.latest_statement = spin_box.value
 	timer.stop()
