@@ -46,17 +46,18 @@ func get_selected_cards() -> Array:
 
 	return output
 	
-func arrange_cards_in_arc()->void:
-	var step=180/cards.size()
-	var degree=90
-	for i in range(cards.size()):
-		
-		var c:Card=cards[i]
-		c.z_index=i
-		c.rotation_degrees = degree
-		degree-=step
-		
+func arrange_cards_in_arc() -> void:
+	var step = 90 / cards.size() # Reduce the step to make the arc less wide
+	var degree = 45 # Start with a smaller degree for a less wide arc
+	var offset = Vector2(20, 0) # Displace to the right by 50 pixels
 
+	for i in range(cards.size()):
+		var c: Card = cards[i]
+		c.z_index = i
+		c.rotation_degrees = degree
+		c.position += offset # Displace to the right
+		degree -= step
+		
 
 ## Add a card to the array on the back
 func add_card(card: Card):
@@ -64,9 +65,7 @@ func add_card(card: Card):
 	cards.append(card)
 	card.set_reveal(reveal)
 	add_child(card)
-	card.global_position=global_position
-	card.global_rotation=global_rotation
+	card.global_position = global_position
+	card.global_rotation = global_rotation
 	
 	arrange_cards_in_arc()
-	
-	
