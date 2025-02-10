@@ -36,8 +36,16 @@ var actual_player:Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	welcome.show()
 	play_button.pressed.connect(on_play_button)
 	liar_button.pressed.connect(on_liar_button)
+	
+	var screen_size=DisplayServer.screen_get_size()
+	print(screen_size)
+	player_0.global_position=Vector2(0,screen_size.y/2)
+	player_1.global_position=Vector2(-screen_size.x/2,0)
+	player_2.global_position=Vector2(0,-screen_size.y/2)
+	player_3.global_position=Vector2(screen_size.x/2,0)
 	
 	start_button.pressed.connect(on_start_button)
 	how_to_play_button.pressed.connect(on_how_to_play_button)

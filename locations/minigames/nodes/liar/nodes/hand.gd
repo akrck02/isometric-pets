@@ -45,7 +45,8 @@ func get_selected_cards() -> Array:
 			output.append(card)
 
 	return output
-	
+
+
 func arrange_cards_in_arc() -> void:
 	var step = 90 / cards.size() # Reduce the step to make the arc less wide
 	var degree = 45 # Start with a smaller degree for a less wide arc
@@ -65,7 +66,7 @@ func arrange_cards_in_arc() -> void:
 
 func get_combined_bounding_box() -> Rect2:
 	var rect = Rect2()
-	for card:Card in cards:
+	for card: Card in cards:
 		rect = rect.merge(Rect2(card.position, card.color_rect.size))
 	return rect
 
