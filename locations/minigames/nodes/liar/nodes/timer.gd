@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 class_name TurnTimer
 @onready var timer: Timer = $Timer
 @onready var label: Label = $GridContainer/Label

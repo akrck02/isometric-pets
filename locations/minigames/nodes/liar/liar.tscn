@@ -22,6 +22,10 @@ can_pan = false
 [node name="Stack" parent="." instance=ExtResource("7_bjnwe")]
 
 [node name="Timer" parent="." instance=ExtResource("4_lk7y7")]
+offset_left = -176.0
+offset_top = -337.0
+offset_right = -176.0
+offset_bottom = -337.0
 
 [node name="Player0" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(4, 545)
