@@ -58,7 +58,18 @@ func arrange_cards_in_arc() -> void:
 		c.position += offset # Displace to the right
 		degree -= step
 		
+	# Center the hand inside its parent node
+	var parent_size = get_parent().circle.size.x
+	var hand_size = get_combined_bounding_box().size.x
+	position.x = (parent_size - hand_size) / 2
 
+func get_combined_bounding_box() -> Rect2:
+	var rect = Rect2()
+	for card:Card in cards:
+		rect = rect.merge(Rect2(card.position, card.color_rect.size))
+	return rect
+
+	
 ## Add a card to the array on the back
 func add_card(card: Card):
 	print("Added card")
