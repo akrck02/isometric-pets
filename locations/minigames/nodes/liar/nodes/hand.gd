@@ -44,6 +44,9 @@ func get_selected_cards() -> Array:
 
 	return output
 
+func add_cards(cards: Array):
+	for card in cards:
+		add_card(card)
 
 #func arrange_cards_in_arc() -> void:
 	#var step = 90 / cards.size() # Reduce the step to make the arc less wide

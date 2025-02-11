@@ -69,8 +69,6 @@ func pop_latest_added_cards():
 	
 	
 func pop_cards():
-	for card in cards:
-		remove_child(card)
 	
 	var output=cards
 	cards=[]

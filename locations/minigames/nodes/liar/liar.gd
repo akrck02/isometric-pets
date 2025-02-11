@@ -69,12 +69,12 @@ func _ready() -> void:
 			player.hand.add_card(card)
 			#card.add_to(player.hand)
 			
-	player_1.hand.arrange_cards_in_arc()
-	player_2.hand.arrange_cards_in_arc()
-	player_3.hand.arrange_cards_in_arc()
 	
 func start_game():
 	player_0.hand.arrange_cards_in_line()
+	player_1.hand.arrange_cards_in_arc()
+	player_2.hand.arrange_cards_in_arc()
+	player_3.hand.arrange_cards_in_arc()
 	play_button.disabled = true
 	liar_button.disabled = true
 	TimeManager.tick_reached.connect(tick_update)
@@ -109,11 +109,11 @@ func liar()->void:
 
 	if stack.latest_statement_true(latest_statement):
 		print("It was true statement")
-		actual_player.add_cards(stack.pop_cards())
+		actual_player.hand.add_cards(stack.pop_cards())
 
 	else:
 		print("It was false statement")
-		previous_player.add_cards(stack.pop_cards())
+		previous_player.hand.add_cards(stack.pop_cards())
 		
 		# If the player discovers a lie, starts the next round
 		turn= (turn-1)%NUM_PLAYERS

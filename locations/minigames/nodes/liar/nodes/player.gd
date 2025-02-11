@@ -107,13 +107,6 @@ func remove_cards(cards: Array) -> void:
 	for card in cards:
 		remove_card(card)
 
-func add_card(card: Card):
-	hand.add_card(card)
-
-
-func add_cards(cards: Array):
-	for card in cards:
-		add_card(card)
 
 func set_player_name(name: String):
 	self.player_name = name
