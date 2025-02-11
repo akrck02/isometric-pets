@@ -1,26 +1,25 @@
-extends Node2D
+extends CardGroup
 class_name Stack
 const PLAYERS = 4
 const CARDS_PER_HAND = 10
 ## Array containing the cards
-var cards: Array
 const card_scene = preload("res://locations/minigames/nodes/liar/nodes/card.tscn");
 const hand_scene = preload("res://locations/minigames/nodes/liar/nodes/hand.tscn");
 @onready var sprite_2d: Sprite2D = $Sprite2D
 var latest_added_cards: Array
 
 
-func _init() -> void:
-	self.cards = []
-	for color_name in Constants.COLORS.keys():
-		var color = Constants.COLORS[color_name]
-		for num in range(10):
-			var card_instance = card_scene.instantiate()
-			card_instance.color = color
-			card_instance.number = num
-			card_instance.update_sprite()
-			add_child(card_instance)
-			cards.append(card_instance)
+#func _init() -> void:
+	#self.cards = []
+	#for color_name in Constants.COLORS.keys():
+		#var color = Constants.COLORS[color_name]
+		#for num in range(10):
+			#var card_instance = card_scene.instantiate()
+			#card_instance.color = color
+			#card_instance.number = num
+			#card_instance.update_sprite()
+			#add_child(card_instance)
+			#cards.append(card_instance)
 			
 
 
@@ -36,16 +35,16 @@ func latest_statement_true(latest_statement: int) -> bool:
 	return true
 
 
-func add_card(card: Card):
-	cards.append(card)
-	var tween = create_tween()
-	tween.tween_property(card, NodeProperties.GlobalPosition, Vector2(0,0),0.5).set_trans(Tween.TRANS_EXPO)
-	await tween.finished
-	tween.kill()
-	card.reparent(self)
-	
-	if cards.size() > 1:
-		update_sprite()
+#func add_card(card: Card):
+	#cards.append(card)
+	#var tween = create_tween()
+	#tween.tween_property(card, NodeProperties.GlobalPosition, Vector2(0,0),0.5).set_trans(Tween.TRANS_EXPO)
+	#await tween.finished
+	#tween.kill()
+	#card.reparent(self)
+	#
+	#if cards.size() > 1:
+		#update_sprite()
 
 
 func add_cards(cards: Array):

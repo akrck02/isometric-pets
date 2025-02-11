@@ -11,7 +11,7 @@ enum PLAYER_TYPE {
 @export var id: int
 @export var player_name: String = "teko"
 @export var player_type: PLAYER_TYPE = PLAYER_TYPE.NPC
-@export var hide_cards: bool
+@export var show_cards: bool
 @export var color: Color
 
 @onready var hand: Hand = $Hand
@@ -33,7 +33,7 @@ func _ready() -> void:
 	sprite_2d.texture = load(Paths.get_character(char).get_sprite("%s.png" % player_name))
 	
 	# Set if cards in hand are hidden
-	hand.hide = hide_cards
+	hand.show_cards = show_cards
 	
 	# Set circle color
 	var styleBox: StyleBoxFlat = circle.get_theme_stylebox("panel").duplicate()
@@ -80,15 +80,6 @@ func truth() -> Array:
 	return output
 
 
-## Removes and returns Cards with selected [code]true[/code]
-func pop_selected_cards() -> Array:
-	var output = []
-	for card in hand.cards:
-		if card.selected:
-			remove_card(card)
-			output.append(card)
-	return output
-
 ## Gets a random card
 func pop_random_card() -> Card:
 	var random = randi() % hand.cards.size()
@@ -109,7 +100,7 @@ func remove_card(card: Card) -> void:
 	card.unselect()
 	hand.cards.remove_at(index)
 	#hand.remove_child(card)
-	card.set_hide(true)
+	card.set_show(false)
 
 ## Removes given [Card]s from [Hand]
 func remove_cards(cards: Array) -> void:
@@ -138,4 +129,3 @@ func set_hide_cards(value: bool):
 func set_hand(hand: Hand):
 	print("Set hand")
 	self.hand = hand
-	self.hand.show_cards()

@@ -12,7 +12,7 @@ var color: Color
 
 
 ## If the number and color is shown
-var hide: bool = false
+var show_card: bool = false
 
 ## If card is selected
 var selected: bool = false
@@ -44,6 +44,7 @@ func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	selected = !selected
 	
 	if selected:
+		print("Selected card")
 		select()
 	else:
 		unselect()
@@ -67,14 +68,16 @@ func set_outline(value: bool):
 		styleBox.set_border_width_all(5)
 	panel.add_theme_stylebox_override("panel", styleBox)
 	
-	
-func set_facing(facing: Constants.FACING):
-	self.facing = facing
-	update_sprite()
 
-
-func set_hide(value: bool):
-	self.hide = value
+func add_to(card_group: CardGroup):
+	card_group.cards.append(self)
+	if self.get_parent()!=null:
+		reparent(card_group)
+	else:
+		card_group.add_child(self)
+		
+func set_show(value: bool):
+	show_card = value
 	update_sprite()
 
 func set_selectable(value: bool):
@@ -93,9 +96,8 @@ func update_sprite():
 	label.text = str(number)
 	color_rect.color = color
 		
-	if hide:
+	if show_card:
+		label.show()
+	else:
 		label.hide()
 		color_rect.color = Color(1, 1, 1)
-	
-	else:
-		label.show()

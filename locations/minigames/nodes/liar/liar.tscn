@@ -29,10 +29,9 @@ offset_bottom = -337.0
 
 [node name="Player0" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(4, 545)
-id = 0
 player_name = "tas"
 player_type = 1
-hide_cards = false
+show_cards = true
 color = Color(0.768627, 0.419608, 0.419608, 1)
 
 [node name="Player1" parent="." instance=ExtResource("6_3f0sk")]
@@ -40,8 +39,6 @@ position = Vector2(-310, 0)
 rotation = 1.5708
 id = 1
 player_name = "foxy"
-player_type = 0
-hide_cards = true
 color = Color(0.866667, 0.74902, 0.360784, 1)
 
 [node name="Player2" parent="." instance=ExtResource("6_3f0sk")]
@@ -50,7 +47,6 @@ rotation = 3.14159
 id = 2
 player_name = "tuko"
 player_type = 1
-hide_cards = true
 color = Color(0.733333, 0.431373, 0.854902, 1)
 
 [node name="Player3" parent="." instance=ExtResource("6_3f0sk")]
@@ -58,8 +54,6 @@ position = Vector2(327, 5)
 rotation = -1.5708
 id = 3
 player_name = "soriel"
-player_type = 0
-hide_cards = true
 color = Color(0.419608, 0.768627, 0.701961, 1)
 
 [node name="Welcome" type="CanvasLayer" parent="."]

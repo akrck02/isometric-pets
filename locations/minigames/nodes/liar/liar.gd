@@ -20,7 +20,7 @@ const TURN_TIME = 120
 @onready var timer: TurnTimer = $Timer
 
 const Player = preload("res://locations/minigames/nodes/liar/nodes/player.gd")
-
+const card_scene = preload("res://locations/minigames/nodes/liar/nodes/card.tscn");
 
 @onready var player_0: Player = $Player0
 @onready var player_1: Player = $Player1
@@ -50,17 +50,33 @@ func _ready() -> void:
 	how_to_play_button.pressed.connect(on_how_to_play_button)
 	exit_button.pressed.connect(on_exit_button)
 	
+	var cards = []
+	for color_name in Constants.COLORS.keys():
+		var color = Constants.COLORS[color_name]
+		for num in range(10):
+			var card_instance = card_scene.instantiate()
+			card_instance.color = color
+			card_instance.number = num
+			card_instance.update_sprite()
+			#add_child(card_instance)
+			cards.append(card_instance)
+	cards.shuffle()
 	
-func start_game():
 	players=[player_0, player_1, player_2, player_3]
 	for player:Player in players:
 		for x in 10:
-			var card=stack.get_random_card()
-			player.add_card(card)
-
+			var card:Card=cards.pop_front()
+			player.hand.add_card(card)
+			#card.add_to(player.hand)
+			
+	player_1.hand.arrange_cards_in_arc()
+	player_2.hand.arrange_cards_in_arc()
+	player_3.hand.arrange_cards_in_arc()
+	
+func start_game():
+	player_0.hand.arrange_cards_in_line()
 	play_button.disabled = true
 	liar_button.disabled = true
-
 	TimeManager.tick_reached.connect(tick_update)
 	
 func on_start_button():
@@ -75,7 +91,7 @@ func on_exit_button():
 	SceneManager.scene_change_requested.emit(Paths.get_world().get_scene())
 
 func on_play_button():
-	var selected_cards = player_0.pop_selected_cards()
+	var selected_cards = player_0.hand.pop_selected_cards()
 	stack.add_cards(selected_cards)
 	player_0.latest_statement = spin_box.value
 	timer.stop()
