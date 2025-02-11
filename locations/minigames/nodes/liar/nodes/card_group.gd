@@ -1,26 +1,27 @@
 extends Node2D
 class_name CardGroup
 
+
+
 var free_position: int = 0
 var cards = []
 @export var show_cards: bool = false
 
 
-
-
 func add_card(card: Card):
+	card.set_show(show_cards)
 	cards.append(card)
-	var tween = create_tween()
-	tween.tween_property(card, NodeProperties.GlobalPosition, Vector2(0,0), 0.5).set_trans(Tween.TRANS_EXPO)
-	#tween.tween_property(card, NodeProperties.Rotation, self.rotation, 0.5).set_trans(Tween.TRANS_EXPO)
-	await tween.finished
-	tween.kill()
 	if card.get_parent() != null:
 		print("Reparent")
 		card.reparent(self)
 	else:
 		add_child(card)
-	card.set_show(show_cards)
+	var tween = create_tween()
+	tween.tween_property(card, NodeProperties.GlobalPosition, self.global_position, 0.5).set_trans(Tween.TRANS_EXPO)
+	if self is not Stack:
+		tween.tween_property(card, NodeProperties.Rotation, self.rotation, 0.5).set_trans(Tween.TRANS_EXPO)
+	await tween.finished
+	tween.kill()
 	
 func remove_card_from_array(card: Card):
 	var index = cards.find(card)

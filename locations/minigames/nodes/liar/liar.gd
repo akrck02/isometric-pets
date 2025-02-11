@@ -8,6 +8,7 @@ const TURN_TIME = 120
 @onready var play_button: Button = $UI/Margin/HBoxContainer/PlayButton
 @onready var liar_button: Button = $UI/Margin/HBoxContainer/LiarButton
 @onready var spin_box: SpinBox = $UI/Margin/HBoxContainer/SpinBox
+@onready var next_turn_button: Button = $UI/Margin/HBoxContainer/NextTurnButton
 
 # Welcome Screen
 @onready var welcome: CanvasLayer = $Welcome
@@ -33,7 +34,7 @@ var game_finished: bool = false
 var players: Array = [player_0, player_1, player_2, player_3]
 var previous_player:Player 
 var actual_player:Player
-
+var next_turn:bool=true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	welcome.show()
@@ -49,6 +50,7 @@ func _ready() -> void:
 	start_button.pressed.connect(on_start_button)
 	how_to_play_button.pressed.connect(on_how_to_play_button)
 	exit_button.pressed.connect(on_exit_button)
+	next_turn_button.pressed.connect(on_next_turn_button)
 	
 	var cards = []
 	for color_name in Constants.COLORS.keys():
@@ -87,6 +89,9 @@ func on_how_to_play_button():
 	# TODO
 	pass
 	
+func on_next_turn_button():
+	next_turn=true
+	
 func on_exit_button():
 	SceneManager.scene_change_requested.emit(Paths.get_world().get_scene())
 
@@ -94,6 +99,7 @@ func on_play_button():
 	var selected_cards = player_0.hand.pop_selected_cards()
 	stack.add_cards(selected_cards)
 	player_0.latest_statement = spin_box.value
+	player_0.hand.arrange_cards_in_line()
 	timer.stop()
 
 
@@ -110,11 +116,18 @@ func liar()->void:
 	if stack.latest_statement_true(latest_statement):
 		print("It was true statement")
 		actual_player.hand.add_cards(stack.pop_cards())
+		if actual_player.id==0:
+			actual_player.hand.arrange_cards_in_line()
+		else:
+			actual_player.hand.arrange_cards_in_arc()
 
 	else:
 		print("It was false statement")
 		previous_player.hand.add_cards(stack.pop_cards())
-		
+		if previous_player.id==0:
+			previous_player.hand.arrange_cards_in_line()
+		else:
+			previous_player.hand.arrange_cards_in_arc()
 		# If the player discovers a lie, starts the next round
 		turn= (turn-1)%NUM_PLAYERS
 
@@ -131,11 +144,19 @@ func play()->void:
 		
 		var test=actual_player.lie()
 		stack.add_cards(test)
+		if actual_player.id==0:
+			actual_player.hand.arrange_cards_in_line()
+		else:
+			actual_player.hand.arrange_cards_in_arc()
 		
 	else:
 		print("Player ",actual_player, " chose Truth")
 		var test=actual_player.truth()
 		stack.add_cards(test)
+		if actual_player.id==0:
+			actual_player.hand.arrange_cards_in_line()
+		else:
+			actual_player.hand.arrange_cards_in_arc()
 		
 	timer.stop()
 	
@@ -143,6 +164,10 @@ func play()->void:
 func tick_update() -> void:
 	if not timer.turn_ended:
 		return
+		
+	if not next_turn:
+		return
+	next_turn=false
 	
 	print("Turno de {0}".format([players[turn]]))
 	var previous_player_index = (turn - 1) % 4
@@ -154,7 +179,7 @@ func tick_update() -> void:
 		player_0.hand.set_selectable(true)
 		play_button.disabled = false
 		liar_button.disabled = false
-		timer.start(player_0,60)
+		#timer.start(player_0,60)
 	else:
 		player_0.hand.set_selectable(false)
 		# Unselect selected cards
@@ -173,7 +198,7 @@ func tick_update() -> void:
 				
 		timer.stop()
 
-		timer.start(players[(turn + 1) %NUM_PLAYERS],5)
+		#timer.start(players[(turn + 1) %NUM_PLAYERS],5)
 	print("----\n")
 	# Set turn between 0 and 3
 	turn = (turn + 1) %NUM_PLAYERS
