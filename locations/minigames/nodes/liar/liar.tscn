@@ -20,7 +20,6 @@ can_zoom = false
 can_pan = false
 
 [node name="Stack" parent="." instance=ExtResource("7_bjnwe")]
-show_cards = null
 
 [node name="Timer" parent="." instance=ExtResource("4_lk7y7")]
 offset_left = -176.0
@@ -36,7 +35,7 @@ show_cards = true
 color = Color(0.768627, 0.419608, 0.419608, 1)
 
 [node name="Player1" parent="." instance=ExtResource("6_3f0sk")]
-position = Vector2(-310, 0)
+position = Vector2(-303.25, 0)
 rotation = 1.5708
 id = 1
 player_name = "foxy"
@@ -150,3 +149,6 @@ text = "Next Turn"
 [node name="Button" type="Button" parent="."]
 offset_right = 8.0
 offset_bottom = 8.0
+
+[editable path="Player0"]
+[editable path="Player1"]

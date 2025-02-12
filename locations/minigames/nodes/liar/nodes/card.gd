@@ -61,21 +61,14 @@ func set_outline(value: bool):
 	var styleBox: StyleBoxFlat = panel.get_theme_stylebox("panel").duplicate()
 	if value:
 		
-		styleBox.set("border_color", Color(1,1,1))
+		styleBox.set("border_color", Color(1, 1, 1))
 		styleBox.set_border_width_all(10)
 	else:
-		styleBox.set("border_color", Color(0,0,0))
+		styleBox.set("border_color", Color(0, 0, 0))
 		styleBox.set_border_width_all(5)
 	panel.add_theme_stylebox_override("panel", styleBox)
 	
 
-func add_to(card_group: CardGroup):
-	card_group.cards.append(self)
-	if self.get_parent()!=null:
-		reparent(card_group)
-	else:
-		card_group.add_child(self)
-		
 func set_show(value: bool):
 	show_card = value
 	update_sprite()

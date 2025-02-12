@@ -26,10 +26,10 @@ texture = ExtResource("3_4dt4v")
 hframes = 3
 
 [node name="Hand" parent="." instance=ExtResource("3_s8h24")]
-position = Vector2(-2, 171)
-show_cards = null
+position = Vector2(-2, 142.54)
 
 [node name="Circle" type="Panel" parent="."]
+z_index = 3
 offset_left = -41.0
 offset_top = -70.0
 offset_right = 39.0

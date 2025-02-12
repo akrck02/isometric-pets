@@ -1,12 +1,9 @@
 extends Node2D
 class_name CardGroup
 
-
-
 var free_position: int = 0
 var cards = []
 @export var show_cards: bool = false
-
 
 func add_card(card: Card):
 	card.set_show(show_cards)
@@ -40,10 +37,11 @@ func pop_selected_cards() -> Array:
 	var output = get_selected_cards()
 	remove_cards_from_array(output)
 	return output
+
 func arrange_cards_in_arc() -> void:
 	if cards.is_empty():
 		return
-	var step = 90 / cards.size() # Reduce the step to make the arc less wide
+	var step = 90.0 / cards.size() # Reduce the step to make the arc less wide
 	var degree = 45 # Start with a smaller degree for a less wide arc
 	var offset = Vector2(20, 0) # Displace to the right by 50 pixels
 
@@ -53,9 +51,12 @@ func arrange_cards_in_arc() -> void:
 		var tween=create_tween()
 		tween.tween_property(c, NodeProperties.Rotation, deg_to_rad(degree), 0.1).set_trans(Tween.TRANS_EXPO)
 		tween.tween_property(c, NodeProperties.Position,c.position+offset, 0.1).set_trans(Tween.TRANS_EXPO)
+		await tween.finished
 		degree -= step
 		
-		_center()
+		#_center()
+		
+	print(self.position)
 	
 func _center():
 	# Center the hand inside its parent node

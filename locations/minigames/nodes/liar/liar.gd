@@ -41,11 +41,6 @@ func _ready() -> void:
 	play_button.pressed.connect(on_play_button)
 	liar_button.pressed.connect(on_liar_button)
 	
-	var screen_size=DisplayServer.screen_get_size()
-	player_0.global_position=Vector2(0,screen_size.y/2)
-	player_1.global_position=Vector2(-screen_size.x/2,0)
-	player_2.global_position=Vector2(0,-screen_size.y/2)
-	player_3.global_position=Vector2(screen_size.x/2,0)
 	
 	start_button.pressed.connect(on_start_button)
 	how_to_play_button.pressed.connect(on_how_to_play_button)
@@ -60,7 +55,6 @@ func _ready() -> void:
 			card_instance.color = color
 			card_instance.number = num
 			card_instance.update_sprite()
-			#add_child(card_instance)
 			cards.append(card_instance)
 	cards.shuffle()
 	
@@ -69,9 +63,21 @@ func _ready() -> void:
 		for x in 10:
 			var card:Card=cards.pop_front()
 			player.hand.add_card(card)
-			#card.add_to(player.hand)
-			
+	var screen_size=DisplayServer.screen_get_size()
+	player_0.global_position=Vector2(0,screen_size.y/2)
+	player_1.global_position=Vector2(-screen_size.x/2,0)
+	player_2.global_position=Vector2(0,-screen_size.y/2)
+	player_3.global_position=Vector2(screen_size.x/2,0)
 	
+	# Calculate the Rect of the Camera2D
+	#var camera_size = camera_2d.get_viewport_rect().size * camera_2d.zoom
+	#var camera_rect = Rect2(camera_2d.get_screen_center_position()- camera_size / 2, camera_size)
+	
+	#player_0.global_position=Vector2(0,camera_rect.end.y)
+	#player_1.global_position=Vector2(camera_rect.position.x,0)
+	#player_2.global_position=Vector2(0,camera_rect.position.y)
+	#player_3.global_position=Vector2(camera_rect.end.x,0)
+	#
 func start_game():
 	player_0.hand.arrange_cards_in_line()
 	player_1.hand.arrange_cards_in_arc()
