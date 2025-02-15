@@ -16,8 +16,9 @@ func _to_string() -> String:
 
 ## Shows all [Card] objects in the [Hand]
 func set_show_cards(value: bool) -> void:
-	for card: Card in self.cards:
-		card.show_card = value
+	for card: Card in self.cards_array:
+		if card!=null:
+			card.set_show(value)
 
 
 func set_selectable(value: bool):
@@ -30,7 +31,7 @@ func set_selectable(value: bool):
 
 ## Unselect all cards in hand
 func unselect():
-	for card in cards_array:
+	for card:Card in cards_array:
 		if card == null:
 			continue
 		card.unselect()

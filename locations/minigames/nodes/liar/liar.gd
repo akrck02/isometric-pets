@@ -60,16 +60,20 @@ func _ready() -> void:
 	cards.shuffle()
 	
 	players=[player_0, player_1, player_2, player_3]
-	for player:Player in players:
-		for x in 10:
-			var card:Card=cards.pop_front()
-			player.hand.add_card(card)
+	
+
 	var screen_size=DisplayServer.screen_get_size()
 	player_0.global_position=Vector2(0,screen_size.y/2)
 	player_1.global_position=Vector2(-screen_size.x/2,0)
 	player_2.global_position=Vector2(0,-screen_size.y/2)
 	player_3.global_position=Vector2(screen_size.x/2,0)
 	
+	
+	player_0.hand.add_cards(cards.slice(0,9))
+	player_0.hand.set_show_cards(true)
+	player_1.hand.add_cards(cards.slice(10,19))
+	player_2.hand.add_cards(cards.slice(20,29))
+	player_3.hand.add_cards(cards.slice(30,39))
 	# Calculate the Rect of the Camera2D
 	#var camera_size = camera_2d.get_viewport_rect().size * camera_2d.zoom
 	#var camera_rect = Rect2(camera_2d.get_screen_center_position()- camera_size / 2, camera_size)
@@ -104,9 +108,9 @@ func on_exit_button():
 
 func on_play_button():
 	var selected_cards = player_0.hand.pop_selected_cards()
+	player_0.hand.unselect()
 	stack.add_cards(selected_cards)
 	player_0.latest_statement = spin_box.value
-	#player_0.hand.arrange_cards()
 	timer.stop()
 
 
@@ -125,12 +129,12 @@ func liar()->void:
 
 	if stack.latest_statement_true(latest_statement):
 		print("It was true statement")
-		actual_player.hand.add_cards(stack.pop_cards())
+		actual_player.hand.add_cards(stack.pop_cards(), actual_player.id==0)
 		#actual_player.hand.arrange_cards()
 
 	else:
 		print("It was false statement")
-		previous_player.hand.add_cards(stack.pop_cards())
+		previous_player.hand.add_cards(stack.pop_cards(), previous_player.id==0)
 		#previous_player.hand.arrange_cards()
 		# If the player discovers a lie, starts the next round
 		turn= (turn-1)%NUM_PLAYERS

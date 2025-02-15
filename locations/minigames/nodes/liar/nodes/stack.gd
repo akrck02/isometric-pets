@@ -9,6 +9,7 @@ const hand_scene = preload("res://locations/minigames/nodes/liar/nodes/hand.tscn
 var latest_added_cards: Array
 
 
+
 func latest_statement_true(latest_statement: int) -> bool:
 	for card in latest_added_cards:
 		if card.number != latest_statement:
@@ -16,7 +17,7 @@ func latest_statement_true(latest_statement: int) -> bool:
 	return true
 
 
-func add_cards(cards: Array):
+func add_cards(cards: Array, show_cards:bool=false):
 	latest_added_cards = []
 	latest_added_cards = cards
 	super(cards)
@@ -41,7 +42,7 @@ func pop_cards():
 	for card in cards_array:
 		if card != null:
 			output.append(card)
-	cards_array = []
+	cards_array.resize(40)
 	return output
 
 

@@ -12,13 +12,12 @@ var card_width = 80
 func _ready() -> void:
 	cards_per_line = DisplayServer.screen_get_size().x / card_width
 	cards_array.resize(40)
-	print(cards_array)
 
-func add_cards(cards: Array):
+func add_cards(cards: Array, show_cards:bool=false):
 	var tween = create_tween()
 	
 	for i in range(cards.size()):
-		var card = cards[i]
+		var card:Card = cards[i]
 		if card.get_parent() != null:
 			card.reparent(self)
 		else:
@@ -26,6 +25,7 @@ func add_cards(cards: Array):
 		
 		var free_position=cards_array.find(null)
 		cards_array[free_position]= card
+		card.set_show(show_cards)
 		
 		var test = self.global_position
 		test = to_global(Vector2(free_position * 80 + 20, 0))
@@ -35,12 +35,16 @@ func add_cards(cards: Array):
 				tween.parallel().tween_property(card, NodeProperties.Rotation, self.rotation, 0.5).set_trans(Tween.TRANS_EXPO)
 				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, test, 0.5).set_trans(Tween.TRANS_EXPO)
 			Constants.CARD_ORGANIZATION.ARC: # HAND
-				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, test, 0.5).set_trans(Tween.TRANS_EXPO)
+				var degree=-45
+				degree+=free_position*6
+				tween.parallel().tween_property(card, NodeProperties.Rotation, deg_to_rad(degree), 0.5).set_trans(Tween.TRANS_EXPO)
+				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, self.global_position, 0.5).set_trans(Tween.TRANS_EXPO)
 			Constants.CARD_ORGANIZATION.PILE: # STACK
 				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, self.global_position, 0.5).set_trans(Tween.TRANS_EXPO)
-		
 	await tween.finished
 	tween.kill()
+	if organization==Constants.CARD_ORGANIZATION.LINE:
+		_center()
 		
 func add_card(card: Card):
 	card.set_show(show_cards)
@@ -54,6 +58,7 @@ func add_card(card: Card):
 	
 	var test = self.global_position
 	test = to_global(Vector2(free_position * 80 + 20, 0))
+	print("add_card "+str(test.y))
 	
 	var tween = create_tween()
 	match organization:

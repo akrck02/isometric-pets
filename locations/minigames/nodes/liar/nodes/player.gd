@@ -52,8 +52,8 @@ func lie() -> Array:
 	var output = []
 	var max_num = 3
 	
-	if hand.cards.size() < 3:
-		max_num = hand.cards.size()
+	if hand.cards_array.size() < 3:
+		max_num = hand.cards_array.size()
 		
 	# Number of cards to play
 	var num_cards = randi_range(1, max_num)
@@ -74,8 +74,8 @@ func truth() -> Array:
 	var random_card = pop_random_card()
 	latest_statement = random_card.number
 	output.append(random_card)
-	for card in hand.cards:
-		if card.number == random_card.number:
+	for card in hand.cards_array:
+		if card!=null and card.number == random_card.number:
 			output.append(card)
 			remove_card(card)
 	
@@ -84,8 +84,17 @@ func truth() -> Array:
 
 ## Gets a random card
 func pop_random_card() -> Card:
-	var random = randi() % hand.cards.size()
-	var random_card = hand.cards[random]
+	# Filter out null values
+	var non_null_cards = hand.cards_array.filter(func(card):
+		return card != null
+	)
+	
+	if non_null_cards.size() == 0:
+		return null  # Return null if there are no non-null cards
+
+	# Get a random index from the non-null cards
+	var random_index = randi() % non_null_cards.size()
+	var random_card = non_null_cards[random_index]
 	
 	remove_card(random_card)
 	
@@ -93,24 +102,16 @@ func pop_random_card() -> Card:
 
 ## Removes given [Card] from [Hand]
 func remove_card(card: Card) -> void:
-	
-	var index = hand.cards.find(card);
-	if -1 == index or hand.cards.size() <= index:
+	var index = hand.cards_array.find(card);
+	if -1 == index or hand.cards_array.size() <= index:
 		printerr("Card %s doesn't exist in the hand." % card.name)
 		return
 	
 	card.unselect()
-	hand.cards.remove_at(index)
-	#hand.remove_child(card)
+	hand.cards_array[index]=null
 	card.set_show(false)
 
 ## Removes given [Card]s from [Hand]
 func remove_cards(cards: Array) -> void:
 	for card in cards:
 		remove_card(card)
-
-
-func set_hide_cards(value: bool):
-	hand.reveal = value
-	for card in hand.cards:
-		card.set_reveal(value)

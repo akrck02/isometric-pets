@@ -52,17 +52,17 @@ func select():
 	set_outline(true)
 	
 func unselect():
+	print("Unselect")
 	set_outline(false)
 		
 
 func set_outline(value: bool):
-	# TODO 	
 	var styleBox: StyleBoxFlat = panel.get_theme_stylebox("panel").duplicate()
 	if value:
-		
 		styleBox.set("border_color", Color(1, 1, 1))
 		styleBox.set_border_width_all(10)
 	else:
+		print("Outline false")
 		styleBox.set("border_color", Color(0, 0, 0))
 		styleBox.set_border_width_all(5)
 	panel.add_theme_stylebox_override("panel", styleBox)
