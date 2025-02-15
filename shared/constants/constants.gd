@@ -20,3 +20,8 @@ const COLORS={
 	"GREEN": Color(0,1,0),
 	"YELLOW": Color(1,1,0),
 }
+
+enum CARD_ORGANIZATION {
+	ARC,
+	LINE
+}

@@ -13,6 +13,7 @@ enum PLAYER_TYPE {
 @export var player_type: PLAYER_TYPE = PLAYER_TYPE.NPC
 @export var show_cards: bool
 @export var color: Color
+@export var card_organization: Constants.CARD_ORGANIZATION = Constants.CARD_ORGANIZATION.ARC
 
 @onready var hand: Hand = $Hand
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -34,6 +35,7 @@ func _ready() -> void:
 	
 	# Set if cards in hand are hidden
 	hand.show_cards = show_cards
+	hand.organization=card_organization
 	
 	# Set circle color
 	var styleBox: StyleBoxFlat = circle.get_theme_stylebox("panel").duplicate()

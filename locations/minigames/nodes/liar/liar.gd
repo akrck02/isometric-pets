@@ -35,6 +35,7 @@ var players: Array = [player_0, player_1, player_2, player_3]
 var previous_player:Player 
 var actual_player:Player
 var next_turn:bool=true
+var use_lie:bool=true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	welcome.show()
@@ -77,12 +78,12 @@ func _ready() -> void:
 	#player_1.global_position=Vector2(camera_rect.position.x,0)
 	#player_2.global_position=Vector2(0,camera_rect.position.y)
 	#player_3.global_position=Vector2(camera_rect.end.x,0)
-	#
+	
 func start_game():
-	player_0.hand.arrange_cards_in_line()
-	player_1.hand.arrange_cards_in_arc()
-	player_2.hand.arrange_cards_in_arc()
-	player_3.hand.arrange_cards_in_arc()
+	player_0.hand.arrange_cards()
+	player_1.hand.arrange_cards()
+	player_2.hand.arrange_cards()
+	player_3.hand.arrange_cards()
 	play_button.disabled = true
 	liar_button.disabled = true
 	TimeManager.tick_reached.connect(tick_update)
@@ -105,13 +106,16 @@ func on_play_button():
 	var selected_cards = player_0.hand.pop_selected_cards()
 	stack.add_cards(selected_cards)
 	player_0.latest_statement = spin_box.value
-	player_0.hand.arrange_cards_in_line()
+	#player_0.hand.arrange_cards()
 	timer.stop()
 
 
 func on_liar_button():
 	liar()
 	timer.stop()
+	
+func on_use_lie_button():
+	pass
 
 ## Executed when player uses Liar!
 func liar()->void:
@@ -122,18 +126,12 @@ func liar()->void:
 	if stack.latest_statement_true(latest_statement):
 		print("It was true statement")
 		actual_player.hand.add_cards(stack.pop_cards())
-		if actual_player.id==0:
-			actual_player.hand.arrange_cards_in_line()
-		else:
-			actual_player.hand.arrange_cards_in_arc()
+		#actual_player.hand.arrange_cards()
 
 	else:
 		print("It was false statement")
 		previous_player.hand.add_cards(stack.pop_cards())
-		if previous_player.id==0:
-			previous_player.hand.arrange_cards_in_line()
-		else:
-			previous_player.hand.arrange_cards_in_arc()
+		#previous_player.hand.arrange_cards()
 		# If the player discovers a lie, starts the next round
 		turn= (turn-1)%NUM_PLAYERS
 
@@ -150,20 +148,14 @@ func play()->void:
 		
 		var test=actual_player.lie()
 		stack.add_cards(test)
-		if actual_player.id==0:
-			actual_player.hand.arrange_cards_in_line()
-		else:
-			actual_player.hand.arrange_cards_in_arc()
+		#actual_player.hand.arrange_cards()
 		
 	else:
 		print("Player ",actual_player, " chose Truth")
 		var test=actual_player.truth()
 		stack.add_cards(test)
-		if actual_player.id==0:
-			actual_player.hand.arrange_cards_in_line()
-		else:
-			actual_player.hand.arrange_cards_in_arc()
-		
+		#actual_player.hand.arrange_cards()
+	
 	timer.stop()
 	
 
@@ -196,6 +188,8 @@ func tick_update() -> void:
 		
 		# Liar or play
 		var play_or_liar = randf_range(0,9)
+		if use_lie:
+			play_or_liar=1
 
 		if play_or_liar < 3: 
 			liar()

@@ -13,7 +13,7 @@ script = ExtResource("1_h8pm3")
 [node name="Camera2D" parent="." instance=ExtResource("6_v1bv8")]
 zoom = Vector2(0.33, 0.33)
 default_zoom_desktop_override = false
-default_zoom = Vector2(0.8, 0.8)
+default_zoom = Vector2(0.5, 0.5)
 max_zoom = 500.0
 can_move = false
 can_zoom = false
@@ -33,6 +33,7 @@ player_name = "tas"
 player_type = 1
 show_cards = true
 color = Color(0.768627, 0.419608, 0.419608, 1)
+card_organization = 1
 
 [node name="Player1" parent="." instance=ExtResource("6_3f0sk")]
 position = Vector2(-303.25, 0)
@@ -149,6 +150,3 @@ text = "Next Turn"
 [node name="Button" type="Button" parent="."]
 offset_right = 8.0
 offset_bottom = 8.0
-
-[editable path="Player0"]
-[editable path="Player1"]
