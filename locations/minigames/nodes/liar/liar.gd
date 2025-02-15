@@ -80,10 +80,10 @@ func _ready() -> void:
 	#player_3.global_position=Vector2(camera_rect.end.x,0)
 	
 func start_game():
-	player_0.hand.arrange_cards()
-	player_1.hand.arrange_cards()
-	player_2.hand.arrange_cards()
-	player_3.hand.arrange_cards()
+	#player_0.hand.arrange_cards()
+	#player_1.hand.arrange_cards()
+	#player_2.hand.arrange_cards()
+	#player_3.hand.arrange_cards()
 	play_button.disabled = true
 	liar_button.disabled = true
 	TimeManager.tick_reached.connect(tick_update)
@@ -145,7 +145,6 @@ func play()->void:
 	
 	if lie<3:
 		print("Player ",actual_player, " chose Lie")
-		
 		var test=actual_player.lie()
 		stack.add_cards(test)
 		#actual_player.hand.arrange_cards()
@@ -193,6 +192,7 @@ func tick_update() -> void:
 
 		if play_or_liar < 3: 
 			liar()
+			use_lie=false
 		else:  
 			play()
 				

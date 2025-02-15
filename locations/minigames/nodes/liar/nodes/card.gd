@@ -44,7 +44,6 @@ func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	selected = !selected
 	
 	if selected:
-		print("Selected card")
 		select()
 	else:
 		unselect()

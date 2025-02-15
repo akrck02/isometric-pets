@@ -35,7 +35,7 @@ func _ready() -> void:
 	
 	# Set if cards in hand are hidden
 	hand.show_cards = show_cards
-	hand.organization=card_organization
+	hand.organization = card_organization
 	
 	# Set circle color
 	var styleBox: StyleBoxFlat = circle.get_theme_stylebox("panel").duplicate()
@@ -110,17 +110,7 @@ func remove_cards(cards: Array) -> void:
 		remove_card(card)
 
 
-func set_player_name(name: String):
-	self.player_name = name
-	# TODO: update sprite
-
-
 func set_hide_cards(value: bool):
 	hand.reveal = value
 	for card in hand.cards:
 		card.set_reveal(value)
-
-
-func set_hand(hand: Hand):
-	print("Set hand")
-	self.hand = hand

@@ -8,24 +8,10 @@ const hand_scene = preload("res://locations/minigames/nodes/liar/nodes/hand.tscn
 @onready var sprite_2d: Sprite2D = $Sprite2D
 var latest_added_cards: Array
 
-
-#func _init() -> void:
-	#self.cards = []
-	#for color_name in Constants.COLORS.keys():
-		#var color = Constants.COLORS[color_name]
-		#for num in range(10):
-			#var card_instance = card_scene.instantiate()
-			#card_instance.color = color
-			#card_instance.number = num
-			#card_instance.update_sprite()
-			#add_child(card_instance)
-			#cards.append(card_instance)
-			
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass  # Replace with function body.
+	print("Stack ready "+str(free_positions))
+	pass # Replace with function body.
 
 
 func latest_statement_true(latest_statement: int) -> bool:
@@ -35,21 +21,10 @@ func latest_statement_true(latest_statement: int) -> bool:
 	return true
 
 
-#func add_card(card: Card):
-	#cards.append(card)
-	#var tween = create_tween()
-	#tween.tween_property(card, NodeProperties.GlobalPosition, Vector2(0,0),0.5).set_trans(Tween.TRANS_EXPO)
-	#await tween.finished
-	#tween.kill()
-	#card.reparent(self)
-	#
-	#if cards.size() > 1:
-		#update_sprite()
-
-
 func add_cards(cards: Array):
+	print("Stack "+str(free_positions))
 	latest_added_cards = []
-	latest_added_cards=cards
+	latest_added_cards = cards
 	for card in cards:
 		add_card(card)
 
@@ -69,19 +44,35 @@ func pop_latest_added_cards():
 	
 	
 func pop_cards():
-	
-	var output=cards
-	cards=[]
+	var output = []
+	for card in cards_array:
+		if card != null:
+			output.append(card)
+	cards_array = []
 	return output
 
 
 func _to_string() -> String:
-	return "stack: "+ str(cards)
+	return "stack: " + str(cards_array)
 
 
 ## Returns a random [Card] while removing it from the [Deck]
 func get_random_card() -> Card:
-	var random = randi() % cards.size()
-	var card=cards.pop_at(random)
+	# Filter out null elements
+	var non_null_cards = cards_array.filter(func(card):
+		return card != null
+	)
+	
+	if non_null_cards.size() == 0:
+		return null # Return null if there are no non-null cards
+
+	# Get a random index from the non-null cards
+	var random_index = randi() % non_null_cards.size()
+	var card = non_null_cards[random_index]
+
+	# Remove the card from the original cards_array
+	var original_index = cards_array.find(card)
+	cards_array[original_index] = null
+
 	remove_child(card)
 	return card

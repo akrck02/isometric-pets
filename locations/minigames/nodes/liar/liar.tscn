@@ -20,6 +20,7 @@ can_zoom = false
 can_pan = false
 
 [node name="Stack" parent="." instance=ExtResource("7_bjnwe")]
+organization = 2
 
 [node name="Timer" parent="." instance=ExtResource("4_lk7y7")]
 offset_left = -176.0
