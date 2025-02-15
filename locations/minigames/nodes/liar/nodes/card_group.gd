@@ -2,23 +2,20 @@ extends Node2D
 class_name CardGroup
 
 
-var free_positions: Array = []
 var cards_array = []
 var cards_per_line: int = 10
 var card_width = 80
 @export var show_cards: bool = false
 @export var organization: Constants.CARD_ORGANIZATION = Constants.CARD_ORGANIZATION.ARC
 
-func _init() -> void:
-	for x in 40:
-		free_positions.append(x)
+
 func _ready() -> void:
 	cards_per_line = DisplayServer.screen_get_size().x / card_width
 	cards_array.resize(40)
+	print(cards_array)
 
 func add_cards(cards: Array):
 	var tween = create_tween()
-	print("free_positions1 "+ str(free_positions))
 	
 	for i in range(cards.size()):
 		var card = cards[i]
@@ -26,10 +23,9 @@ func add_cards(cards: Array):
 			card.reparent(self)
 		else:
 			add_child(card)
-			
-		var free_position = free_positions.pop_at(i)
-		print(free_position)
-		cards_array.insert(free_position, card)
+		
+		var free_position=cards_array.find(null)
+		cards_array[free_position]= card
 		
 		var test = self.global_position
 		test = to_global(Vector2(free_position * 80 + 20, 0))
@@ -53,8 +49,8 @@ func add_card(card: Card):
 	else:
 		add_child(card)
 	
-	var free_position = free_positions.pop_front()
-	cards_array.insert(free_position, card)
+	var free_position=cards_array.find(null)
+	cards_array[free_position]=card
 	
 	var test = self.global_position
 	test = to_global(Vector2(free_position * 80 + 20, 0))
@@ -74,9 +70,7 @@ func add_card(card: Card):
 	
 func remove_card_from_array(card: Card):
 	var index = cards_array.find(card)
-	cards_array.remove_at(index)
-	free_positions.append(index)
-	free_positions.sort()
+	cards_array[index]=null
 	
 func _get_free_position() -> int:
 	for i in range(cards_array.size()):
@@ -145,7 +139,7 @@ func arrange_cards_in_line() -> void:
 			continue
 		var c: Card = cards_array[i]
 		var test = self.global_position
-		var free_position = free_positions.pop_front()
+		var free_position = cards_array.find(null)
 		test = to_global(Vector2(free_position * 80 + 20, 0))
 		var tween = create_tween()
 		tween.tween_property(c, NodeProperties.GlobalPosition, test, 0.1).set_trans(Tween.TRANS_EXPO)

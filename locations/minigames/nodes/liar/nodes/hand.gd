@@ -10,8 +10,6 @@ var facing: Constants.FACING
 var selectable: bool = false
 
 
-func _ready() -> void:
-	pass
 
 func _to_string() -> String:
 	return "hand" + str(cards_array)

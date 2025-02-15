@@ -8,11 +8,6 @@ const hand_scene = preload("res://locations/minigames/nodes/liar/nodes/hand.tscn
 @onready var sprite_2d: Sprite2D = $Sprite2D
 var latest_added_cards: Array
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	print("Stack ready "+str(free_positions))
-	pass # Replace with function body.
-
 
 func latest_statement_true(latest_statement: int) -> bool:
 	for card in latest_added_cards:
@@ -22,11 +17,9 @@ func latest_statement_true(latest_statement: int) -> bool:
 
 
 func add_cards(cards: Array):
-	print("Stack "+str(free_positions))
 	latest_added_cards = []
 	latest_added_cards = cards
-	for card in cards:
-		add_card(card)
+	super(cards)
 
 
 func update_sprite():
