@@ -7,8 +7,9 @@ var color: Color
 
 @onready var color_rect: ColorRect = $ColorRect
 @onready var label: Label = $Label
-@onready var panel: Panel = $Panel
 @onready var area_2d: Area2D = $ColorRect/Area2D
+@onready var front_panel: Panel = $front_panel
+@onready var selected_panel: Panel = $selected_panel
 
 
 ## If the number and color is shown
@@ -49,24 +50,10 @@ func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 		unselect()
 		
 func select():
-	set_outline(true)
+	selected_panel.show()
 	
 func unselect():
-	print("Unselect")
-	set_outline(false)
-		
-
-func set_outline(value: bool):
-	var styleBox: StyleBoxFlat = panel.get_theme_stylebox("panel").duplicate()
-	if value:
-		styleBox.set("border_color", Color(1, 1, 1))
-		styleBox.set_border_width_all(10)
-	else:
-		print("Outline false")
-		styleBox.set("border_color", Color(0, 0, 0))
-		styleBox.set_border_width_all(5)
-	panel.add_theme_stylebox_override("panel", styleBox)
-	
+	selected_panel.hide()
 
 func set_show(value: bool):
 	show_card = value

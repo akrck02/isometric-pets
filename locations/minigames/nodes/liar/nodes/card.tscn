@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c22g7l1a1tbct"]
+[gd_scene load_steps=9 format=3 uid="uid://c22g7l1a1tbct"]
 
 [ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/card.gd" id="1_iup7b"]
 
@@ -11,11 +11,19 @@ font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtu6w"]
 draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj35u"]
+draw_center = false
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.317647, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_fvxnw"]
 length = 0.001
@@ -92,7 +100,7 @@ label_settings = SubResource("LabelSettings_v1hbu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="."]
+[node name="front_panel" type="Panel" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -104,6 +112,20 @@ offset_right = 40.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qtu6w")
+
+[node name="selected_panel" type="Panel" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -120.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mj35u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

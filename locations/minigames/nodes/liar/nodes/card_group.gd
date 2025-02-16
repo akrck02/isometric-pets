@@ -13,18 +13,18 @@ func _ready() -> void:
 	cards_per_line = DisplayServer.screen_get_size().x / card_width
 	cards_array.resize(40)
 
-func add_cards(cards: Array, show_cards:bool=false):
+func add_cards(cards: Array, show_cards: bool = false):
 	var tween = create_tween()
 	
 	for i in range(cards.size()):
-		var card:Card = cards[i]
+		var card: Card = cards[i]
 		if card.get_parent() != null:
 			card.reparent(self)
 		else:
 			add_child(card)
 		
-		var free_position=cards_array.find(null)
-		cards_array[free_position]= card
+		var free_position = cards_array.find(null)
+		cards_array[free_position] = card
 		card.set_show(show_cards)
 		
 		var test = self.global_position
@@ -35,15 +35,15 @@ func add_cards(cards: Array, show_cards:bool=false):
 				tween.parallel().tween_property(card, NodeProperties.Rotation, self.rotation, 0.5).set_trans(Tween.TRANS_EXPO)
 				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, test, 0.5).set_trans(Tween.TRANS_EXPO)
 			Constants.CARD_ORGANIZATION.ARC: # HAND
-				var degree=-45
-				degree+=free_position*6
+				var degree = -45
+				degree += free_position * 6
 				tween.parallel().tween_property(card, NodeProperties.Rotation, deg_to_rad(degree), 0.5).set_trans(Tween.TRANS_EXPO)
 				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, self.global_position, 0.5).set_trans(Tween.TRANS_EXPO)
 			Constants.CARD_ORGANIZATION.PILE: # STACK
 				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, self.global_position, 0.5).set_trans(Tween.TRANS_EXPO)
 	await tween.finished
 	tween.kill()
-	if organization==Constants.CARD_ORGANIZATION.LINE:
+	if organization == Constants.CARD_ORGANIZATION.LINE:
 		_center()
 		
 func add_card(card: Card):
@@ -53,12 +53,12 @@ func add_card(card: Card):
 	else:
 		add_child(card)
 	
-	var free_position=cards_array.find(null)
-	cards_array[free_position]=card
+	var free_position = cards_array.find(null)
+	cards_array[free_position] = card
 	
 	var test = self.global_position
 	test = to_global(Vector2(free_position * 80 + 20, 0))
-	print("add_card "+str(test.y))
+	print("add_card " + str(test.y))
 	
 	var tween = create_tween()
 	match organization:
@@ -75,7 +75,7 @@ func add_card(card: Card):
 	
 func remove_card_from_array(card: Card):
 	var index = cards_array.find(card)
-	cards_array[index]=null
+	cards_array[index] = null
 	
 func _get_free_position() -> int:
 	for i in range(cards_array.size()):
@@ -89,13 +89,15 @@ func remove_cards_from_array(cards: Array):
 			continue
 		remove_card_from_array(card)
 		
-func get_selected_cards() -> Array:
-	return cards_array.filter(func(card):
+func pop_selected_cards() -> Array:
+	var output = cards_array.filter(func(card):
 		return card != null && card.selected
 	)
 
-func pop_selected_cards() -> Array:
-	var output = get_selected_cards()
+	# Set selected to false for the selected cards
+	for card:Card in output:
+		card.unselect()
+
 	remove_cards_from_array(output)
 	return output
 
