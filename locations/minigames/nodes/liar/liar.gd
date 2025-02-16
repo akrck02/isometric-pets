@@ -144,7 +144,7 @@ func play()->void:
 		
 	timer.stop()
 	
-func _turn_finished():
+func _turn_started():
 	turn = (turn + 1) % NUM_PLAYERS
 	print("Turn "+str(turn)+" started")
 	var previous_player_index = (turn - 1) % 4
@@ -157,15 +157,11 @@ func _turn_finished():
 		liar_button.disabled = false
 	else:
 		player_0.hand.set_selectable(false)
-		# Unselect selected cards
 		player_0.hand.unselect()
-
 		play_button.disabled = true
 		liar_button.disabled = true
-		
-	
-	#SignalDatabase.turn_finished.emit()
 	timer.start(actual_player,9)
+	wait_for_turn_to_end()
 	
 
 # Function to wait for the turn to end
@@ -186,7 +182,7 @@ func tick_update() -> void:
 	if timer.turn_ended:
 		timer.turn_ended = false
 		print("tick")
-		_turn_finished()
+		_turn_started()
 	return
 	
 	

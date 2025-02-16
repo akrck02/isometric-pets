@@ -11,4 +11,3 @@ extends Node
 # Liar minigame signals
 
 signal turn_finished
-signal turn_started

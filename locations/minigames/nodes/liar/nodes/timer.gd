@@ -34,5 +34,5 @@ func stop():
 	SignalDatabase.turn_finished.emit()
 
 func _on_timer_timeout():
-	turn_ended = true
+	#turn_ended = true
 	SignalDatabase.turn_finished.emit()
