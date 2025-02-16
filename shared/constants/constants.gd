@@ -12,8 +12,6 @@ const AUDIO_MUSIC_BUS = "Music";
 const AUDIO_EFFECTS_BUS = "Effects";
 
 # Liar minigame
-enum FACING { UP, DOWN, LEFT, RIGHT }
-
 const COLORS={
 	"RED": Color(1,0,0),
 	"BLUE": Color(0,0,1),

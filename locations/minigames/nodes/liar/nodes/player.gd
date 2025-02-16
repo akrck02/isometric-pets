@@ -1,7 +1,6 @@
 extends Node2D
 class_name Player
 
-
 enum PLAYER_TYPE {
 	NPC,
 	PET
@@ -19,22 +18,21 @@ enum PLAYER_TYPE {
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var circle: Panel = $Circle
 
-## List of [Card]s
-var facing: Constants.FACING
 var latest_statement: int = 0
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	var char = "npc"
+	var character = "npc"
 	if player_type == PLAYER_TYPE.PET:
-		char = "pet"
+		character = "pet"
 	
-	sprite_2d.texture = load(Paths.get_character(char).get_sprite("%s.png" % player_name))
+	sprite_2d.texture = load(Paths.get_character(character).get_sprite("%s.png" % player_name))
 	
 	# Set if cards in hand are hidden
 	hand.show_cards = show_cards
+
+	# Set how cards are organized in the game
 	hand.organization = card_organization
 	
 	# Set circle color
@@ -44,7 +42,6 @@ func _ready() -> void:
 
 func _to_string() -> String:
 	return "{0} {1}".format([id, player_name])
-	
 
 ## Gets a random number of random cards
 ## Returns [Array] of [Card]
@@ -75,9 +72,9 @@ func truth() -> Array:
 	latest_statement = random_card.number
 	output.append(random_card)
 	for card in hand.cards_array:
-		if card!=null and card.number == random_card.number:
+		if card != null and card.number == random_card.number:
 			output.append(card)
-			remove_card(card)
+			_remove_card(card)
 	
 	return output
 
@@ -90,28 +87,23 @@ func pop_random_card() -> Card:
 	)
 	
 	if non_null_cards.size() == 0:
-		return null  # Return null if there are no non-null cards
+		return null # Return null if there are no non-null cards
 
 	# Get a random index from the non-null cards
 	var random_index = randi() % non_null_cards.size()
 	var random_card = non_null_cards[random_index]
 	
-	remove_card(random_card)
+	_remove_card(random_card)
 	
 	return random_card
 
 ## Removes given [Card] from [Hand]
-func remove_card(card: Card) -> void:
+func _remove_card(card: Card) -> void:
 	var index = hand.cards_array.find(card);
 	if -1 == index or hand.cards_array.size() <= index:
 		printerr("Card %s doesn't exist in the hand." % card.name)
 		return
 	
 	card.unselect()
-	hand.cards_array[index]=null
+	hand.cards_array[index] = null
 	card.set_show(false)
-
-## Removes given [Card]s from [Hand]
-func remove_cards(cards: Array) -> void:
-	for card in cards:
-		remove_card(card)

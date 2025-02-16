@@ -1,14 +1,9 @@
 extends CardGroup
 class_name Hand
 
-## Class that represents the list of [Card] objects that a [Player] has
-
-## List of [Card] objects
-var facing: Constants.FACING
 
 ## If user can select cards
 var selectable: bool = false
-
 
 func _to_string() -> String:
 	return "hand" + str(cards_array)
