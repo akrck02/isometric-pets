@@ -23,5 +23,6 @@ const COLORS={
 
 enum CARD_ORGANIZATION {
 	ARC,
-	LINE
+	LINE,
+	PILE
 }

@@ -31,6 +31,8 @@ func start(player:Player, seconds:int):
 func stop():
 	turn_ended=true
 	timer.stop()
+	SignalDatabase.turn_finished.emit()
 
 func _on_timer_timeout():
 	turn_ended = true
+	SignalDatabase.turn_finished.emit()

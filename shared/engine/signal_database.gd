@@ -6,3 +6,9 @@ extends Node
 
 
 @warning_ignore("unused_signal") signal toggle_pet_actions_menu(pet : Pet)
+
+
+# Liar minigame signals
+
+signal turn_finished
+signal turn_started
