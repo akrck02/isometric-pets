@@ -7,12 +7,6 @@ extends CharacterBody2D
 @export var location : World.Locations = World.Locations.MainSquare
 @export var stats : CareStats = CareStats.new()
 
-## Visuals
-@onready var sprite : Sprite2D = $Visuals/Sprite
-@onready var point_light : PointLight2D = $Visuals/PointLight2D
-@onready var animation_player : AnimationPlayer = $Visuals/AnimationPlayer
-const OUTLINE_SHADER_MATERIAL : ShaderMaterial = preload("res://materials/general/outline_shader_material.tres")
-
 ## Emotions
 @onready var chat_bubble = $Visuals/ChatBubble
 
@@ -23,6 +17,8 @@ var interaction_active : bool  = false
 ## Loader
 @onready var loader : PetLoader = $Loader
 
+## Visuals
+@onready var visuals: PetVisuals = $Visuals
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,10 +56,7 @@ func _load_from_savestate() -> void:
 
 ## Change the sprite according to name
 func _update_sprite() -> void:
-	if not sprite:
-		return
-	
-	sprite.texture = load(Paths.get_character("pet").get_sprite("%s.png" % pet_name))
+	visuals._update_sprite()
 
 
 ## Change the pet by uuid
@@ -98,31 +91,21 @@ func _handle_touch(event : InputEventScreenTouch):
 
 ## Play animation based in mood
 func play_mood_animation():
-	match stats.mood:
-		CareEnums.Mood.HAPPY : animation_player.play("happy")
-		CareEnums.Mood.ANGRY : animation_player.play("angry")
-		CareEnums.Mood.HUNGRY : animation_player.play("hungry")
-		CareEnums.Mood.SAD : animation_player.play("sad")
-
-	await animation_player.animation_finished
+	visuals.play_mood_animation()
 
 ## Prepare the visuals for nighttime
 func _set_night() : 
-	point_light.show()
+	visuals._set_night()
 
 
 ## Prepare the visuals for daytime
 func _set_day() : 
-	point_light.hide()
+	visuals._set_day()
 
 
 ## Toggle the sprite outline
 func set_outline(value:bool):
-	if value:
-		sprite.material = OUTLINE_SHADER_MATERIAL
-		return
-		
-	sprite.material = null
+	visuals.set_outline(value)
 
 
 ## Save the pet as dictionary
