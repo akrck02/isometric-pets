@@ -18,7 +18,8 @@ func add_cards(cards: Array, show_cards: bool = false):
 	
 	for i in range(cards.size()):
 		var card: Card = cards[i]
-		if card.get_parent() != null:
+		var parent = card.get_parent()
+		if parent != null:
 			card.reparent(self)
 		else:
 			add_child(card)
@@ -89,6 +90,8 @@ func remove_cards_from_array(cards: Array):
 			continue
 		remove_card_from_array(card)
 		
+	_center()
+		
 func pop_selected_cards() -> Array:
 	var output = cards_array.filter(func(card):
 		return card != null && card.selected
@@ -130,6 +133,7 @@ func arrange_cards_in_arc() -> void:
 		
 	
 func _center():
+	print("_center")
 	# Center the hand inside its parent node
 	var parent_size = get_parent().circle.size.x
 	var hand_size = get_combined_bounding_box().size.x

@@ -135,7 +135,3 @@ max_value = 9.0
 [node name="LiarButton" type="Button" parent="UI/Margin/HBoxContainer"]
 layout_mode = 2
 text = "Liar!"
-
-[node name="Button" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0

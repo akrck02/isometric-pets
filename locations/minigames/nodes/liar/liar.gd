@@ -9,6 +9,9 @@ const CARD_HEIGHT = 120
 const Player = preload("res://locations/minigames/nodes/liar/nodes/player.gd")
 const card_scene = preload("res://locations/minigames/nodes/liar/nodes/card.tscn");
 
+# Camera
+@onready var camera_2d: Camera2D = $Camera2D
+
 # UI elements
 @onready var play_button: Button = $UI/Margin/HBoxContainer/PlayButton
 @onready var liar_button: Button = $UI/Margin/HBoxContainer/LiarButton
@@ -20,7 +23,6 @@ const card_scene = preload("res://locations/minigames/nodes/liar/nodes/card.tscn
 @onready var start_button: Button = $Welcome/MarginContainer/HFlowContainer/StartButton
 @onready var how_to_play_button: Button = $Welcome/MarginContainer/HFlowContainer/HowToPlayButton
 @onready var exit_button: Button = $Welcome/MarginContainer/HFlowContainer/ExitButton
-@onready var camera_2d: Camera2D = $Camera2D
 
 # Game logic
 @onready var stack: Stack = $Stack
@@ -42,14 +44,16 @@ func _ready() -> void:
 	# Get the viewport size
 	var viewport_size = get_viewport().size
 
-	# Calculate the diagonal using the Pythagorean theorem
+	# Calculate the diagonal 
 	var screen_diagonal = sqrt(pow(viewport_size.x, 2) + pow(viewport_size.y, 2))
 
 	# Print the diagonal size
 	print("Diagonal size: ", screen_diagonal)
 	
 	# Set zoom to camera depending of the screen size
-	var zoom_factor=1500/screen_diagonal
+	var zoom_factor=1
+	if screen_diagonal<1500:
+		zoom_factor=0.8
 	var zoom=Vector2(zoom_factor,zoom_factor)
 	print("Zoom " + str(zoom))
 	camera_2d.zoom=zoom
@@ -80,12 +84,14 @@ func _ready() -> void:
 	
 	players = [player_0, player_1, player_2, player_3]
 	
-	# Set players positions depending on screen size
-	var padding = CARD_HEIGHT + 100
+	# Set positions depending on screen size
+	var size_circle = player_0.circle.size.y/2
+	var padding = CARD_HEIGHT + size_circle + 20
 	player_0.global_position = Vector2(0, visible_size.y / 2-padding)
 	player_1.global_position = Vector2(-visible_size.x / 2+padding, 0)
 	player_2.global_position = Vector2(0, -visible_size.y / 2+padding)
 	player_3.global_position = Vector2(visible_size.x / 2-padding, 0)
+	timer.global_position = Vector2(-visible_size.x/2, -visible_size.y/2)
 	
 	# Deal the cards
 	player_0.hand.add_cards(cards.slice(0, 9))
