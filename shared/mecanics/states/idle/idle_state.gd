@@ -1,8 +1,8 @@
 extends State
 class_name IdleState
 
-@export var animation : AnimationPlayer
+@export var pet_visuals: PetVisuals
 
 ## Logic for the entrance of the state
 func enter(): 
-	animation.play("idle")
+	pet_visuals.animation_player.play("idle")

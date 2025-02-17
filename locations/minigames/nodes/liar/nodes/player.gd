@@ -14,9 +14,10 @@ enum PLAYER_TYPE {
 @export var color: Color
 @export var card_organization: Constants.CARD_ORGANIZATION = Constants.CARD_ORGANIZATION.ARC
 
+# Nodes
 @onready var hand: Hand = $Hand
-@onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var circle: Panel = $Circle
+@onready var visuals: PetVisuals = $Visuals
 
 var latest_statement: int = 0
 
@@ -27,7 +28,10 @@ func _ready() -> void:
 	if player_type == PLAYER_TYPE.PET:
 		character = "pet"
 	
-	sprite_2d.texture = load(Paths.get_character(character).get_sprite("%s.png" % player_name))
+	visuals.pet_name=player_name
+	visuals.sprite.texture = load(Paths.get_character(character).get_sprite("%s.png" % player_name))
+	visuals.scale=Vector2(1.8,1.8)
+	visuals.animation_player.play("idle")
 	
 	# Set if cards in hand are hidden
 	hand.show_cards = show_cards
