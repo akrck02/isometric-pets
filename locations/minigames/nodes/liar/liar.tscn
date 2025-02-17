@@ -1,23 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://h15omfbp4itu"]
+[gd_scene load_steps=6 format=3 uid="uid://h15omfbp4itu"]
 
 [ext_resource type="Script" path="res://locations/minigames/nodes/liar/liar.gd" id="1_h8pm3"]
 [ext_resource type="PackedScene" uid="uid://bvhg7a5q5tmws" path="res://locations/minigames/nodes/liar/nodes/timer.tscn" id="4_lk7y7"]
 [ext_resource type="PackedScene" uid="uid://bhi2gelqnmo12" path="res://locations/minigames/nodes/liar/nodes/player.tscn" id="6_3f0sk"]
-[ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="6_v1bv8"]
 [ext_resource type="PackedScene" uid="uid://d24f6jscr5rhj" path="res://locations/minigames/nodes/liar/nodes/stack.tscn" id="7_bjnwe"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="9_whx6x"]
 
 [node name="Liar" type="Node2D"]
 script = ExtResource("1_h8pm3")
 
-[node name="Camera2D" parent="." instance=ExtResource("6_v1bv8")]
-zoom = Vector2(0.33, 0.33)
-default_zoom_desktop_override = false
-default_zoom = Vector2(0.5, 0.5)
-max_zoom = 500.0
-can_move = false
-can_zoom = false
-can_pan = false
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Stack" parent="." instance=ExtResource("7_bjnwe")]
 organization = 2

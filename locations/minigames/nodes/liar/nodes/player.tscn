@@ -7,31 +7,40 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogxxs"]
 bg_color = Color(0.634175, 0.507385, 0.946914, 1)
 draw_center = false
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 20
 
 [node name="Player" type="Node2D"]
 script = ExtResource("3_5b8qw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 3
-position = Vector2(3.97298, -28.3406)
+position = Vector2(-1, -3)
+scale = Vector2(2, 2)
 texture = ExtResource("3_4dt4v")
 hframes = 3
 
 [node name="Hand" parent="." instance=ExtResource("3_s8h24")]
-position = Vector2(-2, 142.54)
+position = Vector2(-2, 200)
 
 [node name="Circle" type="Panel" parent="."]
 z_index = 3
-offset_left = -41.0
-offset_top = -70.0
-offset_right = 39.0
-offset_bottom = 10.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ogxxs")
