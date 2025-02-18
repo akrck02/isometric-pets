@@ -7,8 +7,8 @@ var color: Color
 @onready var front_panel: Panel = $FrontPanel
 
 @onready var label: Label = $Label
-@onready var area_2d: Area2D = $Area2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var area_2d: Area2D = $Area2D
 
 
 ## If the number and color is shown
@@ -34,6 +34,7 @@ func _to_string() -> String:
 
 
 func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
+	print(1)
 	if event is not InputEventScreenTouch and event.is_pressed() == false:
 		return ;
 	
@@ -41,7 +42,7 @@ func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 		return
 	
 	selected = !selected
-	
+	print("1")
 	if selected:
 		select()
 	else:

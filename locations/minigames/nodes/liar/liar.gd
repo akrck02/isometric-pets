@@ -13,10 +13,9 @@ const card_scene = preload("res://locations/minigames/nodes/liar/nodes/card.tscn
 @onready var camera_2d: Camera2D = $Camera2D
 
 # UI elements
-@onready var play_button: Button = $UI/Margin/HBoxContainer/PlayButton
-@onready var liar_button: Button = $UI/Margin/HBoxContainer/LiarButton
-@onready var spin_box: SpinBox = $UI/Margin/HBoxContainer/SpinBox
-@onready var next_turn_button: Button = $UI/Margin/HBoxContainer/NextTurnButton
+@onready var play_button: Button = $UI/PlayButton
+@onready var liar_button: Button = $UI/LiarButton
+@onready var spin_box: SpinBox = $UI/SpinBox
 
 # Welcome Screen
 @onready var welcome: CanvasLayer = $Welcome
@@ -92,6 +91,26 @@ func _ready() -> void:
 	player_2.global_position = Vector2(0, -visible_size.y / 2+padding)
 	player_3.global_position = Vector2(visible_size.x / 2-padding, 0)
 	timer.global_position = Vector2(-visible_size.x/2, -visible_size.y/2)
+	
+	
+	var circle_start=player_0.circle.get_rect().position
+	var circle_end=player_0.circle.get_rect().end
+	var button_padding = 20
+	
+	var play_button_x_size=play_button.get_rect().size.x
+	var play_button_y_size=play_button.get_rect().size.y
+	var play_button_x_position=player_0.circle.global_position.x-play_button_x_size-button_padding
+	var play_button_y_position=player_0.circle.global_position.y+ size_circle -play_button_y_size/2
+	var play_button_position=Vector2(play_button_x_position,play_button_y_position)
+	
+	var liar_button_x_size=liar_button.get_rect().size.x
+	var liar_button_y_size=liar_button.get_rect().size.y
+	var liar_button_x_position=circle_end.x+button_padding
+	var liar_button_y_position=player_0.circle.global_position.y+ size_circle -liar_button_y_size/2
+	var liar_button_position=Vector2(liar_button_x_position,liar_button_y_position)
+	
+	play_button.global_position = play_button_position
+	liar_button.global_position = liar_button_position
 	
 	# Deal the cards
 	player_0.hand.add_cards(cards.slice(0, 9))
