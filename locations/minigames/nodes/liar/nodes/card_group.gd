@@ -5,6 +5,7 @@ class_name CardGroup
 var cards_array = []
 var cards_per_line: int = 10
 var card_width = 80
+const CARD_LINE_SEPARATION = 10
 @export var show_cards: bool = false
 @export var organization: Constants.CARD_ORGANIZATION = Constants.CARD_ORGANIZATION.ARC
 
@@ -26,10 +27,11 @@ func add_cards(cards: Array, show_cards: bool = false):
 		
 		var free_position = cards_array.find(null)
 		cards_array[free_position] = card
-		card.set_show(show_cards)
 		
+		card.set_show(show_cards)
 		var test = self.global_position
-		test = to_global(Vector2(free_position * 80 + 20, 0))
+		test = to_global(Vector2(free_position * (80 + CARD_LINE_SEPARATION), 0))
+		
 		
 		match organization:
 			Constants.CARD_ORGANIZATION.LINE: # HAND
@@ -62,6 +64,7 @@ func add_card(card: Card):
 	print("add_card " + str(test.y))
 	
 	var tween = create_tween()
+	
 	match organization:
 		Constants.CARD_ORGANIZATION.LINE: # HAND
 			tween.tween_property(card, NodeProperties.Rotation, self.rotation, 0.5).set_trans(Tween.TRANS_EXPO)
@@ -98,42 +101,14 @@ func pop_selected_cards() -> Array:
 	)
 
 	# Set selected to false for the selected cards
-	for card:Card in output:
+	for card: Card in output:
 		card.unselect()
 
 	remove_cards_from_array(output)
 	return output
 
 
-func arrange_cards() -> void:
-	if organization == Constants.CARD_ORGANIZATION.LINE:
-		arrange_cards_in_line()
-	else:
-		arrange_cards_in_arc()
-
-func arrange_cards_in_arc() -> void:
-	if cards_array.is_empty():
-		return
-	var step = 90.0 / cards_array.size() # Reduce the step to make the arc less wide
-	var degree = 45 # Start with a smaller degree for a less wide arc
-	var offset = Vector2(20, 0) # Displace to the right by 50 pixels
-
-	for i in range(cards_array.size()):
-		if cards_array[i] == null:
-			continue
-		var c: Card = cards_array[i]
-		c.z_index = i
-		var tween = create_tween()
-		tween.tween_property(c, NodeProperties.Rotation, deg_to_rad(degree), 0.1).set_trans(Tween.TRANS_EXPO)
-		tween.tween_property(c, NodeProperties.Position, c.position + offset, 0.1).set_trans(Tween.TRANS_EXPO)
-		await tween.finished
-		degree -= step
-		
-		#_center()
-		
-	
 func _center():
-	print("_center")
 	# Center the hand inside its parent node
 	var parent_size = get_parent().circle.size.x
 	var hand_size = get_combined_bounding_box().size.x
@@ -144,25 +119,12 @@ func _center():
 	await tween.finished
 	tween.kill()
 	
-func arrange_cards_in_line() -> void:
-	for i in range(cards_array.size()):
-		if cards_array[i] == null:
-			continue
-		var c: Card = cards_array[i]
-		var test = self.global_position
-		var free_position = cards_array.find(null)
-		test = to_global(Vector2(free_position * 80 + 20, 0))
-		var tween = create_tween()
-		tween.tween_property(c, NodeProperties.GlobalPosition, test, 0.1).set_trans(Tween.TRANS_EXPO)
-		await tween.finished
-		tween.kill()
-
 func get_combined_bounding_box() -> Rect2:
 	var rect = Rect2()
 	for card: Card in cards_array:
 		if card == null:
 			continue
-		if card.color_rect == null:
+		if card.front_panel == null:
 			continue
-		rect = rect.merge(Rect2(card.position, card.color_rect.size))
+		rect = rect.merge(Rect2(card.position, card.front_panel.size))
 	return rect

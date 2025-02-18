@@ -165,10 +165,10 @@ func play() -> void:
 	
 func _turn_started():
 	turn = (turn + 1) % NUM_PLAYERS
-	print("Turn " + str(turn) + " started")
 	var previous_player_index = (turn - 1) % 4
 	previous_player = players[previous_player_index]
 	actual_player = players[turn]
+	print("Turn of " + str(actual_player) + " started")
 	
 	if actual_player.id == 0:
 		player_0.hand.set_selectable(true)
@@ -193,11 +193,10 @@ func wait_for_turn_to_end() -> void:
 			liar()
 		else:
 			play()
-	print("Turn " + str(turn) + " finished" + "\n")
+	print("Turn of " + str(actual_player) + " finished" + "\n")
 
 func tick_update() -> void:
 	if timer.turn_ended:
 		timer.turn_ended = false
-		print("tick")
 		_turn_started()
 	return

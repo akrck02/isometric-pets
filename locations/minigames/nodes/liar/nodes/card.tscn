@@ -1,48 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://c22g7l1a1tbct"]
+[gd_scene load_steps=10 format=3 uid="uid://c22g7l1a1tbct"]
 
 [ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/card.gd" id="1_iup7b"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqocm"]
-size = Vector2(80, 120)
-
-[sub_resource type="LabelSettings" id="LabelSettings_v1hbu"]
-font_size = 80
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtu6w"]
-draw_center = false
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fd8g"]
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj35u"]
-draw_center = false
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0.317647, 1, 1, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_v1hbu"]
+font_size = 80
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_fvxnw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath("BackPanel:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ew4ds"]
 resource_name = "hide"
-length = 0.3
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -50,22 +39,83 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(0.1, 1)]
+"values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackPanel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_53ui1"]
+resource_name = "select"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rj4xf"]
+resource_name = "show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackPanel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ipkw8"]
 _data = {
 "RESET": SubResource("Animation_fvxnw"),
-"hide": SubResource("Animation_ew4ds")
+"hide": SubResource("Animation_ew4ds"),
+"select": SubResource("Animation_53ui1"),
+"show": SubResource("Animation_rj4xf")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqocm"]
+size = Vector2(80, 120)
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_iup7b")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="FrontPanel" type="Panel" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -76,15 +126,10 @@ offset_top = -120.0
 offset_right = 40.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="Area2D" type="Area2D" parent="ColorRect"]
-position = Vector2(0, 120)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/Area2D"]
-position = Vector2(40, -60)
-shape = SubResource("RectangleShape2D_wqocm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_7fd8g")
 
 [node name="Label" type="Label" parent="."]
+z_index = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -100,34 +145,29 @@ label_settings = SubResource("LabelSettings_v1hbu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="front_panel" type="Panel" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -120.0
-offset_right = 40.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_qtu6w")
-
-[node name="selected_panel" type="Panel" parent="."]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -120.0
-offset_right = 40.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_mj35u")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ipkw8")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-40, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(40, -60)
+shape = SubResource("RectangleShape2D_wqocm")
+
+[node name="BackPanel" type="Panel" parent="."]
+visible = false
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -120.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7fd8g")

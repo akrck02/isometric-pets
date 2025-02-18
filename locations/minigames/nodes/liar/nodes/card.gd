@@ -4,12 +4,11 @@ extends Node2D
 const movement_speed = 1.00 / 1.5
 var number: int = -1
 var color: Color
+@onready var front_panel: Panel = $FrontPanel
 
-@onready var color_rect: ColorRect = $ColorRect
 @onready var label: Label = $Label
-@onready var area_2d: Area2D = $ColorRect/Area2D
-@onready var front_panel: Panel = $front_panel
-@onready var selected_panel: Panel = $selected_panel
+@onready var area_2d: Area2D = $Area2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 ## If the number and color is shown
@@ -38,7 +37,6 @@ func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if event is not InputEventScreenTouch and event.is_pressed() == false:
 		return ;
 	
-		
 	if not selectable:
 		return
 	
@@ -50,14 +48,18 @@ func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 		unselect()
 		
 func select():
-	selected_panel.show()
+	animation_player.play("select")
 	
 func unselect():
-	selected_panel.hide()
+	animation_player.play("idle")
 
 func set_show(value: bool):
+	if show_card!=value:
+		if value:
+			animation_player.play("show")
+		else:
+			animation_player.play("hide")
 	show_card = value
-	update_sprite()
 
 func set_selectable(value: bool):
 	self.selectable = value
@@ -65,18 +67,21 @@ func set_selectable(value: bool):
 
 func update_sprite():
 	
-	if not color_rect:
+	if not front_panel:
 		return
 		
 	if not label:
 		return
 		
-		
 	label.text = str(number)
-	color_rect.color = color
-		
+	var stylebox:StyleBox=front_panel.get_theme_stylebox("panel").duplicate()
+	stylebox.bg_color=color
+	front_panel.add_theme_stylebox_override("panel", stylebox)
+	
 	if show_card:
-		label.show()
+		#label.show()
+		animation_player.play("show")
 	else:
-		label.hide()
-		color_rect.color = Color(1, 1, 1)
+		animation_player.play("hide")
+		#label.hide()
+		#color_rect.color = Color(1, 1, 1)

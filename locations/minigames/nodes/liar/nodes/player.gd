@@ -45,7 +45,7 @@ func _ready() -> void:
 	circle.add_theme_stylebox_override("panel", styleBox)
 
 func _to_string() -> String:
-	return "{0} {1}".format([id, player_name])
+	return player_name
 
 ## Gets a random number of random cards
 ## Returns [Array] of [Card]
