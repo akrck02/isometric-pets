@@ -135,6 +135,7 @@ offset_top = -120.0
 offset_right = 40.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7fd8g")
 
 [node name="Label" type="Label" parent="."]
@@ -172,4 +173,5 @@ offset_top = -120.0
 offset_right = 40.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7fd8g")
