@@ -34,7 +34,6 @@ func _to_string() -> String:
 
 
 func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
-	print(1)
 	if event is not InputEventScreenTouch and event.is_pressed() == false:
 		return ;
 	
@@ -42,7 +41,6 @@ func handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 		return
 	
 	selected = !selected
-	print("1")
 	if selected:
 		select()
 	else:
@@ -52,7 +50,7 @@ func select():
 	animation_player.play("select")
 	
 func unselect():
-	animation_player.play("idle")
+	animation_player.play("RESET")
 
 func set_show(value: bool):
 	if show_card!=value:
