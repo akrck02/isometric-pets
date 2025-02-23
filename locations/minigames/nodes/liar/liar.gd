@@ -46,13 +46,15 @@ func _ready() -> void:
 	# Calculate the diagonal 
 	var screen_diagonal = sqrt(pow(viewport_size.x, 2) + pow(viewport_size.y, 2))
 
-	# Print the diagonal size
-	print("Diagonal size: ", screen_diagonal)
+	
+	
 	
 	# Set zoom to camera depending of the screen size
 	var zoom_factor=1
 	if screen_diagonal<1500:
 		zoom_factor=0.8
+		
+	zoom_factor = 0.7
 	var zoom=Vector2(zoom_factor,zoom_factor)
 	print("Zoom " + str(zoom))
 	camera_2d.zoom=zoom
@@ -86,6 +88,17 @@ func _ready() -> void:
 	# Set positions depending on screen size
 	var size_circle = player_0.circle.size.y/2
 	var padding = CARD_HEIGHT + size_circle + 20
+	var player_0_pos = Vector2(0, visible_size.y / 2-padding)
+	var player_1_pos = Vector2(-visible_size.x / 2+padding, 0)
+	var player_2_pos = Vector2(0, -visible_size.y / 2+padding)
+	var player_3_pos = Vector2(visible_size.x / 2-padding, 0)
+	print("Viewport Size " + str(viewport_size))
+	print("Diagonal size: ", screen_diagonal)
+	print("Visible size : "+str(visible_size))
+	print("Player 0 : " + str(player_0_pos) )
+	print("Player 1 : " + str(player_1_pos) )
+	print("Player 2 : " + str(player_2_pos) )
+	print("Player 3 : " + str(player_3_pos) )
 	player_0.global_position = Vector2(0, visible_size.y / 2-padding)
 	player_1.global_position = Vector2(-visible_size.x / 2+padding, 0)
 	player_2.global_position = Vector2(0, -visible_size.y / 2+padding)

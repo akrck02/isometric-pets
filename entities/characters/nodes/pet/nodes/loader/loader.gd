@@ -8,8 +8,7 @@ const GET_PET_SERVICE : String = PET_SERVICE + "/pets/%s"
 const GET_PET_IMAGE_SERVICE : String = GET_PET_SERVICE + "/image"
 
 @export_category("Dependencies")
-@export var sprite : Sprite2D
-@export var animator : AnimationPlayer
+@export var visual : PetVisuals
 
 @export_category("Stats")
 @export var uuid = "";
@@ -19,8 +18,7 @@ var loaded : bool = false;
 @onready var http_request : HTTPRequest = $HTTPRequest
 
 func _ready() -> void:
-	dependencies.add("sprite", sprite)
-	dependencies.add("animator", animator)
+	dependencies.add("visuals", visual)
 	dependencies.check()
 	_connect_signals()
 
@@ -54,9 +52,9 @@ func _load_pet(_result: int, response_code: int, _headers: PackedStringArray, bo
 #		printerr(error)
 #		return
 	
-	animator.play("disappear")
-	await animator.animation_finished
-	sprite.texture = ImageTexture.create_from_image(img)
-	animator.play("appear")
-	await animator.animation_finished
+	visual.animation_player.play("disappear")
+	await visual.animation_player.animation_finished
+	visual.sprite.texture = ImageTexture.create_from_image(img)
+	visual.animation_player.play("appear")
+	await visual.animation_player.animation_finished
 	loaded = true

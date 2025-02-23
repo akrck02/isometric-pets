@@ -5,8 +5,7 @@ extends Node2D
 var dependencies : DependencyDatabase = DependencyDatabase.for_node("Movement")
 
 @export var navigation : NavigationNode
-@export var animation_player : AnimationPlayer
-@export var visuals : Node2D
+@export var visuals : PetVisuals
 
 # Standard procedural animation
 @export var speed = 1.5
@@ -15,7 +14,6 @@ var dependencies : DependencyDatabase = DependencyDatabase.for_node("Movement")
 
 func _ready() -> void:
 	dependencies.add("navigation", navigation)
-	dependencies.add("animation_player", animation_player)
 	dependencies.add("visuals", visuals)
 	dependencies.check()
 
@@ -33,8 +31,8 @@ func move_towards_in_grid(node : Node2D, new_coordinates : Vector2i) -> void:
 	if new_coordinates == null:
 		return;
 		
-	if animation_player.current_animation != "walk":
-		animation_player.play("walk")
+	if visuals.animation_player.current_animation != "walk":
+		visuals.animation_player.play("walk")
 	
 	navigation.calculate_current_coordinates()
 	var directions : Array[MoveEnums.Direction] = Positions.get_directions_from_coordinates(navigation.data.current_coordinates, new_coordinates)

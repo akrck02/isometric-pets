@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgd58tknkodwv"]
 
 [ext_resource type="Script" path="res://entities/characters/nodes/pet/pet.gd" id="1_t2hn5"]
-[ext_resource type="PackedScene" uid="uid://67q0ts1he87k" path="res://entities/characters/nodes/pet/pet_visuals.tscn" id="2_wld6k"]
+[ext_resource type="PackedScene" path="res://entities/characters/nodes/pet/pet_visuals.tscn" id="2_wld6k"]
 [ext_resource type="PackedScene" uid="uid://dbciupg0y5qog" path="res://shared/mecanics/states/state_machine.tscn" id="7_0n4qr"]
 [ext_resource type="PackedScene" uid="uid://btpvicx32t5f" path="res://shared/mecanics/navigation/navigation.tscn" id="7_sqe1t"]
 [ext_resource type="PackedScene" uid="uid://c62rvsu2k52vs" path="res://entities/characters/nodes/pet/nodes/loader/loader.tscn" id="8_86gkl"]
@@ -41,10 +41,12 @@ target_position = Vector2(0, 40)
 
 [node name="Navigation" parent="." instance=ExtResource("7_sqe1t")]
 
-[node name="Movement" parent="." node_paths=PackedStringArray("navigation") instance=ExtResource("8_tn5q3")]
+[node name="Movement" parent="." node_paths=PackedStringArray("navigation", "visuals") instance=ExtResource("8_tn5q3")]
 navigation = NodePath("../Navigation")
+visuals = NodePath("../Visuals")
 
-[node name="Loader" parent="." instance=ExtResource("8_86gkl")]
+[node name="Loader" parent="." node_paths=PackedStringArray("visual") instance=ExtResource("8_86gkl")]
+visual = NodePath("../Visuals")
 
 [node name="States" parent="." node_paths=PackedStringArray("actor", "initial_state") instance=ExtResource("7_0n4qr")]
 position = Vector2(-1, -30)
