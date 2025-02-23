@@ -3,24 +3,22 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c032lcegudlcv"
-path.s3tc="res://.godot/imported/landscape.png-ce00f0d32c69fe7925a45be538b749d8.s3tc.ctex"
-path.etc2="res://.godot/imported/landscape.png-ce00f0d32c69fe7925a45be538b749d8.etc2.ctex"
+path="res://.godot/imported/landscape.png-ce00f0d32c69fe7925a45be538b749d8.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://locations/world/sprites/landscape.png"
-dest_files=["res://.godot/imported/landscape.png-ce00f0d32c69fe7925a45be538b749d8.s3tc.ctex", "res://.godot/imported/landscape.png-ce00f0d32c69fe7925a45be538b749d8.etc2.ctex"]
+dest_files=["res://.godot/imported/landscape.png-ce00f0d32c69fe7925a45be538b749d8.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
-compress/hdr_compression=1
+compress/hdr_compression=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
