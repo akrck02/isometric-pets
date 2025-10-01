@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://db2acwdainnwl"]
+[gd_scene load_steps=8 format=3 uid="uid://db2acwdainnwl"]
 
 [ext_resource type="Script" path="res://locations/minigames/nodes/dino_run/nodes/character/dino_character.gd" id="1_lnsd4"]
 [ext_resource type="Texture2D" uid="uid://dce45j43fcy5i" path="res://entities/characters/nodes/pet/sprites/teko.png" id="2_o1yxd"]
+[ext_resource type="Texture2D" uid="uid://qumbafhlij1j" path="res://entities/characters/sprites/eyes.png" id="3_uflxp"]
 
 [sub_resource type="Animation" id="Animation_1mc0y"]
 length = 0.001
@@ -62,6 +63,13 @@ z_index = 1
 position = Vector2(-6, -4)
 texture = ExtResource("2_o1yxd")
 flip_h = true
+hframes = 3
+
+[node name="Eyes" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(-5.42548, -4.52786)
+scale = Vector2(-1, 1)
+texture = ExtResource("3_uflxp")
 hframes = 3
 
 [node name="Timer" type="Timer" parent="."]

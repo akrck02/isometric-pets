@@ -12,24 +12,27 @@ config_version=5
 
 config/name="isopets"
 run/main_scene="res://locations/main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-boot_splash/image="res://entities/animals/nodes/cat/sprites/cat.png"
+config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/use_filter=false
+boot_splash/image="res://entities/animals/nodes/cat/sprites/cat.png"
 config/icon="res://android_icon.png"
 
 [autoload]
 
 OSManager="*res://shared/managers/os/os.gd"
+NfcManager="*res://shared/managers/nfc/nfc.gd"
 SignalDatabase="*res://shared/engine/signal_database.gd"
 GameSprites="*res://shared/constants/game_sprites.gd"
 TimeManager="*res://shared/managers/time/time.gd"
-SaveManager="*res://shared/managers/save/save.gd"
+SaveManager="*res://shared/managers/save/save_manager.tscn"
+DialogueManager="*res://shared/managers/dialogue/dialogue.gd"
 SettingsManager="*res://shared/managers/settings/settings.gd"
 UIManager="*res://shared/managers/render/ui/ui.gd"
 InputManager="*res://shared/managers/input/input.gd"
 Canvas="*res://shared/managers/render/scenes/canvas.gd"
 SceneManager="*res://shared/managers/render/scenes/scene.gd"
 TilemapManager="*res://shared/managers/render/tilemap.gd"
+InteractionManager="*res://shared/managers/interaction/interaction.gd"
 
 [display]
 
@@ -38,6 +41,10 @@ window/size/viewport_height=1152
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GodotNFC/plugin.cfg")
 
 [file_customization]
 
@@ -55,10 +62,12 @@ folder_colors={
 
 [global_group]
 
-Persist=""
 dino_run_score_area=""
 dino_run_death_area=""
 followable=""
+navigation=""
+persist=""
+pets=""
 
 [input]
 
@@ -135,14 +144,23 @@ ui_start={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+ui_debug={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194334,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
 
+[navigation]
+
+2d/default_cell_size=20.0
+
 [rendering]
 
-textures/canvas_textures/default_texture_filter=3
+textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_etc2_astc=true
-environment/defaults/default_clear_color=Color(0.133333, 0.133333, 0.133333, 1)
 anti_aliasing/quality/msaa_2d=1
+environment/defaults/default_clear_color=Color(0.133333, 0.133333, 0.133333, 1)

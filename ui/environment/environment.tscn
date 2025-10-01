@@ -70,6 +70,7 @@ randomness = 0.31
 
 [node name="RainParticles" type="GPUParticles2D" parent="."]
 position = Vector2(708, -74)
+emitting = false
 amount = 400
 process_material = SubResource("ParticleProcessMaterial_gyhp4")
 texture = ExtResource("3_5ul2i")

@@ -1,35 +1,42 @@
 extends Node2D
 class_name DinoRunCharacter
 
-# Motion parameters
+## Pet
+var current_pet_name : String = ""
+
+## Motion parameters
 @export var global_speed : float = 1;
 var capture_motion = true
 
-# Animations
+## Visuals
 @onready var timer : Timer = $Timer
 @onready var animation_player = $AnimationPlayer
+@onready var sprite : Sprite2D = $Sprite
 
-# jump
+## jump
 @onready var original_position : Vector2 = position
 @onready var tween : Tween
 @export var jump_speed = .15;
 var jumping : bool = false
 
+## Collisions
+@onready var collision_area : Area2D = $Area2D
 
-@onready var area_2d : Area2D = $Area2D
 
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#InputManager.screen_touch_started.connect(jump)
-	area_2d.area_entered.connect(check_collision)
+	collision_area.area_entered.connect(check_collision)
 	animation_player.play("walk")
 
+
+## Controls 
 func _input(_event):
 	if Input.is_action_just_pressed(Controls.INTERACT):
-		jump(null)
+		_jump()
 
-# Handle input
-func jump(_data : InputData):
+
+## Handle input
+func _jump():
 	
 	if not capture_motion or jumping:
 		return
@@ -51,15 +58,30 @@ func jump(_data : InputData):
 	tween.kill()
 	jumping = false
 
+
+## Check colisions
 func check_collision(node : Node2D):
 	
 	if node.is_in_group("dino_run_score_area"):
-		update_score()
+		_update_score()
 	elif node.is_in_group("dino_run_death_area"):
-		kill()
+		_kill()
 
-func update_score():
+
+## Update score
+func _update_score():
 	SignalDatabase.dinorun_update_score.emit()
 
-func kill():
+
+## Kill dino
+func _kill():
 	SignalDatabase.dinorun_finished.emit()
+
+
+## Set pet
+func set_pet(pet_name : String) -> void: 
+	if not SaveManager.save_data.pet_exists(pet_name):
+		return 
+
+	current_pet_name = pet_name
+	sprite.texture = load(Paths.get_pets().get_sprite("%s.png" % pet_name))

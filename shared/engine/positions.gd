@@ -9,6 +9,7 @@ static func convert_to_scene_global_position(node_reference : Node2D, relative_p
 static func convert_ui_position_to_scene_global_position(viewport : Viewport, canvas_position : Vector2) -> Vector2:
 	return viewport.get_canvas_transform().affine_inverse() * canvas_position
 
+
 ## Get directions to face from coordinates
 static func get_directions_from_coordinates(origin_coordinates : Vector2i, destiny_coordinates: Vector2i) -> Array[MoveEnums.Direction] :
 

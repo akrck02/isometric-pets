@@ -5,3 +5,9 @@ enum Type {
 	Minigame,
 	World
 }
+
+enum Minigames {
+	None,
+	DinoRun,
+	Liar
+}

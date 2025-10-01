@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxo4x8f8l2ibw"]
+
+[ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/hand.gd" id="1_lb3d3"]
+
+[node name="Hand" type="Node2D"]
+script = ExtResource("1_lb3d3")
+organization = 2

@@ -12,8 +12,7 @@ class_name WanderState
 
 @onready var timer : Timer = $Timer
 
-
-var navigation_data : GridNavigationData
+var destiny_coordinates : Vector2i
 
 ## Logic for the entrance of the state
 func enter(): 
@@ -25,42 +24,47 @@ func enter():
 ## Move along the path
 func tick():
 	
+	# If timer is active, no movement is allowed
 	if not timer.is_stopped():
 		return
 	
-	var new_data : GridNavigationData = navigation.next(navigation_data)
-	if new_data == null:
+	# Get next step data 
+	var next_step_data : GridNavigationData = navigation.next(destiny_coordinates)
+	if not next_step_data.enabled:
 		return
 	
-	navigation_data = new_data
-	movement.move_towards_in_grid(actor, navigation_data.next_coordinates)
+	# Move in grid
+	movement.move_towards_in_grid(actor, next_step_data.next_coordinates)
 	
-	if new_data.path.is_empty():
-		# Leave state here
-		timer.one_shot = true
-		timer.wait_time = randf_range(minimum_rest_time,maximum_rest_time)
-		timer.start()
-		await timer.timeout
+	# If the route is finished, calculate new one
+	if navigation.data.finished:
 		update_route()
-
+	
 
 ## Update next
 func update_route() -> void:
-	navigation_data = await calculate_next_route()
+	
+	# Set timer to wait 
+	timer.one_shot = true
+	timer.wait_time = randf_range(minimum_rest_time, maximum_rest_time)
+	timer.start()
+	await timer.timeout
+	
+	# Calculate next route
+	await calculate_next_route()
 
 
 ## Calculate next route
-func calculate_next_route() -> GridNavigationData:
+func calculate_next_route() -> void:
 	
+	# Wait until the next physics frame to avoid early
+	# non-loaded content to be updated
 	await get_tree().physics_frame
-	navigation_data = navigation.calculate_current_coordinates()
-	if navigation_data == null:
-		return
+	navigation.calculate_current_coordinates()
 	
-	var new_coordinates = navigation_data.current_coordinates
-	new_coordinates.x += randi_range(-5,5)
-	new_coordinates.y += randi_range(-3,3)
-	return navigation.calculate_path_to(new_coordinates)
+	destiny_coordinates = navigation.data.current_coordinates
+	destiny_coordinates.x += randi_range(-5,5)
+	destiny_coordinates.y += randi_range(-3,3)
 
 
 ## Check startup parameters

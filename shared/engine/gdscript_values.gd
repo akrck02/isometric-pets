@@ -1,0 +1,4 @@
+class_name GDScriptValues
+
+const MIN_INTEGER_VALUE : int = -9223372036854775808
+const MAX_INTEGER_VALUE : int = 9223372036854775807

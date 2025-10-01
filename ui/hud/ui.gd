@@ -2,36 +2,34 @@ extends CanvasLayer
 
 # Dependency injection
 @export var site_name : String = "" 
-@export var camera : Camera2D
+@export var camera : SmartCamera
 
 # Ui general
-@onready var ui_control : VBoxContainer = $UiControl
-@onready var time_label : Label = $UiControl/PanelContainer/MarginContainer/Banner/Time 
 @onready var filter : ColorRect = $Filter
+@onready var time_label : Label = $TopBar/MarginContainer/Banner/Spacing/Time
+@onready var loader_animation : AnimationPlayer = $Loader/AnimationPlayer
 
 # Info banner
-@onready var info_banner : PanelContainer = $UiControl/MarginContainer/InfoBanner
-@onready var info : RichTextLabel = $UiControl/MarginContainer/InfoBanner/Info
-@onready var info_animation_player : AnimationPlayer = $UiControl/MarginContainer/InfoBanner/AnimationPlayer
-@onready var info_timer : Timer = $UiControl/MarginContainer/InfoBanner/Timer
+@onready var info_banner : PanelContainer = $MessageContainer/InfoBanner
+@onready var info : RichTextLabel = $MessageContainer/InfoBanner/Info
+@onready var info_animation_player : AnimationPlayer = $MessageContainer/InfoBanner/AnimationPlayer
+@onready var info_timer : Timer = $MessageContainer/InfoBanner/Timer
 var notification_showing = false;
 
-# Settings
-@onready var show_settings_button : Button = $UiControl/PanelContainer/MarginContainer/Banner/SettingsButton/Button
-@onready var settings = $Settings
+# Apps
+@onready var apps = $Apps
 
 # Location title
-@onready var location_label : Label = $UiControl/PanelContainer/MarginContainer/Banner/LocationContainer/Location 
+@onready var location_label : Label = $TopBar/MarginContainer/Banner/LocationContainer/Location
 
 # Debug ui
-@onready var debug_ui : DebugUi = $DebugUi
+@onready var debug_ui : DebugUi = $Debug
 
-## Dependency management
+# Dependency management
 var dependencies : DependencyDatabase = DependencyDatabase.for_node("Ui")
 
-
 ## Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	dependencies.add("camera", camera)
 	
 	if not dependencies.check():
@@ -42,52 +40,66 @@ func _ready():
 	
 	_connect_signals()
 	_update_time()
-	location_label.text = site_name
 	
-	if OSManager.is_desktop():
-		info_banner.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	location_label.text = site_name
+	loader_animation.play("idle")
+
+
+## Process inputs
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed(&'ui_debug'):
+		debug_ui.visible =! debug_ui.visible
 
 
 ## Connect the needed signals
-func _connect_signals():
+func _connect_signals() -> void:
 	TimeManager.tick_reached.connect(_update_tick);
 	TimeManager.night_started.connect(_set_night_color_palette)
 	TimeManager.day_started.connect(_set_day_color_palette)
+	
 	UIManager.notification_shown.connect(_show_notification)
 	UIManager.notification_hidden.connect(_hide_notification)
-	InputManager.start_requested.connect(_toggle_settings_by_input)
-	show_settings_button.pressed.connect(_toggle_settings)
+	
+	SaveManager.save_game_started.connect(_start_loader_animation)
+	SaveManager.save_game_finished.connect(_finish_loader_animation)
+	
+	UIManager.interaction_started.connect(_target_camera)
+	UIManager.dialogue_started.connect(_target_camera)
+
+
+## Target the camera to the current selected pet
+func _target_camera() -> void:
+	
+	if null != InteractionManager.current_pet: camera.focus_node = InteractionManager.current_pet
+	elif null != InteractionManager.current_npc: camera.focus_node = InteractionManager.current_npc
+	camera.focus()
+	camera.return_to_default_camera_position(null)
 	
 
-## Toggle the entire ui visibility
-func _toggle_ui():
-	ui_control.visible = !ui_control.visible
-
-
 ## Update tick
-func _update_tick():
+func _update_tick() -> void:
 	_update_time()
 
 
 ## Update time clock
-func _update_time():
+func _update_time() -> void:
 	var time = TimeManager.get_real_time();
 	time_label.text = "{hh}:{mm}".format({"hh": "%02d" % time.hour, "mm": "%02d" % time.minute })
 	TimeManager.emit_daytime()
 
-	
+
 ## Set night color palette
-func _set_night_color_palette():
+func _set_night_color_palette() -> void:
 	filter.material = load("res://materials/camera/filter_shader_material_night.tres")
 
 
 ## Set day color palette
-func _set_day_color_palette():
+func _set_day_color_palette() -> void:
 	filter.material = load("res://materials/camera/filter_shader_material_day.tres")
 
 
 ## Show notification
-func _show_notification(message : String):
+func _show_notification(message : String) -> void:
 	
 	if notification_showing and info.text == message: 
 		return
@@ -98,7 +110,7 @@ func _show_notification(message : String):
 
 
 ## Hide notification
-func _hide_notification():
+func _hide_notification() -> void:
 	
 	if not notification_showing:
 		return
@@ -108,16 +120,12 @@ func _hide_notification():
 	notification_showing = false
 
 
-## Toggle settings by input
-func _toggle_settings_by_input(_data : InputData):
-	_toggle_settings()
-	
+## Start loader animation
+func _start_loader_animation() -> void:
+	loader_animation.play("load")
 
-## Toggle settings 
-func _toggle_settings():
-	
-	if settings.visible:
-		settings.close_menu()
-		return
-	
-	settings.open_menu()
+
+## Finish loader animation
+func _finish_loader_animation() -> void:
+	await get_tree().create_timer(1.0).timeout
+	loader_animation.play("RESET")

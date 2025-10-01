@@ -8,7 +8,10 @@ extends CharacterBody2D
 @export var tilemap : TileMapExtended 
 
 # Pet data
-@export var pet_name : String = "soriel"
+@export var character_name : String = "soriel"
+
+# Minigame
+@export var minigame : SceneEnums.Minigames = SceneEnums.Minigames.None
 
 # Visuals
 @onready var visuals : Node2D = $Visuals
@@ -21,7 +24,10 @@ extends CharacterBody2D
 @onready var navigation : NavigationNode = $Navigation
 
 # Interactions
-@onready var interaction : Area2D = $Interaction
+@onready var interaction_area : Area2D = $Interaction
+
+# Dialogue
+@onready var dialogue : Dialogue = $Dialogue
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,10 +38,14 @@ func _ready() -> void:
 	
 	# Signal connection
 	TimeManager.tick_reached.connect(tick_process)
-	UIManager.outline.connect(toggle_outline)
+	set_outline(false)
+	
+	# Interactions
+	interaction_area.input_event.connect(_handle_interaction)
 	
 	# Setup the npc data
 	load_from_savestate();
+	dialogue.load_for_character(character_name)
 	update_sprite()
 	idle()
 	
@@ -50,13 +60,12 @@ func update_sprite() -> void:
 	if not sprite:
 		return;
 	
-	sprite.texture =  load(Paths.get_character("npc").get_sprite("%s.png" % pet_name))
+	sprite.texture =  load(Paths.get_character("npc").get_sprite("%s.png" % character_name))
 
 
 ## This function will be called every tick
 func tick_process() -> void:
 	pass
-	# navigation.step()
 
 
 ## Set idle state
@@ -64,48 +73,22 @@ func idle() -> void:
 	animation_player.play("idle")
 
 
-## Test click movement
-func move_test(input: InputData) -> void:
-	var click_coordinates : Vector2i = TilemapManager.get_coordinates_from_global_position(input.get_current_global_position(get_viewport()))
-	navigation.calculate_path_to(click_coordinates)
-
-
-## Move towards coordinates in grid
-func move_towards_in_grid(new_coordinates : Vector2i) -> void:
+## Handle interaction
+func _handle_interaction(_viewport: Node, event: InputEvent, _shape_idx: int):
 	
-	if new_coordinates == null:
+	if event is not InputEventScreenTouch:
 		return;
-		
-	if animation_player.current_animation != "walk":
-		animation_player.play("walk")
 	
-	# if not SceneManager.current_tilemap.can_object_be_placed_on_tile(self, coords):
-		# return
+	if not event.double_tap:
+		return
 	
-	var directions : Array[MoveEnums.Direction] = Positions.get_directions_from_coordinates(navigation.coordinates, new_coordinates)
+	InteractionManager.interact_with_npc(self)
 
-	match  directions[0]:
-		MoveEnums.Direction.Right:  
-			visuals.scale.x = -1
-		MoveEnums.Direction.Left:
-			visuals.scale.x = 1
 
-	match  directions[1]:
-		MoveEnums.Direction.Up:  
-			visuals.scale.x = -1
-		MoveEnums.Direction.Down:
-			visuals.scale.x = 1
-
-	navigation.step_node_to(self,new_coordinates)
-
-## Interact
-func interact() -> void:
-	pass
-
-## Toggle outline
-func toggle_outline(value : bool) -> void:
+## Set sprite outline
+func set_outline(value:bool):
 	if value:
-		sprite.material.set_shader_parameter("width",1)
+		sprite.material = load("res://materials/general/outline_shader_material.tres")
 		return
 		
-	sprite.material.set_shader_parameter("width",0)
+	sprite.material = null

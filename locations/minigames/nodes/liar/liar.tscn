@@ -1,0 +1,148 @@
+[gd_scene load_steps=6 format=3 uid="uid://h15omfbp4itu"]
+
+[ext_resource type="Script" path="res://locations/minigames/nodes/liar/liar.gd" id="1_h8pm3"]
+[ext_resource type="PackedScene" uid="uid://bvhg7a5q5tmws" path="res://locations/minigames/nodes/liar/nodes/timer.tscn" id="4_lk7y7"]
+[ext_resource type="PackedScene" uid="uid://bhi2gelqnmo12" path="res://locations/minigames/nodes/liar/nodes/player.tscn" id="6_3f0sk"]
+[ext_resource type="PackedScene" uid="uid://d24f6jscr5rhj" path="res://locations/minigames/nodes/liar/nodes/stack.tscn" id="7_bjnwe"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="9_whx6x"]
+
+[node name="Liar" type="Node2D"]
+script = ExtResource("1_h8pm3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Stack" parent="." instance=ExtResource("7_bjnwe")]
+organization = 2
+
+[node name="Timer" parent="." instance=ExtResource("4_lk7y7")]
+offset_left = -176.0
+offset_top = -337.0
+offset_right = -176.0
+offset_bottom = -337.0
+
+[node name="Player0" parent="." instance=ExtResource("6_3f0sk")]
+position = Vector2(4, 545)
+player_name = "tas"
+player_type = 1
+show_cards = true
+color = Color(0.768627, 0.419608, 0.419608, 1)
+card_organization = 1
+
+[node name="Player1" parent="." instance=ExtResource("6_3f0sk")]
+position = Vector2(-303.25, 0)
+rotation = 1.5708
+id = 1
+player_name = "foxy"
+color = Color(0.866667, 0.74902, 0.360784, 1)
+
+[node name="Player2" parent="." instance=ExtResource("6_3f0sk")]
+position = Vector2(-2, -559)
+rotation = 3.14159
+id = 2
+player_name = "tuko"
+player_type = 1
+color = Color(0.733333, 0.431373, 0.854902, 1)
+
+[node name="Player3" parent="." instance=ExtResource("6_3f0sk")]
+position = Vector2(327, 5)
+rotation = -1.5708
+id = 3
+player_name = "soriel"
+color = Color(0.419608, 0.768627, 0.701961, 1)
+
+[node name="Welcome" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Welcome"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1902.0
+offset_top = -986.0
+offset_right = -1902.0
+offset_bottom = -986.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.222, 2.27416)
+theme = ExtResource("9_whx6x")
+color = Color(1, 0.886275, 0.670588, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Welcome"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_whx6x")
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HFlowContainer" type="VBoxContainer" parent="Welcome/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("9_whx6x")
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Welcome/MarginContainer/HFlowContainer"]
+layout_mode = 2
+theme = ExtResource("9_whx6x")
+theme_type_variation = &"HeaderLarge"
+text = "Liar Game"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="Welcome/MarginContainer/HFlowContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="HowToPlayButton" type="Button" parent="Welcome/MarginContainer/HFlowContainer"]
+layout_mode = 2
+text = "How to play"
+
+[node name="ExitButton" type="Button" parent="Welcome/MarginContainer/HFlowContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="PlayButton" type="Button" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.5
+offset_top = -30.5
+offset_right = 62.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(68, 23)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("9_whx6x")
+text = "Play"
+
+[node name="LiarButton" type="Button" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.5
+offset_top = -30.5
+offset_right = 66.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_whx6x")
+text = "Liar!"
+
+[node name="SpinBox" type="SpinBox" parent="UI"]
+offset_left = 271.0
+offset_top = 850.0
+offset_right = 354.062
+offset_bottom = 881.0
+max_value = 9.0

@@ -15,7 +15,7 @@ static func handle_touch(event : InputEventScreenTouch, delta : float):
 		return;
 
 	# Register touch events
-	touch_points[event.index] =  event.position
+	touch_points[event.index] = event.position
 
 	# Switch between the touch types
 	var data = InputData.new()

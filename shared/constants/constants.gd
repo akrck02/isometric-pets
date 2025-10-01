@@ -10,3 +10,17 @@ const TILE_SIZE = 80
 const AUDIO_MASTER_BUS = "Master";
 const AUDIO_MUSIC_BUS = "Music";
 const AUDIO_EFFECTS_BUS = "Effects";
+
+# Liar minigame
+const COLORS={
+	"RED": Color(1,0,0),
+	"BLUE": Color(0,0,1),
+	"GREEN": Color(0,1,0),
+	"YELLOW": Color(1,1,0),
+}
+
+enum CARD_ORGANIZATION {
+	ARC,
+	LINE,
+	PILE
+}

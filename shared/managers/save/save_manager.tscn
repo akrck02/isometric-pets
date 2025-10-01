@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dymrnyekj8u8t"]
+
+[ext_resource type="Script" path="res://shared/managers/save/save.gd" id="1_t8iqw"]
+
+[node name="SaveManager" type="Node"]
+script = ExtResource("1_t8iqw")
+
+[node name="Timer" type="Timer" parent="."]

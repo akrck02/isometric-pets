@@ -27,6 +27,6 @@ func handle_input(_viewport: Node, _event: InputEvent, _shape_idx: int) -> void:
 			path = Paths.get_debug_scene(scene).get_scene()
 	
 	if path != "" :
-		SignalDatabase.scene_change_requested.emit(path)
+		SceneManager.scene_change_requested.emit(path)
 	
 	change_requested = true

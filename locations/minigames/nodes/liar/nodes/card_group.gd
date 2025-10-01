@@ -1,0 +1,130 @@
+extends Node2D
+class_name CardGroup
+
+
+var cards_array = []
+var cards_per_line: int = 10
+var card_width = 80
+const CARD_LINE_SEPARATION = 10
+@export var show_cards: bool = false
+@export var organization: Constants.CARD_ORGANIZATION = Constants.CARD_ORGANIZATION.ARC
+
+
+func _ready() -> void:
+	cards_per_line = DisplayServer.screen_get_size().x / card_width
+	cards_array.resize(40)
+
+func add_cards(cards: Array, show_cards: bool = false):
+	var tween = create_tween()
+	
+	for i in range(cards.size()):
+		var card: Card = cards[i]
+		var parent = card.get_parent()
+		if parent != null:
+			card.reparent(self)
+		else:
+			add_child(card)
+		
+		var free_position = cards_array.find(null)
+		cards_array[free_position] = card
+		
+		card.set_show(show_cards)
+		var test = self.global_position
+		test = to_global(Vector2(free_position * (80 + CARD_LINE_SEPARATION), 0))
+		
+		
+		match organization:
+			Constants.CARD_ORGANIZATION.LINE: # HAND
+				tween.parallel().tween_property(card, NodeProperties.Rotation, self.rotation, 0.5).set_trans(Tween.TRANS_EXPO)
+				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, test, 0.5).set_trans(Tween.TRANS_EXPO)
+			Constants.CARD_ORGANIZATION.ARC: # HAND
+				var degree = -45
+				degree += free_position * 6
+				tween.parallel().tween_property(card, NodeProperties.Rotation, deg_to_rad(degree), 0.5).set_trans(Tween.TRANS_EXPO)
+				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, self.global_position, 0.5).set_trans(Tween.TRANS_EXPO)
+			Constants.CARD_ORGANIZATION.PILE: # STACK
+				tween.parallel().tween_property(card, NodeProperties.GlobalPosition, self.global_position, 0.5).set_trans(Tween.TRANS_EXPO)
+	await tween.finished
+	tween.kill()
+	if organization == Constants.CARD_ORGANIZATION.LINE:
+		_center()
+		
+func add_card(card: Card):
+	card.set_show(show_cards)
+	if card.get_parent() != null:
+		card.reparent(self)
+	else:
+		add_child(card)
+	
+	var free_position = cards_array.find(null)
+	cards_array[free_position] = card
+	
+	var test = self.global_position
+	test = to_global(Vector2(free_position * 80 + 20, 0))
+	print("add_card " + str(test.y))
+	
+	var tween = create_tween()
+	
+	match organization:
+		Constants.CARD_ORGANIZATION.LINE: # HAND
+			tween.tween_property(card, NodeProperties.Rotation, self.rotation, 0.5).set_trans(Tween.TRANS_EXPO)
+			tween.tween_property(card, NodeProperties.GlobalPosition, test, 0.5).set_trans(Tween.TRANS_EXPO)
+		Constants.CARD_ORGANIZATION.ARC: # HAND
+			tween.tween_property(card, NodeProperties.GlobalPosition, test, 0.5).set_trans(Tween.TRANS_EXPO)
+		Constants.CARD_ORGANIZATION.PILE: # STACK
+			tween.tween_property(card, NodeProperties.GlobalPosition, self.global_position, 0.5).set_trans(Tween.TRANS_EXPO)
+	
+	await tween.finished
+	tween.kill()
+	
+func remove_card_from_array(card: Card):
+	var index = cards_array.find(card)
+	cards_array[index] = null
+	
+func _get_free_position() -> int:
+	for i in range(cards_array.size()):
+		if cards_array[i] == null:
+			return i
+	return -1
+	
+func remove_cards_from_array(cards: Array):
+	for card in cards:
+		if card == null:
+			continue
+		remove_card_from_array(card)
+		
+	_center()
+		
+func pop_selected_cards() -> Array:
+	var output = cards_array.filter(func(card):
+		return card != null && card.selected
+	)
+
+	# Set selected to false for the selected cards
+	for card: Card in output:
+		card.unselect()
+
+	remove_cards_from_array(output)
+	return output
+
+
+func _center():
+	# Center the hand inside its parent node
+	var parent_size = get_parent().circle.size.x
+	var hand_size = get_combined_bounding_box().size.x
+	var new_global_x = get_parent().global_position.x + (parent_size - hand_size) / 2
+
+	var tween = create_tween()
+	tween.tween_property(self, NodeProperties.GlobalPosition, Vector2(new_global_x, global_position.y), 0.1).set_trans(Tween.TRANS_EXPO)
+	await tween.finished
+	tween.kill()
+	
+func get_combined_bounding_box() -> Rect2:
+	var rect = Rect2()
+	for card: Card in cards_array:
+		if card == null:
+			continue
+		if card.front_panel == null:
+			continue
+		rect = rect.merge(Rect2(card.position, card.front_panel.size))
+	return rect
