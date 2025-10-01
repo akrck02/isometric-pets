@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=4 uid="uid://cfe218fpwkj7d"]
 
-[ext_resource type="Script" path="res://locations/world/world.gd" id="1_y5n7u"]
-[ext_resource type="Script" path="res://entities/map/nodes/tilemap/tilemap_extended.gd" id="2_rh15b"]
+[ext_resource type="Script" uid="uid://cmb0nnp1j35hp" path="res://locations/world/world.gd" id="1_y5n7u"]
+[ext_resource type="Script" uid="uid://bf44carnj7py5" path="res://entities/map/nodes/tilemap/tilemap_extended.gd" id="2_rh15b"]
 [ext_resource type="TileSet" uid="uid://b1vppjetxm2w8" path="res://materials/map/tilemap.tres" id="4_fxkog"]
 [ext_resource type="PackedScene" uid="uid://bb0q2fy8l6iaj" path="res://entities/animals/nodes/cat/nodes/totem/tottem.tscn" id="5_cwnpp"]
 [ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="7_lsj0o"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://xtpk8a7u1agl" path="res://entities/characters/nodes/npc/npc.tscn" id="9_p24x2"]
 [ext_resource type="PackedScene" uid="uid://rw88feax5dwj" path="res://entities/animals/nodes/turtle/turtle.tscn" id="11_ind7k"]
 [ext_resource type="AudioStream" uid="uid://ccr3le5vpgpte" path="res://locations/world/sounds/garden-main.mp3" id="11_vw2cf"]
-[ext_resource type="Script" path="res://shared/mecanics/selector/selector.gd" id="11_yvk1j"]
+[ext_resource type="Script" uid="uid://lxm5b1najeru" path="res://shared/mecanics/selector/selector.gd" id="11_yvk1j"]
 [ext_resource type="PackedScene" uid="uid://blkbi8l5llsgb" path="res://entities/world/nodes/house/house.tscn" id="13_st7px"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nl0mm"]

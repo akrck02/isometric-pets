@@ -1,5 +1,6 @@
 extends Control
 
+@export var enable = false
 var scene = preload("res://entities/characters/nodes/pet/pet.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -13,6 +14,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _input(event):
+	if not enable: return
 	if (event is InputEventMouse):
 		var button = event.get_button_mask()
 

@@ -12,9 +12,9 @@ config_version=5
 
 config/name="isopets"
 run/main_scene="res://locations/main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-boot_splash/image="res://entities/animals/nodes/cat/sprites/cat.png"
+config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/use_filter=false
+boot_splash/image="res://entities/animals/nodes/cat/sprites/cat.png"
 config/icon="res://android_icon.png"
 
 [autoload]
@@ -162,5 +162,5 @@ pointing/emulate_touch_from_mouse=true
 
 textures/canvas_textures/default_texture_filter=0
 textures/vram_compression/import_etc2_astc=true
-environment/defaults/default_clear_color=Color(0.133333, 0.133333, 0.133333, 1)
 anti_aliasing/quality/msaa_2d=1
+environment/defaults/default_clear_color=Color(0.133333, 0.133333, 0.133333, 1)
