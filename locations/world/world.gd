@@ -3,6 +3,7 @@ extends Node2D
 @onready var music = $Music/Music
 
 func _ready() -> void:
+	TilemapManager.set_tilemap($Tilemap)
 	music.play()
 	
 	var pet_scene = preload("res://entities/characters/nodes/pet/pet.tscn")

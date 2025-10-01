@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://cn0xm81r1djb1" path="res://materials/ui/button_pressed.tres" id="2_jbinl"]
 [ext_resource type="StyleBox" uid="uid://cf3vx3oawdia7" path="res://materials/ui/button_normal.tres" id="3_fte3n"]
 [ext_resource type="StyleBox" uid="uid://bagl0oxvrcjqi" path="res://materials/ui/button_hover.tres" id="3_xul5r"]
-[ext_resource type="StyleBox" uid="uid://woclggw5lgn0" path="res://materials/ui/grabber_area_highlight.tres" id="6_ocmf0"]
+[ext_resource type="StyleBox" path="res://materials/ui/grabber_area_highlight.tres" id="6_ocmf0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qv88"]
 content_margin_left = 30.0
