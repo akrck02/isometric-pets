@@ -11,7 +11,6 @@ enum AvailableApps {
 
 ## General
 @onready var open_button : Button = $OpenButton
-
 ## Apps
 @onready var menu : App = $Scroll/Menu
 @onready var pets : App = $Scroll/Pets

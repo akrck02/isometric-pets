@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dpha16cuubtta"]
 
-[ext_resource type="Script" path="res://ui/hud/apps/settings/settings.gd" id="1_6woeb"]
+[ext_resource type="Script" uid="uid://7bc6s7apjhao" path="res://ui/hud/apps/settings/settings.gd" id="1_6woeb"]
 [ext_resource type="Texture2D" uid="uid://dfkmx8ud2ixjl" path="res://ui/hud/apps/settings/sprites/catbrightnessdown.png" id="4_3h7cg"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="7_n54e2"]
 

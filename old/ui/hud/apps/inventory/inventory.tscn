@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhcl0u1ebow4h"]
+
+[ext_resource type="Script" uid="uid://bliv5ttax6lh1" path="res://ui/hud/apps/inventory/inventory.gd" id="1_bypnk"]
+
+[node name="Inventory" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bypnk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.84589255, 0.75436056, 0.1908691, 1)
