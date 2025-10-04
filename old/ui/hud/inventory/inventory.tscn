@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhcl0u1ebow4h"]
+
+[ext_resource type="Script" uid="uid://d05wmxfguwb5c" path="res://ui/hud/inventory/inventory.gd" id="1_h2b6o"]
+[ext_resource type="Script" uid="uid://0xosg5lilhjd" path="res://entities/items/nodes/item/item.gd" id="2_3py3y"]
+[ext_resource type="Resource" uid="uid://dsl652b2lnbqh" path="res://entities/items/nodes/food/oniguiri.tres" id="3_b8i4a"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h2b6o")
+items = Array[ExtResource("2_3py3y")]([ExtResource("3_b8i4a"), ExtResource("3_b8i4a")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.84589255, 0.75436056, 0.1908691, 1)
