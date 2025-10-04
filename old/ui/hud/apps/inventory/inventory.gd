@@ -1,8 +1,19 @@
 extends App
 
+@export var items: Array[Item]
+@onready var grid_container: GridContainer = $GridContainer
+@onready var slots: Array = $GridContainer.get_children()
 
-@export var slots: Array[Item]
 
+func open() -> void:
+	super()
+	var index= 3
+	for item in items:
+		for slot in slots:
+			if !slot.slot_item:
+				slot.update(item, index)
+				index+=1
+				break
+		
 
-func _ready() -> void:
-	pass
+	

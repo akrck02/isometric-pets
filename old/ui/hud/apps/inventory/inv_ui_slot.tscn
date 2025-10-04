@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8aw5v6o0wy2h"]
+[gd_scene load_steps=5 format=3 uid="uid://c8aw5v6o0wy2h"]
 
 [ext_resource type="Script" uid="uid://4xh3wsu1tesq" path="res://ui/hud/apps/inventory/inv_ui_slot.gd" id="1_cocju"]
-[ext_resource type="Texture2D" uid="uid://dfkmx8ud2ixjl" path="res://ui/hud/apps/settings/sprites/catbrightnessdown.png" id="2_53h14"]
+[ext_resource type="Texture2D" uid="uid://dqp30tsofkpqk" path="res://entities/animals/nodes/cat/sprites/cat.png" id="2_53h14"]
+[ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="3_axrdk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nnx62"]
+font = ExtResource("3_axrdk")
+font_size = 80
 
 [node name="InvUiSlot" type="Panel"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,21 +19,24 @@ script = ExtResource("1_cocju")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_53h14")
 centered = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 80.0
-offset_bottom = 80.0
-color = Color(1, 0.40392157, 1, 1)
+offset_right = 120.0
+offset_bottom = 120.0
+color = Color(0.9397888, 0.6040254, 0.24662483, 1)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 z_index = 2
 layout_mode = 0
-offset_left = 40.0
-offset_top = 57.0
-offset_right = 80.0
-offset_bottom = 80.0
+offset_left = 42.0
+offset_top = 41.0
+offset_right = 122.0
+offset_bottom = 122.0
 text = "100"
+label_settings = SubResource("LabelSettings_nnx62")
 horizontal_alignment = 2
