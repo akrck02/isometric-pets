@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="isopets"
+run/main_scene="uid://bf71i2lupr5f4"
+config/features=PackedStringArray("4.5")
+config/icon="res://icon.svg"
+
+[autoload]
+
+InputManager="*res://shared/managers/input/input.gd"
+
+[file_customization]
+
+folder_colors={
+"res://entities/": "red",
+"res://locations/": "blue",
+"res://materials/": "pink",
+"res://shaders/": "purple",
+"res://shared/": "yellow",
+"res://ui/": "orange"
+}
+
+[rendering]
+
+renderer/rendering_method="mobile"
