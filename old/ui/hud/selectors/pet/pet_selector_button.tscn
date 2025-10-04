@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://ne24t3mifa7y"]
+
+[ext_resource type="Script" path="res://ui/hud/selectors/pet/pet_selector_button.gd" id="1_6cekr"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_1jdl7"]
+[ext_resource type="StyleBox" uid="uid://b8ihspmnyjuyn" path="res://materials/ui/selectors/pet_selector/pet_selector_button_selected.tres" id="2_dik64"]
+[ext_resource type="Texture2D" uid="uid://cv23i0i8ygm3g" path="res://entities/characters/nodes/npc/sprites/soriel.png" id="2_qsgc8"]
+[ext_resource type="Texture2D" uid="uid://qumbafhlij1j" path="res://entities/characters/sprites/eyes.png" id="2_t6vb5"]
+[ext_resource type="StyleBox" uid="uid://5avgqlr8knoq" path="res://materials/ui/selectors/pet_selector/pet_selector_button.tres" id="3_x5tvi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7836l"]
+
+[node name="PetSelectorButton" type="MarginContainer"]
+custom_minimum_size = Vector2(153, 180)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 169.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 15
+script = ExtResource("1_6cekr")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7836l")
+theme_override_styles/hover = ExtResource("2_dik64")
+theme_override_styles/pressed = ExtResource("2_dik64")
+theme_override_styles/normal = ExtResource("3_x5tvi")
+
+[node name="Columns" type="HBoxContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="MarginContainer" parent="Button/Columns"]
+clip_contents = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 25
+
+[node name="PetTextureRect" type="TextureRect" parent="Button/Columns/Container"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture = ExtResource("2_qsgc8")
+stretch_mode = 5
+
+[node name="DecorationTextureRect" type="TextureRect" parent="Button/Columns/Container"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture = ExtResource("2_t6vb5")
+stretch_mode = 5
+
+[node name="LabelMargin" type="MarginContainer" parent="Button/Columns"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="Label" type="Label" parent="Button/Columns/LabelMargin"]
+layout_mode = 2
+theme = ExtResource("2_1jdl7")
+theme_override_font_sizes/font_size = 51
+text = "Random cat"

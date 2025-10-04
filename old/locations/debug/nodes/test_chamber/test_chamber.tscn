@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj8nab01n4ntb"]
+
+[ext_resource type="PackedScene" uid="uid://bgd58tknkodwv" path="res://entities/characters/nodes/pet/pet.tscn" id="3_nl8pc"]
+[ext_resource type="PackedScene" uid="uid://cba3m5gci8old" path="res://ui/hud/ui.tscn" id="4_p5xpf"]
+[ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="5_gymh8"]
+
+[node name="TestChamber1" type="Node2D"]
+
+[node name="Ui" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_p5xpf")]
+site_name = "Test chamber #1"
+camera = NodePath("../Camera2D")
+
+[node name="Camera2D" parent="." instance=ExtResource("5_gymh8")]
+position = Vector2(315, 558)
+
+[node name="Tas" parent="." instance=ExtResource("3_nl8pc")]
+position = Vector2(68, 677)
+
+[node name="Teko" parent="." instance=ExtResource("3_nl8pc")]
+position = Vector2(416, 670)
+pet_name = "teko"

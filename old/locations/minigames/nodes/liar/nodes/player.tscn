@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhi2gelqnmo12"]
+
+[ext_resource type="Script" path="res://locations/minigames/nodes/liar/nodes/player.gd" id="3_5b8qw"]
+[ext_resource type="PackedScene" uid="uid://67q0ts1he87k" path="res://entities/characters/nodes/pet/pet_visuals.tscn" id="3_qbb8u"]
+[ext_resource type="PackedScene" uid="uid://cxo4x8f8l2ibw" path="res://locations/minigames/nodes/liar/nodes/hand.tscn" id="3_s8h24"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogxxs"]
+bg_color = Color(0.634175, 0.507385, 0.946914, 1)
+draw_center = false
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwibi"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="Player" type="Node2D"]
+script = ExtResource("3_5b8qw")
+
+[node name="Hand" parent="." instance=ExtResource("3_s8h24")]
+position = Vector2(-2, 200)
+
+[node name="Visuals" parent="." instance=ExtResource("3_qbb8u")]
+z_index = 1
+position = Vector2(-1, 56)
+
+[node name="Circle" type="Panel" parent="."]
+z_index = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogxxs")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_iwibi")

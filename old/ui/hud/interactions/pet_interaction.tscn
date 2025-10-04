@@ -1,0 +1,151 @@
+[gd_scene load_steps=5 format=3 uid="uid://dulkirp0j7yge"]
+
+[ext_resource type="Script" path="res://ui/hud/interactions/pet_interaction.gd" id="1_on608"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_m3bdy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2i5l"]
+bg_color = Color(0.915112, 0.78171, 0.581963, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_82rk6"]
+color = Color(0.592157, 0.439216, 0.298039, 1)
+thickness = 4
+
+[node name="Pet" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_on608")
+
+[node name="Container" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 140
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 90
+
+[node name="Scroll" type="ScrollContainer" parent="Container"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m2i5l")
+
+[node name="Rows" type="VBoxContainer" parent="Container/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+alignment = 2
+
+[node name="Header" type="MarginContainer" parent="Container/Scroll/Rows"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="Rows" type="VBoxContainer" parent="Container/Scroll/Rows/Header"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Name" type="Label" parent="Container/Scroll/Rows/Header/Rows"]
+layout_mode = 2
+theme = ExtResource("2_m3bdy")
+theme_override_font_sizes/font_size = 65
+text = "Name here"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Container/Scroll/Rows/Header/Rows"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_82rk6")
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/Scroll/Rows/Header/Rows"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="Level" type="Label" parent="Container/Scroll/Rows/Header/Rows"]
+layout_mode = 2
+theme = ExtResource("2_m3bdy")
+theme_override_font_sizes/font_size = 52
+text = "Level 0"
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="Container/Scroll/Rows/Header/Rows"]
+layout_mode = 2
+theme = ExtResource("2_m3bdy")
+theme_override_font_sizes/font_size = 52
+text = "Time 0"
+vertical_alignment = 1
+
+[node name="StatControlsContainer" type="MarginContainer" parent="Container/Scroll/Rows"]
+layout_mode = 2
+theme = ExtResource("2_m3bdy")
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 15
+
+[node name="Rows" type="VBoxContainer" parent="Container/Scroll/Rows/StatControlsContainer"]
+layout_mode = 2
+
+[node name="HungerContainer" type="VBoxContainer" parent="Container/Scroll/Rows/StatControlsContainer/Rows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Scroll/Rows/StatControlsContainer/Rows/HungerContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Hunger"
+
+[node name="HSlider" type="HSlider" parent="Container/Scroll/Rows/StatControlsContainer/Rows/HungerContainer"]
+layout_mode = 2
+
+[node name="FunContainer" type="VBoxContainer" parent="Container/Scroll/Rows/StatControlsContainer/Rows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Scroll/Rows/StatControlsContainer/Rows/FunContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Fun"
+
+[node name="HSlider" type="HSlider" parent="Container/Scroll/Rows/StatControlsContainer/Rows/FunContainer"]
+layout_mode = 2
+
+[node name="AffectionContainer" type="VBoxContainer" parent="Container/Scroll/Rows/StatControlsContainer/Rows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Scroll/Rows/StatControlsContainer/Rows/AffectionContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Affection"
+
+[node name="HSlider" type="HSlider" parent="Container/Scroll/Rows/StatControlsContainer/Rows/AffectionContainer"]
+layout_mode = 2
+
+[node name="EnergyContainer" type="VBoxContainer" parent="Container/Scroll/Rows/StatControlsContainer/Rows"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Scroll/Rows/StatControlsContainer/Rows/EnergyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Energy"
+
+[node name="HSlider" type="HSlider" parent="Container/Scroll/Rows/StatControlsContainer/Rows/EnergyContainer"]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="MarginContainer" parent="Container/Scroll/Rows"]
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="Container/Scroll/Rows/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_m3bdy")
+text = "Exit"

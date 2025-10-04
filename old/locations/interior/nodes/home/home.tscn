@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=4 uid="uid://d0ne5f5d2ni1p"]
+
+[ext_resource type="Script" path="res://locations/interior/nodes/home/home.gd" id="1_bf8e2"]
+[ext_resource type="TileSet" uid="uid://b1vppjetxm2w8" path="res://materials/map/tilemap.tres" id="1_rj68t"]
+[ext_resource type="PackedScene" uid="uid://dtqvovtctndtl" path="res://ui/camera/camera.tscn" id="2_iftty"]
+[ext_resource type="PackedScene" uid="uid://cba3m5gci8old" path="res://ui/hud/ui.tscn" id="3_p2s5v"]
+[ext_resource type="PackedScene" uid="uid://xtpk8a7u1agl" path="res://entities/characters/nodes/npc/npc.tscn" id="5_7fbur"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjdij"]
+size = Vector2(98.4482, 27.3666)
+
+[node name="Home" type="Node2D"]
+script = ExtResource("1_bf8e2")
+
+[node name="Decoration" type="TileMapLayer" parent="."]
+z_index = 2
+tile_map_data = PackedByteArray("AADy/9v/BAAAAAAAAADy/9z/BAAAAAAAAAA=")
+tile_set = ExtResource("1_rj68t")
+
+[node name="Ground" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AADy/9f/AAAEAAMAAADy/9j/AAAEAAMAAADy/9n/AAAEAAMAAADy/9r/AAAEAAMAAADy/9v/AAAEAAMAAADy/9z/AAAEAAMAAADy/93/AAAEAAMAAADy/97/AAAEAAMAAADy/9//AAAEAAMAAADy/+D/AAAEAAMAAADy/+H/AAAEAAMAAADz/9f/AAAEAAMAAADz/9j/AAAEAAMAAADz/9n/AAAEAAMAAADz/9r/AAAEAAMAAADz/9v/AAAEAAMAAADz/9z/AAAEAAMAAADz/93/AAAEAAMAAADz/97/AAAEAAMAAADz/9//AAAEAAMAAADz/+D/AAAEAAMAAADz/+H/AAAEAAMAAAD0/9f/AAAEAAMAAAD0/9j/AAAEAAMAAAD0/9n/AAAEAAMAAAD0/9r/AAAEAAMAAAD0/9v/AAAEAAMAAAD0/9z/AAAEAAMAAAD0/93/AAAEAAMAAAD0/97/AAAEAAMAAAD0/9//AAAEAAMAAAD0/+D/AAAEAAMAAAD0/+H/AAAEAAMAAAD1/9f/AAAEAAMAAAD1/9j/AAAEAAMAAAD1/9n/AAAEAAMAAAD1/9r/AAAEAAMAAAD1/9v/AAAEAAMAAAD1/9z/AAAEAAMAAAD1/93/AAAEAAMAAAD1/97/AAAEAAMAAAD1/9//AAAEAAMAAAD1/+D/AAAEAAMAAAD1/+H/AAAEAAMAAAD2/9f/AAAEAAMAAAD2/9j/AAAEAAMAAAD2/9n/AAAEAAMAAAD2/9r/AAAEAAMAAAD2/9v/AAAEAAMAAAD2/9z/AAAEAAMAAAD2/93/AAAEAAMAAAD2/97/AAAEAAMAAAD2/9//AAAEAAMAAAD2/+D/AAAEAAMAAAD2/+H/AAAEAAMAAAD3/9f/AAAEAAMAAAD3/9j/AAAEAAMAAAD3/9n/AAAEAAMAAAD3/9r/AAAEAAMAAAD3/9v/AAAEAAMAAAD3/9z/AAAEAAMAAAD3/93/AAAEAAMAAAD3/97/AAAEAAMAAAD3/9//AAAEAAMAAAD3/+D/AAAEAAMAAAD3/+H/AAAEAAMAAAD4/9f/AAAEAAMAAAD4/9j/AAAEAAMAAAD4/9n/AAAEAAMAAAD4/9r/AAAEAAMAAAD4/9v/AAAEAAMAAAD4/9z/AAAEAAMAAAD4/93/AAAEAAMAAAD4/97/AAAEAAMAAAD4/9//AAAEAAMAAAD4/+D/AAAEAAMAAAD4/+H/AAAEAAMAAAD5/9f/AAAEAAMAAAD5/9j/AAAEAAMAAAD5/9n/AAAEAAMAAAD5/9r/AAAEAAMAAAD5/9v/AAAEAAMAAAD5/9z/AAAEAAMAAAD5/93/AAAEAAMAAAD5/97/AAAEAAMAAAD5/9//AAAEAAMAAAD5/+D/AAAEAAMAAAD5/+H/AAAEAAMAAAD6/9f/AAAEAAMAAAD6/9j/AAAEAAMAAAD6/9n/AAAEAAMAAAD6/9r/AAAEAAMAAAD6/9v/AAAEAAMAAAD6/9z/AAAEAAMAAAD6/93/AAAEAAMAAAD6/97/AAAEAAMAAAD6/9//AAAEAAMAAAD6/+D/AAAEAAMAAAD6/+H/AAAEAAMAAAD7/9f/AAAEAAMAAAD7/9j/AAAEAAMAAAD7/9n/AAAEAAMAAAD7/9r/AAAEAAMAAAD7/9v/AAAEAAMAAAD7/9z/AAAEAAMAAAD7/93/AAAEAAMAAAD7/97/AAAEAAMAAAD7/9//AAAEAAMAAAD7/+D/AAAEAAMAAAD7/+H/AAAEAAMAAAD8/9f/AAAEAAMAAAD8/9j/AAAEAAMAAAD8/9n/AAAEAAMAAAD8/9r/AAAEAAMAAAD8/9v/AAAEAAMAAAD8/9z/AAAEAAMAAAD8/93/AAAEAAMAAAD8/97/AAAEAAMAAAD8/9//AAAEAAMAAAD8/+D/AAAEAAMAAAD8/+H/AAAEAAMAAAA=")
+tile_set = ExtResource("1_rj68t")
+
+[node name="Camera2D" parent="." instance=ExtResource("2_iftty")]
+position = Vector2(1114, -892)
+zoom = Vector2(0.7, 0.7)
+default_zoom = Vector2(0.7, 0.7)
+
+[node name="Ui" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_p2s5v")]
+site_name = "Home"
+camera = NodePath("../Camera2D")
+
+[node name="ExitArea" type="Area2D" parent="."]
+position = Vector2(911, -979)
+rotation = -0.478128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(28.8033, 3.10052)
+shape = SubResource("RectangleShape2D_sjdij")
+
+[node name="Soriel" parent="." instance=ExtResource("5_7fbur")]
+position = Vector2(1127, -890)
+character_name = "catotem"

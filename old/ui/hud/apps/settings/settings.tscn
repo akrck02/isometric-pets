@@ -1,0 +1,128 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpha16cuubtta"]
+
+[ext_resource type="Script" path="res://ui/hud/apps/settings/settings.gd" id="1_6woeb"]
+[ext_resource type="Texture2D" uid="uid://dfkmx8ud2ixjl" path="res://ui/hud/apps/settings/sprites/catbrightnessdown.png" id="4_3h7cg"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="7_n54e2"]
+
+[node name="Settings" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_6woeb")
+
+[node name="Rows" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleMargin" type="MarginContainer" parent="Rows"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="SettingsLabel" type="Label" parent="Rows/TitleMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_n54e2")
+theme_type_variation = &"Title1"
+theme_override_colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="VolumeLabel" type="Label" parent="Rows"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_n54e2")
+theme_override_font_sizes/font_size = 52
+text = "Volume"
+
+[node name="VolumeControls" type="VBoxContainer" parent="Rows"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GeneralVolumeHSlider" type="HSlider" parent="Rows/VolumeControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("7_n54e2")
+theme_override_icons/grabber = ExtResource("4_3h7cg")
+theme_override_icons/grabber_highlight = ExtResource("4_3h7cg")
+max_value = 1.0
+step = 0.1
+
+[node name="TextSpeedLabel" type="Label" parent="Rows"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_n54e2")
+theme_override_font_sizes/font_size = 52
+text = "Text speed"
+
+[node name="TextSpeedControls" type="VBoxContainer" parent="Rows"]
+custom_minimum_size = Vector2(-7, 0)
+layout_mode = 2
+
+[node name="TextSpeedControls" type="HBoxContainer" parent="Rows/TextSpeedControls"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Normal" type="Button" parent="Rows/TextSpeedControls/TextSpeedControls"]
+layout_mode = 2
+theme = ExtResource("7_n54e2")
+theme_override_font_sizes/font_size = 39
+disabled = true
+text = "Normal"
+
+[node name="Fast" type="Button" parent="Rows/TextSpeedControls/TextSpeedControls"]
+layout_mode = 2
+theme = ExtResource("7_n54e2")
+theme_override_font_sizes/font_size = 39
+text = "Fast"
+
+[node name="GraphicsLabel" type="Label" parent="Rows"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("7_n54e2")
+theme_override_font_sizes/font_size = 52
+text = "Graphics"
+
+[node name="GraphicControls" type="VBoxContainer" parent="Rows"]
+custom_minimum_size = Vector2(-7, 0)
+layout_mode = 2
+
+[node name="DisplayControls" type="HBoxContainer" parent="Rows/GraphicControls"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="FullScreen" type="Button" parent="Rows/GraphicControls/DisplayControls"]
+layout_mode = 2
+theme = ExtResource("7_n54e2")
+theme_override_font_sizes/font_size = 39
+text = "Fullscreen"
+
+[node name="Windowed" type="Button" parent="Rows/GraphicControls/DisplayControls"]
+layout_mode = 2
+theme = ExtResource("7_n54e2")
+theme_override_font_sizes/font_size = 39
+text = "Windowed
+"
+
+[node name="ExitControlsMargin" type="MarginContainer" parent="Rows"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_top = 25
+
+[node name="ExitControls" type="HBoxContainer" parent="Rows/ExitControlsMargin"]
+layout_mode = 2
+size_flags_vertical = 10
+alignment = 1
+
+[node name="ExitGameButton" type="Button" parent="Rows/ExitControlsMargin/ExitControls"]
+visible = false
+layout_mode = 2
+theme = ExtResource("7_n54e2")
+theme_override_font_sizes/font_size = 38
+text = "Exit game"

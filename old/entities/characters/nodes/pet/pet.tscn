@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://bgd58tknkodwv"]
+
+[ext_resource type="Script" path="res://entities/characters/nodes/pet/pet.gd" id="1_t2hn5"]
+[ext_resource type="PackedScene" path="res://entities/characters/nodes/pet/pet_visuals.tscn" id="2_wld6k"]
+[ext_resource type="PackedScene" uid="uid://dbciupg0y5qog" path="res://shared/mecanics/states/state_machine.tscn" id="7_0n4qr"]
+[ext_resource type="PackedScene" uid="uid://btpvicx32t5f" path="res://shared/mecanics/navigation/navigation.tscn" id="7_sqe1t"]
+[ext_resource type="PackedScene" uid="uid://c62rvsu2k52vs" path="res://entities/characters/nodes/pet/nodes/loader/loader.tscn" id="8_86gkl"]
+[ext_resource type="Script" path="res://shared/mecanics/states/idle/idle_state.gd" id="8_fngwt"]
+[ext_resource type="PackedScene" uid="uid://b8kgse64epm5s" path="res://shared/mecanics/movement/movement.tscn" id="8_tn5q3"]
+[ext_resource type="PackedScene" uid="uid://b145u2b1gyom3" path="res://shared/mecanics/states/wander/wander.tscn" id="11_w66mi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ketbd"]
+radius = 29.0
+height = 80.0
+
+[node name="Pet" type="CharacterBody2D" groups=["persist", "pets"]]
+y_sort_enabled = true
+script = ExtResource("1_t2hn5")
+
+[node name="Interaction" type="Area2D" parent="."]
+position = Vector2(-1, -30)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+show_behind_parent = true
+position = Vector2(-0.125, -0.500023)
+shape = SubResource("CapsuleShape2D_ketbd")
+debug_color = Color(0, 0.6, 0.701961, 0.101961)
+
+[node name="Visuals" parent="." instance=ExtResource("2_wld6k")]
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+modulate = Color(0.909804, 0.803922, 1, 0.25098)
+position = Vector2(-27, -1)
+polygon = PackedVector2Array(26.3, -16, 61.3, 1, 26.3, 19, -9.7, 1)
+
+[node name="RayCast" type="RayCast2D" parent="."]
+position = Vector2(1.90735e-06, -10)
+scale = Vector2(1.4, 1.4)
+target_position = Vector2(0, 40)
+
+[node name="Navigation" parent="." instance=ExtResource("7_sqe1t")]
+
+[node name="Movement" parent="." node_paths=PackedStringArray("navigation", "visuals") instance=ExtResource("8_tn5q3")]
+navigation = NodePath("../Navigation")
+visuals = NodePath("../Visuals")
+
+[node name="Loader" parent="." node_paths=PackedStringArray("visual") instance=ExtResource("8_86gkl")]
+visual = NodePath("../Visuals")
+
+[node name="States" parent="." node_paths=PackedStringArray("actor", "initial_state") instance=ExtResource("7_0n4qr")]
+position = Vector2(-1, -30)
+actor = NodePath("..")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="States" node_paths=PackedStringArray("pet_visuals")]
+script = ExtResource("8_fngwt")
+pet_visuals = NodePath("../../Visuals")
+
+[node name="Wander" parent="States" node_paths=PackedStringArray("navigation", "movement") instance=ExtResource("11_w66mi")]
+navigation = NodePath("../../Navigation")
+movement = NodePath("../../Movement")
+enabled = false
