@@ -1,14 +1,15 @@
 class_name MouseInput
-
+const isDebug = false
 ## Mouse motion handle
 static func handle_mouse_motion(_event : InputEventMouseMotion, delta : float):
-	InputManager.current_input = Controls.Type.KeyboardAndMouse
-	
-	var data = InputData.new();
-	data.delta = delta
-	data.origin = Controls.Type.KeyboardAndMouse
-	data.keyboard_and_mouse_data = KeyboardAndMouseInputData.new()
-	InputManager.movement_requested.emit(data)
+	if(isDebug):
+		InputManager.current_input = Controls.Type.KeyboardAndMouse
+		
+		var data = InputData.new();
+		data.delta = delta
+		data.origin = Controls.Type.KeyboardAndMouse
+		data.keyboard_and_mouse_data = KeyboardAndMouseInputData.new()
+		InputManager.movement_requested.emit(data)
 
 
 ## Mouse mouse button
