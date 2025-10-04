@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhcl0u1ebow4h"]
+[gd_scene load_steps=3 format=3 uid="uid://dhcl0u1ebow4h"]
 
 [ext_resource type="Script" uid="uid://bliv5ttax6lh1" path="res://ui/hud/apps/inventory/inventory.gd" id="1_bypnk"]
+[ext_resource type="PackedScene" uid="uid://c8aw5v6o0wy2h" path="res://ui/hud/apps/inventory/inv_ui_slot.tscn" id="2_bmx74"]
 
 [node name="Inventory" type="MarginContainer"]
+custom_minimum_size = Vector2(80, 80)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,6 +12,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bypnk")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
-color = Color(0.84589255, 0.75436056, 0.1908691, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+columns = 7
+
+[node name="InvUiSlot" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2
+
+[node name="InvUiSlot2" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2
+
+[node name="InvUiSlot3" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2
+
+[node name="InvUiSlot4" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2
+
+[node name="InvUiSlot5" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2
+
+[node name="InvUiSlot6" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2
+
+[node name="InvUiSlot7" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2
+
+[node name="InvUiSlot8" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2
+
+[node name="InvUiSlot9" parent="GridContainer" instance=ExtResource("2_bmx74")]
+layout_mode = 2

@@ -1,4 +1,8 @@
 extends App
 
 
-@export var items: Array[Item]
+@export var slots: Array[Item]
+
+
+func _ready() -> void:
+	pass
