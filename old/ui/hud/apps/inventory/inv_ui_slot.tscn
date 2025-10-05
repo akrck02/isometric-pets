@@ -4,7 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://dqp30tsofkpqk" path="res://entities/animals/nodes/cat/sprites/cat.png" id="2_53h14"]
 [ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="3_axrdk"]
 
-[sub_resource type="Theme" id="Theme_axrdk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axrdk"]
+bg_color = Color(0.47058824, 0.33333334, 0.2, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_nnx62"]
 font = ExtResource("3_axrdk")
@@ -19,14 +24,8 @@ offset_right = -528.0
 offset_bottom = -1032.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_axrdk")
 script = ExtResource("1_cocju")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 120.0
-offset_bottom = 120.0
-theme = SubResource("Theme_axrdk")
-color = Color(0.47058824, 0.33333334, 0.2, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

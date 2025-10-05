@@ -13,11 +13,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
 script = ExtResource("1_bypnk")
 items = Array[ExtResource("2_3py3y")]([ExtResource("3_b8i4a"), ExtResource("3_b8i4a"), ExtResource("3_b8i4a")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -92,28 +95,4 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="InvUiSlot20" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
-layout_mode = 2
-
-[node name="InvUiSlot21" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
-layout_mode = 2
-
-[node name="InvUiSlot22" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
-layout_mode = 2
-
-[node name="InvUiSlot23" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
-layout_mode = 2
-
-[node name="InvUiSlot24" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
-layout_mode = 2
-
-[node name="InvUiSlot25" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
-layout_mode = 2
-
-[node name="InvUiSlot26" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
-layout_mode = 2
-
-[node name="InvUiSlot27" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
-layout_mode = 2
-
-[node name="InvUiSlot28" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
