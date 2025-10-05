@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://fk4bfu837bvc"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://fk4bfu837bvc"]
 
 [ext_resource type="Texture2D" uid="uid://dfkmx8ud2ixjl" path="res://ui/hud/apps/settings/sprites/catbrightnessdown.png" id="1_cbvwn"]
+[ext_resource type="StyleBox" uid="uid://tpwu1g86r11c" path="res://materials/ui/apps/app_icon_background.tres" id="1_e7vm6"]
 [ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="1_i8spk"]
 [ext_resource type="StyleBox" uid="uid://cn0xm81r1djb1" path="res://materials/ui/button_pressed.tres" id="2_jbinl"]
 [ext_resource type="StyleBox" uid="uid://cf3vx3oawdia7" path="res://materials/ui/button_normal.tres" id="3_fte3n"]
@@ -19,41 +20,34 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gs6ee"]
-content_margin_left = 30.0
-content_margin_top = 5.0
-content_margin_right = 30.0
-content_margin_bottom = 5.0
-bg_color = Color(0.592157, 0.439216, 0.298039, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-anti_aliasing = false
-
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_xj6wt"]
 color = Color(0.592157, 0.439216, 0.298039, 1)
 thickness = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7vm6"]
+bg_color = Color(0.5254902, 0.32156864, 0.101960786, 1)
+
 [resource]
 default_font = ExtResource("1_i8spk")
-Button/colors/font_color = Color(1, 0.886275, 0.670588, 1)
-Button/colors/font_disabled_color = Color(1, 0.886275, 0.670588, 1)
-Button/colors/font_hover_color = Color(1, 0.872592, 0.629493, 1)
+AppIconButton/base_type = &"Button"
+AppIconButton/styles/normal = ExtResource("1_e7vm6")
+AppIconLabel/base_type = &"Label"
+AppIconLabel/colors/font_color = Color(0.27450982, 0.16470589, 0.047058824, 1)
+AppIconLabel/font_sizes/font_size = 36
+AppIconLabel/fonts/font = ExtResource("1_i8spk")
 Button/font_sizes/font_size = 50
 Button/fonts/font = ExtResource("1_i8spk")
 Button/styles/disabled = SubResource("StyleBoxFlat_6qv88")
-Button/styles/focus = ExtResource("3_xul5r")
+Button/styles/focus = null
 Button/styles/hover = ExtResource("3_xul5r")
-Button/styles/hover_pressed = ExtResource("3_xul5r")
 Button/styles/normal = ExtResource("3_fte3n")
-Button/styles/pressed = SubResource("StyleBoxFlat_gs6ee")
+Button/styles/pressed = ExtResource("2_jbinl")
 CheckButton/font_sizes/font_size = 50
 CheckButton/fonts/font = ExtResource("1_i8spk")
 CheckButton/styles/focus = null
 CheckButton/styles/hover = ExtResource("3_xul5r")
 CheckButton/styles/hover_pressed = ExtResource("2_jbinl")
-CheckButton/styles/normal = null
+CheckButton/styles/normal = ExtResource("3_fte3n")
 CheckButton/styles/pressed = ExtResource("2_jbinl")
 HSlider/icons/grabber = ExtResource("1_cbvwn")
 HSlider/icons/grabber_disabled = null
@@ -64,6 +58,8 @@ HSlider/styles/slider = SubResource("StyleBoxLine_xj6wt")
 HeaderLarge/colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
 HeaderLarge/font_sizes/font_size = 80
 HeaderLarge/fonts/font = ExtResource("1_i8spk")
+Inventory_Slot/base_type = &"Panel"
+Inventory_Slot/styles/panel = SubResource("StyleBoxFlat_e7vm6")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
