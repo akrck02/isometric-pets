@@ -13,21 +13,24 @@ custom_minimum_size = Vector2(120, 120)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -528.0
+offset_bottom = -1032.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cocju")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_53h14")
-centered = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 120.0
 color = Color(0.9397888, 0.6040254, 0.24662483, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_53h14")
+centered = false
 
 [node name="Label" type="Label" parent="."]
 visible = false
