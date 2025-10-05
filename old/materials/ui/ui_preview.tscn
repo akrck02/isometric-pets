@@ -26,9 +26,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="HBoxContainer" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
 
 [node name="Colors" type="VBoxContainer" parent="ScrollContainer/HBoxContainer"]
 layout_mode = 2
