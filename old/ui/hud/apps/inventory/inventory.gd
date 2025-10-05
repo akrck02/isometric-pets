@@ -2,7 +2,7 @@ extends App
 
 @export var items: Array[Item]
 @onready var grid_container: GridContainer = $GridContainer
-@onready var slots: Array = $GridContainer.get_children()
+@onready var slots: Array = $VBoxContainer/GridContainer.get_children()
 
 
 func open() -> void:

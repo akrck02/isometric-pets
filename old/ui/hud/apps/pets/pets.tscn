@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bd3yddlagqo8t"]
 
-[ext_resource type="Script" path="res://ui/hud/apps/pets/pets.gd" id="1_hwop2"]
+[ext_resource type="Script" uid="uid://c33bshehrkfhs" path="res://ui/hud/apps/pets/pets.gd" id="1_hwop2"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="2_m2s7e"]
 
 [node name="Pets" type="MarginContainer"]
@@ -23,6 +23,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("2_m2s7e")
+theme_type_variation = &"Title1"
 theme_override_font_sizes/font_size = 52
 text = "PETS"
 horizontal_alignment = 1

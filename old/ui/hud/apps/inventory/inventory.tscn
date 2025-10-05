@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhcl0u1ebow4h"]
+[gd_scene load_steps=6 format=3 uid="uid://dhcl0u1ebow4h"]
 
 [ext_resource type="Script" uid="uid://bliv5ttax6lh1" path="res://ui/hud/apps/inventory/inventory.gd" id="1_bypnk"]
 [ext_resource type="Script" uid="uid://d2tnco55ryki6" path="res://entities/items/nodes/item/item.gd" id="2_3py3y"]
 [ext_resource type="PackedScene" uid="uid://c8aw5v6o0wy2h" path="res://ui/hud/apps/inventory/inv_ui_slot.tscn" id="2_bmx74"]
 [ext_resource type="Resource" uid="uid://dsl652b2lnbqh" path="res://entities/items/nodes/food/oniguiri.tres" id="3_b8i4a"]
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="4_hqpih"]
 
 [node name="Inventory" type="MarginContainer"]
 custom_minimum_size = Vector2(80, 80)
@@ -15,92 +16,102 @@ grow_vertical = 2
 script = ExtResource("1_bypnk")
 items = Array[ExtResource("2_3py3y")]([ExtResource("3_b8i4a"), ExtResource("3_b8i4a"), ExtResource("3_b8i4a")])
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_hqpih")
+theme_type_variation = &"Title1"
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 columns = 5
 
-[node name="InvUiSlot" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot2" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot2" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot3" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot3" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot4" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot4" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot5" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot5" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot6" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot6" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot7" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot7" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot8" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot8" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot9" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot9" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot10" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot10" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot11" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot11" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot12" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot12" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot13" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot13" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot14" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot14" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot15" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot15" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot16" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot16" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot17" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot17" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot18" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot18" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot19" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot19" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot20" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot20" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot21" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot21" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot22" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot22" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot23" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot23" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot24" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot24" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot25" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot25" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot26" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot26" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot27" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot27" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
-[node name="InvUiSlot28" parent="GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot28" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2

@@ -26,7 +26,7 @@ layout_mode = 0
 offset_right = 120.0
 offset_bottom = 120.0
 theme = SubResource("Theme_axrdk")
-color = Color(0.9397888, 0.6040254, 0.24662483, 1)
+color = Color(0.47058824, 0.33333334, 0.2, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false

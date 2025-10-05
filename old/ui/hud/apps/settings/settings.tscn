@@ -25,7 +25,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("7_n54e2")
 theme_type_variation = &"Title1"
-theme_override_colors/font_color = Color(0.592157, 0.439216, 0.298039, 1)
 text = "Settings"
 horizontal_alignment = 1
 
@@ -34,7 +33,7 @@ custom_minimum_size = Vector2(520, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("7_n54e2")
-theme_override_font_sizes/font_size = 52
+theme_type_variation = &"Title2"
 text = "Volume"
 
 [node name="VolumeControls" type="VBoxContainer" parent="Rows"]
@@ -57,7 +56,7 @@ custom_minimum_size = Vector2(520, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("7_n54e2")
-theme_override_font_sizes/font_size = 52
+theme_type_variation = &"Title2"
 text = "Text speed"
 
 [node name="TextSpeedControls" type="VBoxContainer" parent="Rows"]
@@ -86,7 +85,7 @@ custom_minimum_size = Vector2(520, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("7_n54e2")
-theme_override_font_sizes/font_size = 52
+theme_type_variation = &"Title2"
 text = "Graphics"
 
 [node name="GraphicControls" type="VBoxContainer" parent="Rows"]
