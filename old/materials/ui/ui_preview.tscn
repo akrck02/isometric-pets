@@ -1,0 +1,169 @@
+[gd_scene load_steps=5 format=3 uid="uid://c15ibpcpb6iop"]
+
+[ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="1_0vj34"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qov4q"]
+font_size = 70
+
+[sub_resource type="LabelSettings" id="LabelSettings_0vj34"]
+font_size = 70
+
+[sub_resource type="Theme" id="Theme_0vj34"]
+
+[node name="UiPreview" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_0vj34")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Colors" type="VBoxContainer" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Primary" type="MarginContainer" parent="ScrollContainer/HBoxContainer/Colors"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer/HBoxContainer/Colors/Primary"]
+layout_mode = 2
+color = Color(0.47058824, 0.33333334, 0.2, 1)
+
+[node name="Label" type="Label" parent="ScrollContainer/HBoxContainer/Colors/Primary"]
+z_index = 1
+layout_mode = 2
+text = "Primary"
+label_settings = SubResource("LabelSettings_qov4q")
+horizontal_alignment = 1
+
+[node name="Secondary" type="MarginContainer" parent="ScrollContainer/HBoxContainer/Colors"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer/HBoxContainer/Colors/Secondary"]
+layout_mode = 2
+color = Color(0.23921569, 0.1764706, 0.12156863, 1)
+
+[node name="Label" type="Label" parent="ScrollContainer/HBoxContainer/Colors/Secondary"]
+z_index = 1
+layout_mode = 2
+text = "Secondary"
+label_settings = SubResource("LabelSettings_qov4q")
+horizontal_alignment = 1
+
+[node name="Tertiary" type="MarginContainer" parent="ScrollContainer/HBoxContainer/Colors"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScrollContainer/HBoxContainer/Colors/Tertiary"]
+layout_mode = 2
+color = Color(0.36078432, 0.37254903, 0.20784314, 1)
+
+[node name="Label" type="Label" parent="ScrollContainer/HBoxContainer/Colors/Tertiary"]
+z_index = 1
+layout_mode = 2
+text = "Tertiary"
+label_settings = SubResource("LabelSettings_0vj34")
+horizontal_alignment = 1
+
+[node name="Text" type="VBoxContainer" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Title1" type="Label" parent="ScrollContainer/HBoxContainer/Text"]
+layout_mode = 2
+theme = SubResource("Theme_0vj34")
+theme_type_variation = &"Title1"
+text = "Title 1"
+
+[node name="Title2" type="Label" parent="ScrollContainer/HBoxContainer/Text"]
+layout_mode = 2
+theme = SubResource("Theme_0vj34")
+theme_type_variation = &"Title2"
+text = "Title 2"
+
+[node name="Title3" type="Label" parent="ScrollContainer/HBoxContainer/Text"]
+layout_mode = 2
+theme = SubResource("Theme_0vj34")
+theme_type_variation = &"Title3"
+text = "Title 3"
+
+[node name="Buttons" type="VBoxContainer" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+text = "Button"
+
+[node name="CheckButton" type="CheckButton" parent="ScrollContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+text = "CheckButton"
+
+[node name="MenuButton" type="MenuButton" parent="ScrollContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+text = "MenuButton"
+
+[node name="OptionButton" type="OptionButton" parent="ScrollContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "OptionButton"
+popup/item_0/id = 0
+
+[node name="TextInputs" type="VBoxContainer" parent="ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="ScrollContainer/HBoxContainer/TextInputs"]
+layout_mode = 2
+text = "Line Edit"
+
+[node name="Disabled LineEdit" type="LineEdit" parent="ScrollContainer/HBoxContainer/TextInputs"]
+layout_mode = 2
+text = "Disabled LineEdit"
+editable = false
+
+[node name="TextEdit" type="TextEdit" parent="ScrollContainer/HBoxContainer/TextInputs"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+text = "TextEdit"
+placeholder_text = "TextEdit"
+
+[node name="SpinBox" type="SpinBox" parent="ScrollContainer/HBoxContainer/TextInputs"]
+layout_mode = 2
+
+[node name="Scrolls" type="HBoxContainer" parent="ScrollContainer/HBoxContainer/TextInputs"]
+layout_mode = 2
+
+[node name="VSlider" type="VSlider" parent="ScrollContainer/HBoxContainer/TextInputs/Scrolls"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="ScrollContainer/HBoxContainer/TextInputs/Scrolls"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="ScrollContainer/HBoxContainer/TextInputs/Scrolls"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/TextInputs/Scrolls"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="ScrollContainer/HBoxContainer/TextInputs/Scrolls/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="HScrollBar" type="HScrollBar" parent="ScrollContainer/HBoxContainer/TextInputs/Scrolls/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/HBoxContainer/TextInputs/Scrolls/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="ScrollContainer/HBoxContainer/TextInputs/Scrolls/VBoxContainer"]
+layout_mode = 2

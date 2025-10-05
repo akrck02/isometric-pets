@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://fk4bfu837bvc"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://fk4bfu837bvc"]
 
 [ext_resource type="Texture2D" uid="uid://dfkmx8ud2ixjl" path="res://ui/hud/apps/settings/sprites/catbrightnessdown.png" id="1_cbvwn"]
 [ext_resource type="StyleBox" uid="uid://tpwu1g86r11c" path="res://materials/ui/apps/app_icon_background.tres" id="1_e7vm6"]
@@ -26,6 +26,59 @@ thickness = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7vm6"]
 bg_color = Color(0.5254902, 0.32156864, 0.101960786, 1)
+
+[sub_resource type="DPITexture" id="DPITexture_e7vm6"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\"><circle cx=\"4\" cy=\"4\" r=\"1.5\" fill=\"#fff\" fill-opacity=\".2\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_0sdkr"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"8\" height=\"8\"><path fill=\"#fff\" fill-opacity=\".2\" d=\"M6 0v8h2V0zM1 0a1 1 0 0 0-.693 1.705L2.6 3.998.307 6.291A1 1 0 0 0 1.72 7.705l3-3a1 1 0 0 0 0-1.414l-3-3A1 1 0 0 0 1 0z\"/></svg>
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnrrm"]
+content_margin_left = 6.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(0.14699998, 0.16799998, 0.203, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.44, 0.73, 0.98, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3xro"]
+content_margin_left = 6.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(0.14699998, 0.16799998, 0.203, 1)
+border_width_bottom = 2
+border_color = Color(0.115499996, 0.132, 0.15949999, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_detail = 3
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlito"]
+content_margin_left = 6.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(0.189, 0.21599999, 0.26099998, 1)
+border_width_bottom = 2
+border_color = Color(0.147, 0.168, 0.203, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_detail = 3
+anti_aliasing = false
 
 [resource]
 default_font = ExtResource("1_i8spk")
@@ -72,6 +125,21 @@ Label/fonts/font = ExtResource("1_i8spk")
 Label/styles/normal = null
 RichTextLabel/font_sizes/normal_font_size = 40
 RichTextLabel/fonts/normal_font = ExtResource("1_i8spk")
+TextEdit/colors/background_color = Color(0, 0, 0, 0)
+TextEdit/colors/caret_color = Color(0.8025, 0.81, 0.8225, 1)
+TextEdit/colors/font_color = Color(0.8025, 0.81, 0.8225, 1)
+TextEdit/colors/font_outline_color = Color(0, 0, 0, 0)
+TextEdit/colors/font_placeholder_color = Color(1, 1, 1, 0.5)
+TextEdit/colors/font_readonly_color = Color(1, 1, 1, 0.65)
+TextEdit/colors/selection_color = Color(0.44, 0.73, 0.98, 0.4)
+TextEdit/constants/caret_width = 1
+TextEdit/constants/line_spacing = 4
+TextEdit/constants/outline_size = 0
+TextEdit/icons/space = SubResource("DPITexture_e7vm6")
+TextEdit/icons/tab = SubResource("DPITexture_0sdkr")
+TextEdit/styles/focus = SubResource("StyleBoxFlat_xnrrm")
+TextEdit/styles/normal = SubResource("StyleBoxFlat_n3xro")
+TextEdit/styles/read_only = SubResource("StyleBoxFlat_wlito")
 Title1/base_type = &"Label"
 Title1/colors/font_color = Color(0.41568628, 0.23137255, 0.007843138, 1)
 Title1/font_sizes/font_size = 90

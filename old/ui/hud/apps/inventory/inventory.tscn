@@ -30,7 +30,9 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-columns = 5
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 4
 
 [node name="InvUiSlot" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
