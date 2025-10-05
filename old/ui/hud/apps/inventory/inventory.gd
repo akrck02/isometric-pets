@@ -14,6 +14,3 @@ func open() -> void:
 				slot.update(item, index)
 				index+=1
 				break
-		
-
-	

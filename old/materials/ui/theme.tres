@@ -110,7 +110,6 @@ HSlider/styles/grabber_area = ExtResource("6_ocmf0")
 HSlider/styles/grabber_area_highlight = ExtResource("6_ocmf0")
 HSlider/styles/slider = SubResource("StyleBoxLine_xj6wt")
 HeaderLarge/font_sizes/font_size = 28
-Inventory_Slot/base_type = &"Panel"
 Inventory_Slot/styles/panel = SubResource("StyleBoxFlat_e7vm6")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)

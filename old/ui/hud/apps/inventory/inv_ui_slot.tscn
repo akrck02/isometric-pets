@@ -12,6 +12,7 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_nnx62"]
+line_spacing = 1.0
 font = ExtResource("3_axrdk")
 font_size = 80
 
@@ -38,10 +39,10 @@ centered = false
 visible = false
 z_index = 2
 layout_mode = 0
-offset_left = 42.0
-offset_top = 41.0
-offset_right = 122.0
-offset_bottom = 122.0
+offset_left = 22.0
+offset_top = 53.0
+offset_right = 102.0
+offset_bottom = 134.0
 text = "100"
 label_settings = SubResource("LabelSettings_nnx62")
 horizontal_alignment = 2

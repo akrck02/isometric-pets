@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhcl0u1ebow4h"]
+[gd_scene load_steps=8 format=3 uid="uid://dhcl0u1ebow4h"]
 
 [ext_resource type="Script" uid="uid://bliv5ttax6lh1" path="res://ui/hud/apps/inventory/inventory.gd" id="1_bypnk"]
 [ext_resource type="Script" uid="uid://d2tnco55ryki6" path="res://entities/items/nodes/item/item.gd" id="2_3py3y"]
 [ext_resource type="PackedScene" uid="uid://c8aw5v6o0wy2h" path="res://ui/hud/apps/inventory/inv_ui_slot.tscn" id="2_bmx74"]
 [ext_resource type="Resource" uid="uid://dsl652b2lnbqh" path="res://entities/items/nodes/food/oniguiri.tres" id="3_b8i4a"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="4_hqpih"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqpih"]
+bg_color = Color(0.34901962, 0.25882354, 0.1764706, 1)
+
+[sub_resource type="Theme" id="Theme_hqpih"]
 
 [node name="Inventory" type="MarginContainer"]
 custom_minimum_size = Vector2(80, 80)
@@ -37,7 +42,7 @@ theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 15
 columns = 4
 
-[node name="InvUiSlot" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
+[node name="InvUiSlot1" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
 [node name="InvUiSlot2" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
@@ -96,3 +101,32 @@ layout_mode = 2
 
 [node name="InvUiSlot20" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
+
+[node name="Actions" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_hqpih")
+
+[node name="MarginContainer" type="MarginContainer" parent="Actions"]
+layout_mode = 2
+theme = SubResource("Theme_hqpih")
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Actions/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="Actions/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_hqpih")
+text = "Eat"
+
+[node name="Button2" type="Button" parent="Actions/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_hqpih")
+text = "Drop"
