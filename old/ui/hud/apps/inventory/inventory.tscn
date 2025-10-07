@@ -26,6 +26,7 @@ items = Array[ExtResource("2_3py3y")]([ExtResource("3_b8i4a"), ExtResource("3_b8
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -102,7 +103,23 @@ layout_mode = 2
 [node name="InvUiSlot20" parent="VBoxContainer/GridContainer" instance=ExtResource("2_bmx74")]
 layout_mode = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PrevPageButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_hqpih")
+text = "Previous Page"
+
+[node name="NextPageButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_hqpih")
+text = "Next Page"
+
 [node name="Actions" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
