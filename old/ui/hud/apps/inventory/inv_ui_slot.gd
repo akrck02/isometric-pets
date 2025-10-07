@@ -1,12 +1,21 @@
 extends Control
 class_name InvUiSlot
-@onready var sprite_2d: Sprite2D = $Sprite2D
+
 @onready var label: Label = $Label
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 var slot_item:Item
 var item_quantity:int=0
 
+
+func _ready() -> void:
+	self.pressed.connect(_on_click)
+
+func _on_click():
+	var actions:Inventory = self.get_parent().get_parent().get_parent()
+	actions.open_actions(slot_item.item_name, slot_item.item_texture, slot_item.item_description)
+	print(actions)
 
 func update(item:Item, quantity:int):
 	slot_item=item

@@ -6,17 +6,13 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_axrdk"]
 bg_color = Color(0.47058824, 0.33333334, 0.2, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_nnx62"]
 line_spacing = 1.0
 font = ExtResource("3_axrdk")
 font_size = 80
 
-[node name="InvUiSlot" type="Panel"]
+[node name="InvUiSlot" type="Button"]
 custom_minimum_size = Vector2(120, 120)
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,18 +21,10 @@ offset_right = -528.0
 offset_bottom = -1032.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_axrdk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_axrdk")
 script = ExtResource("1_cocju")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-z_index = 1
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_53h14")
-centered = false
-
 [node name="Label" type="Label" parent="."]
-visible = false
 z_index = 2
 layout_mode = 0
 offset_left = 22.0
@@ -46,3 +34,9 @@ offset_bottom = 134.0
 text = "100"
 label_settings = SubResource("LabelSettings_nnx62")
 horizontal_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_53h14")
+centered = false

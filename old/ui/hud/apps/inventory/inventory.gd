@@ -1,26 +1,53 @@
 extends App
+class_name Inventory
 
 @export var items: Array[Item]
 @onready var grid_container: GridContainer = $GridContainer
 @onready var slots: Array = $VBoxContainer/GridContainer.get_children()
 @onready var next_page_button: Button = $VBoxContainer/HBoxContainer/NextPageButton
 @onready var prev_page_button: Button = $VBoxContainer/HBoxContainer/PrevPageButton
-var onigiri = preload("res://entities/items/nodes/food/oniguiri.tres")   
+@onready var actions: MarginContainer = $Actions
+@onready var actions_back_button: Button = $Actions/MarginContainer/VBoxContainer2/ActionsBackButton
+@onready var selected_item_label: Label = $Actions/MarginContainer/VBoxContainer2/HBoxContainer/SelectedItemLabel
+@onready var selected_item_texture_rect: TextureRect = $Actions/MarginContainer/VBoxContainer2/HBoxContainer/SelectedItemTextureRect
+@onready var selected_item_description: Label = $Actions/MarginContainer/VBoxContainer2/SelectedItemDescription
+
+
+const ONIGUIRI = preload("res://entities/items/nodes/food/oniguiri.tres") 
+const CHEESECAKE = preload("uid://dm1e8f1r511fs")
+const CHOCOLATE_CAKE = preload("uid://ckodg6yax5ok6")
+const RED_VELVET = preload("uid://o0a1psq4lbol")
 
 const ITEMS_PER_PAGE = 20
 var current_page = 0
 var last_page = 1
 
+func _on_slot_clicked():
+	actions.visible=true
 
 
 func _ready() -> void:
 	next_page_button.pressed.connect(_next_page)
 	prev_page_button.pressed.connect(_prev_page)
+	actions_back_button.pressed.connect(_close_actions)
+	items.append(CHEESECAKE.duplicate())
+	items.append(CHOCOLATE_CAKE.duplicate())
+	items.append(RED_VELVET.duplicate())
+	
 	for i in range(50):
-		items.append(onigiri.duplicate())
+		items.append(ONIGUIRI.duplicate())
+		
 		
 	last_page = ceil(float(items.size()) / ITEMS_PER_PAGE) - 1
 	
+func _close_actions():
+	actions.visible=false
+	
+func open_actions(item_name:String, texture:Texture2D, description:String):
+	actions.visible=true
+	selected_item_label.text=item_name
+	selected_item_texture_rect.texture=texture
+	selected_item_description.text=description
 	
 
 func _get_current_page_items():
@@ -58,7 +85,7 @@ func _update_slots():
 	var slot_index= 0
 	for item in _get_current_page_items():
 		if slot_index<20:
-			slots[slot_index].update(item,10*current_page+slot_index)
+			slots[slot_index].update(item,10*current_page+slot_index+1)
 			slot_index+=1
 			
 func _empty_slots():

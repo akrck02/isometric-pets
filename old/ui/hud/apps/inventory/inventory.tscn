@@ -1,15 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhcl0u1ebow4h"]
+[gd_scene load_steps=11 format=3 uid="uid://dhcl0u1ebow4h"]
 
 [ext_resource type="Script" uid="uid://bliv5ttax6lh1" path="res://ui/hud/apps/inventory/inventory.gd" id="1_bypnk"]
 [ext_resource type="Script" uid="uid://d2tnco55ryki6" path="res://entities/items/nodes/item/item.gd" id="2_3py3y"]
 [ext_resource type="PackedScene" uid="uid://c8aw5v6o0wy2h" path="res://ui/hud/apps/inventory/inv_ui_slot.tscn" id="2_bmx74"]
 [ext_resource type="Resource" uid="uid://dsl652b2lnbqh" path="res://entities/items/nodes/food/oniguiri.tres" id="3_b8i4a"]
 [ext_resource type="Theme" uid="uid://fk4bfu837bvc" path="res://materials/ui/theme.tres" id="4_hqpih"]
+[ext_resource type="Texture2D" uid="uid://dqp30tsofkpqk" path="res://entities/animals/nodes/cat/sprites/cat.png" id="6_tqygx"]
+[ext_resource type="FontFile" uid="uid://b3v175ls5slpe" path="res://resources/fonts/PIXELADE.TTF" id="7_d202m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqpih"]
-bg_color = Color(0.34901962, 0.25882354, 0.1764706, 1)
+bg_color = Color(0.41568628, 0.23137255, 0.007843138, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
-[sub_resource type="Theme" id="Theme_hqpih"]
+[sub_resource type="LabelSettings" id="LabelSettings_mdpud"]
+font = ExtResource("7_d202m")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_tqygx"]
+font = ExtResource("7_d202m")
+font_size = 40
 
 [node name="Inventory" type="MarginContainer"]
 custom_minimum_size = Vector2(80, 80)
@@ -119,24 +131,46 @@ layout_mode = 2
 theme = ExtResource("4_hqpih")
 text = "Next"
 
-[node name="Actions" type="PanelContainer" parent="."]
-visible = false
+[node name="Actions" type="MarginContainer" parent="."]
+z_index = 2
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="Panel" type="Panel" parent="Actions"]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hqpih")
 
 [node name="MarginContainer" type="MarginContainer" parent="Actions"]
 layout_mode = 2
-theme = SubResource("Theme_hqpih")
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Actions/MarginContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Actions/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="SelectedItemTextureRect" type="TextureRect" parent="Actions/MarginContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_tqygx")
+
+[node name="SelectedItemLabel" type="Label" parent="Actions/MarginContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Item"
+label_settings = SubResource("LabelSettings_mdpud")
+horizontal_alignment = 1
+
+[node name="SelectedItemDescription" type="Label" parent="Actions/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Description"
+label_settings = SubResource("LabelSettings_tqygx")
 
 [node name="Button" type="Button" parent="Actions/MarginContainer/VBoxContainer2"]
 layout_mode = 2
@@ -148,3 +182,8 @@ text = "Eat"
 layout_mode = 2
 theme = ExtResource("4_hqpih")
 text = "Drop"
+
+[node name="ActionsBackButton" type="Button" parent="Actions/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_hqpih")
+text = "Close"
