@@ -109,14 +109,15 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="PrevPageButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_hqpih")
-text = "Previous Page"
+text = "Previous"
 
 [node name="NextPageButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_hqpih")
-text = "Next Page"
+text = "Next"
 
 [node name="Actions" type="PanelContainer" parent="."]
 visible = false
