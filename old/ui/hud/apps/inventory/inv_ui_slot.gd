@@ -15,7 +15,6 @@ func _ready() -> void:
 func _on_click():
 	var actions:Inventory = self.get_parent().get_parent().get_parent()
 	actions.open_actions(slot_item.item_name, slot_item.item_texture, slot_item.item_description)
-	print(actions)
 
 func update(item:Item, quantity:int):
 	slot_item=item
