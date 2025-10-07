@@ -21,7 +21,6 @@ const CHOCOLATE_CAKE = preload("res://entities/items/nodes/food/chocolate_cake.t
 const RED_VELVET = preload("res://entities/items/nodes/food/red_velvet.tres")
 
 const ITEMS_PER_PAGE = 20
-var selected_slot:InvUiSlot = null
 var current_page = 0
 var last_page = 1
 
