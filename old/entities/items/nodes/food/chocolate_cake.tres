@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Food" load_steps=3 format=3 uid="uid://ckodg6yax5ok6"]
+
+[ext_resource type="Texture2D" uid="uid://d0n342mtecqmr" path="res://entities/items/nodes/food/sprites/chocolate_cake.png" id="1_74e3r"]
+[ext_resource type="Script" uid="uid://cgh815eiwsjvp" path="res://entities/items/nodes/food/food.gd" id="1_lxwut"]
+
+[resource]
+script = ExtResource("1_lxwut")
+item_name = "Chocolate Cake"
+item_description = "Cake made of chocolate"
+item_texture = ExtResource("1_74e3r")
+metadata/_custom_type_script = "uid://cgh815eiwsjvp"

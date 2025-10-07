@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dsl652b2lnbqh"]
 
-[ext_resource type="Texture2D" uid="uid://cqutuq0jrsqbu" path="res://ui/hud/apps/settings/sprites/park.svg" id="1_cdraf"]
+[ext_resource type="Texture2D" uid="uid://dplxq43x64qkr" path="res://entities/items/nodes/food/sprites/oniguiri.png" id="1_cdraf"]
 [ext_resource type="Script" uid="uid://d2tnco55ryki6" path="res://entities/items/nodes/item/item.gd" id="1_sbmjq"]
 
 [resource]

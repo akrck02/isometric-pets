@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Food" load_steps=3 format=3 uid="uid://dm1e8f1r511fs"]
+
+[ext_resource type="Texture2D" uid="uid://c2gw3t1v8hwk6" path="res://entities/items/nodes/food/sprites/cheesecake.png" id="1_nc7o0"]
+[ext_resource type="Script" uid="uid://cgh815eiwsjvp" path="res://entities/items/nodes/food/food.gd" id="2_fu753"]
+
+[resource]
+script = ExtResource("2_fu753")
+item_name = "Cheesecake"
+item_description = "Cake made of cheese"
+item_texture = ExtResource("1_nc7o0")
+metadata/_custom_type_script = "uid://cgh815eiwsjvp"
