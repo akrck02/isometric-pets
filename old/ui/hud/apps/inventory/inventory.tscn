@@ -132,7 +132,6 @@ theme = ExtResource("4_hqpih")
 text = "Next"
 
 [node name="Actions" type="MarginContainer" parent="."]
-visible = false
 z_index = 2
 layout_mode = 2
 size_flags_vertical = 4
@@ -173,13 +172,13 @@ layout_mode = 2
 text = "Description"
 label_settings = SubResource("LabelSettings_tqygx")
 
-[node name="Button" type="Button" parent="Actions/MarginContainer/VBoxContainer2"]
+[node name="Action1Button" type="Button" parent="Actions/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_hqpih")
 text = "Eat"
 
-[node name="Button2" type="Button" parent="Actions/MarginContainer/VBoxContainer2"]
+[node name="Action2Button" type="Button" parent="Actions/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_hqpih")
 text = "Drop"

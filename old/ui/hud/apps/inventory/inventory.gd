@@ -11,14 +11,17 @@ class_name Inventory
 @onready var selected_item_label: Label = $Actions/MarginContainer/VBoxContainer2/HBoxContainer/SelectedItemLabel
 @onready var selected_item_texture_rect: TextureRect = $Actions/MarginContainer/VBoxContainer2/HBoxContainer/SelectedItemTextureRect
 @onready var selected_item_description: Label = $Actions/MarginContainer/VBoxContainer2/SelectedItemDescription
+@onready var action_1_button: Button = $Actions/MarginContainer/VBoxContainer2/Action1Button
+@onready var action_2_button: Button = $Actions/MarginContainer/VBoxContainer2/Action2Button
 
 
 const ONIGUIRI = preload("res://entities/items/nodes/food/oniguiri.tres") 
-const CHEESECAKE = preload("uid://dm1e8f1r511fs")
-const CHOCOLATE_CAKE = preload("uid://ckodg6yax5ok6")
-const RED_VELVET = preload("uid://o0a1psq4lbol")
+const CHEESECAKE = preload("res://entities/items/nodes/food/cheesecake.tres")
+const CHOCOLATE_CAKE = preload("res://entities/items/nodes/food/chocolate_cake.tres")
+const RED_VELVET = preload("res://entities/items/nodes/food/red_velvet.tres")
 
 const ITEMS_PER_PAGE = 20
+var selected_slot:InvUiSlot = null
 var current_page = 0
 var last_page = 1
 
@@ -36,19 +39,21 @@ func _ready() -> void:
 	
 	for i in range(50):
 		items.append(ONIGUIRI.duplicate())
-		
-		
 	last_page = ceil(float(items.size()) / ITEMS_PER_PAGE) - 1
-	
+
 func _close_actions():
 	actions.visible=false
 	
-func open_actions(item_name:String, texture:Texture2D, description:String):
+func open_actions(item:Item):
 	actions.visible=true
-	selected_item_label.text=item_name
-	selected_item_texture_rect.texture=texture
-	selected_item_description.text=description
-	
+	selected_item_label.text=item.item_name
+	selected_item_description.text=item.item_description
+	selected_item_texture_rect.texture=item.item_texture
+	match item.item_type:
+		ItemType.ItemType.FOOD:
+			action_1_button.text="Eat"
+		ItemType.ItemType.FURNITURE:
+			action_1_button.text="Place"
 
 func _get_current_page_items():
 	var start = current_page * ITEMS_PER_PAGE
