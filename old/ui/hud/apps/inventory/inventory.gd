@@ -13,24 +13,24 @@ var current_page = 1
 
 
 func _ready() -> void:
-	next_page_button.pressed.connect(next_page)
-	prev_page_button.pressed.connect(prev_page)
+	next_page_button.pressed.connect(_next_page)
+	prev_page_button.pressed.connect(_prev_page)
 	for i in range(50):
 		items.append(onigiri.duplicate())
 	
 	
 
-func get_current_page_items():
+func _get_current_page_items():
 	var start = current_page * ITEMS_PER_PAGE
 	var end = min(start + ITEMS_PER_PAGE, items.size())
 	return items.slice(start, end)
 
-func next_page():
+func _next_page():
 	if (current_page + 1) * ITEMS_PER_PAGE < items.size():
 		current_page += 1
 	_update_slots()
 
-func prev_page():
+func _prev_page():
 	if current_page > 0:
 		current_page -= 1
 		
@@ -39,7 +39,7 @@ func prev_page():
 func _update_slots():
 	_empty_slots()
 	var slot_index= 0
-	for item in get_current_page_items():
+	for item in _get_current_page_items():
 		if slot_index<20:
 			slots[slot_index].update(item,10*current_page+slot_index)
 			slot_index+=1
